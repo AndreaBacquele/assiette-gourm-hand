@@ -1,0 +1,8 @@
+{
+  "name": "Assiette Gourm'hand",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite",
+  "id": "5cf685a8"
+}
