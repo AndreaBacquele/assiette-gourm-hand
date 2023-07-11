@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { IonButton,
+import {
+  IonButton,
   IonContent,
   IonHeader,
   IonItem,
@@ -10,21 +11,15 @@ import { IonButton,
   IonRadio,
   IonRadioGroup,
   IonTitle,
-  IonToolbar,} from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+  IonToolbar,
+} from '@ionic/react';
 import type { RadioGroupCustomEvent } from '@ionic/react';
-import './Tab1.css';
 
-const Tab1: React.FC = () => {
-  const [menuType, setMenuType] = useState('overlay');
+function TypeOfJudge() {
+const [menuType, setMenuType] = useState('overlay');
+
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Accueil</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <>
+    <>
       <IonMenu type={menuType} contentId="main-content">
         <IonHeader>
           <IonToolbar>
@@ -70,17 +65,6 @@ const Tab1: React.FC = () => {
         </IonContent>
       </IonPage>
     </>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 1</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 1 page" />
-      </IonContent>
-    </IonPage>
-  
   );
-};
-
-export default Tab1;
+}
+export default TypeOfJudge;
