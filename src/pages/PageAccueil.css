@@ -12,5 +12,6 @@ ion-item{
 }
 
 ion-button{
-    --background-color:white;
+    --background : green;
+    --color : white;
 }

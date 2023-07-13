@@ -38,17 +38,17 @@ function Accueil() {
         </IonToolbar>
         </IonHeader>
 
+    {/* Mise en place du formulaire */}
     <IonContent className="ion-padding">
+    
+    <h6> Merci de compléter les informations ci-dessous afin d'avoir accés aux grilles de notation</h6>
+
     <IonItem>
-        <IonTextarea readonly={true}> Merci de remplir les informations suivantes afin d'avoir accés à la grille de notation.</IonTextarea>
+        <IonInput label="Nom" placeholder="A changer"></IonInput> 
     </IonItem>
 
     <IonItem>
-        <IonInput label="Nom du Jury" placeholder="Nom de famille"></IonInput>
-    </IonItem>
-
-    <IonItem>
-        <IonInput label="Prénom" placeholder="Prénom"></IonInput>
+        <IonInput label="Prénom" placeholder="A changer"></IonInput>
     </IonItem>
         
 
@@ -70,9 +70,7 @@ function Accueil() {
             <IonRadio value="technique"></IonRadio>
             </IonItem>
         </IonRadioGroup> <br />
-            <IonMenuToggle>
                 <IonButton>Validez</IonButton>
-            </IonMenuToggle>
         </IonContent>
     </>
     )
