@@ -70,7 +70,9 @@ function Accueil() {
             <IonRadio value="technique"></IonRadio>
             </IonItem>
         </IonRadioGroup> <br />
+        <div className="ion-text-center">
                 <IonButton>Validez</IonButton>
+                </div>
         </IonContent>
     </>
     )
