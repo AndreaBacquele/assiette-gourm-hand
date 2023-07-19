@@ -2,7 +2,6 @@ import {
     IonItem,
     IonLabel, 
     IonThumbnail,
-    IonMenu,
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -10,20 +9,24 @@ import {
     IonRadio,
     IonButton,
     IonRadioGroup,
-    IonPage,
-    IonMenuToggle,
     IonInput,
-    IonTextarea,
 } from '@ionic/react';
 import Logo from '../images/logo.jpg';
 import React, { useState } from 'react';
 import type { RadioGroupCustomEvent } from '@ionic/react';
 import './PageAccueil.css'
-
+import { useHistory } from 'react-router-dom';
 
 
 function Accueil() {
+    // Donne la direction de la page vers laquelle le bouton validez doit envoyer
+    const history = useHistory();
+
+    const handleButtonClick = () => {
+    history.push('/evaldegustation');
+    }
     const [menuType, setMenuType] = useState('overlay');
+    
     return(
     <>
     {/* Permet d'afficher les éléments de la toolbar */}
@@ -71,7 +74,7 @@ function Accueil() {
             </IonItem>
         </IonRadioGroup> <br />
         <div className="ion-text-center">
-                <IonButton>Validez</IonButton>
+                <IonButton onClick={handleButtonClick}>Validez</IonButton>
                 </div>
         </IonContent>
     </>
