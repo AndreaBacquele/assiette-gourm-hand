@@ -24,3 +24,8 @@ img{
 ion-card-content{
     color: orange;
 }
+
+ion-button{
+    --background: orange;
+    color : black;
+}

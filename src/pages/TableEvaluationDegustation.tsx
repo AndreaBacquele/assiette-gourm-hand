@@ -8,7 +8,8 @@ IonCardTitle,
 IonGrid,
 IonCol,
 IonRow,
-IonInput, } from '@ionic/react';
+IonInput, 
+IonButton } from '@ionic/react';
 import Logo from '../images/logo.jpg';
 import './TableEvaluationDegustation.css';
 
@@ -101,6 +102,9 @@ function TableEvaluationDegustation(){
             <IonCol size='1'><p>/30</p></IonCol>
         </IonRow>
     </IonGrid>
+    <div className="ion-text-center">
+    <IonButton>Retour à la liste des Candidats</IonButton>
+    </div>
         </>
     );
 }

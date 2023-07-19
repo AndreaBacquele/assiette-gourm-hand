@@ -19,6 +19,7 @@ import { useHistory } from 'react-router-dom';
 
 
 function Accueil() {
+    // Donne la direction de la page vers laquelle le bouton validez doit envoyer
     const history = useHistory();
 
     const handleButtonClick = () => {
