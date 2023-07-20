@@ -10,125 +10,134 @@ IonGrid,
 IonCol,
 IonRow } from '@ionic/react';
 import './ListeCandidatCuisine.css'
+import { useHistory } from 'react-router';
 
 // Voir comment gérer le fait que ce soit le jury dégustation ou cuisine (cookies?)
-function ListeCandidatCuisine() {
-    return(
-        <>
+function ListeCandidatCuisine(){
+
+const history = useHistory();
+
+const handleButtonClick = () => {
+history.push('/evalcuisine');
+}
+
+return(
+    <>
 <IonContent>
-        <IonHeader color="light">
-        <IonToolbar >
-            <IonItem>
-                <img alt="Logo du concours" src='../images/logo.jpg' /> 
-                <IonTitle> Liste des candidats</IonTitle>
-            </IonItem>
-        </IonToolbar>
-        </IonHeader>
+    <IonHeader color="light">
+    <IonToolbar >
+        <IonItem>
+            <img alt="Logo du concours" src='../images/logo.jpg' /> 
+            <IonTitle> Liste des candidats - Jury cuisine</IonTitle>
+            {/* <span><p>Pour avoir accés à la fiche du candidat, merci de cliquer sur le numéro</p></span> */}
+        </IonItem>
+    </IonToolbar>
+    </IonHeader>
 
+<IonList lines="full">
+    <IonItem>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°1
+        </IonButton>
+    </IonItem>
 
-  <IonList lines="full">
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°1
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°2
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°2
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°3
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°3
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°4
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°4
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°5
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°5
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°6
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°6
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°7
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°7
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°8
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°8
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°9
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°9
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°10
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°10
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°11
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°11
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°12
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°12
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°13
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°13
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°14
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°14
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°15
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°15
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°16
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°16
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°17
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°17
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°18
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°18
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°19
+        </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton expand='full'>
-        Candidat n°19
-      </IonButton>
+        <IonButton onClick={handleButtonClick} expand='full'>
+    Candidat n°20
+        </IonButton>
     </IonItem>
-    <IonItem>
-      <IonButton expand='full'>
-        Candidat n°20
-      </IonButton>
-    </IonItem>
-    
-  </IonList>
+
+</IonList>
 </IonContent>
     </>
     );

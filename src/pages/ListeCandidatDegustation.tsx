@@ -34,13 +34,13 @@ function ListeCandidatDegustation() {
         </IonToolbar>
         </IonHeader>
 
-
   <IonList lines="full">
     <IonItem>
       <IonButton onClick={handleButtonClick} expand='full'>
         Candidat n°1
       </IonButton>
     </IonItem>
+    
     <IonItem>
       <IonButton onClick={handleButtonClick} expand='full'>
         Candidat n°2

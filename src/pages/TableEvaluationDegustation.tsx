@@ -10,11 +10,14 @@ IonCol,
 IonRow,
 IonInput, 
 IonButton,
-IonIcon} from '@ionic/react';
+IonIcon,
+IonContent} from '@ionic/react';
 import Logo from '../images/logo.jpg';
 import './TableEvaluationDegustation.css';
 import { useHistory } from 'react-router-dom';
 // import { refreshOutline } from 'ionicons/dist/types/components/icon/icon';
+
+// ATTENTION : Probléme responsivité du tableau sur mobile
 
 
 function TableEvaluationDegustation(){
@@ -26,6 +29,7 @@ function TableEvaluationDegustation(){
 
     return (
         <>
+    <IonContent>
         <IonCard>
             <IonCardHeader>
             <img alt="Logo du concours" src="../images/logo.jpg" />
@@ -117,6 +121,7 @@ function TableEvaluationDegustation(){
             Retour à la liste des Candidats
     </IonButton>
     </div>
+    </IonContent>
         </>
     );
 }
