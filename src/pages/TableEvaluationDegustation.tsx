@@ -9,14 +9,27 @@ IonGrid,
 IonCol,
 IonRow,
 IonInput, 
-IonButton } from '@ionic/react';
+IonButton,
+IonIcon,
+IonContent} from '@ionic/react';
 import Logo from '../images/logo.jpg';
 import './TableEvaluationDegustation.css';
+import { useHistory } from 'react-router-dom';
+// import { refreshOutline } from 'ionicons/dist/types/components/icon/icon';
+
+// ATTENTION : Probléme responsivité du tableau sur mobile
 
 
 function TableEvaluationDegustation(){
+    const history = useHistory();
+
+    const handleButtonClick = () => {
+    history.push('/listingdegustation');
+    }
+
     return (
         <>
+    <IonContent>
         <IonCard>
             <IonCardHeader>
             <img alt="Logo du concours" src="../images/logo.jpg" />
@@ -43,7 +56,7 @@ function TableEvaluationDegustation(){
         <IonRow>
             <IonCol size='5'><p>Présentation générale et netteté du contenant</p></IonCol>
             <IonCol size="2">
-                <IonInput placeholder='0-9'> </IonInput>
+                <IonInput placeholder='0-9' type='number'> </IonInput>
             </IonCol>
             <IonCol size="1"><p>/9</p></IonCol>
             <IonCol>
@@ -56,7 +69,7 @@ function TableEvaluationDegustation(){
         <IonRow>
             <IonCol size='5'><p>Cuisson et qualité gustative de la pièce principale</p></IonCol>
             <IonCol size="2">
-                <IonInput placeholder='0-7'> </IonInput>
+                <IonInput placeholder='0-7' type='number'> </IonInput>
             </IonCol>
             <IonCol size="1"><p>/7</p></IonCol>
             <IonCol>
@@ -69,7 +82,7 @@ function TableEvaluationDegustation(){
         <IonRow>
             <IonCol size='5'><p>Cuisson et qualité gustative des garnitures</p></IonCol>
             <IonCol size="2">
-                <IonInput placeholder='0-7'></IonInput>
+                <IonInput placeholder='0-7' type='number'></IonInput>
             </IonCol>
             <IonCol size="1"><p>/7</p></IonCol>
             <IonCol>
@@ -82,7 +95,7 @@ function TableEvaluationDegustation(){
         <IonRow>
             <IonCol size='5'><p>Accord entre les garnitures et la pièce principale</p></IonCol>
             <IonCol size="2">
-                <IonInput placeholder='0-7'> </IonInput>
+                <IonInput placeholder='0-7' type="number"> </IonInput>
             </IonCol>
             <IonCol size="1"><p>/7</p></IonCol>
             <IonCol>
@@ -103,8 +116,12 @@ function TableEvaluationDegustation(){
         </IonRow>
     </IonGrid>
     <div className="ion-text-center">
-    <IonButton>Retour à la liste des Candidats</IonButton>
+    <IonButton onClick={handleButtonClick}>
+        {/* <IonIcon icon={refreshOutline}/> */}
+            Retour à la liste des Candidats
+    </IonButton>
     </div>
+    </IonContent>
         </>
     );
 }
