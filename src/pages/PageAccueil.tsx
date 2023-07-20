@@ -23,7 +23,7 @@ function Accueil() {
     const history = useHistory();
 
     const handleButtonClick = () => {
-    history.push('/evaldegustation');
+    history.push('/listingdegustation');
     }
     const [menuType, setMenuType] = useState('overlay');
     
@@ -33,9 +33,7 @@ function Accueil() {
     <IonHeader color="light">
         <IonToolbar >
             <IonItem>
-                <IonThumbnail slot="start">
                 <img alt="Logo du concours" src='../images/logo.jpg' /> 
-                </IonThumbnail>
                 <IonTitle> Page d'accueil</IonTitle>
             </IonItem>
         </IonToolbar>
@@ -44,7 +42,7 @@ function Accueil() {
     {/* Mise en place du formulaire */}
     <IonContent className="ion-padding">
     
-    <h6> Merci de compléter les informations ci-dessous afin d'avoir accés aux grilles de notation</h6>
+    <h6> Merci de compléter les informations ci-dessous afin d'avoir accés à la liste des candidats et aux grilles d'évaluation</h6>
 
     <IonItem>
         <IonInput label="Nom" placeholder="A changer"></IonInput> 
@@ -74,7 +72,7 @@ function Accueil() {
             </IonItem>
         </IonRadioGroup> <br />
         <div className="ion-text-center">
-                <IonButton onClick={handleButtonClick}>Validez</IonButton>
+                <IonButton color='success' onClick={handleButtonClick}>Validez</IonButton>
                 </div>
         </IonContent>
     </>

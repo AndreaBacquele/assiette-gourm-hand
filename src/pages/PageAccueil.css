@@ -10,8 +10,3 @@ ion-item{
     /* A changer en fonction de la couleur à mettre en fond de chaque partie du formulaire */
     /* --background:grey */
 }
-
-ion-button{
-    --background : green;
-    --color : white;
-}
