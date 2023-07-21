@@ -10,3 +10,8 @@ ion-item{
     /* A changer en fonction de la couleur à mettre en fond de chaque partie du formulaire */
     /* --background:grey */
 }
+
+
+ion-input{
+    --highlight-color-focused:orange;
+}
