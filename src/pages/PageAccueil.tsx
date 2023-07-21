@@ -55,7 +55,7 @@ function Accueil() {
         } else {
 
             //A changer Mettre la bonne redirection
-            history.push('/evaldegustation')
+            history.push('/listingtechnique')
         }
         
     };
