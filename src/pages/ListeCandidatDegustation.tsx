@@ -21,6 +21,8 @@ function ListeCandidatDegustation() {
     history.push('/evaldegustation');
     }
 
+
+
     return(
         <>
 <IonContent>
@@ -33,106 +35,111 @@ function ListeCandidatDegustation() {
             </IonItem>
         </IonToolbar>
         </IonHeader>
+        <IonItem>
+          <IonTitle> 
+            <p> Jury </p>
+          </IonTitle>
+        </IonItem>
 
   <IonList lines="full">
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°1
       </IonButton>
     </IonItem>
     
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°2
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°3
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°4
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°5
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°6
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°7
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°8
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°9
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°10
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°11
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°12
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°13
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°14
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°15
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°16
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°17
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°18
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°19
       </IonButton>
     </IonItem>
     <IonItem>
-      <IonButton onClick={handleButtonClick} expand='full'>
+      <IonButton color='warning' onClick={handleButtonClick} expand='full'>
         Candidat n°20
       </IonButton>
     </IonItem>
