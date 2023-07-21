@@ -11,12 +11,12 @@ import {
     IonRadioGroup,
     IonInput,
 } from '@ionic/react';
-import Logo from '../images/logo.jpg';
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import type { RadioGroupCustomEvent } from '@ionic/react';
-import './PageAccueil.css'
 import { useHistory } from 'react-router-dom';
 import { Storage } from '@ionic/storage';
+import './PageAccueil.css'
+
 
 
 
@@ -53,16 +53,12 @@ function Accueil() {
         if(juryType == 'degustation'){
             history.push('/listingdegustation')
         } else {
+
+            //A changer Mettre la bonne redirection
             history.push('/evaldegustation')
         }
         
     };
-    
-    
-
-    // Besoin de récupérer les données des inputs, et de les envoyer en base de données quand on clique sur le bouton Validez
-
-    
     
     return(
     <>

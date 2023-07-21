@@ -10,11 +10,6 @@ ion-col {
     height:70px;
 }
 
-.p{
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
 img{
     height: 10em;
     width: 10em;
@@ -25,7 +20,7 @@ ion-card-content{
     color: orange;
 }
 
-ion-button{
+/* ion-button{
     --background: orange;
     color : black;
-}
+} */
