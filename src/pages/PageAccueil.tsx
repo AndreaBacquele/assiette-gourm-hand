@@ -12,20 +12,57 @@ import {
     IonInput,
 } from '@ionic/react';
 import Logo from '../images/logo.jpg';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import type { RadioGroupCustomEvent } from '@ionic/react';
 import './PageAccueil.css'
 import { useHistory } from 'react-router-dom';
+import { Storage } from '@ionic/storage';
+
 
 
 function Accueil() {
-    // Donne la direction de la page vers laquelle le bouton validez doit envoyer
-    const history = useHistory();
 
+     //Création de l'espace de stockage
+    const store = new Storage();
+    store.create();
+
+    //Récupére les valeurs mise dans les inputs
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [juryType, setJuryType] = useState('overlay');
+
+
+    const handleFirstNameChange = (event: CustomEvent) => {
+        setFirstName(event.detail.value);
+    };
+    
+    const handleLastNameChange = (event: CustomEvent) => {
+        setLastName(event.detail.value);
+    };
+    
+
+    const history = useHistory();
+    
+
+    //Permet de rediriger la page quand on clique sur le bouton ainsi que stocker les données rentrées
     const handleButtonClick = () => {
-    history.push('/listingdegustation');
-    }
-    const [menuType, setMenuType] = useState('overlay');
+        console.log(firstName);
+        console.log(lastName);
+        console.log(juryType)
+        store.set('jury', {'lastName' : {lastName},  'firstName':{firstName}, 'juryType': {juryType}});
+        if(juryType == 'degustation'){
+            history.push('/listingdegustation')
+        } else {
+            history.push('/evaldegustation')
+        }
+        
+    };
+    
+    
+
+    // Besoin de récupérer les données des inputs, et de les envoyer en base de données quand on clique sur le bouton Validez
+
+    
     
     return(
     <>
@@ -45,19 +82,19 @@ function Accueil() {
     <h6> Merci de compléter les informations ci-dessous afin d'avoir accés à la liste des candidats et aux grilles d'évaluation</h6>
 
     <IonItem>
-        <IonInput label="Nom" placeholder="A changer"></IonInput> 
+        <IonInput required value={lastName} onIonChange={handleLastNameChange} label="Nom" placeholder="A changer"></IonInput> 
     </IonItem>
 
     <IonItem>
-        <IonInput label="Prénom" placeholder="A changer"></IonInput>
+        <IonInput required value={firstName} onIonChange={handleFirstNameChange} label="Prénom" placeholder="A changer"></IonInput>
     </IonItem>
         
 
 {/* Gestion des toogles pour le choix de jury */}
         <h2>Vous êtes jury:</h2>
         <IonRadioGroup
-            value={menuType}
-            onIonChange={(ev: RadioGroupCustomEvent) => {setMenuType(ev.detail.value);}}>
+            value={juryType}
+            onIonChange={(ev: RadioGroupCustomEvent) => {setJuryType(ev.detail.value);}}>
             <IonItem>
             <IonLabel>
                 <code>Dégustation</code>
