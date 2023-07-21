@@ -18,7 +18,7 @@ function ListeCandidatCuisine(){
 const history = useHistory();
 
 const handleButtonClick = () => {
-history.push('/evalcuisine');
+history.push('/evaltechnique');
 }
 
 return(

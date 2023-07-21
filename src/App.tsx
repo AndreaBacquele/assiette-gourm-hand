@@ -8,7 +8,8 @@ import { IonReactRouter } from '@ionic/react-router';
 import Accueil from './pages/PageAccueil';
 import ListeCandidatDegustation from './pages/ListeCandidatDegustation';
 import TableEvaluationDegustation from './pages/TableEvaluationDegustation';
-import ListeCandidatTechnique from './pages/ListeCandidatTechnique'
+import ListeCandidatTechnique from './pages/ListeCandidatTechnique';
+import TableEvaluationTechnique from './pages/TableEvaluationTechnique';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -30,6 +31,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 
+
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -41,6 +43,7 @@ const App: React.FC = () => (
       <Route path="/listingdegustation" component={ListeCandidatDegustation} />
       <Route path="/listingtechnique" component={ListeCandidatTechnique} />
       <Route path="/evaldegustation" component={TableEvaluationDegustation} />
+      <Route path="/evaltechnique" component={TableEvaluationTechnique} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
