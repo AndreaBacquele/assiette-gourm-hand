@@ -12,7 +12,7 @@ import {
     IonInput,
 } from '@ionic/react';
 import Logo from '../images/logo.jpg';
-import React, { useState, useRef } from 'react';
+import React, { useState} from 'react';
 import type { RadioGroupCustomEvent } from '@ionic/react';
 import './PageAccueil.css'
 import { useHistory } from 'react-router-dom';
