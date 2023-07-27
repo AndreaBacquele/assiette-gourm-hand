@@ -14,7 +14,6 @@ import {
 import React, { useState, useEffect } from 'react';
 import type { RadioGroupCustomEvent } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
-import { Storage } from '@ionic/storage';
 import './PageAccueil.css'
 import {useStorage} from '../hooks/useStorage'
 
@@ -24,24 +23,6 @@ import {useStorage} from '../hooks/useStorage'
 function Accueil() {
 
     const {store} = useStorage();
-    // useEffect(() => {
-    //     if(!store) return;
-    
-    //     const getData = async () => {
-    //     await store.set('key', 'value');
-    //     const value = await store.get('key');
-    //     console.log(value);
-    //     }
-    
-    //     getData();
-    // }, [store])
-
-     //Création de l'espace de stockage
-
-    // const store = new Storage({
-    //     name:'AGdb',
-    // });
-    // store.create();
 
     //Récupére les valeurs mise dans les inputs
     const [firstName, setFirstName] = useState('');
@@ -70,8 +51,6 @@ function Accueil() {
         if(juryType == 'degustation'){
             history.push('/listingdegustation')
         } else {
-
-            //A changer Mettre la bonne redirection
             history.push('/listingtechnique')
         }
         

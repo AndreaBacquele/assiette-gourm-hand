@@ -16,6 +16,7 @@ import Logo from '../images/logo.jpg';
 import './TableEvaluationDegustation.css';
 import { useHistory } from 'react-router-dom';
 import { Storage } from '@ionic/storage';
+import {useStorage} from '../hooks/useStorage'
 
 // import { refreshOutline } from 'ionicons/dist/types/components/icon/icon';
 
@@ -24,6 +25,7 @@ import { Storage } from '@ionic/storage';
 
 function TableEvaluationDegustation(){
 
+    const {store} = useStorage();
     //Récupération des informations des inputs
     const [presentation, setPresentation] = useState('');
     const [cuissonPrincipale, setCuissonPrincipale] = useState('');
@@ -55,6 +57,9 @@ function TableEvaluationDegustation(){
         let total = floatCuissonGarniture + floatPresentation + floatCuissonPrincipale + floatAccordGlobal
         console.log(total)
         setTotal(total)
+        if(store){
+            store.set('noteDegustation', {floatPresentation, floatCuissonGarniture,  floatCuissonPrincipale, floatAccordGlobal, total });
+            }
         }
 
         
