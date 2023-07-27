@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { IonItem, 
 IonList,
 IonHeader,
@@ -11,9 +11,30 @@ IonCol,
 IonRow } from '@ionic/react';
 import './ListeCandidatDegustation.css'
 import { useHistory } from 'react-router-dom';
+import {useStorage} from '../hooks/useStorage'
 
 
 function ListeCandidatDegustation() {
+
+  // Gére la récupération des données + permet l'affichage de celles-ci en dessous
+const {store} = useStorage();
+const [lastName, setLastName] = useState('');
+const [firstName, setFirstName] = useState('');
+
+const test = async() => {
+  if(store){
+      const name = await store.get('jury');
+      const lastName = name?.lastName;
+      const firstName = name?.firstName;
+      setLastName(lastName);
+      setFirstName(firstName);
+  }
+}
+
+useEffect(() => {
+  test();
+}, [store]);
+
 
   const history = useHistory();
 
@@ -37,7 +58,7 @@ function ListeCandidatDegustation() {
         </IonHeader>
         <IonItem>
           <IonTitle> 
-            <p> Jury </p>
+            <p> Jury {firstName} {lastName}  </p>
           </IonTitle>
         </IonItem>
 

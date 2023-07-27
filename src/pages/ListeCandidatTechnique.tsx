@@ -11,15 +11,20 @@ IonCol,
 IonRow } from '@ionic/react';
 import './ListeCandidatTechnique.css'
 import { useHistory } from 'react-router';
+import './PageAccueil'
+import { Storage } from '@ionic/storage';
 
-// Voir comment gérer le fait que ce soit le jury dégustation ou cuisine (cookies?)
+
 function ListeCandidatCuisine(){
+
 
 const history = useHistory();
 
 const handleButtonClick = () => {
-history.push('/evalcuisine');
+history.push('/evaltechnique');
 }
+
+
 
 return(
     <>
