@@ -11,20 +11,37 @@ import {
     IonRadioGroup,
     IonInput,
 } from '@ionic/react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { RadioGroupCustomEvent } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { Storage } from '@ionic/storage';
 import './PageAccueil.css'
+import {useStorage} from '../hooks/useStorage'
 
 
 
 
 function Accueil() {
 
+    const {store} = useStorage();
+    // useEffect(() => {
+    //     if(!store) return;
+    
+    //     const getData = async () => {
+    //     await store.set('key', 'value');
+    //     const value = await store.get('key');
+    //     console.log(value);
+    //     }
+    
+    //     getData();
+    // }, [store])
+
      //Création de l'espace de stockage
-    const store = new Storage();
-    store.create();
+
+    // const store = new Storage({
+    //     name:'AGdb',
+    // });
+    // store.create();
 
     //Récupére les valeurs mise dans les inputs
     const [firstName, setFirstName] = useState('');
@@ -46,10 +63,10 @@ function Accueil() {
 
     //Permet de rediriger la page quand on clique sur le bouton ainsi que stocker les données rentrées
     const handleButtonClick = () => {
-        console.log(firstName);
-        console.log(lastName);
-        console.log(juryType)
-        store.set('jury', {'lastName' : {lastName},  'firstName':{firstName}, 'juryType': {juryType}});
+        if(store){
+        store.set('jury', {lastName, firstName,  juryType});
+        }
+        
         if(juryType == 'degustation'){
             history.push('/listingdegustation')
         } else {

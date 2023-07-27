@@ -11,6 +11,7 @@ import TableEvaluationDegustation from './pages/TableEvaluationDegustation';
 import ListeCandidatTechnique from './pages/ListeCandidatTechnique';
 import TableEvaluationTechnique from './pages/TableEvaluationTechnique';
 
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -35,6 +36,7 @@ import './theme/variables.css';
 setupIonicReact();
 
 const App: React.FC = () => (
+  
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
