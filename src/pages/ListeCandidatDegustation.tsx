@@ -64,11 +64,25 @@ useEffect(() => {
 
   const history = useHistory();
 
-    const handleButtonClick = () => {
-    history.push('/evaldegustation');
+    const handleButtonClick = (candidate : number) => {
+    history.push('/evaldegustation/'+candidate);
     }
 
-
+    // Boucle qui permet d'afficher le bon nombre de candidats sur le dashboard
+    const nb_candidates = 20;
+    const range = (start:number, end:number) => Array.from({length: (end - start + 1)}, (v, k) => k + start);
+    const candidates = range(1, nb_candidates).map(nb =>
+      <IonRow>
+        <IonCol>
+        <IonButton color='warning' onClick={() => handleButtonClick(nb)} expand='full'> Candidat n°{nb}</IonButton>
+        </IonCol>
+        <IonCol> {presentation}  </IonCol>
+        <IonCol>{cuissonPrincipale} </IonCol>
+        <IonCol>{cuissonGarniture}</IonCol>
+        <IonCol>{accordGlobal}</IonCol>
+        <IonCol>{total}</IonCol>
+      </IonRow>
+    );
 
     return(
         <>
@@ -92,338 +106,13 @@ useEffect(() => {
       <IonGrid>
         <IonRow>
           <IonCol></IonCol>
-          <IonCol> Note de présentation  </IonCol>
-          <IonCol>Note cuisson principale </IonCol>
+          <IonCol>Note de présentation</IonCol>
+          <IonCol>Note cuisson principale</IonCol>
           <IonCol>Note cuisson garniture</IonCol>
           <IonCol>Note accord global plat</IonCol>
           <IonCol>Total</IonCol>
         </IonRow>
-      {/* </IonGrid> */}
-    {/* </IonItem> */}
-  
-    {/* <IonItem>
-      <IonGrid> */}
-        <IonRow>
-          <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°1
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem> */}
-    
-    {/* <IonItem>
-      <IonGrid> */}
-        <IonRow>
-          <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°2
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem>
-      
-      <IonGrid> */}
-        <IonRow>
-          <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-            Candidat n°3
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-    
-      {/* <IonGrid> */}
-        <IonRow>
-          <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°4
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°5
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°6
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°7
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°8
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°9
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°10
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°11
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°12
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°13
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°14
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°15
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°16
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°17
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-          <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-          Candidat n°18
-          </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-        <IonCol>
-            <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-            Candidat n°19
-            </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      {/* </IonGrid>
-    </IonItem>
-    <IonItem> */}
-      {/* <IonGrid> */}
-        <IonRow>
-          <IonCol>
-            <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-            Candidat n°20
-            </IonButton>
-          </IonCol>
-          <IonCol> {presentation}  </IonCol>
-          <IonCol>{cuissonPrincipale} </IonCol>
-          <IonCol>{cuissonGarniture}</IonCol>
-          <IonCol>{accordGlobal}</IonCol>
-          <IonCol>{total}</IonCol>
-        </IonRow>
-      
-    {/* </IonItem> */}
+        {candidates}
     </IonGrid>
   </IonList>
 </IonContent>

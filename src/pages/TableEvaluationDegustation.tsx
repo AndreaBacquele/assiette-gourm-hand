@@ -14,8 +14,7 @@ IonIcon,
 IonContent} from '@ionic/react';
 import Logo from '../images/logo.jpg';
 import './TableEvaluationDegustation.css';
-import { useHistory } from 'react-router-dom';
-import { Storage } from '@ionic/storage';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import {useStorage} from '../hooks/useStorage'
 
 // import { refreshOutline } from 'ionicons/dist/types/components/icon/icon';
@@ -24,6 +23,10 @@ import {useStorage} from '../hooks/useStorage'
 
 
 function TableEvaluationDegustation(){
+
+    // Récupére le numéro de candidat dans l'URL
+    const{candidate} = useParams<{candidate : string}>()
+    console.log(candidate)
 
     const {store} = useStorage();
     //Récupération des informations des inputs
@@ -58,11 +61,10 @@ function TableEvaluationDegustation(){
         console.log(total)
         setTotal(total)
         if(store){
-            store.set('noteDegustation', {floatPresentation, floatCuissonGarniture,  floatCuissonPrincipale, floatAccordGlobal, total });
+            store.set('notes',{floatPresentation, floatCuissonGarniture,  floatCuissonPrincipale, floatAccordGlobal, total });
             }
         }
 
-        
     //Redirection vers la page listingCandidatDegustation
     const history = useHistory();
     const handleBackClick = () => {
@@ -84,7 +86,7 @@ function TableEvaluationDegustation(){
         {/* A voir si utilisation de card ou juste affichage des phrases et réglage en CSS */}
         {/* <h6>Sous le haut patronnage de Monsieur Emmanuel MACRON, Président de la République</h6>
         <h6> Note de présentation et de dégustation</h6> */}
-
+    <p>Candidat n°{candidate}</p>
     <IonGrid fixed={true}>
         <IonRow>
             <IonCol size='5'><p>Critéres</p></IonCol>
