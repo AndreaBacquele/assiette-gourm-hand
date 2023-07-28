@@ -53,15 +53,22 @@ function TableEvaluationDegustation(){
 
     const [total, setTotal] = useState(0);
     const handleValidateClick = () => {
-        let floatPresentation = parseFloat(presentation)
-        let floatCuissonGarniture = parseFloat(cuissonGarniture)
-        let floatCuissonPrincipale = parseFloat(cuissonPrincipale)
-        let floatAccordGlobal = parseFloat(accordGlobal)
-        let total = floatCuissonGarniture + floatPresentation + floatCuissonPrincipale + floatAccordGlobal
-        console.log(total)
+        let Presentation = parseFloat(presentation)
+        let CuissonGarniture = parseFloat(cuissonGarniture)
+        let CuissonPrincipale = parseFloat(cuissonPrincipale)
+        let AccordGlobal = parseFloat(accordGlobal)
+        let total = CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal
         setTotal(total)
         if(store){
-            store.set('notes',{floatPresentation, floatCuissonGarniture,  floatCuissonPrincipale, floatAccordGlobal, total });
+            store.set('notes', {
+                ['candidat' + candidate]: {
+                    Presentation,
+                    CuissonGarniture,
+                    CuissonPrincipale,
+                    AccordGlobal,
+                    total
+                }
+            });
             }
         }
 
