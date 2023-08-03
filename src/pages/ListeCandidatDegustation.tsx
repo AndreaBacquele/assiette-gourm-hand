@@ -40,28 +40,6 @@ useEffect(() => {
 }, [store]);
 
 
-// Récupére les notations de la table évaluation dégustation
-const pickNotes = async() => {
-  if(store){
-      const notes = await store.get('noteDegustation');
-      const presentation = notes?.floatPresentation;
-      const cuissonGarniture = notes?.floatCuissonGarniture;
-      const cuissonPrincipale = notes?.floatCuissonPrincipale;
-      const accordGlobal = notes?.floatAccordGlobal;
-      const total = notes?.total
-      setPresentation(presentation);
-      setCuissonPrincipale(cuissonPrincipale);
-      setCuissonGarniture(cuissonGarniture);
-      setAccordGlobal(accordGlobal);
-      setTotal(total)
-  }
-}
-useEffect(() => {
-  pickNotes();
-}, [store]);
-
-
-
   const history = useHistory();
 
     const handleButtonClick = (candidate : number) => {
@@ -83,6 +61,40 @@ useEffect(() => {
         <IonCol>{total}</IonCol>
       </IonRow>
     );
+
+
+// Récupére les notations de la table évaluation dégustation
+const pickNotes = async(candidate:number) => {
+  if(store){
+      const notes = await store.get('notes');
+
+      if (notes && notes['candidat' + candidate]) {
+
+        // ? derriére la clé, permet d'émettre une erreur si la clé est undefined ou null; ?? fait la même chose est renvoi une chaine de caractére vide si le champ est vide
+        const presentation = notes['candidat' + candidate]?.Presentation ?? '';
+        const cuissonGarniture = notes['candidat' + candidate]?.CuissonGarniture ?? '';
+        const cuissonPrincipale = notes['candidat' + candidate]?.CuissonPrincipale ?? '';
+        const accordGlobal = notes['candidat' + candidate]?.AccordGlobal ?? '';
+        const total = notes['candidat' + candidate]?.total ?? '';
+
+      setPresentation(presentation);
+      setCuissonPrincipale(cuissonPrincipale);
+      setCuissonGarniture(cuissonGarniture);
+      setAccordGlobal(accordGlobal);
+      setTotal(total)
+  }
+}
+}
+useEffect(() => {
+  const AllNotes = async() => {
+    for (let i = 0; i<=nb_candidates; i++){
+      await pickNotes(i);
+    }
+  }
+  AllNotes()
+  
+}, [store]);
+
 
     return(
         <>
