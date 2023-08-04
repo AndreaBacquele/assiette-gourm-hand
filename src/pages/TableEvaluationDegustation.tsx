@@ -83,6 +83,22 @@ function TableEvaluationDegustation() {
     }
   };
 
+  // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
+  useEffect(() => {
+    if (store) {
+      store.get("notes").then((all_notes: Record<string, any>) => {
+        const candidateNotes = all_notes["candidat" + candidate];
+        if (candidateNotes) {
+          setPresentation(candidateNotes.Presentation || "");
+          setCuissonPrincipale(candidateNotes.CuissonPrincipale || "");
+          setCuissonGarniture(candidateNotes.CuissonGarniture || "");
+          setAccordGlobal(candidateNotes.AccordGlobal || "");
+          setTotal(candidateNotes.total || "");
+        }
+      });
+    }
+  }, [store, candidate]);
+
   //Redirection vers la page listingCandidatDegustation
   const history = useHistory();
   const handleBackClick = () => {
@@ -139,6 +155,7 @@ function TableEvaluationDegustation() {
               >
                 {" "}
               </IonInput>
+              {presentation && <p>{presentation}</p>}
             </IonCol>
             <IonCol size="1">
               <p>/9</p>
