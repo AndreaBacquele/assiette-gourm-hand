@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   IonCard,
   IonCardContent,
@@ -14,7 +14,6 @@ import {
   IonContent,
   IonItem,
 } from "@ionic/react";
-import Logo from "../images/logo.jpg";
 import "./TableEvaluationTechnique.css";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
@@ -22,14 +21,14 @@ import { useStorage } from "../hooks/useStorage";
 // ATTENTION : PROBLEME RESPONSIVITE SUR MOBILE
 function TableEvaluationTechnique() {
   const history = useHistory();
+  const { store } = useStorage();
 
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
 
-  //   Retour liste candidats technique
-  const handleBackClick = () => {
-    history.push("/listingtechnique");
-  };
+  const [firstTotal, setFirstTotal] = useState(0);
+  const [secondTotal, setSecondTotal] = useState(0);
+  const [allTotal, setAllTotal] = useState(0);
 
   // TABLEAU NOTE PRODUCTION
   const [secuHygiene, setSecuHygiene] = useState("");
@@ -50,10 +49,6 @@ function TableEvaluationTechnique() {
   const handleTimingChange = (event: CustomEvent) => {
     setTiming(event.detail.value);
   };
-
-  const [firstTotal, setFirstTotal] = useState(0);
-  const [secondTotal, setSecondTotal] = useState(0);
-  const [allTotal, setAllTotal] = useState(0);
 
   // TABLEAU NOTE AUTONOMIE
   const [initiative, setInitiative] = useState("");
@@ -134,6 +129,54 @@ function TableEvaluationTechnique() {
 
     let TotalAllTableaux = Total2tableaux + Total2Tableauxbis;
     setAllTotal(TotalAllTableaux);
+
+    if (store) {
+      let candidates_notes = {
+        totalProduct,
+        totalAutonomie,
+        totalDurable,
+        TotalOptimisation,
+        TotalAllTableaux,
+      };
+
+      // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
+      // On récupére les notes déja présentes. Ensuite, on traite la promesse obtenue et on applique la fonction save_notes
+      // La fonction save_notes permet d'ajouter une instance de notes d'un candidat
+      const save_notes = (
+        all_notes: Record<string, any>,
+        candidate: string,
+        candidates_notes: Object
+      ) => {
+        all_notes["candidat" + candidate] = candidates_notes;
+        store.set("notes", all_notes);
+      };
+      store.get("notes").then((all_notes: Record<string, any>) => {
+        save_notes(all_notes, candidate, candidates_notes);
+      });
+    }
+  };
+
+  //  A VOIR SI AFFICHAGE DANS CHAQUE CASE DES NOTES : ELEMENTS STOCKES ?
+  //   useEffect(() => {
+  //     if (store) {
+  //       store.get("notes").then((all_notes: Record<string, any>) => {
+  //         const candidateNotes = all_notes["candidat" + candidate];
+  //         if (candidateNotes) {
+  //           // Affichage éléments 1er tableau
+  //           setSecuHygiene(candidateNotes.secuHygiene || "");
+  //           setTotalProduction(candidateNotes.totalProduct || "");
+  //           setTotalAutonomie(candidateNotes.totalAutonomie || "");
+  //           setTotalDurable(candidateNotes.totalDurable || "");
+  //           setTotalOptimisation(candidateNotes.TotalOptimisation || "");
+  //           setAllTotal(candidateNotes.allTotal || 0);
+  //         }
+  //       });
+  //     }
+  //   }, [store, candidate]);
+
+  //   Retour liste candidats technique
+  const handleBackClick = () => {
+    history.push("/listingtechnique");
   };
 
   return (

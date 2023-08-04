@@ -48,6 +48,7 @@ function TableEvaluationDegustation() {
   //Permet de faire le calcul du total quand on appuie sur le bouton validez l'évaluation
 
   const [total, setTotal] = useState(0);
+
   const handleValidateClick = () => {
     let Presentation = parseFloat(presentation);
     let CuissonGarniture = parseFloat(cuissonGarniture);
@@ -93,7 +94,7 @@ function TableEvaluationDegustation() {
           setCuissonPrincipale(candidateNotes.CuissonPrincipale || "");
           setCuissonGarniture(candidateNotes.CuissonGarniture || "");
           setAccordGlobal(candidateNotes.AccordGlobal || "");
-          setTotal(candidateNotes.total || "");
+          setTotal(candidateNotes.total || 0);
         }
       });
     }
