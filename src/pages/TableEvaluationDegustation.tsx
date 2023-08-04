@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   IonCard,
   IonCardContent,
@@ -13,9 +13,8 @@ import {
   IonIcon,
   IonContent,
 } from "@ionic/react";
-import Logo from "../images/logo.jpg";
 import "./TableEvaluationDegustation.css";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 
 // import { refreshOutline } from 'ionicons/dist/types/components/icon/icon';
@@ -25,7 +24,6 @@ import { useStorage } from "../hooks/useStorage";
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
-  // const candidat = ["candidat" + candidate];
 
   const { store } = useStorage();
   //Récupération des informations des inputs
@@ -67,6 +65,7 @@ function TableEvaluationDegustation() {
         AccordGlobal,
         total,
       };
+
       // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
       // On récupére les notes déja présentes. Ensuite, on traite la promesse obtenue et on applique la fonction save_notes
       // La fonction save_notes permet d'ajouter une instance de notes d'un candidat
