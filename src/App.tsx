@@ -10,6 +10,7 @@ import ListeCandidatDegustation from './pages/ListeCandidatDegustation';
 import TableEvaluationDegustation from './pages/TableEvaluationDegustation';
 import ListeCandidatTechnique from './pages/ListeCandidatTechnique';
 import TableEvaluationTechnique from './pages/TableEvaluationTechnique';
+import MyComponent from './pages/TableEvaluationDegustation'
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -44,8 +45,8 @@ const App: React.FC = () => (
         <Route exact path="/" render={() => <Redirect to="/home" />} />
       <Route path="/listingdegustation" component={ListeCandidatDegustation} />
       <Route path="/listingtechnique" component={ListeCandidatTechnique} />
-      <Route path="/evaldegustation" component={TableEvaluationDegustation} />
       <Route path="/evaltechnique" component={TableEvaluationTechnique} />
+      <Route path="/evaldegustation/:candidate"> <TableEvaluationDegustation /></Route>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
