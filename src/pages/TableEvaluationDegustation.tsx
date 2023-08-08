@@ -49,21 +49,27 @@ function TableEvaluationDegustation() {
 
   const [total, setTotal] = useState(0);
 
-  const handleValidateClick = () => {
-    let Presentation = parseFloat(presentation);
-    let CuissonGarniture = parseFloat(cuissonGarniture);
-    let CuissonPrincipale = parseFloat(cuissonPrincipale);
-    let AccordGlobal = parseFloat(accordGlobal);
+  useEffect(() => {
+    let Presentation = isNaN(Number(presentation)) ? 0 : Number(presentation);
+    let CuissonGarniture = isNaN(Number(cuissonGarniture))
+      ? 0
+      : Number(cuissonGarniture);
+    let CuissonPrincipale = isNaN(Number(cuissonPrincipale))
+      ? 0
+      : Number(cuissonPrincipale);
+    let AccordGlobal = isNaN(Number(accordGlobal)) ? 0 : Number(accordGlobal);
     let total =
       CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal;
     setTotal(total);
+  }, [presentation, cuissonGarniture, cuissonPrincipale, accordGlobal]);
 
+  const handleValidateClick = () => {
     if (store) {
       let candidates_notes = {
-        Presentation,
-        CuissonGarniture,
-        CuissonPrincipale,
-        AccordGlobal,
+        presentation,
+        cuissonPrincipale,
+        cuissonGarniture,
+        accordGlobal,
         total,
       };
 

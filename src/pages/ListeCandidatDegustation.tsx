@@ -24,10 +24,10 @@ function ListeCandidatDegustation() {
 
   // Spécifie la structure attendu pour l'objet notes
   interface Note {
-    Presentation: string;
-    CuissonPrincipale: string;
-    CuissonGarniture: string;
-    AccordGlobal: string;
+    presentation: string;
+    cuissonPrincipale: string;
+    cuissonGarniture: string;
+    accordGlobal: string;
     total: string;
   }
 
@@ -71,12 +71,12 @@ function ListeCandidatDegustation() {
     Array.from({ length: end - start + 1 }, (v, k) => k + start);
 
   const candidates = range(1, nb_candidates).map((nb) => {
-    const presentation = (notes && notes["candidat" + nb]?.Presentation) ?? "";
+    const presentation = (notes && notes["candidat" + nb]?.presentation) ?? "";
     const cuissonGarniture =
-      (notes && notes["candidat" + nb]?.CuissonGarniture) ?? "";
+      (notes && notes["candidat" + nb]?.cuissonGarniture) ?? "";
     const cuissonPrincipale =
-      (notes && notes["candidat" + nb]?.CuissonPrincipale) ?? "";
-    const accordGlobal = (notes && notes["candidat" + nb]?.AccordGlobal) ?? "";
+      (notes && notes["candidat" + nb]?.cuissonPrincipale) ?? "";
+    const accordGlobal = (notes && notes["candidat" + nb]?.accordGlobal) ?? "";
     const total = (notes && notes["candidat" + nb]?.total) ?? "";
     return (
       <IonRow>
