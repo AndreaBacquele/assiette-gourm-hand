@@ -97,6 +97,7 @@ function TableEvaluationTechnique() {
 
   // Fonction qui permet de faire les calculs de totaux automatiquement lorsque l'on clique sur le bouton Validez l'évaluation.
   const handleValidateClick = () => {
+    // Calculs tableau 1 : Production
     let SecuHygiene = parseFloat(secuHygiene);
     let Organisation = parseFloat(organisation);
     let MaitriseTech = parseFloat(maitriseTech);
@@ -104,6 +105,7 @@ function TableEvaluationTechnique() {
     let totalProduct = SecuHygiene + Organisation + MaitriseTech + Timing;
     setTotalProduction(totalProduct);
 
+    // Calculs tableau 2 : Autonomie
     let Initiative = parseFloat(initiative);
     let Harmonie = parseFloat(harmonie);
     let QualiteAccompagnement = parseFloat(qualiteAccomp);
@@ -111,31 +113,50 @@ function TableEvaluationTechnique() {
     let totalAutonomie = Initiative + Harmonie + QualiteAccompagnement + Clarte;
     setTotalAutonomie(totalAutonomie);
 
-    let Total2tableaux = totalAutonomie + totalProduct;
-    setFirstTotal(Total2tableaux);
+    // Total intermédiaire
+    let TotalProductAutonomie = totalAutonomie + totalProduct;
+    setFirstTotal(TotalProductAutonomie);
 
+    // Calculs tableau 3 : Développement durable
     let Dechets = parseFloat(dechets);
     let Fluides = parseFloat(fluides);
     let totalDurable = Dechets + Fluides;
     setTotalDurable(totalDurable);
 
+    // Calculs tableau 4 : Optimisation du panier
     let UtilObligatoires = parseFloat(utilObligatoires);
     let UtilLibres = parseFloat(utilLibres);
-    let TotalOptimisation = UtilObligatoires + UtilLibres;
-    setTotalOptimisation(TotalOptimisation);
+    let totalOptimisation = UtilObligatoires + UtilLibres;
+    setTotalOptimisation(totalOptimisation);
 
-    let Total2Tableauxbis = TotalOptimisation + totalDurable;
-    setSecondTotal(Total2Tableauxbis);
+    // Total intermédiaire
+    let TotalDurableOpti = totalOptimisation + totalDurable;
+    setSecondTotal(TotalDurableOpti);
 
-    let TotalAllTableaux = Total2tableaux + Total2Tableauxbis;
+    // Totaux finaux
+    let TotalAllTableaux = TotalProductAutonomie + TotalDurableOpti;
     setAllTotal(TotalAllTableaux);
 
     if (store) {
       let candidates_notes = {
+        secuHygiene,
+        organisation,
+        maitriseTech,
+        timing,
         totalProduct,
+        initiative,
+        qualiteAccomp,
+        harmonie,
+        clarte,
         totalAutonomie,
+        dechets,
+        fluides,
         totalDurable,
-        TotalOptimisation,
+        utilLibres,
+        utilObligatoires,
+        totalOptimisation,
+        TotalProductAutonomie,
+        TotalDurableOpti,
         TotalAllTableaux,
       };
 
@@ -156,23 +177,46 @@ function TableEvaluationTechnique() {
     }
   };
 
-  //  A VOIR SI AFFICHAGE DANS CHAQUE CASE DES NOTES : ELEMENTS STOCKES ?
-  //   useEffect(() => {
-  //     if (store) {
-  //       store.get("notes").then((all_notes: Record<string, any>) => {
-  //         const candidateNotes = all_notes["candidat" + candidate];
-  //         if (candidateNotes) {
-  //           // Affichage éléments 1er tableau
-  //           setSecuHygiene(candidateNotes.secuHygiene || "");
-  //           setTotalProduction(candidateNotes.totalProduct || "");
-  //           setTotalAutonomie(candidateNotes.totalAutonomie || "");
-  //           setTotalDurable(candidateNotes.totalDurable || "");
-  //           setTotalOptimisation(candidateNotes.TotalOptimisation || "");
-  //           setAllTotal(candidateNotes.allTotal || 0);
-  //         }
-  //       });
-  //     }
-  //   }, [store, candidate]);
+  //  Affichage des élements dans chaque case dés que la grille a été sauvegardée
+  useEffect(() => {
+    if (store) {
+      store.get("notes").then((all_notes: Record<string, any>) => {
+        const candidateNotes = all_notes["candidat" + candidate];
+        if (candidateNotes) {
+          // Affichage éléments 1er tableau : Production
+          setSecuHygiene(candidateNotes.secuHygiene || "");
+          setOrganisation(candidateNotes.organisation || "");
+          setMaitriseTech(candidateNotes.maitriseTech || "");
+          setTiming(candidateNotes.timing || "");
+          setTotalProduction(candidateNotes.totalProduct || "");
+
+          // Affichage éléments 2éme tableau : Autonomie
+          setInitiative(candidateNotes.initiative || "");
+          setHarmonie(candidateNotes.harmonie || "");
+          setQualiteAccomp(candidateNotes.qualiteAccomp || "");
+          setClarte(candidateNotes.clarte || "");
+          setTotalAutonomie(candidateNotes.totalAutonomie || "");
+
+          // Affichage total intermédiaire
+          setFirstTotal(candidateNotes.TotalProductAutonomie || "");
+          setSecondTotal(candidateNotes.TotalDurableOpti || "");
+
+          // Affichage éléments 3éme tableau : Développement durable
+          setDechets(candidateNotes.dechets || "");
+          setFluides(candidateNotes.fluides || "");
+          setTotalDurable(candidateNotes.totalDurable || "");
+
+          // Affichage élément 4éme tableau : Optimisation du panier
+          setUtilObligatoires(candidateNotes.utilObligatoires || "");
+          setUtilLibres(candidateNotes.utilLibres || "");
+          setTotalOptimisation(candidateNotes.totalOptimisation || "");
+
+          // Totaux finaux
+          setAllTotal(candidateNotes.TotalAllTableaux || 0);
+        }
+      });
+    }
+  }, [store, candidate]);
 
   //   Retour liste candidats technique
   const handleBackClick = () => {
@@ -196,7 +240,7 @@ function TableEvaluationTechnique() {
         <p>Candidat n°{candidate}</p>
 
         <div id="tableau">
-          <u> Note de production</u>
+          <u> Notes de production</u>
         </div>
         {/*1er tableau : Note de production*/}
         <IonGrid fixed={true}>
@@ -310,7 +354,7 @@ function TableEvaluationTechnique() {
         </IonGrid>
 
         <div id="tableau">
-          <u> Note d'autonomie</u>
+          <u> Notes d'autonomie</u>
         </div>
         {/*2éme tableau : Note d'autonomie*/}
         <IonGrid fixed={true}>

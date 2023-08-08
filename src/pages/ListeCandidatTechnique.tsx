@@ -22,11 +22,11 @@ function ListeCandidatCuisine() {
   const [notes, setNotes] = useState<Record<string, Note>>({});
 
   interface Note {
-    Presentation: string;
-    CuissonPrincipale: string;
-    CuissonGarniture: string;
-    AccordGlobal: string;
-    total: string;
+    totalProduct: string;
+    totalAutonomie: string;
+    totalDurable: string;
+    totalOptimisation: string;
+    TotalAllTableaux: string;
   }
 
   const history = useHistory();
@@ -35,18 +35,21 @@ function ListeCandidatCuisine() {
     history.push("/evaltechnique/" + candidate);
   };
 
+  //   Gestion de l'affichage des candidats sur le dashboard
   const nb_candidates = 20;
   const range = (start: number, end: number) =>
     Array.from({ length: end - start + 1 }, (v, k) => k + start);
 
   const candidates = range(1, nb_candidates).map((nb) => {
-    // const presentation = (notes && notes["candidat" + nb]?.Presentation) ?? "";
-    // const cuissonGarniture =
-    //   (notes && notes["candidat" + nb]?.CuissonGarniture) ?? "";
-    // const cuissonPrincipale =
-    //   (notes && notes["candidat" + nb]?.CuissonPrincipale) ?? "";
-    // const accordGlobal = (notes && notes["candidat" + nb]?.AccordGlobal) ?? "";
-    // const total = (notes && notes["candidat" + nb]?.total) ?? "";
+    const totalProduction =
+      (notes && notes["candidat" + nb]?.totalProduct) ?? "";
+    const totalAutonomie =
+      (notes && notes["candidat" + nb]?.totalAutonomie) ?? "";
+    const totalDurable = (notes && notes["candidat" + nb]?.totalDurable) ?? "";
+    const totalOptimisation =
+      (notes && notes["candidat" + nb]?.totalOptimisation) ?? "";
+    const TotalAllTableaux =
+      (notes && notes["candidat" + nb]?.TotalAllTableaux) ?? "";
     return (
       <IonRow>
         <IonCol>
@@ -59,11 +62,11 @@ function ListeCandidatCuisine() {
             Candidat n°{nb}
           </IonButton>
         </IonCol>
-        <IonCol> </IonCol>
-        <IonCol> </IonCol>
-        <IonCol></IonCol>
-        <IonCol></IonCol>
-        <IonCol></IonCol>
+        <IonCol>{totalProduction}</IonCol>
+        <IonCol>{totalAutonomie} </IonCol>
+        <IonCol>{totalDurable}</IonCol>
+        <IonCol>{totalOptimisation}</IonCol>
+        <IonCol>{TotalAllTableaux}</IonCol>
       </IonRow>
     );
   });
@@ -92,7 +95,18 @@ function ListeCandidatCuisine() {
           </IonToolbar>
         </IonHeader>
 
-        <IonList lines="full">{candidates}</IonList>
+        <IonGrid>
+          <IonRow>
+            <IonCol></IonCol>
+            <IonCol> Note totale Production</IonCol>
+            <IonCol> Note totale Autonomie </IonCol>
+            <IonCol>Note totale développement durable</IonCol>
+            <IonCol>Note totale optimisation du panier</IonCol>
+            <IonCol>Total</IonCol>
+          </IonRow>
+
+          <IonList lines="full">{candidates}</IonList>
+        </IonGrid>
       </IonContent>
     </>
   );
