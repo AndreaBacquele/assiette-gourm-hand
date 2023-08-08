@@ -45,10 +45,9 @@ function TableEvaluationDegustation() {
     setAccordGlobal(event.detail.value);
   };
 
-  //Permet de faire le calcul du total quand on appuie sur le bouton validez l'évaluation
-
   const [total, setTotal] = useState(0);
 
+  // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
   useEffect(() => {
     let Presentation = isNaN(Number(presentation)) ? 0 : Number(presentation);
     let CuissonGarniture = isNaN(Number(cuissonGarniture))
@@ -63,6 +62,7 @@ function TableEvaluationDegustation() {
     setTotal(total);
   }, [presentation, cuissonGarniture, cuissonPrincipale, accordGlobal]);
 
+  // Stockage des notes dés que l'on appuie sur le bouton Valider l'évaluation
   const handleValidateClick = () => {
     if (store) {
       let candidates_notes = {

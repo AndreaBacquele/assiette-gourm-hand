@@ -26,9 +26,9 @@ function TableEvaluationTechnique() {
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
 
-  const [firstTotal, setFirstTotal] = useState(0);
-  const [secondTotal, setSecondTotal] = useState(0);
-  const [allTotal, setAllTotal] = useState(0);
+  const [TotalProductAutonomie, setTotalProductAutonomie] = useState(0);
+  const [TotalOptiDurable, setTotalOptiDurable] = useState(0);
+  const [AllTotal, setAllTotal] = useState(0);
 
   // TABLEAU NOTE PRODUCTION
   const [secuHygiene, setSecuHygiene] = useState("");
@@ -95,55 +95,70 @@ function TableEvaluationTechnique() {
     setUtilLibres(event.detail.value);
   };
 
-  // Fonction qui permet de faire les calculs de totaux automatiquement lorsque l'on clique sur le bouton Validez l'évaluation.
-  const handleValidateClick = () => {
-    // Calculs tableau 1 : Production
-    let SecuHygiene = parseFloat(secuHygiene);
-    let Organisation = parseFloat(organisation);
-    let MaitriseTech = parseFloat(maitriseTech);
-    let Timing = parseFloat(timing);
-    let totalProduct = SecuHygiene + Organisation + MaitriseTech + Timing;
-    setTotalProduction(totalProduct);
+  // Affichage-calcul en temps réel du calcul du total 1ER TABLEAU : Production
+  useEffect(() => {
+    let SecuHygiene = secuHygiene === "" ? 0 : parseFloat(secuHygiene);
+    let Organisation = organisation === "" ? 0 : parseFloat(organisation);
+    let Timing = timing === "" ? 0 : parseFloat(timing);
+    let MaitriseTech = maitriseTech === "" ? 0 : parseFloat(maitriseTech);
+    let TotalProduct = SecuHygiene + Organisation + Timing + MaitriseTech;
+    setTotalProduction(TotalProduct);
+  }, [secuHygiene, organisation, maitriseTech, timing, totalProduction]);
 
-    // Calculs tableau 2 : Autonomie
-    let Initiative = parseFloat(initiative);
-    let Harmonie = parseFloat(harmonie);
-    let QualiteAccompagnement = parseFloat(qualiteAccomp);
-    let Clarte = parseFloat(clarte);
+  // Affichage-calcul en temps réel du calcul du total 2EME TABLEAU : Autonomie
+  useEffect(() => {
+    let Initiative = initiative === "" ? 0 : parseFloat(initiative);
+    let Harmonie = harmonie === "" ? 0 : parseFloat(harmonie);
+    let QualiteAccompagnement =
+      qualiteAccomp === "" ? 0 : parseFloat(qualiteAccomp);
+    let Clarte = clarte === "" ? 0 : parseFloat(clarte);
     let totalAutonomie = Initiative + Harmonie + QualiteAccompagnement + Clarte;
     setTotalAutonomie(totalAutonomie);
+  }, [initiative, harmonie, qualiteAccomp, clarte, totalAutonomie]);
 
-    // Total intermédiaire
-    let TotalProductAutonomie = totalAutonomie + totalProduct;
-    setFirstTotal(TotalProductAutonomie);
+  // Affichage-calcul en temps réel du calcul du total intermédiaire
+  useEffect(() => {
+    let TotalProductAutonomie = totalAutonomie + totalProduction;
+    setTotalProductAutonomie(TotalProductAutonomie);
+  }, [totalAutonomie, totalProduction]);
 
-    // Calculs tableau 3 : Développement durable
-    let Dechets = parseFloat(dechets);
-    let Fluides = parseFloat(fluides);
+  // Affichage-calcul en temps réel du calcul du total 3EME TABLEAU : Développement durable
+  useEffect(() => {
+    let Dechets = dechets === "" ? 0 : parseFloat(dechets);
+    let Fluides = fluides === "" ? 0 : parseFloat(fluides);
     let totalDurable = Dechets + Fluides;
     setTotalDurable(totalDurable);
+  }, [dechets, fluides, totalDurable]);
 
-    // Calculs tableau 4 : Optimisation du panier
-    let UtilObligatoires = parseFloat(utilObligatoires);
-    let UtilLibres = parseFloat(utilLibres);
+  // Affichage-calcul en temps réel du calcul du total 4EME TABLEAU : Optimisation du panier
+  useEffect(() => {
+    let UtilObligatoires =
+      utilObligatoires === "" ? 0 : parseFloat(utilObligatoires);
+    let UtilLibres = utilLibres === "" ? 0 : parseFloat(utilLibres);
     let totalOptimisation = UtilObligatoires + UtilLibres;
     setTotalOptimisation(totalOptimisation);
+  }, [utilObligatoires, utilLibres, totalOptimisation]);
 
-    // Total intermédiaire
+  // Affichage-calcul en temps réel du calcul du total 1er tableau + 2éme tableau : Optimisation du panier
+  useEffect(() => {
     let TotalDurableOpti = totalOptimisation + totalDurable;
-    setSecondTotal(TotalDurableOpti);
+    setTotalOptiDurable(TotalDurableOpti);
+  }, [totalOptimisation, totalProduction]);
 
-    // Totaux finaux
-    let TotalAllTableaux = TotalProductAutonomie + TotalDurableOpti;
+  useEffect(() => {
+    let TotalAllTableaux = TotalProductAutonomie + TotalOptiDurable;
     setAllTotal(TotalAllTableaux);
+  });
 
+  // Fonction qui permet de stocker les données lorsque l'on clique sur le bouton Validez l'évaluation.
+  const handleValidateClick = () => {
     if (store) {
       let candidates_notes = {
         secuHygiene,
         organisation,
         maitriseTech,
         timing,
-        totalProduct,
+        totalProduction,
         initiative,
         qualiteAccomp,
         harmonie,
@@ -156,8 +171,8 @@ function TableEvaluationTechnique() {
         utilObligatoires,
         totalOptimisation,
         TotalProductAutonomie,
-        TotalDurableOpti,
-        TotalAllTableaux,
+        TotalOptiDurable,
+        AllTotal,
       };
 
       // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
@@ -188,7 +203,7 @@ function TableEvaluationTechnique() {
           setOrganisation(candidateNotes.organisation || "");
           setMaitriseTech(candidateNotes.maitriseTech || "");
           setTiming(candidateNotes.timing || "");
-          setTotalProduction(candidateNotes.totalProduct || "");
+          setTotalProduction(candidateNotes.totalProduction || "");
 
           // Affichage éléments 2éme tableau : Autonomie
           setInitiative(candidateNotes.initiative || "");
@@ -198,8 +213,8 @@ function TableEvaluationTechnique() {
           setTotalAutonomie(candidateNotes.totalAutonomie || "");
 
           // Affichage total intermédiaire
-          setFirstTotal(candidateNotes.TotalProductAutonomie || "");
-          setSecondTotal(candidateNotes.TotalDurableOpti || "");
+          setTotalProductAutonomie(candidateNotes.TotalProductAutonomie || "");
+          setTotalOptiDurable(candidateNotes.TotalDurableOpti || "");
 
           // Affichage éléments 3éme tableau : Développement durable
           setDechets(candidateNotes.dechets || "");
@@ -212,7 +227,7 @@ function TableEvaluationTechnique() {
           setTotalOptimisation(candidateNotes.totalOptimisation || "");
 
           // Totaux finaux
-          setAllTotal(candidateNotes.TotalAllTableaux || 0);
+          setAllTotal(candidateNotes.AllTotal || 0);
         }
       });
     }
@@ -473,7 +488,7 @@ function TableEvaluationTechnique() {
             <p> Total : </p>
           </IonCol>
           <IonCol size="2">
-            <p>{firstTotal}</p>
+            <p>{TotalProductAutonomie}</p>
           </IonCol>
           <IonCol size="1">
             <p>/50</p>
@@ -631,7 +646,7 @@ function TableEvaluationTechnique() {
             <p> Total : </p>
           </IonCol>
           <IonCol size="2">
-            <p>{secondTotal} </p>
+            <p>{TotalOptiDurable} </p>
           </IonCol>
           <IonCol size="1">
             <p>/20</p>
@@ -643,7 +658,7 @@ function TableEvaluationTechnique() {
             <p> Total évaluation technique : </p>
           </IonCol>
           <IonCol size="2">
-            <p>{allTotal} </p>
+            <p>{AllTotal} </p>
           </IonCol>
           <IonCol size="1">
             <p>/20</p>

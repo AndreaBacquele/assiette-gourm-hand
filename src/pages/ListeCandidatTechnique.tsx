@@ -22,11 +22,11 @@ function ListeCandidatCuisine() {
   const [notes, setNotes] = useState<Record<string, Note>>({});
 
   interface Note {
-    totalProduct: string;
+    totalProduction: string;
     totalAutonomie: string;
     totalDurable: string;
     totalOptimisation: string;
-    TotalAllTableaux: string;
+    AllTotal: string;
   }
 
   const history = useHistory();
@@ -42,14 +42,13 @@ function ListeCandidatCuisine() {
 
   const candidates = range(1, nb_candidates).map((nb) => {
     const totalProduction =
-      (notes && notes["candidat" + nb]?.totalProduct) ?? "";
+      (notes && notes["candidat" + nb]?.totalProduction) ?? "";
     const totalAutonomie =
       (notes && notes["candidat" + nb]?.totalAutonomie) ?? "";
     const totalDurable = (notes && notes["candidat" + nb]?.totalDurable) ?? "";
     const totalOptimisation =
       (notes && notes["candidat" + nb]?.totalOptimisation) ?? "";
-    const TotalAllTableaux =
-      (notes && notes["candidat" + nb]?.TotalAllTableaux) ?? "";
+    const TotalAllTableaux = (notes && notes["candidat" + nb]?.AllTotal) ?? "";
     return (
       <IonRow>
         <IonCol>
