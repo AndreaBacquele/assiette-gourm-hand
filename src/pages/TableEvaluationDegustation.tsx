@@ -45,24 +45,31 @@ function TableEvaluationDegustation() {
     setAccordGlobal(event.detail.value);
   };
 
-  //Permet de faire le calcul du total quand on appuie sur le bouton validez l'évaluation
-
   const [total, setTotal] = useState(0);
-  const handleValidateClick = () => {
-    let Presentation = parseFloat(presentation);
-    let CuissonGarniture = parseFloat(cuissonGarniture);
-    let CuissonPrincipale = parseFloat(cuissonPrincipale);
-    let AccordGlobal = parseFloat(accordGlobal);
+
+  // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
+  useEffect(() => {
+    let Presentation = isNaN(Number(presentation)) ? 0 : Number(presentation);
+    let CuissonGarniture = isNaN(Number(cuissonGarniture))
+      ? 0
+      : Number(cuissonGarniture);
+    let CuissonPrincipale = isNaN(Number(cuissonPrincipale))
+      ? 0
+      : Number(cuissonPrincipale);
+    let AccordGlobal = isNaN(Number(accordGlobal)) ? 0 : Number(accordGlobal);
     let total =
       CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal;
     setTotal(total);
+  }, [presentation, cuissonGarniture, cuissonPrincipale, accordGlobal]);
 
+  // Stockage des notes dés que l'on appuie sur le bouton Valider l'évaluation
+  const handleValidateClick = () => {
     if (store) {
       let candidates_notes = {
-        Presentation,
-        CuissonGarniture,
-        CuissonPrincipale,
-        AccordGlobal,
+        presentation,
+        cuissonPrincipale,
+        cuissonGarniture,
+        accordGlobal,
         total,
       };
 
@@ -82,6 +89,22 @@ function TableEvaluationDegustation() {
       });
     }
   };
+
+  // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
+  useEffect(() => {
+    if (store) {
+      store.get("notes").then((all_notes: Record<string, any>) => {
+        const candidateNotes = all_notes["candidat" + candidate];
+        if (candidateNotes) {
+          setPresentation(candidateNotes.presentation || "");
+          setCuissonPrincipale(candidateNotes.cuissonPrincipale || "");
+          setCuissonGarniture(candidateNotes.cuissonGarniture || "");
+          setAccordGlobal(candidateNotes.accordGlobal || "");
+          setTotal(candidateNotes.total || 0);
+        }
+      });
+    }
+  }, [store, candidate]);
 
   //Redirection vers la page listingCandidatDegustation
   const history = useHistory();
@@ -139,6 +162,7 @@ function TableEvaluationDegustation() {
               >
                 {" "}
               </IonInput>
+              {presentation && <p>{presentation}</p>}
             </IonCol>
             <IonCol size="1">
               <p>/9</p>

@@ -1,151 +1,114 @@
-import React from 'react';
-import { IonItem, 
-IonList,
-IonHeader,
-IonToolbar,
-IonTitle,
-IonButton,
-IonContent,
-IonGrid,
-IonCol,
-IonRow } from '@ionic/react';
-import './ListeCandidatTechnique.css'
-import { useHistory } from 'react-router';
-import './PageAccueil'
-import { Storage } from '@ionic/storage';
+import React, { useEffect, useState } from "react";
+import {
+  IonItem,
+  IonList,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButton,
+  IonContent,
+  IonGrid,
+  IonCol,
+  IonRow,
+} from "@ionic/react";
+import "./ListeCandidatTechnique.css";
+import { useHistory, useParams } from "react-router";
+import { useStorage } from "../hooks/useStorage";
+import "./PageAccueil";
 
+function ListeCandidatCuisine() {
+  const { candidate } = useParams<{ candidate: string }>();
+  const { store } = useStorage();
+  const [notes, setNotes] = useState<Record<string, Note>>({});
 
-function ListeCandidatCuisine(){
+  interface Note {
+    totalProduction: string;
+    totalAutonomie: string;
+    totalDurable: string;
+    totalOptimisation: string;
+    AllTotal: string;
+  }
 
+  const history = useHistory();
 
-const history = useHistory();
+  const handleButtonClick = (candidate: number) => {
+    history.push("/evaltechnique/" + candidate);
+  };
 
-const handleButtonClick = () => {
-history.push('/evaltechnique');
-}
+  //   Gestion de l'affichage des candidats sur le dashboard
+  const nb_candidates = 20;
+  const range = (start: number, end: number) =>
+    Array.from({ length: end - start + 1 }, (v, k) => k + start);
 
-
-
-return(
-    <>
-<IonContent>
-    <IonHeader color="light">
-    <IonToolbar >
-        <IonItem>
-            <img alt="Logo du concours" src='../images/logo.jpg' /> 
-            <IonTitle> Liste des candidats - Jury technique</IonTitle>
-            {/* <span><p>Pour avoir accés à la fiche du candidat, merci de cliquer sur le numéro</p></span> */}
-        </IonItem>
-    </IonToolbar>
-    </IonHeader>
-
-<IonList lines="full">
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°1
-        </IonButton>
-    </IonItem>
-
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°2
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°3
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°4
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°5
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°6
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°7
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°8
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°9
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°10
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°11
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°12
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°13
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°14
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°15
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°16
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°17
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°18
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°19
-        </IonButton>
-    </IonItem>
-    <IonItem>
-        <IonButton color='warning' onClick={handleButtonClick} expand='full'>
-    Candidat n°20
-        </IonButton>
-    </IonItem>
-
-</IonList>
-</IonContent>
-    </>
+  const candidates = range(1, nb_candidates).map((nb) => {
+    const totalProduction =
+      (notes && notes["candidat" + nb]?.totalProduction) ?? "";
+    const totalAutonomie =
+      (notes && notes["candidat" + nb]?.totalAutonomie) ?? "";
+    const totalDurable = (notes && notes["candidat" + nb]?.totalDurable) ?? "";
+    const totalOptimisation =
+      (notes && notes["candidat" + nb]?.totalOptimisation) ?? "";
+    const TotalAllTableaux = (notes && notes["candidat" + nb]?.AllTotal) ?? "";
+    return (
+      <IonRow>
+        <IonCol>
+          <IonButton
+            color="warning"
+            onClick={() => handleButtonClick(nb)}
+            expand="full"
+          >
+            {" "}
+            Candidat n°{nb}
+          </IonButton>
+        </IonCol>
+        <IonCol>{totalProduction}</IonCol>
+        <IonCol>{totalAutonomie} </IonCol>
+        <IonCol>{totalDurable}</IonCol>
+        <IonCol>{totalOptimisation}</IonCol>
+        <IonCol>{TotalAllTableaux}</IonCol>
+      </IonRow>
     );
+  });
+
+  const loadNotes = async () => {
+    if (store) {
+      const notes = await store.get("notes");
+      setNotes(notes || {});
+    }
+  };
+
+  useEffect(() => {
+    loadNotes();
+  }, [store]);
+
+  return (
+    <>
+      <IonContent>
+        <IonHeader color="light">
+          <IonToolbar>
+            <IonItem>
+              <img alt="Logo du concours" src="../images/logo.jpg" />
+              <IonTitle> Liste des candidats - Jury technique</IonTitle>
+              {/* <span><p>Pour avoir accés à la fiche du candidat, merci de cliquer sur le numéro</p></span> */}
+            </IonItem>
+          </IonToolbar>
+        </IonHeader>
+
+        <IonGrid>
+          <IonRow>
+            <IonCol></IonCol>
+            <IonCol> Note totale Production</IonCol>
+            <IonCol> Note totale Autonomie </IonCol>
+            <IonCol>Note totale développement durable</IonCol>
+            <IonCol>Note totale optimisation du panier</IonCol>
+            <IonCol>Total</IonCol>
+          </IonRow>
+
+          <IonList lines="full">{candidates}</IonList>
+        </IonGrid>
+      </IonContent>
+    </>
+  );
 }
 
 export default ListeCandidatCuisine;
