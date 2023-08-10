@@ -96,10 +96,10 @@ function TableEvaluationDegustation() {
       store.get("notes").then((all_notes: Record<string, any>) => {
         const candidateNotes = all_notes["candidat" + candidate];
         if (candidateNotes) {
-          setPresentation(candidateNotes.Presentation || "");
-          setCuissonPrincipale(candidateNotes.CuissonPrincipale || "");
-          setCuissonGarniture(candidateNotes.CuissonGarniture || "");
-          setAccordGlobal(candidateNotes.AccordGlobal || "");
+          setPresentation(candidateNotes.presentation || "");
+          setCuissonPrincipale(candidateNotes.cuissonPrincipale || "");
+          setCuissonGarniture(candidateNotes.cuissonGarniture || "");
+          setAccordGlobal(candidateNotes.accordGlobal || "");
           setTotal(candidateNotes.total || 0);
         }
       });
