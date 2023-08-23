@@ -13,6 +13,8 @@ import {
   IonIcon,
   IonContent,
   IonItem,
+  IonList,
+  IonLabel,
 } from "@ionic/react";
 import "./TableEvaluationTechnique.css";
 import { useHistory, useParams } from "react-router-dom";
@@ -481,7 +483,7 @@ function TableEvaluationTechnique() {
             </IonCol>
           </IonRow>
         </IonGrid>
-
+        <br></br>
         {/* 1er total global des 2 tableaux précédents */}
         <IonRow class="ion-justify-content-center">
           <IonCol size="5">
@@ -494,7 +496,10 @@ function TableEvaluationTechnique() {
             <p>/50</p>
           </IonCol>
         </IonRow>
-        <IonItem lines="full" color={"warning"}></IonItem>
+        <br></br>
+        <hr />
+        <hr />
+        {/* <IonItem lines="full" color={"warning"}></IonItem> */}
 
         {/* 3éme tableau : Note développement durable */}
         <div id="tableau">
@@ -639,6 +644,7 @@ function TableEvaluationTechnique() {
             </IonCol>
           </IonRow>
         </IonGrid>
+        <br></br>
 
         {/* 2éme total global des 2 tableaux précédents */}
         <IonRow class="ion-justify-content-center">
@@ -652,7 +658,9 @@ function TableEvaluationTechnique() {
             <p>/20</p>
           </IonCol>
         </IonRow>
-
+        <br></br>
+        <hr />
+        <hr />
         <IonRow class="ion-justify-content-center">
           <IonCol size="5">
             <p> Total évaluation technique : </p>
@@ -664,6 +672,7 @@ function TableEvaluationTechnique() {
             <p>/20</p>
           </IonCol>
         </IonRow>
+        <br></br>
         <div className="ion-text-center">
           <IonButton color={"success"} onClick={handleValidateClick}>
             {/* <IonIcon icon={refreshOutline}/> */}

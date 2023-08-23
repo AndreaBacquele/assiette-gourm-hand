@@ -8,3 +8,11 @@
 #total{
     border-color: orange;
 }
+
+
+hr {
+    border: none;
+    color: orange; /* background color */
+    background-color: orange; /* same as border color */
+  }
+  
