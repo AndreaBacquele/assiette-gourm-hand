@@ -14,6 +14,8 @@ import {
 import "./ListeCandidatDegustation.css";
 import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
+import axios from "axios";
+// import { url } from "inspector";
 
 function ListeCandidatDegustation() {
   // Gére la récupération des données + permet l'affichage de celles-ci en dessous
@@ -30,6 +32,27 @@ function ListeCandidatDegustation() {
     accordGlobal: string;
     total: string;
   }
+
+  // Connexion entre le spreadsheet / l'API REST Google / l'application
+  const handleSubmitNotes = (e: any) => {
+    e.preventDefault();
+
+    const objt = { notes, lastName };
+    console.log(objt);
+    // console.log(process.env);
+    console.log(import.meta.env.VITE_REACT_APP_SHEET_BEST_API);
+
+    const url: string | undefined = import.meta.env
+      .VITE_REACT_APP_SHEET_BEST_API;
+
+    if (url) {
+      axios.post(url, objt).then((response) => {
+        console.log(response);
+      });
+    } else {
+      console.error("URL is undefined");
+    }
+  };
 
   // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
   const picklastNamefirstName = async () => {
@@ -119,6 +142,11 @@ function ListeCandidatDegustation() {
             </p>
           </IonTitle>
         </IonItem>
+        <IonButton onClick={handleSubmitNotes}>Envoi des notes</IonButton>
+        <p>
+          Une connexion internet est nécessaire afin de valider l'envoi des
+          notes
+        </p>
 
         <IonList lines="full">
           <IonGrid>
@@ -130,6 +158,7 @@ function ListeCandidatDegustation() {
               <IonCol>Note accord global plat</IonCol>
               <IonCol>Total</IonCol>
             </IonRow>
+            {/* <form data-sheet-best= "process.env.REACT_APP_SHEET_BEST_API"></form> */}
             {candidates}
           </IonGrid>
         </IonList>
