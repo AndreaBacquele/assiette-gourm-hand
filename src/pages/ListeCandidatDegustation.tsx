@@ -15,6 +15,7 @@ import "./ListeCandidatDegustation.css";
 import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import axios from "axios";
+// import { url } from "inspector";
 
 function ListeCandidatDegustation() {
   // Gére la récupération des données + permet l'affichage de celles-ci en dessous
@@ -32,14 +33,17 @@ function ListeCandidatDegustation() {
     total: string;
   }
 
-  // Permet la connexion entre le spreadsheet / l'API REST Google / l'application
+  // Connexion entre le spreadsheet / l'API REST Google / l'application
   const handleSubmitNotes = (e: any) => {
     e.preventDefault();
 
-    const objt = { notes };
+    const objt = { notes, lastName };
     console.log(objt);
+    // console.log(process.env);
+    console.log(import.meta.env.VITE_REACT_APP_SHEET_BEST_API);
 
-    const url: string | undefined = process.env.REACT_APP_SHEET_BEST_API;
+    const url: string | undefined = import.meta.env
+      .VITE_REACT_APP_SHEET_BEST_API;
 
     if (url) {
       axios.post(url, objt).then((response) => {
@@ -154,14 +158,10 @@ function ListeCandidatDegustation() {
               <IonCol>Note accord global plat</IonCol>
               <IonCol>Total</IonCol>
             </IonRow>
+            {/* <form data-sheet-best= "process.env.REACT_APP_SHEET_BEST_API"></form> */}
             {candidates}
           </IonGrid>
         </IonList>
-
-        {/* <IonButton color="warning" onClick={() => appendToSheet(["hello"])}>
-          {" "}
-          Synchroniser les notes
-        </IonButton> */}
       </IonContent>
     </>
   );
