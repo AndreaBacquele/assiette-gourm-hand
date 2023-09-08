@@ -35,10 +35,6 @@ function ListeCandidatDegustation() {
   const handleSubmitNotes = (e: any) => {
     e.preventDefault();
 
-
-    // Boucle qui itére sur les candidats
-    // Pour chaque candidat : création d'une row avec une valeur associée à chaque colonne
-    const oneRow = {
     // Récupération de la date + heure
     var d = new Date();
     var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
@@ -50,7 +46,7 @@ function ListeCandidatDegustation() {
     const oneRow = {
       date_sync: fullDate,
       jury_name: lastName + " " + firstName,
-      candidate_number: ""
+      candidate_number: "",
       grade_presentation: notes["candidat1"]["presentation"],
       grade_cuisson_principale: notes["candidat1"]["cuissonPrincipale"],
       grade_cuisson_garniture: notes["candidat1"]["cuissonPrincipale"],
