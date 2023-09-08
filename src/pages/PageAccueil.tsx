@@ -70,11 +70,11 @@ function Accueil() {
         </h6>
         <IonItem>
           <IonInput
-            required
+            required={true}
             value={lastName}
             onIonChange={handleLastNameChange}
             label="Nom"
-            placeholder="A changer"
+            placeholder="Champ à remplir"
           ></IonInput>
         </IonItem>
         <IonItem>
@@ -83,7 +83,7 @@ function Accueil() {
             value={firstName}
             onIonChange={handleFirstNameChange}
             label="Prénom"
-            placeholder="A changer"
+            placeholder="Champ à remplir"
           ></IonInput>
         </IonItem>
         {/* Gestion des toogles pour le choix de jury */}
