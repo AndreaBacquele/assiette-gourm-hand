@@ -36,22 +36,23 @@ function ListeCandidatDegustation() {
   const handleSubmitNotes = (e: any) => {
     e.preventDefault();
 
+    // Récupération de la date + heure
     var d = new Date();
     var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
     var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
     var fullDate = date + " " + hours;
-    console.log(fullDate);
 
     // Boucle qui itére sur les candidats
     // Pour chaque candidat : création d'une row avec une valeur associée à chaque colonne
     const oneRow = {
       date_sync: fullDate,
+      jury_name: lastName + " " + firstName,
+      candidate_number: "",
       grade_presentation: notes["candidat1"]["presentation"],
       grade_cuisson_principale: notes["candidat1"]["cuissonPrincipale"],
       grade_cuisson_garniture: notes["candidat1"]["cuissonPrincipale"],
       grade_accord_global: notes["candidat1"]["accordGlobal"],
       grade_total: notes["candidat1"]["total"],
-      jury_name: lastName + firstName,
     };
     console.log(oneRow);
 
