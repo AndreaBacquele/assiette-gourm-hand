@@ -31,44 +31,55 @@ function ListeCandidatDegustation() {
     accordGlobal: string;
     total: string;
   }
+
   // Connexion entre le spreadsheet / l'API REST Google / l'application
+  // Envoi les notes vers le spreasheet dés que l'on appuie sur le bouton envoyé
+
   const handleSubmitNotes = (e: any) => {
     e.preventDefault();
 
+    const requests: any = [];
 
-    // Boucle qui itére sur les candidats
-    // Pour chaque candidat : création d'une row avec une valeur associée à chaque colonne
-    const oneRow = {
     // Récupération de la date + heure
     var d = new Date();
     var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
     var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
     var fullDate = date + " " + hours;
 
-    // Boucle qui itére sur les candidats
-    // Pour chaque candidat : création d'une row avec une valeur associée à chaque colonne
-    const oneRow = {
-      date_sync: fullDate,
-      jury_name: lastName + " " + firstName,
-      candidate_number: ""
-      grade_presentation: notes["candidat1"]["presentation"],
-      grade_cuisson_principale: notes["candidat1"]["cuissonPrincipale"],
-      grade_cuisson_garniture: notes["candidat1"]["cuissonPrincipale"],
-      grade_accord_global: notes["candidat1"]["accordGlobal"],
-      grade_total: notes["candidat1"]["total"],
-    };
-    console.log(oneRow);
-
     const url: string | undefined = import.meta.env
       .VITE_REACT_APP_SHEET_BEST_API_DEGUSTATION;
 
-    if (url) {
-      axios.post(url, oneRow).then((response) => {
-        console.log(response);
-      });
-    } else {
-      console.error("URL is undefined");
+    for (let nb = 0; nb <= nb_candidates; nb++) {
+      if (notes["candidat" + nb] != null) {
+        const oneRow = {
+          date_sync: fullDate,
+          jury_name: lastName + " " + firstName,
+          candidate_number: nb,
+          grade_presentation: notes["candidat" + nb]["presentation"],
+          grade_cuisson_principale: notes["candidat" + nb]["cuissonPrincipale"],
+          grade_cuisson_garniture: notes["candidat" + nb]["cuissonPrincipale"],
+          grade_accord_global: notes["candidat" + nb]["accordGlobal"],
+          grade_total: notes["candidat" + nb]["total"],
+        };
+        console.log(oneRow);
+        if (url) {
+          axios.post(url, oneRow);
+        } else {
+          console.error("URL is undefined");
+        }
+      }
     }
+
+    // Si toutes les lignes sont traitées avec succés, envoi un message à l'utilisateur
+    Promise.all(requests)
+      .then((responses) => {
+        responses.forEach((response) => console.log(response));
+        alert("Toutes les notes ont été envoyées avec succès !");
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Une erreur s'est produite lors de l'envoi des notes.");
+      });
   };
 
   // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
