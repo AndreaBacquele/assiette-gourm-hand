@@ -32,56 +32,6 @@ function ListeCandidatDegustation() {
     total: string;
   }
 
-  // Connexion entre le spreadsheet / l'API REST Google / l'application
-  // Envoi les notes vers le spreasheet dés que l'on appuie sur le bouton envoyé
-
-  const handleSubmitNotes = (e: any) => {
-    e.preventDefault();
-
-    const requests: any = [];
-
-    // Récupération de la date + heure
-    var d = new Date();
-    var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-    var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-    var fullDate = date + " " + hours;
-
-    const url: string | undefined = import.meta.env
-      .VITE_REACT_APP_SHEET_BEST_API_DEGUSTATION;
-
-    for (let nb = 0; nb <= nb_candidates; nb++) {
-      if (notes["candidat" + nb] != null) {
-        const oneRow = {
-          date_sync: fullDate,
-          jury_name: lastName + " " + firstName,
-          candidate_number: nb,
-          grade_presentation: notes["candidat" + nb]["presentation"],
-          grade_cuisson_principale: notes["candidat" + nb]["cuissonPrincipale"],
-          grade_cuisson_garniture: notes["candidat" + nb]["cuissonPrincipale"],
-          grade_accord_global: notes["candidat" + nb]["accordGlobal"],
-          grade_total: notes["candidat" + nb]["total"],
-        };
-        console.log(oneRow);
-        if (url) {
-          axios.post(url, oneRow);
-        } else {
-          console.error("URL is undefined");
-        }
-      }
-    }
-
-    // Si toutes les lignes sont traitées avec succés, envoi un message à l'utilisateur
-    Promise.all(requests)
-      .then((responses) => {
-        responses.forEach((response) => console.log(response));
-        alert("Toutes les notes ont été envoyées avec succès !");
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Une erreur s'est produite lors de l'envoi des notes.");
-      });
-  };
-
   // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
   const picklastNamefirstName = async () => {
     if (store) {
@@ -149,6 +99,56 @@ function ListeCandidatDegustation() {
       </IonRow>
     );
   });
+
+  // Connexion entre le spreadsheet / l'API REST Google / l'application
+  // Envoi les notes vers le spreasheet dés que l'on appuie sur le bouton envoyé
+
+  const handleSubmitNotes = (e: any) => {
+    e.preventDefault();
+
+    const requests: any = [];
+
+    // Récupération de la date + heure
+    var d = new Date();
+    var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+    var fullDate = date + " " + hours;
+
+    const url: string | undefined = import.meta.env
+      .VITE_REACT_APP_SHEET_BEST_API_DEGUSTATION;
+
+    for (let nb = 0; nb <= nb_candidates; nb++) {
+      if (notes["candidat" + nb] != null) {
+        const oneRow = {
+          date_sync: fullDate,
+          jury_name: lastName + " " + firstName,
+          candidate_number: nb,
+          grade_presentation: notes["candidat" + nb]["presentation"],
+          grade_cuisson_principale: notes["candidat" + nb]["cuissonPrincipale"],
+          grade_cuisson_garniture: notes["candidat" + nb]["cuissonPrincipale"],
+          grade_accord_global: notes["candidat" + nb]["accordGlobal"],
+          grade_total: notes["candidat" + nb]["total"],
+        };
+        console.log(oneRow);
+        if (url) {
+          axios.post(url, oneRow);
+        } else {
+          console.error("URL is undefined");
+        }
+      }
+    }
+
+    // Si toutes les lignes sont traitées avec succés, envoi un message à l'utilisateur
+    Promise.all(requests)
+      .then((responses) => {
+        responses.forEach((response) => console.log(response));
+        alert("Toutes les notes ont été envoyées avec succès !");
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Une erreur s'est produite lors de l'envoi des notes.");
+      });
+  };
 
   return (
     <>

@@ -62,6 +62,7 @@ function TableEvaluationDegustation() {
     setTotal(total);
   }, [presentation, cuissonGarniture, cuissonPrincipale, accordGlobal]);
 
+  const history = useHistory();
   // Stockage des notes dés que l'on appuie sur le bouton Valider l'évaluation
   const handleValidateClick = () => {
     if (store) {
@@ -88,6 +89,7 @@ function TableEvaluationDegustation() {
         save_notes(all_notes, candidate, candidates_notes);
       });
     }
+    history.push("/listingdegustation");
   };
 
   // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
@@ -107,10 +109,10 @@ function TableEvaluationDegustation() {
   }, [store, candidate]);
 
   //Redirection vers la page listingCandidatDegustation
-  const history = useHistory();
-  const handleBackClick = () => {
-    history.push("/listingdegustation");
-  };
+  // const history = useHistory();
+  // const handleBackClick = () => {
+  //   history.push("/listingdegustation");
+  // };
 
   return (
     <>
@@ -162,7 +164,6 @@ function TableEvaluationDegustation() {
               >
                 {" "}
               </IonInput>
-              {presentation && <p>{presentation}</p>}
             </IonCol>
             <IonCol size="1">
               <p>/9</p>
@@ -261,10 +262,10 @@ function TableEvaluationDegustation() {
             {/* <IonIcon icon={refreshOutline}/> */}
             Validez l'évaluation
           </IonButton>
-          <IonButton color="warning" onClick={handleBackClick}>
-            {/* <IonIcon icon={refreshOutline}/> */}
-            Retour à la liste des Candidats
-          </IonButton>
+          {/* <IonButton color="warning" onClick={handleBackClick}> */}
+          {/* <IonIcon icon={refreshOutline}/> */}
+          {/* Retour à la liste des Candidats
+          </IonButton> */}
         </div>
       </IonContent>
     </>
