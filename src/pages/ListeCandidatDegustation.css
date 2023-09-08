@@ -1,3 +1,22 @@
-img{
-    border-radius: 50%;
+#labelCol{
+    font-size: 11px;
+    vertical-align: middle;
+}
+
+#txtButton{
+    font-size: 10px;
+    text-align: center;
+}
+
+#title{
+    font-size: 15px;
+    text-align: center;
+}
+
+.p{
+    font-size: 15px;
+}
+
+#text{
+    vertical-align: baseline;
 }

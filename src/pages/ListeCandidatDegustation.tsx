@@ -15,7 +15,6 @@ import "./ListeCandidatDegustation.css";
 import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import axios from "axios";
-// import { url } from "inspector";
 
 function ListeCandidatDegustation() {
   // Gére la récupération des données + permet l'affichage de celles-ci en dessous
@@ -36,6 +35,10 @@ function ListeCandidatDegustation() {
   const handleSubmitNotes = (e: any) => {
     e.preventDefault();
 
+
+    // Boucle qui itére sur les candidats
+    // Pour chaque candidat : création d'une row avec une valeur associée à chaque colonne
+    const oneRow = {
     // Récupération de la date + heure
     var d = new Date();
     var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
@@ -47,7 +50,7 @@ function ListeCandidatDegustation() {
     const oneRow = {
       date_sync: fullDate,
       jury_name: lastName + " " + firstName,
-      candidate_number: "",
+      candidate_number: ""
       grade_presentation: notes["candidat1"]["presentation"],
       grade_cuisson_principale: notes["candidat1"]["cuissonPrincipale"],
       grade_cuisson_garniture: notes["candidat1"]["cuissonPrincipale"],
@@ -117,14 +120,14 @@ function ListeCandidatDegustation() {
     const total = (notes && notes["candidat" + nb]?.total) ?? "";
     return (
       <IonRow>
-        <IonCol>
+        <IonCol size-xs="2.8" size-lg="2">
           <IonButton
             color="warning"
             onClick={() => handleButtonClick(nb)}
             expand="full"
           >
             {" "}
-            Candidat n°{nb}
+            <div id="txtButton"> n°{nb}</div>
           </IonButton>
         </IonCol>
         <IonCol> {presentation} </IonCol>
@@ -143,11 +146,15 @@ function ListeCandidatDegustation() {
           <IonToolbar>
             <IonItem>
               <img alt="Logo du concours" src="../images/logo.jpg" />
-              <IonTitle> Liste des candidats - Jury dégustation</IonTitle>
+              <IonTitle id="title">
+                {" "}
+                Liste des candidats : <br /> Jury dégustation
+              </IonTitle>
               {/* <span><p>Pour avoir accés à la fiche du candidat, merci de cliquer sur le numéro</p></span> */}
             </IonItem>
           </IonToolbar>
         </IonHeader>
+
         <IonItem>
           <IonTitle>
             <p>
@@ -156,23 +163,41 @@ function ListeCandidatDegustation() {
             </p>
           </IonTitle>
         </IonItem>
-        <IonButton onClick={handleSubmitNotes}>Envoi des notes</IonButton>
-        <p>
+        <div id="title">
           Une connexion internet est nécessaire afin de valider l'envoi des
           notes
-        </p>
+        </div>
+        <div className="ion-text-center">
+          <IonButton onClick={handleSubmitNotes} id="txtButton">
+            Envoi des notes
+          </IonButton>
+        </div>
 
         <IonList lines="full">
           <IonGrid>
             <IonRow>
-              <IonCol></IonCol>
-              <IonCol>Note de présentation</IonCol>
-              <IonCol>Note cuisson principale</IonCol>
-              <IonCol>Note cuisson garniture</IonCol>
-              <IonCol>Note accord global plat</IonCol>
-              <IonCol>Total</IonCol>
+              <IonCol size-xs="2.8" size-lg="2">
+                <div id="labelCol">Candidat</div>
+              </IonCol>
+              <IonCol size-xs="1.84" size-lg="2">
+                <div id="labelCol">
+                  Note de <br />
+                  présentation
+                </div>
+              </IonCol>
+              <IonCol size-xs="1.84" size-lg="2">
+                <div id="labelCol">Cuisson principale</div>
+              </IonCol>
+              <IonCol size-xs="1.84" size-lg="2">
+                <div id="labelCol">Cuisson garniture</div>
+              </IonCol>
+              <IonCol size-xs="1.84" size-lg="2">
+                <div id="labelCol">Accord global plat</div>
+              </IonCol>
+              <IonCol size-xs="1.84" size-lg="2">
+                <div id="labelCol">Total</div>
+              </IonCol>
             </IonRow>
-            {/* <form data-sheet-best= "process.env.REACT_APP_SHEET_BEST_API"></form> */}
             {candidates}
           </IonGrid>
         </IonList>
