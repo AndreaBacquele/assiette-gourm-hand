@@ -31,6 +31,7 @@ function TableEvaluationDegustation() {
   const [cuissonPrincipale, setCuissonPrincipale] = useState("");
   const [cuissonGarniture, setCuissonGarniture] = useState("");
   const [accordGlobal, setAccordGlobal] = useState("");
+  const [total, setTotal] = useState(0);
 
   const handlePresentationChange = (event: CustomEvent) => {
     setPresentation(event.detail.value);
@@ -44,8 +45,6 @@ function TableEvaluationDegustation() {
   const handleAccordGlobal = (event: CustomEvent) => {
     setAccordGlobal(event.detail.value);
   };
-
-  const [total, setTotal] = useState(0);
 
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
   useEffect(() => {

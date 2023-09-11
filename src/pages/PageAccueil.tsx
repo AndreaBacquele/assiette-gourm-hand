@@ -49,6 +49,20 @@ function Accueil() {
     }
   };
 
+  // Permet de vérifier si la personne a déja enregistré des notes ou non.
+  // A CORRIGER : SE DECLENCHE 4 FOIS
+  const isJuryRegister = () => {
+    if (store) {
+      store.get("jury").then(function (response: any) {
+        if (response != null) {
+          alert("Vous allez être redirigé vers le listing des candidats");
+          history.push("/listingdegustation");
+        }
+      });
+    }
+  };
+
+  isJuryRegister();
   return (
     <>
       {/* Permet d'afficher les éléments de la toolbar */}

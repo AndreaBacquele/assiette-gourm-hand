@@ -268,7 +268,7 @@ function TableEvaluationTechnique() {
             <IonCol size="2">
               <i>Notation</i>
             </IonCol>
-            <IonCol size="1"></IonCol>
+            <IonCol size="1.5"></IonCol>
             <IonCol>
               <i>Observations</i>
             </IonCol>
@@ -287,7 +287,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/5</p>
             </IonCol>
             <IonCol>
@@ -308,7 +308,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/5</p>
             </IonCol>
             <IonCol>
@@ -329,7 +329,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/5</p>
             </IonCol>
             <IonCol>
@@ -350,7 +350,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/5</p>
             </IonCol>
             <IonCol>
@@ -364,7 +364,7 @@ function TableEvaluationTechnique() {
             <IonCol size="2">
               <p>{totalProduction}</p>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/20</p>
             </IonCol>
           </IonRow>
@@ -382,7 +382,7 @@ function TableEvaluationTechnique() {
             <IonCol size="2">
               <i>Notation</i>
             </IonCol>
-            <IonCol size="1"></IonCol>
+            <IonCol size="1.5"></IonCol>
             <IonCol>
               <i>Observations</i>
             </IonCol>
@@ -401,7 +401,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/10</p>
             </IonCol>
             <IonCol>
@@ -422,7 +422,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/7</p>
             </IonCol>
             <IonCol>
@@ -443,7 +443,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/7</p>
             </IonCol>
             <IonCol>
@@ -464,7 +464,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/6</p>
             </IonCol>
             <IonCol>
@@ -478,7 +478,7 @@ function TableEvaluationTechnique() {
             <IonCol size="2">
               <p>{totalAutonomie} </p>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/30</p>
             </IonCol>
           </IonRow>
@@ -492,7 +492,7 @@ function TableEvaluationTechnique() {
           <IonCol size="2">
             <p>{TotalProductAutonomie}</p>
           </IonCol>
-          <IonCol size="1">
+          <IonCol size="1.5">
             <p>/50</p>
           </IonCol>
         </IonRow>
@@ -513,7 +513,7 @@ function TableEvaluationTechnique() {
             <IonCol size="2">
               <i>Notation</i>
             </IonCol>
-            <IonCol size="1"></IonCol>
+            <IonCol size="1.5"></IonCol>
             <IonCol>
               <i>Observations</i>
             </IonCol>
@@ -532,7 +532,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/5</p>
             </IonCol>
             <IonCol>
@@ -553,7 +553,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/5</p>
             </IonCol>
             <IonCol>
@@ -567,7 +567,7 @@ function TableEvaluationTechnique() {
             <IonCol size="2">
               <p>{totalDurable} </p>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/10</p>
             </IonCol>
           </IonRow>
@@ -585,7 +585,7 @@ function TableEvaluationTechnique() {
             <IonCol size="2">
               <i>Notation</i>
             </IonCol>
-            <IonCol size="1"></IonCol>
+            <IonCol size="1.5"></IonCol>
             <IonCol>
               <i>Observations</i>
             </IonCol>
@@ -604,7 +604,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/6</p>
             </IonCol>
             <IonCol>
@@ -625,7 +625,7 @@ function TableEvaluationTechnique() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/4</p>
             </IonCol>
             <IonCol>
@@ -639,7 +639,7 @@ function TableEvaluationTechnique() {
             <IonCol size="2">
               <p>{totalOptimisation}</p>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/10</p>
             </IonCol>
           </IonRow>
@@ -654,7 +654,7 @@ function TableEvaluationTechnique() {
           <IonCol size="2">
             <p>{TotalOptiDurable} </p>
           </IonCol>
-          <IonCol size="1">
+          <IonCol size="1.5">
             <p>/20</p>
           </IonCol>
         </IonRow>
@@ -668,8 +668,8 @@ function TableEvaluationTechnique() {
           <IonCol size="2">
             <p>{AllTotal} </p>
           </IonCol>
-          <IonCol size="1">
-            <p>/20</p>
+          <IonCol size="1.5">
+            <p>/70</p>
           </IonCol>
         </IonRow>
         <br></br>
