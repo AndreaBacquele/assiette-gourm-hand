@@ -19,8 +19,6 @@ import { useStorage } from "../hooks/useStorage";
 
 // import { refreshOutline } from 'ionicons/dist/types/components/icon/icon';
 
-// ATTENTION : Probléme responsivité du tableau sur mobile
-
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
@@ -56,6 +54,7 @@ function TableEvaluationDegustation() {
       ? 0
       : Number(cuissonPrincipale);
     let AccordGlobal = isNaN(Number(accordGlobal)) ? 0 : Number(accordGlobal);
+    console.log(AccordGlobal);
     let total =
       CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal;
     setTotal(total);
@@ -86,9 +85,9 @@ function TableEvaluationDegustation() {
       };
       store.get("notes").then((all_notes: Record<string, any>) => {
         save_notes(all_notes, candidate, candidates_notes);
+        history.push("/listingdegustation");
       });
     }
-    history.push("/listingdegustation");
   };
 
   // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
@@ -150,6 +149,8 @@ function TableEvaluationDegustation() {
               <IonInput
                 placeholder="0-9"
                 type="number"
+                min={"0"}
+                max={"9"}
                 value={presentation}
                 onIonChange={handlePresentationChange}
               >
@@ -238,7 +239,11 @@ function TableEvaluationDegustation() {
           </IonRow>
         </IonGrid>
         <div className="ion-text-center">
-          <IonButton color={"success"} onClick={handleValidateClick}>
+          <IonButton
+            type="submit"
+            color={"success"}
+            onClick={handleValidateClick}
+          >
             {/* <IonIcon icon={refreshOutline}/> */}
             Validez l'évaluation
           </IonButton>
