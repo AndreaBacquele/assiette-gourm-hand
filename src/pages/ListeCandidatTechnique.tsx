@@ -58,7 +58,7 @@ function ListeCandidatCuisine() {
             expand="full"
           >
             {" "}
-            Candidat n°{nb}
+            n°{nb}
           </IonButton>
         </IonCol>
         <IonCol>{totalProduction}</IonCol>
@@ -96,12 +96,26 @@ function ListeCandidatCuisine() {
 
         <IonGrid>
           <IonRow>
-            <IonCol></IonCol>
-            <IonCol> Note totale Production</IonCol>
-            <IonCol> Note totale Autonomie </IonCol>
-            <IonCol>Note totale développement durable</IonCol>
-            <IonCol>Note totale optimisation du panier</IonCol>
-            <IonCol>Total</IonCol>
+            <IonCol size-xs="2" size-lg="2">
+              Candidat
+            </IonCol>
+            <IonCol size-xs="2" size-lg="2">
+              {" "}
+              Note totale Production
+            </IonCol>
+            <IonCol size-xs="2" size-lg="2">
+              {" "}
+              Note totale Autonomie{" "}
+            </IonCol>
+            <IonCol size-xs="1.84" size-lg="2">
+              Note totale développement durable
+            </IonCol>
+            <IonCol size-xs="1.84" size-lg="2">
+              Note totale optimisation du panier
+            </IonCol>
+            <IonCol size-xs="1.84" size-lg="2">
+              Total final
+            </IonCol>
           </IonRow>
 
           <IonList lines="full">{candidates}</IonList>

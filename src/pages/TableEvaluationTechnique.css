@@ -15,4 +15,8 @@ hr {
     color: orange; /* background color */
     background-color: orange; /* same as border color */
   }
+
+.p{
+    font-size: 1px;
+}
   

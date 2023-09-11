@@ -31,6 +31,7 @@ function TableEvaluationDegustation() {
   const [cuissonPrincipale, setCuissonPrincipale] = useState("");
   const [cuissonGarniture, setCuissonGarniture] = useState("");
   const [accordGlobal, setAccordGlobal] = useState("");
+  const [total, setTotal] = useState(0);
 
   const handlePresentationChange = (event: CustomEvent) => {
     setPresentation(event.detail.value);
@@ -44,8 +45,6 @@ function TableEvaluationDegustation() {
   const handleAccordGlobal = (event: CustomEvent) => {
     setAccordGlobal(event.detail.value);
   };
-
-  const [total, setTotal] = useState(0);
 
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
   useEffect(() => {
@@ -62,6 +61,7 @@ function TableEvaluationDegustation() {
     setTotal(total);
   }, [presentation, cuissonGarniture, cuissonPrincipale, accordGlobal]);
 
+  const history = useHistory();
   // Stockage des notes dés que l'on appuie sur le bouton Valider l'évaluation
   const handleValidateClick = () => {
     if (store) {
@@ -88,6 +88,7 @@ function TableEvaluationDegustation() {
         save_notes(all_notes, candidate, candidates_notes);
       });
     }
+    history.push("/listingdegustation");
   };
 
   // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
@@ -105,12 +106,6 @@ function TableEvaluationDegustation() {
       });
     }
   }, [store, candidate]);
-
-  //Redirection vers la page listingCandidatDegustation
-  const history = useHistory();
-  const handleBackClick = () => {
-    history.push("/listingdegustation");
-  };
 
   return (
     <>
@@ -132,7 +127,8 @@ function TableEvaluationDegustation() {
         {/* A voir si utilisation de card ou juste affichage des phrases et réglage en CSS */}
         {/* <h6>Sous le haut patronnage de Monsieur Emmanuel MACRON, Président de la République</h6>
         <h6> Note de présentation et de dégustation</h6> */}
-        <p>Candidat n°{candidate}</p>
+        <p> Candidat n°{candidate}</p>
+
         <IonGrid fixed={true}>
           <IonRow>
             <IonCol size="5">
@@ -141,14 +137,11 @@ function TableEvaluationDegustation() {
             <IonCol size="2">
               <p>Notation</p>
             </IonCol>
-            <IonCol size="1"></IonCol>
+            <IonCol size="1.5"></IonCol>
             <IonCol>
               <p>Observations</p>
             </IonCol>
           </IonRow>
-        </IonGrid>
-
-        <IonGrid fixed={true}>
           <IonRow>
             <IonCol size="5">
               <p>Présentation générale et netteté du contenant</p>
@@ -162,18 +155,14 @@ function TableEvaluationDegustation() {
               >
                 {" "}
               </IonInput>
-              {presentation && <p>{presentation}</p>}
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/9</p>
             </IonCol>
             <IonCol>
               <IonInput placeholder="..."> </IonInput>
             </IonCol>
           </IonRow>
-        </IonGrid>
-
-        <IonGrid fixed={true}>
           <IonRow>
             <IonCol size="5">
               <p>Cuisson et qualité gustative de la pièce principale</p>
@@ -188,16 +177,13 @@ function TableEvaluationDegustation() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/7</p>
             </IonCol>
             <IonCol>
               <IonInput placeholder="..."> </IonInput>
             </IonCol>
           </IonRow>
-        </IonGrid>
-
-        <IonGrid fixed={true}>
           <IonRow>
             <IonCol size="5">
               <p>Cuisson et qualité gustative des garnitures</p>
@@ -210,16 +196,14 @@ function TableEvaluationDegustation() {
                 onIonChange={handleCuissonGarnitureChange}
               ></IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/7</p>
             </IonCol>
             <IonCol>
               <IonInput placeholder="..."> </IonInput>
             </IonCol>
           </IonRow>
-        </IonGrid>
 
-        <IonGrid fixed={true}>
           <IonRow>
             <IonCol size="5">
               <p>Accord entre les garnitures et la pièce principale</p>
@@ -234,16 +218,13 @@ function TableEvaluationDegustation() {
                 {" "}
               </IonInput>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/7</p>
             </IonCol>
             <IonCol>
               <IonInput placeholder="..."> </IonInput>
             </IonCol>
           </IonRow>
-        </IonGrid>
-
-        <IonGrid fixed={true}>
           <IonRow>
             <IonCol size="5">
               <p> Total : </p>
@@ -251,7 +232,7 @@ function TableEvaluationDegustation() {
             <IonCol size="2">
               <p> {total} </p>
             </IonCol>
-            <IonCol size="1">
+            <IonCol size="1.5">
               <p>/30</p>
             </IonCol>
           </IonRow>
@@ -261,10 +242,10 @@ function TableEvaluationDegustation() {
             {/* <IonIcon icon={refreshOutline}/> */}
             Validez l'évaluation
           </IonButton>
-          <IonButton color="warning" onClick={handleBackClick}>
-            {/* <IonIcon icon={refreshOutline}/> */}
-            Retour à la liste des Candidats
-          </IonButton>
+          {/* <IonButton color="warning" onClick={handleBackClick}> */}
+          {/* <IonIcon icon={refreshOutline}/> */}
+          {/* Retour à la liste des Candidats
+          </IonButton> */}
         </div>
       </IonContent>
     </>

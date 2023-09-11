@@ -49,20 +49,39 @@ function Accueil() {
     }
   };
 
+  // Permet de vérifier si la personne a déja enregistré des notes ou non.
+  // A CORRIGER : SE DECLENCHE 4 FOIS
+  const isJuryRegister = () => {
+    if (store) {
+      store.get("jury").then(function (response: any) {
+        if (response != null) {
+          alert("Vous allez être redirigé vers le listing des candidats");
+          console.log(response.juryType);
+          if (response.juryType == "degustation") {
+            history.push("/listingdegustation");
+          } else {
+            history.push("/listingtechnique");
+          }
+        }
+      });
+    }
+  };
+
+  isJuryRegister();
+
   return (
     <>
-      {/* Permet d'afficher les éléments de la toolbar */}
-      <IonHeader color="light">
-        <IonToolbar>
-          <IonItem>
-            <img alt="Logo du concours" src="../images/logo.jpg" />
-            <IonTitle> Page d'accueil</IonTitle>
-          </IonItem>
-        </IonToolbar>
-      </IonHeader>
-
-      {/* Mise en place du formulaire */}
       <IonContent className="ion-padding">
+        {/* Permet d'afficher les éléments de la toolbar */}
+        <IonHeader color="light">
+          <IonToolbar>
+            <IonItem>
+              <img alt="Logo du concours" src="../images/logo.jpg" />
+              <IonTitle> Page d'accueil</IonTitle>
+            </IonItem>
+          </IonToolbar>
+        </IonHeader>
+        {/* Mise en place du formulaire */}
         <h6>
           {" "}
           Merci de compléter les informations ci-dessous afin d'avoir accés à la
@@ -70,11 +89,11 @@ function Accueil() {
         </h6>
         <IonItem>
           <IonInput
-            required
+            required={true}
             value={lastName}
             onIonChange={handleLastNameChange}
             label="Nom"
-            placeholder="A changer"
+            placeholder="Champ à remplir"
           ></IonInput>
         </IonItem>
         <IonItem>
@@ -83,7 +102,7 @@ function Accueil() {
             value={firstName}
             onIonChange={handleFirstNameChange}
             label="Prénom"
-            placeholder="A changer"
+            placeholder="Champ à remplir"
           ></IonInput>
         </IonItem>
         {/* Gestion des toogles pour le choix de jury */}
