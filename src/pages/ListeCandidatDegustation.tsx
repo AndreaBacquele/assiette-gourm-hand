@@ -157,7 +157,7 @@ function ListeCandidatDegustation() {
           <IonToolbar>
             <IonItem>
               <img alt="Logo du concours" src="../images/logo.jpg" />
-              <IonTitle id="title">
+              <IonTitle id="title2">
                 {" "}
                 Liste des candidats : <br /> Jury dégustation
               </IonTitle>

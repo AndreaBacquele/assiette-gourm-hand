@@ -32,15 +32,31 @@ function TableEvaluationDegustation() {
   const [total, setTotal] = useState(0);
 
   const handlePresentationChange = (event: CustomEvent) => {
-    setPresentation(event.detail.value);
+    let value = event.detail.value;
+    if (value > 9 || value < 0) {
+      alert("Votre note n'est pas dans l'intervalle autorisé");
+    }
+    setPresentation(value);
   };
   const handleCuissonPrincipaleChange = (event: CustomEvent) => {
+    let value = event.detail.value;
+    if (value > 7 || value < 0) {
+      alert("Votre note n'est pas dans l'intervalle autorisé");
+    }
     setCuissonPrincipale(event.detail.value);
   };
   const handleCuissonGarnitureChange = (event: CustomEvent) => {
+    let value = event.detail.value;
+    if (value > 7 || value < 0) {
+      alert("Votre note n'est pas dans l'intervalle autorisé");
+    }
     setCuissonGarniture(event.detail.value);
   };
   const handleAccordGlobal = (event: CustomEvent) => {
+    let value = event.detail.value;
+    if (value > 7 || value < 0) {
+      alert("Votre note n'est pas dans l'intervalle autorisé");
+    }
     setAccordGlobal(event.detail.value);
   };
 
@@ -149,8 +165,8 @@ function TableEvaluationDegustation() {
               <IonInput
                 placeholder="0-9"
                 type="number"
-                min={"0"}
-                max={"9"}
+                min={0}
+                max={9}
                 value={presentation}
                 onIonChange={handlePresentationChange}
               >
