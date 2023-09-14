@@ -14,8 +14,9 @@ import {
 import React, { useState, useEffect } from "react";
 import type { RadioGroupCustomEvent } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import "./PageAccueil.css";
 import { useStorage } from "../hooks/useStorage";
+import CustomFormInput from "../components/InputForm";
+import RadioOption from "../components/RadioOption";
 
 function Accueil() {
   const { store } = useStorage();
@@ -25,14 +26,6 @@ function Accueil() {
   const [lastName, setLastName] = useState("");
   const [juryType, setJuryType] = useState("overlay");
 
-  const handleFirstNameChange = (event: CustomEvent) => {
-    setFirstName(event.detail.value);
-  };
-
-  const handleLastNameChange = (event: CustomEvent) => {
-    setLastName(event.detail.value);
-  };
-
   const history = useHistory();
 
   //Permet de rediriger la page quand on clique sur le bouton ainsi que stocker les données rentrées
@@ -41,7 +34,6 @@ function Accueil() {
       store.set("jury", { lastName, firstName, juryType });
       store.set("notes", {});
     }
-
     if (juryType == "degustation") {
       history.push("/listingdegustation");
     } else {
@@ -50,24 +42,24 @@ function Accueil() {
   };
 
   // Permet de vérifier si la personne a déja enregistré des notes ou non.
-  // A CORRIGER : SE DECLENCHE 4 FOIS
-  const isJuryRegister = () => {
-    if (store) {
-      store.get("jury").then(function (response: any) {
-        if (response != null) {
-          alert("Vous allez être redirigé vers le listing des candidats");
-          console.log(response.juryType);
-          if (response.juryType == "degustation") {
-            history.push("/listingdegustation");
-          } else {
-            history.push("/listingtechnique");
+  useEffect(() => {
+    const isJuryRegister = () => {
+      if (store) {
+        store.get("jury").then(function (response: any) {
+          console.log(response);
+          if (response != null) {
+            alert("Vous allez être redirigé vers le listing des candidats");
+            if (response.juryType == "degustation") {
+              history.push("/listingdegustation");
+            } else {
+              history.push("/listingtechnique");
+            }
           }
-        }
-      });
-    }
-  };
-
-  isJuryRegister();
+        });
+      }
+    };
+    isJuryRegister();
+  }, [store]);
 
   return (
     <>
@@ -88,22 +80,20 @@ function Accueil() {
           liste des candidats et aux grilles d'évaluation
         </h6>
         <IonItem>
-          <IonInput
-            required={true}
-            value={lastName}
-            onIonChange={handleLastNameChange}
+          <CustomFormInput
+            initial={lastName}
+            onInputChange={setLastName}
             label="Nom"
             placeholder="Champ à remplir"
-          ></IonInput>
+          ></CustomFormInput>
         </IonItem>
         <IonItem>
-          <IonInput
-            required
-            value={firstName}
-            onIonChange={handleFirstNameChange}
+          <CustomFormInput
+            initial={firstName}
+            onInputChange={setFirstName}
             label="Prénom"
             placeholder="Champ à remplir"
-          ></IonInput>
+          ></CustomFormInput>
         </IonItem>
         {/* Gestion des toogles pour le choix de jury */}
         <h2>Vous êtes jury:</h2>
@@ -113,19 +103,9 @@ function Accueil() {
             setJuryType(ev.detail.value);
           }}
         >
-          <IonItem>
-            <IonLabel>
-              <code>Dégustation</code>
-            </IonLabel>
-            <IonRadio value="degustation"></IonRadio>
-          </IonItem>
-          <IonItem>
-            <IonLabel>
-              <code>Technique</code>
-            </IonLabel>
-            <IonRadio value="technique"></IonRadio>
-          </IonItem>
-        </IonRadioGroup>{" "}
+          <RadioOption label="Dégustation" value="degustation" />
+          <RadioOption label="Technique" value="technique" />
+        </IonRadioGroup>
         <br />
         <div className="ion-text-center">
           <IonButton color="success" onClick={handleButtonClick}>

@@ -89,7 +89,7 @@ function ListeCandidatCuisine() {
             expand="full"
           >
             {" "}
-            n°{nb}
+            <div id="txtButton"> n°{nb}</div>
           </IonButton>
         </IonCol>
         <IonCol>{totalProduction}</IonCol>

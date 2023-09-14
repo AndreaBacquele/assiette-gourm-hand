@@ -1,0 +1,19 @@
+
+ion-input{
+    --highlight-color-focused:orange;
+}
+
+ion-item{
+    --border-color:grey;
+    /* A changer en fonction de la couleur à mettre en fond de chaque partie du formulaire */
+    /* --background:grey */
+}
+
+#label{
+    font-size: 12px;
+    padding-top: 5px;
+}
+
+.sc-ion-input-md-h {
+    padding-top: 5px;
+}

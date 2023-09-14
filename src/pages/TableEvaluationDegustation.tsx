@@ -31,6 +31,7 @@ function TableEvaluationDegustation() {
   const [accordGlobal, setAccordGlobal] = useState("");
   const [total, setTotal] = useState(0);
 
+  // Il faut récupérer l'instance de l'input et la vider. Je dois agir sur mon input. L'évenement renvoie une information que l'on peut traiter mais on ne peut pas renvoyer d'information à l'input.
   const handlePresentationChange = (event: CustomEvent) => {
     let value = event.detail.value;
     if (value > 9 || value < 0) {
@@ -165,8 +166,6 @@ function TableEvaluationDegustation() {
               <IonInput
                 placeholder="0-9"
                 type="number"
-                min={0}
-                max={9}
                 value={presentation}
                 onIonChange={handlePresentationChange}
               >
