@@ -153,16 +153,14 @@ function ListeCandidatDegustation() {
   return (
     <>
       <IonContent>
-        <IonHeader color="light">
+        <IonHeader color="dark">
           <IonToolbar>
-            <IonItem>
-              <img alt="Logo du concours" src="../images/logo.jpg" />
-              <IonTitle id="title2">
-                {" "}
-                Liste des candidats : <br /> Jury dégustation
-              </IonTitle>
-              {/* <span><p>Pour avoir accés à la fiche du candidat, merci de cliquer sur le numéro</p></span> */}
-            </IonItem>
+            <img alt="Logo du concours" src="../images/logo.jpg" />
+            <IonTitle id="title2">
+              {" "}
+              Liste des candidats : <br /> Jury dégustation
+            </IonTitle>
+            {/* <span><p>Pour avoir accés à la fiche du candidat, merci de cliquer sur le numéro</p></span> */}
           </IonToolbar>
         </IonHeader>
 

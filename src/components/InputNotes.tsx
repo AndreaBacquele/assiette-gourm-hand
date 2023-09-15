@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonItem, IonInput } from "@ionic/react";
+import { IonInput } from "@ionic/react";
 import "./InputNotes.css";
 
 interface CustomNotesInputProps {
@@ -34,16 +34,14 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
   };
 
   return (
-    <IonItem>
-      <IonInput
-        min={min}
-        max={max}
-        value={value}
-        onIonInput={handleChange}
-        placeholder={placeholder}
-        type="number"
-      ></IonInput>
-    </IonItem>
+    <IonInput
+      min={min}
+      max={max}
+      value={value}
+      onIonInput={handleChange}
+      placeholder={placeholder}
+      type="number"
+    ></IonInput>
   );
 };
 

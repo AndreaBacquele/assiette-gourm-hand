@@ -64,10 +64,8 @@ function Accueil() {
         {/* Permet d'afficher les éléments de la toolbar */}
         <IonHeader color="light">
           <IonToolbar>
-            <IonItem>
-              <img alt="Logo du concours" src="../images/logo.jpg" />
-              <IonTitle> Page d'accueil</IonTitle>
-            </IonItem>
+            <img alt="Logo du concours" src="../images/logo.jpg" />
+            <IonTitle> Page d'accueil</IonTitle>
           </IonToolbar>
         </IonHeader>
         {/* Mise en place du formulaire */}
