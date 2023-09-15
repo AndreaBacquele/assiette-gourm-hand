@@ -4,7 +4,7 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonRadio,
+  IonImg,
   IonButton,
   IonRadioGroup,
 } from "@ionic/react";
@@ -64,8 +64,11 @@ function Accueil() {
         {/* Permet d'afficher les éléments de la toolbar */}
         <IonHeader color="light">
           <IonToolbar>
-            <img alt="Logo du concours" src="/assets/logo-c5eafb17.jpg" />
-            <img alt="Logo du concours" src="/images/logo.jpg" />
+            <IonImg
+              className="logo"
+              src="../images/logo.jpg"
+              alt="Logo du concours"
+            ></IonImg>
             <IonTitle> Page d'accueil</IonTitle>
           </IonToolbar>
         </IonHeader>

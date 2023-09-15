@@ -10,6 +10,12 @@ import {
   IonGrid,
   IonCol,
   IonRow,
+  IonImg,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
 } from "@ionic/react";
 import "./ListeCandidatDegustation.css";
 import { useHistory } from "react-router-dom";
@@ -153,17 +159,21 @@ function ListeCandidatDegustation() {
   return (
     <>
       <IonContent>
-        <IonHeader color="dark">
-          <IonToolbar>
-            <img alt="Logo du concours" src="../images/logo.jpg" />
-            <IonTitle id="title2">
-              {" "}
-              Liste des candidats : <br /> Jury dégustation
-            </IonTitle>
-            {/* <span><p>Pour avoir accés à la fiche du candidat, merci de cliquer sur le numéro</p></span> */}
-          </IonToolbar>
-        </IonHeader>
-
+        <IonCard>
+          <IonImg
+            className="logo"
+            src="../images/logo.jpg"
+            alt="Logo du concours"
+          ></IonImg>
+          <IonCardHeader>
+            <IonCardTitle>Liste des candidats</IonCardTitle>
+            <IonCardSubtitle>Jury dégustation</IonCardSubtitle>
+          </IonCardHeader>
+          <IonCardContent>
+            Pour avoir accés à la table d'évaluation d'un candidat, merci de
+            cliquer sur le n° de celui-ci.
+          </IonCardContent>
+        </IonCard>
         <IonItem>
           <IonTitle>
             <p>
