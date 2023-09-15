@@ -190,6 +190,7 @@ function TableEvaluationTechnique() {
       };
       store.get("notes").then((all_notes: Record<string, any>) => {
         save_notes(all_notes, candidate, candidates_notes);
+        history.push("/listingtechnique");
       });
     }
   };
@@ -234,11 +235,6 @@ function TableEvaluationTechnique() {
       });
     }
   }, [store, candidate]);
-
-  //   Retour liste candidats technique
-  const handleBackClick = () => {
-    history.push("/listingtechnique");
-  };
 
   return (
     <>
@@ -677,10 +673,6 @@ function TableEvaluationTechnique() {
           <IonButton color={"success"} onClick={handleValidateClick}>
             {/* <IonIcon icon={refreshOutline}/> */}
             Validez l'évaluation
-          </IonButton>
-          <IonButton color="warning" onClick={handleBackClick}>
-            {/* <IonIcon icon={refreshOutline}/> */}
-            Retour à la liste des Candidats
           </IonButton>
         </div>
       </IonContent>

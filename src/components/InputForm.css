@@ -1,8 +1,6 @@
 
-ion-thumbnail {
-    --size: 140px;
-    --border-radius: 100px;
-    --border-color: grey;
+ion-input{
+    --highlight-color-focused:orange;
 }
 
 ion-item{
@@ -11,7 +9,8 @@ ion-item{
     /* --background:grey */
 }
 
-
-ion-input{
-    --highlight-color-focused:orange;
+#label{
+    font-size: 17px;
+    margin-top: 10px;
 }
+
