@@ -64,7 +64,8 @@ function Accueil() {
         {/* Permet d'afficher les éléments de la toolbar */}
         <IonHeader color="light">
           <IonToolbar>
-            <img alt="Logo du concours" src="../images/logo.jpg" />
+            <img alt="Logo du concours" src="/assets/logo-c5eafb17.jpg" />
+            <img alt="Logo du concours" src="/images/logo.jpg" />
             <IonTitle> Page d'accueil</IonTitle>
           </IonToolbar>
         </IonHeader>
