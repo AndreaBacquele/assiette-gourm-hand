@@ -32,7 +32,7 @@ function TableEvaluationDegustation() {
   const [accordGlobal, setAccordGlobal] = useState("");
   const [total, setTotal] = useState(0);
 
-  // Il faut récupérer l'instance de l'input et la vider. Je dois agir sur mon input. L'évenement renvoie une information que l'on peut traiter mais on ne peut pas renvoyer d'information à l'input.
+  // Changement de la valeur des critéres de notation pour stockage
   const handlePresentationChange = (value: string) => {
     setPresentation(value);
   };
@@ -111,16 +111,15 @@ function TableEvaluationDegustation() {
   return (
     <>
       <IonContent>
+        <img alt="Logo du concours" src="../images/logo.jpg" />
         <IonCard>
           <IonCardHeader>
-            <img alt="Logo du concours" src="../images/logo.jpg" />
             <IonCardTitle>Grille évaluation Jury Dégustation</IonCardTitle>
             <IonCardSubtitle>
               Sous le haut patronnage de Monsieur Emmanuel MACRON, Président de
               la République
             </IonCardSubtitle>
           </IonCardHeader>
-
           <IonCardContent>
             Note de présentation et de dégustation.
           </IonCardContent>
@@ -132,11 +131,11 @@ function TableEvaluationDegustation() {
             <IonCol size="5">
               <p>Critéres</p>
             </IonCol>
-            <IonCol size="2">
+            <IonCol size-xs="2.8" size-lg="2">
               <p>Notation</p>
             </IonCol>
             <IonCol size="1.5"></IonCol>
-            <IonCol>
+            <IonCol size-xs="2.7" size-lg="2">
               <p>Observations</p>
             </IonCol>
           </IonRow>
@@ -144,7 +143,7 @@ function TableEvaluationDegustation() {
             <IonCol size="5">
               <p>Présentation générale et netteté du contenant</p>
             </IonCol>
-            <IonCol size="2">
+            <IonCol size-xs="2.8" size-lg="2">
               <CustomNotesInput
                 placeholder="0-9"
                 min={0}
@@ -163,7 +162,7 @@ function TableEvaluationDegustation() {
             <IonCol size="5">
               <p>Cuisson et qualité gustative de la pièce principale</p>
             </IonCol>
-            <IonCol size="2">
+            <IonCol size-xs="2.8" size-lg="2">
               <CustomNotesInput
                 placeholder="0-7"
                 min={0}
@@ -182,7 +181,7 @@ function TableEvaluationDegustation() {
             <IonCol size="5">
               <p>Cuisson et qualité gustative des garnitures</p>
             </IonCol>
-            <IonCol size="2">
+            <IonCol size-xs="2.8" size-lg="2">
               <CustomNotesInput
                 placeholder="0-7"
                 min={0}
@@ -202,7 +201,7 @@ function TableEvaluationDegustation() {
             <IonCol size="5">
               <p>Accord entre les garnitures et la pièce principale</p>
             </IonCol>
-            <IonCol size="2.5">
+            <IonCol size-xs="2.8" size-lg="2">
               <CustomNotesInput
                 placeholder="0-7"
                 min={0}
@@ -221,7 +220,7 @@ function TableEvaluationDegustation() {
             <IonCol size="5">
               <p> Total : </p>
             </IonCol>
-            <IonCol size="2">
+            <IonCol size-xs="2.8" size-lg="2">
               <p> {total} </p>
             </IonCol>
             <IonCol size="1.5">
