@@ -12,6 +12,7 @@ import {
   IonButton,
   IonIcon,
   IonContent,
+  IonImg,
 } from "@ionic/react";
 import "./TableEvaluationDegustation.css";
 import { useHistory, useParams } from "react-router-dom";
@@ -98,6 +99,7 @@ function TableEvaluationDegustation() {
       store.get("notes").then((all_notes: Record<string, any>) => {
         const candidateNotes = all_notes["candidat" + candidate];
         if (candidateNotes) {
+          console.log(candidateNotes);
           setPresentation(candidateNotes.presentation || "");
           setCuissonPrincipale(candidateNotes.cuissonPrincipale || "");
           setCuissonGarniture(candidateNotes.cuissonGarniture || "");
@@ -111,7 +113,12 @@ function TableEvaluationDegustation() {
   return (
     <>
       <IonContent>
-        <img alt="Logo du concours" src="../images/logo.jpg" />
+        <IonImg
+          className="logo"
+          src="../images/logo.jpg"
+          alt="Logo du concours"
+        ></IonImg>
+        {/* <img alt="Logo du concours" src="../images/logo.jpg" /> */}
         <IonCard>
           <IonCardHeader>
             <IonCardTitle>Grille évaluation Jury Dégustation</IonCardTitle>
@@ -125,7 +132,6 @@ function TableEvaluationDegustation() {
           </IonCardContent>
         </IonCard>
         <p> Candidat n°{candidate}</p>
-
         <IonGrid fixed={true}>
           <IonRow>
             <IonCol size="5">

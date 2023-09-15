@@ -10,14 +10,14 @@ ion-col {
     /* height:50px; */
 }
 
-img{
+.logo{
     height: 10em;
     width: 10em;
-    border-radius: 50%;
+    border-radius: 100px;
     display: flex;
-justify-content: center;
-margin-right: 50%;
-
+   margin-left: auto;
+   margin-right: auto;
+   overflow: hidden;
 }
 
 ion-card-content{
