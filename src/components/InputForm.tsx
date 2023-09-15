@@ -12,7 +12,7 @@ interface CustomFormInputProps {
 const CustomFormInput: React.FC<CustomFormInputProps> = ({
   initial = "",
   label,
-  placeholder,
+  //   placeholder,
   onInputChange,
 }) => {
   const [value, setValue] = useState(initial);
@@ -29,7 +29,8 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
         required={true}
         value={value}
         onIonChange={handleChange}
-        placeholder={placeholder}
+        // placeholder={placeholder}
+        class="ion-float-left"
       >
         {label}
       </IonInput>

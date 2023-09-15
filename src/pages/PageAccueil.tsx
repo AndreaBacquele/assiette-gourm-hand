@@ -1,7 +1,5 @@
 import {
   IonItem,
-  IonLabel,
-  IonThumbnail,
   IonHeader,
   IonToolbar,
   IonTitle,
@@ -9,7 +7,6 @@ import {
   IonRadio,
   IonButton,
   IonRadioGroup,
-  IonInput,
 } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import type { RadioGroupCustomEvent } from "@ionic/react";

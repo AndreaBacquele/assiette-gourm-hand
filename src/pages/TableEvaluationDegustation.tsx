@@ -16,6 +16,7 @@ import {
 import "./TableEvaluationDegustation.css";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
+import CustomNotesInput from "../components/InputNotes";
 
 // import { refreshOutline } from 'ionicons/dist/types/components/icon/icon';
 
@@ -32,33 +33,17 @@ function TableEvaluationDegustation() {
   const [total, setTotal] = useState(0);
 
   // Il faut récupérer l'instance de l'input et la vider. Je dois agir sur mon input. L'évenement renvoie une information que l'on peut traiter mais on ne peut pas renvoyer d'information à l'input.
-  const handlePresentationChange = (event: CustomEvent) => {
-    let value = event.detail.value;
-    if (value > 9 || value < 0) {
-      alert("Votre note n'est pas dans l'intervalle autorisé");
-    }
+  const handlePresentationChange = (value: string) => {
     setPresentation(value);
   };
-  const handleCuissonPrincipaleChange = (event: CustomEvent) => {
-    let value = event.detail.value;
-    if (value > 7 || value < 0) {
-      alert("Votre note n'est pas dans l'intervalle autorisé");
-    }
-    setCuissonPrincipale(event.detail.value);
+  const handleCuissonPrincipaleChange = (value: string) => {
+    setCuissonPrincipale(value);
   };
-  const handleCuissonGarnitureChange = (event: CustomEvent) => {
-    let value = event.detail.value;
-    if (value > 7 || value < 0) {
-      alert("Votre note n'est pas dans l'intervalle autorisé");
-    }
-    setCuissonGarniture(event.detail.value);
+  const handleCuissonGarnitureChange = (value: string) => {
+    setCuissonGarniture(value);
   };
-  const handleAccordGlobal = (event: CustomEvent) => {
-    let value = event.detail.value;
-    if (value > 7 || value < 0) {
-      alert("Votre note n'est pas dans l'intervalle autorisé");
-    }
-    setAccordGlobal(event.detail.value);
+  const handleAccordGlobal = (value: string) => {
+    setAccordGlobal(value);
   };
 
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
@@ -140,9 +125,6 @@ function TableEvaluationDegustation() {
             Note de présentation et de dégustation.
           </IonCardContent>
         </IonCard>
-        {/* A voir si utilisation de card ou juste affichage des phrases et réglage en CSS */}
-        {/* <h6>Sous le haut patronnage de Monsieur Emmanuel MACRON, Président de la République</h6>
-        <h6> Note de présentation et de dégustation</h6> */}
         <p> Candidat n°{candidate}</p>
 
         <IonGrid fixed={true}>
@@ -163,14 +145,12 @@ function TableEvaluationDegustation() {
               <p>Présentation générale et netteté du contenant</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-9"
-                type="number"
-                value={presentation}
-                onIonChange={handlePresentationChange}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={9}
+                onInputChange={handlePresentationChange}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/9</p>
@@ -184,14 +164,12 @@ function TableEvaluationDegustation() {
               <p>Cuisson et qualité gustative de la pièce principale</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-7"
-                type="number"
-                value={cuissonPrincipale}
-                onIonChange={handleCuissonPrincipaleChange}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={7}
+                onInputChange={handleCuissonPrincipaleChange}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/7</p>
@@ -205,12 +183,12 @@ function TableEvaluationDegustation() {
               <p>Cuisson et qualité gustative des garnitures</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-7"
-                type="number"
-                value={cuissonGarniture}
-                onIonChange={handleCuissonGarnitureChange}
-              ></IonInput>
+                min={0}
+                max={7}
+                onInputChange={handleCuissonGarnitureChange}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/7</p>
@@ -224,15 +202,13 @@ function TableEvaluationDegustation() {
             <IonCol size="5">
               <p>Accord entre les garnitures et la pièce principale</p>
             </IonCol>
-            <IonCol size="2">
-              <IonInput
+            <IonCol size="2.5">
+              <CustomNotesInput
                 placeholder="0-7"
-                type="number"
-                value={accordGlobal}
-                onIonChange={handleAccordGlobal}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={7}
+                onInputChange={handleAccordGlobal}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/7</p>
@@ -262,10 +238,6 @@ function TableEvaluationDegustation() {
             {/* <IonIcon icon={refreshOutline}/> */}
             Validez l'évaluation
           </IonButton>
-          {/* <IonButton color="warning" onClick={handleBackClick}> */}
-          {/* <IonIcon icon={refreshOutline}/> */}
-          {/* Retour à la liste des Candidats
-          </IonButton> */}
         </div>
       </IonContent>
     </>

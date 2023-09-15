@@ -10,10 +10,7 @@ ion-item{
 }
 
 #label{
-    font-size: 12px;
-    padding-top: 5px;
+    font-size: 17px;
+    margin-top: 10px;
 }
 
-.sc-ion-input-md-h {
-    padding-top: 5px;
-}
