@@ -12,13 +12,11 @@ import {
   IonButton,
   IonIcon,
   IonContent,
-  IonItem,
-  IonList,
-  IonLabel,
 } from "@ionic/react";
 import "./TableEvaluationTechnique.css";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
+import CustomNotesInput from "../components/InputNotes";
 
 // ATTENTION : PROBLEME RESPONSIVITE SUR MOBILE
 function TableEvaluationTechnique() {
@@ -39,17 +37,17 @@ function TableEvaluationTechnique() {
   const [timing, setTiming] = useState("");
   const [totalProduction, setTotalProduction] = useState(0);
 
-  const handleSecuHygieneChange = (event: CustomEvent) => {
-    setSecuHygiene(event.detail.value);
+  const handleSecuHygieneChange = (value: string) => {
+    setSecuHygiene(value);
   };
-  const handleOrganisationChange = (event: CustomEvent) => {
-    setOrganisation(event.detail.value);
+  const handleOrganisationChange = (value: string) => {
+    setOrganisation(value);
   };
-  const handleMaitriseTechChange = (event: CustomEvent) => {
-    setMaitriseTech(event.detail.value);
+  const handleMaitriseTechChange = (value: string) => {
+    setMaitriseTech(value);
   };
-  const handleTimingChange = (event: CustomEvent) => {
-    setTiming(event.detail.value);
+  const handleTimingChange = (value: string) => {
+    setTiming(value);
   };
 
   // TABLEAU NOTE AUTONOMIE
@@ -59,17 +57,17 @@ function TableEvaluationTechnique() {
   const [clarte, setClarte] = useState("");
   const [totalAutonomie, setTotalAutonomie] = useState(0);
 
-  const handleInitiative = (event: CustomEvent) => {
-    setInitiative(event.detail.value);
+  const handleInitiative = (value: string) => {
+    setInitiative(value);
   };
-  const handleHarmonie = (event: CustomEvent) => {
-    setHarmonie(event.detail.value);
+  const handleHarmonie = (value: string) => {
+    setHarmonie(value);
   };
-  const handleQualiteAccomp = (event: CustomEvent) => {
-    setQualiteAccomp(event.detail.value);
+  const handleQualiteAccomp = (value: string) => {
+    setQualiteAccomp(value);
   };
-  const handleClarte = (event: CustomEvent) => {
-    setClarte(event.detail.value);
+  const handleClarte = (value: string) => {
+    setClarte(value);
   };
 
   //   TABLEAU DEVELOPPEMENT DURABLE
@@ -77,11 +75,11 @@ function TableEvaluationTechnique() {
   const [fluides, setFluides] = useState("");
   const [totalDurable, setTotalDurable] = useState(0);
 
-  const handleDechets = (event: CustomEvent) => {
-    setDechets(event.detail.value);
+  const handleDechets = (value: string) => {
+    setDechets(value);
   };
-  const handleFluides = (event: CustomEvent) => {
-    setFluides(event.detail.value);
+  const handleFluides = (value: string) => {
+    setFluides(value);
   };
 
   //   TABLEAU OPTIMISATION DU PANIER
@@ -90,11 +88,11 @@ function TableEvaluationTechnique() {
   const [utilLibres, setUtilLibres] = useState("");
   const [totalOptimisation, setTotalOptimisation] = useState(0);
 
-  const handleUtilObligatoires = (event: CustomEvent) => {
-    setUtilObligatoires(event.detail.value);
+  const handleUtilObligatoires = (value: string) => {
+    setUtilObligatoires(value);
   };
-  const handleUtilLibres = (event: CustomEvent) => {
-    setUtilLibres(event.detail.value);
+  const handleUtilLibres = (value: string) => {
+    setUtilLibres(value);
   };
 
   // Affichage-calcul en temps réel du calcul du total 1ER TABLEAU : Production
@@ -274,14 +272,12 @@ function TableEvaluationTechnique() {
               <p>Respect des règles d'hygiène et de sécurité</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-5"
-                type="number"
-                value={secuHygiene}
-                onIonChange={handleSecuHygieneChange}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={5}
+                onInputChange={handleSecuHygieneChange}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/5</p>
@@ -295,14 +291,12 @@ function TableEvaluationTechnique() {
               <p>Organisation du travail</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-5"
-                type="number"
-                value={organisation}
-                onIonChange={handleOrganisationChange}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={5}
+                onInputChange={handleOrganisationChange}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/5</p>
@@ -316,14 +310,12 @@ function TableEvaluationTechnique() {
               <p>Maîtrise des techniques</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-5"
-                type="number"
-                value={maitriseTech}
-                onIonChange={handleMaitriseTechChange}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={5}
+                onInputChange={handleMaitriseTechChange}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/5</p>
@@ -337,14 +329,12 @@ function TableEvaluationTechnique() {
               <p>Envoi du plat en respectant le temps imparti</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-5"
-                type="number"
-                value={timing}
-                onIonChange={handleTimingChange}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={5}
+                onInputChange={handleTimingChange}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/5</p>
@@ -388,14 +378,12 @@ function TableEvaluationTechnique() {
               <p>Initiative laissée à la personne handicapée</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-10"
-                type="number"
-                value={initiative}
-                onIonChange={handleInitiative}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={10}
+                onInputChange={handleInitiative}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/10</p>
@@ -409,14 +397,12 @@ function TableEvaluationTechnique() {
               <p>Harmonie globale du binôme</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-7"
-                type="number"
-                value={harmonie}
-                onIonChange={handleHarmonie}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={7}
+                onInputChange={handleHarmonie}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/7</p>
@@ -430,14 +416,12 @@ function TableEvaluationTechnique() {
               <p>Qualité de l'accompagnement</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-7"
-                type="number"
-                value={qualiteAccomp}
-                onIonChange={handleQualiteAccomp}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={7}
+                onInputChange={handleQualiteAccomp}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/7</p>
@@ -451,14 +435,12 @@ function TableEvaluationTechnique() {
               <p>Clarté des consignes</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-6"
-                type="number"
-                value={clarte}
-                onIonChange={handleClarte}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={6}
+                onInputChange={handleClarte}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/6</p>
@@ -519,14 +501,12 @@ function TableEvaluationTechnique() {
               <p>Gestion des déchets</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-5"
-                type="number"
-                value={dechets}
-                onIonChange={handleDechets}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={5}
+                onInputChange={handleDechets}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/5</p>
@@ -540,14 +520,12 @@ function TableEvaluationTechnique() {
               <p>Gestion des fluides (eau,gaz,électricité)</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-5"
-                type="number"
-                value={fluides}
-                onIonChange={handleFluides}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={5}
+                onInputChange={handleFluides}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/5</p>
@@ -591,14 +569,12 @@ function TableEvaluationTechnique() {
               <p>Utilisation des produits obligatoires</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-6"
-                type="number"
-                value={utilObligatoires}
-                onIonChange={handleUtilObligatoires}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={6}
+                onInputChange={handleUtilObligatoires}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/6</p>
@@ -612,14 +588,12 @@ function TableEvaluationTechnique() {
               <p>Utilisation des produits libres</p>
             </IonCol>
             <IonCol size="2">
-              <IonInput
+              <CustomNotesInput
                 placeholder="0-4"
-                type="number"
-                value={utilLibres}
-                onIonChange={handleUtilLibres}
-              >
-                {" "}
-              </IonInput>
+                min={0}
+                max={4}
+                onInputChange={handleUtilLibres}
+              ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
               <p>/4</p>
