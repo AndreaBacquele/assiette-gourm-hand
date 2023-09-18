@@ -35,7 +35,9 @@ function TableEvaluationDegustation() {
 
   // Changement de la valeur des critéres de notation pour stockage
   const handlePresentationChange = (value: string) => {
+    console.log("handle in", value);
     setPresentation(value);
+    console.log("handle out", value);
   };
   const handleCuissonPrincipaleChange = (value: string) => {
     setCuissonPrincipale(value);
@@ -57,7 +59,6 @@ function TableEvaluationDegustation() {
       ? 0
       : Number(cuissonPrincipale);
     let AccordGlobal = isNaN(Number(accordGlobal)) ? 0 : Number(accordGlobal);
-    console.log(AccordGlobal);
     let total =
       CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal;
     setTotal(total);
@@ -140,7 +141,6 @@ function TableEvaluationDegustation() {
             <IonCol size-xs="2.8" size-lg="2">
               <p>Notation</p>
             </IonCol>
-            <IonCol size="1.5"></IonCol>
             <IonCol size-xs="2.7" size-lg="2">
               <p>Observations</p>
             </IonCol>
@@ -151,14 +151,10 @@ function TableEvaluationDegustation() {
             </IonCol>
             <IonCol size-xs="2.8" size-lg="2">
               <CustomNotesInput
-                placeholder="0-9"
                 min={0}
                 max={9}
                 onInputChange={handlePresentationChange}
               ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/9</p>
             </IonCol>
             <IonCol>
               <IonInput placeholder="..."> </IonInput>
@@ -170,14 +166,10 @@ function TableEvaluationDegustation() {
             </IonCol>
             <IonCol size-xs="2.8" size-lg="2">
               <CustomNotesInput
-                placeholder="0-7"
                 min={0}
                 max={7}
                 onInputChange={handleCuissonPrincipaleChange}
               ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/7</p>
             </IonCol>
             <IonCol>
               <IonInput placeholder="..."> </IonInput>
@@ -189,14 +181,10 @@ function TableEvaluationDegustation() {
             </IonCol>
             <IonCol size-xs="2.8" size-lg="2">
               <CustomNotesInput
-                placeholder="0-7"
                 min={0}
                 max={7}
                 onInputChange={handleCuissonGarnitureChange}
               ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/7</p>
             </IonCol>
             <IonCol>
               <IonInput placeholder="..."> </IonInput>
@@ -209,14 +197,10 @@ function TableEvaluationDegustation() {
             </IonCol>
             <IonCol size-xs="2.8" size-lg="2">
               <CustomNotesInput
-                placeholder="0-7"
                 min={0}
                 max={7}
                 onInputChange={handleAccordGlobal}
               ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/7</p>
             </IonCol>
             <IonCol>
               <IonInput placeholder="..."> </IonInput>
