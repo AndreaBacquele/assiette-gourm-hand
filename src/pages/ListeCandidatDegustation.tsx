@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   IonItem,
   IonList,
-  IonHeader,
-  IonToolbar,
   IonTitle,
   IonButton,
   IonContent,
@@ -135,8 +133,7 @@ function ListeCandidatDegustation() {
           grade_accord_global: notes["candidat" + nb]["accordGlobal"],
           grade_total: notes["candidat" + nb]["total"],
         };
-        console.log(oneRow);
-        if (url) {
+        if (url) {;
           axios.post(url, oneRow);
         } else {
           console.error("URL is undefined");

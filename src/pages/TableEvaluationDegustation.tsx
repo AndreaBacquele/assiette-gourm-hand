@@ -27,54 +27,51 @@ function TableEvaluationDegustation() {
 
   const { store } = useStorage();
   //Récupération des informations des inputs
-  const [presentation, setPresentation] = useState("");
-  const [cuissonPrincipale, setCuissonPrincipale] = useState("");
-  const [cuissonGarniture, setCuissonGarniture] = useState("");
-  const [accordGlobal, setAccordGlobal] = useState("");
+  const [values, setValues] = useState({
+    presentation: "",
+    cuissonPrincipale: "",
+    cuissonGarniture: "",
+    accordGlobal: "",
+    total: 0,
+  });
   const [total, setTotal] = useState(0);
 
-  // Changement de la valeur des critéres de notation pour stockage
-  const handlePresentationChange = (value: string) => {
-    console.log("handle in", value);
-    setPresentation(value);
-    console.log("handle out", value);
-  };
-  const handleCuissonPrincipaleChange = (value: string) => {
-    setCuissonPrincipale(value);
-  };
-  const handleCuissonGarnitureChange = (value: string) => {
-    setCuissonGarniture(value);
-  };
-  const handleAccordGlobal = (value: string) => {
-    setAccordGlobal(value);
+  const handleInputChange = (key: string, value: string) => {
+    setValues((prevValues) => ({ ...prevValues, [key]: value }));
   };
 
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
   useEffect(() => {
-    let Presentation = isNaN(Number(presentation)) ? 0 : Number(presentation);
-    let CuissonGarniture = isNaN(Number(cuissonGarniture))
+    let Presentation = isNaN(Number(values.presentation))
       ? 0
-      : Number(cuissonGarniture);
-    let CuissonPrincipale = isNaN(Number(cuissonPrincipale))
+      : Number(values.presentation);
+    let CuissonGarniture = isNaN(Number(values.cuissonGarniture))
       ? 0
-      : Number(cuissonPrincipale);
-    let AccordGlobal = isNaN(Number(accordGlobal)) ? 0 : Number(accordGlobal);
+      : Number(values.cuissonGarniture);
+    let CuissonPrincipale = isNaN(Number(values.cuissonPrincipale))
+      ? 0
+      : Number(values.cuissonPrincipale);
+    let AccordGlobal = isNaN(Number(values.accordGlobal))
+      ? 0
+      : Number(values.accordGlobal);
     let total =
       CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal;
     setTotal(total);
-  }, [presentation, cuissonGarniture, cuissonPrincipale, accordGlobal]);
+  }, [values, total]);
 
   const history = useHistory();
   // Stockage des notes dés que l'on appuie sur le bouton Valider l'évaluation
   const handleValidateClick = () => {
     if (store) {
       let candidates_notes = {
-        presentation,
-        cuissonPrincipale,
-        cuissonGarniture,
-        accordGlobal,
-        total,
+        presentation: values.presentation,
+        cuissonPrincipale: values.cuissonPrincipale,
+        cuissonGarniture: values.cuissonGarniture,
+        accordGlobal: values.accordGlobal,
+        total: total,
       };
+
+      console.log("Est ce que j'ai des notes", candidates_notes);
 
       // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
       // On récupére les notes déja présentes. Ensuite, on traite la promesse obtenue et on applique la fonction save_notes
@@ -94,22 +91,24 @@ function TableEvaluationDegustation() {
     }
   };
 
-  // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
+  // // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
   useEffect(() => {
     if (store) {
-      store.get("notes").then((all_notes: Record<string, any>) => {
+      store.get("notes").then((all_notes: any) => {
         const candidateNotes = all_notes["candidat" + candidate];
         if (candidateNotes) {
           console.log(candidateNotes);
-          setPresentation(candidateNotes.presentation || "");
-          setCuissonPrincipale(candidateNotes.cuissonPrincipale || "");
-          setCuissonGarniture(candidateNotes.cuissonGarniture || "");
-          setAccordGlobal(candidateNotes.accordGlobal || "");
-          setTotal(candidateNotes.total || 0);
+          setValues({
+            presentation: candidateNotes.presentation || "",
+            cuissonPrincipale: candidateNotes.cuissonPrincipale || "",
+            cuissonGarniture: candidateNotes.cuissonGarniture || "",
+            accordGlobal: candidateNotes.accordGlobal || "",
+            total: candidateNotes.total || 0,
+          });
         }
       });
     }
-  }, [store, candidate]);
+  }, []);
 
   return (
     <>
@@ -153,7 +152,8 @@ function TableEvaluationDegustation() {
               <CustomNotesInput
                 min={0}
                 max={9}
-                onInputChange={handlePresentationChange}
+                onIonInput={(value) => handleInputChange("presentation", value)}
+                value={values.presentation}
               ></CustomNotesInput>
             </IonCol>
             <IonCol>
@@ -168,7 +168,10 @@ function TableEvaluationDegustation() {
               <CustomNotesInput
                 min={0}
                 max={7}
-                onInputChange={handleCuissonPrincipaleChange}
+                onIonInput={(value) =>
+                  handleInputChange("cuissonPrincipale", value)
+                }
+                value={values.cuissonPrincipale}
               ></CustomNotesInput>
             </IonCol>
             <IonCol>
@@ -183,7 +186,10 @@ function TableEvaluationDegustation() {
               <CustomNotesInput
                 min={0}
                 max={7}
-                onInputChange={handleCuissonGarnitureChange}
+                onIonInput={(value) =>
+                  handleInputChange("cuissonGarniture", value)
+                }
+                value={values.cuissonGarniture}
               ></CustomNotesInput>
             </IonCol>
             <IonCol>
@@ -199,7 +205,8 @@ function TableEvaluationDegustation() {
               <CustomNotesInput
                 min={0}
                 max={7}
-                onInputChange={handleAccordGlobal}
+                onIonInput={(value) => handleInputChange("accordGlobal", value)}
+                value={values.accordGlobal}
               ></CustomNotesInput>
             </IonCol>
             <IonCol>

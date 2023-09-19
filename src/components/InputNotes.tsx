@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import { IonInput, IonCol } from "@ionic/react";
+import { IonInput } from "@ionic/react";
 import "./InputNotes.css";
 
 interface CustomNotesInputProps {
   min: number;
   max: number;
-  onInputChange: (value: string) => void;
+  value: string;
+  onIonInput: (value: string) => void;
 }
 
 const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
   min,
   max,
-  onInputChange,
+  onIonInput,
+  value,
 }) => {
-  const [value, setValue] = useState("");
   const [isValid, setIsValid] = useState(true);
 
   const handleChange = (event: CustomEvent) => {
@@ -23,13 +24,11 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
     if (intValue >= min && intValue <= max) {
       let roundedValue = (Math.round(intValue * 2) / 2).toString();
       console.log("composant ok", roundedValue);
-      setValue(roundedValue);
-      onInputChange(event.detail.value as string);
+      onIonInput(roundedValue);
       setIsValid(true);
     } else {
       console.log("composant HS", intValue);
       setIsValid(false);
-      setValue("");
       if (!isNaN(intValue)) {
         alert("Votre note n'est pas dans l'intervalle autorisé");
       }
@@ -42,10 +41,9 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
         min={min}
         max={max}
         step="0.5"
-        value={value}
         onIonInput={handleChange}
-        placeholder={"0-" + max}
         type="number"
+        value={value}
       ></IonInput>
       /{max}
     </span>
