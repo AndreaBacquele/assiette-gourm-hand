@@ -22,15 +22,14 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
     const intValue = parseFloat(valeur);
 
     // Vérifie que la note est dans l'intervalle autorisée. Arrondie à 0.5 une note.
-    if (intValue >= min && intValue <= max) {
+    if ((intValue >= min && intValue <= max) || "-") {
       let roundedValue = (Math.round(intValue * 2) / 2).toString();
-      console.log("composant ok", roundedValue);
       onIonInput(roundedValue);
       setIsValid(true);
     } else {
-      console.log("composant HS", intValue);
       setIsValid(false);
       if (!isNaN(intValue)) {
+        // A modifier pour que la case devienne rouge si erreur
         alert("Votre note n'est pas dans l'intervalle autorisé");
       }
     }

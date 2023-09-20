@@ -19,8 +19,8 @@ function Accueil() {
   const { store } = useStorage();
 
   //Récupére les valeurs mise dans les inputs
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [completeName, setCompleteName] = useState("");
+  const [juryTable, setJuryTable] = useState("");
   const [juryType, setJuryType] = useState("overlay");
 
   const history = useHistory();
@@ -28,7 +28,7 @@ function Accueil() {
   //Permet de rediriger la page quand on clique sur le bouton ainsi que stocker les données rentrées
   const handleButtonClick = () => {
     if (store) {
-      store.set("jury", { lastName, firstName, juryType });
+      store.set("jury", { completeName, juryTable, juryType });
       store.set("notes", {});
     }
     if (juryType == "degustation") {
@@ -80,17 +80,17 @@ function Accueil() {
         </h6>
         <IonItem>
           <CustomFormInput
-            initial={lastName}
-            onInputChange={setLastName}
-            label="Nom"
+            initial={completeName}
+            onInputChange={setCompleteName}
+            label="Nom Prénom"
             placeholder="Champ à remplir"
           ></CustomFormInput>
         </IonItem>
         <IonItem>
           <CustomFormInput
-            initial={firstName}
-            onInputChange={setFirstName}
-            label="Prénom"
+            initial={juryTable}
+            onInputChange={setJuryTable}
+            label="N° Table"
             placeholder="Champ à remplir"
           ></CustomFormInput>
         </IonItem>

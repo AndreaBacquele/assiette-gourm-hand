@@ -23,9 +23,10 @@ import axios from "axios";
 function ListeCandidatDegustation() {
   // Gére la récupération des données + permet l'affichage de celles-ci en dessous
   const { store } = useStorage();
-  const [lastName, setLastName] = useState("");
-  const [firstName, setFirstName] = useState("");
+  const [completeName, setCompleteName] = useState("");
+  const [juryTable, setJuryTable] = useState("");
   const [notes, setNotes] = useState<Record<string, Note>>({});
+  const history = useHistory();
 
   // Spécifie la structure attendu pour l'objet notes
   interface Note {
@@ -40,17 +41,24 @@ function ListeCandidatDegustation() {
   const picklastNamefirstName = async () => {
     if (store) {
       const name = await store.get("jury");
-      const lastName = name?.lastName;
-      const firstName = name?.firstName;
-      setLastName(lastName);
-      setFirstName(firstName);
+      const completeName = name?.completeName;
+      const juryTable = name?.juryTable;
+      setCompleteName(completeName);
+      setJuryTable(juryTable);
     }
   };
   useEffect(() => {
     picklastNamefirstName();
   }, [store]);
 
-  const history = useHistory();
+  // Supprime le jury en cas d'erreur
+  const handleDeleteClick = () => {
+    if (store) {
+      store.remove("jury");
+      alert("Jury supprimé");
+      history.push("/home");
+    }
+  };
 
   // Redirige la page lorsque l'on clique sur le bouton Candidat: Créer une url avec le numéro du candidat qui nous sert à stocker les données dans la bon candidat
 
@@ -121,11 +129,26 @@ function ListeCandidatDegustation() {
     const url: string | undefined = import.meta.env
       .VITE_REACT_APP_SHEET_BEST_API_DEGUSTATION;
 
+    const testRow = {
+      date_sync: fullDate,
+      jury_name: completeName,
+      table_number: juryTable,
+    };
+
+    // Permet de tester la connexion API même si aucune note n'a été rentré dans une fiche candidat
+    if (url) {
+      axios.post(url, testRow);
+      alert("Test de connexion ok");
+    } else {
+      console.error("Probléme de connexion");
+    }
+
     for (let nb = 0; nb <= nb_candidates; nb++) {
       if (notes["candidat" + nb] != null) {
         const oneRow = {
           date_sync: fullDate,
-          jury_name: lastName + " " + firstName,
+          jury_name: completeName,
+          table_number: juryTable,
           candidate_number: nb,
           grade_presentation: notes["candidat" + nb]["presentation"],
           grade_cuisson_principale: notes["candidat" + nb]["cuissonPrincipale"],
@@ -133,7 +156,7 @@ function ListeCandidatDegustation() {
           grade_accord_global: notes["candidat" + nb]["accordGlobal"],
           grade_total: notes["candidat" + nb]["total"],
         };
-        if (url) {;
+        if (url) {
           axios.post(url, oneRow);
         } else {
           console.error("URL is undefined");
@@ -144,8 +167,10 @@ function ListeCandidatDegustation() {
     // Si toutes les lignes sont traitées avec succés, envoi un message à l'utilisateur
     Promise.all(requests)
       .then((responses) => {
-        responses.forEach((response) => console.log(response));
-        alert("Toutes les notes ont été envoyées avec succès !");
+        responses.forEach(
+          (response) => console.log(response),
+          alert("Toutes les notes ont été envoyées avec succès !")
+        );
       })
       .catch((error) => {
         console.error(error);
@@ -173,10 +198,7 @@ function ListeCandidatDegustation() {
         </IonCard>
         <IonItem>
           <IonTitle>
-            <p>
-              {" "}
-              Jury {firstName} {lastName}{" "}
-            </p>
+            <p> Jury {completeName} </p>
           </IonTitle>
         </IonItem>
         <div id="title">
@@ -217,6 +239,12 @@ function ListeCandidatDegustation() {
             {candidates}
           </IonGrid>
         </IonList>
+
+        <div className="ion-text-center">
+          <IonButton onClick={handleDeleteClick} id="txtButton">
+            Supprimer les données
+          </IonButton>
+        </div>
       </IonContent>
     </>
   );
