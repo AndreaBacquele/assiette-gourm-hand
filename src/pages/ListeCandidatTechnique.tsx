@@ -112,8 +112,6 @@ function ListeCandidatCuisine() {
     loadNotes();
   }, [store]);
 
-  console.log(notes);
-
   // Connexion entre le spreadsheet / l'API REST Google / l'application
   // Envoi les notes vers le spreasheet dés que l'on appuie sur le bouton envoyé
 

@@ -30,91 +30,114 @@ function TableEvaluationTechnique() {
   const [TotalOptiDurable, setTotalOptiDurable] = useState(0);
   const [AllTotal, setAllTotal] = useState(0);
 
-  // TABLEAU NOTE PRODUCTION
-  const [secuHygiene, setSecuHygiene] = useState("");
-  const [organisation, setOrganisation] = useState("");
-  const [maitriseTech, setMaitriseTech] = useState("");
-  const [timing, setTiming] = useState("");
+  // TABLEAU 1 : NOTE PRODUCTION
+
+  const [valuesProduction, setValuesProduction] = useState({
+    secuHygiene: "",
+    organisation: "",
+    maitriseTech: "",
+    timing: "",
+    totalProduction: 0,
+  });
   const [totalProduction, setTotalProduction] = useState(0);
 
-  const handleSecuHygieneChange = (value: string) => {
-    setSecuHygiene(value);
-  };
-  const handleOrganisationChange = (value: string) => {
-    setOrganisation(value);
-  };
-  const handleMaitriseTechChange = (value: string) => {
-    setMaitriseTech(value);
-  };
-  const handleTimingChange = (value: string) => {
-    setTiming(value);
-  };
-
-  // TABLEAU NOTE AUTONOMIE
-  const [initiative, setInitiative] = useState("");
-  const [harmonie, setHarmonie] = useState("");
-  const [qualiteAccomp, setQualiteAccomp] = useState("");
-  const [clarte, setClarte] = useState("");
-  const [totalAutonomie, setTotalAutonomie] = useState(0);
-
-  const handleInitiative = (value: string) => {
-    setInitiative(value);
-  };
-  const handleHarmonie = (value: string) => {
-    setHarmonie(value);
-  };
-  const handleQualiteAccomp = (value: string) => {
-    setQualiteAccomp(value);
-  };
-  const handleClarte = (value: string) => {
-    setClarte(value);
-  };
-
-  //   TABLEAU DEVELOPPEMENT DURABLE
-  const [dechets, setDechets] = useState("");
-  const [fluides, setFluides] = useState("");
-  const [totalDurable, setTotalDurable] = useState(0);
-
-  const handleDechets = (value: string) => {
-    setDechets(value);
-  };
-  const handleFluides = (value: string) => {
-    setFluides(value);
-  };
-
-  //   TABLEAU OPTIMISATION DU PANIER
-
-  const [utilObligatoires, setUtilObligatoires] = useState("");
-  const [utilLibres, setUtilLibres] = useState("");
-  const [totalOptimisation, setTotalOptimisation] = useState(0);
-
-  const handleUtilObligatoires = (value: string) => {
-    setUtilObligatoires(value);
-  };
-  const handleUtilLibres = (value: string) => {
-    setUtilLibres(value);
+  // Récupération de la valeur des inputs
+  const handleInputChange1 = (key: string, value: string) => {
+    setValuesProduction((prevValues) => ({ ...prevValues, [key]: value }));
   };
 
   // Affichage-calcul en temps réel du calcul du total 1ER TABLEAU : Production
   useEffect(() => {
-    let SecuHygiene = secuHygiene === "" ? 0 : parseFloat(secuHygiene);
-    let Organisation = organisation === "" ? 0 : parseFloat(organisation);
-    let Timing = timing === "" ? 0 : parseFloat(timing);
-    let MaitriseTech = maitriseTech === "" ? 0 : parseFloat(maitriseTech);
+    let SecuHygiene =
+      valuesProduction.secuHygiene === ""
+        ? 0
+        : parseFloat(valuesProduction.secuHygiene);
+    let Organisation =
+      valuesProduction.organisation === ""
+        ? 0
+        : parseFloat(valuesProduction.organisation);
+    let Timing =
+      valuesProduction.timing === "" ? 0 : parseFloat(valuesProduction.timing);
+    let MaitriseTech =
+      valuesProduction.maitriseTech === ""
+        ? 0
+        : parseFloat(valuesProduction.maitriseTech);
     let TotalProduct = SecuHygiene + Organisation + Timing + MaitriseTech;
     setTotalProduction(TotalProduct);
-  }, [secuHygiene, organisation, maitriseTech, timing, totalProduction]);
+  }, [valuesProduction, totalProduction]);
+
+  // TABLEAU 2 : NOTES AUTONOMIE
+
+  const [valuesAutonomie, setValuesAutonomie] = useState({
+    initiative: "",
+    harmonie: "",
+    qualiteAccomp: "",
+    clarte: "",
+    totalAutonomie: 0,
+  });
+  const [totalAutonomie, setTotalAutonomie] = useState(0);
+
+  // Récupération de la valeur des inputs
+  const handleInputChange2 = (key: string, value: string) => {
+    setValuesAutonomie((prevValues) => ({ ...prevValues, [key]: value }));
+  };
 
   // Affichage-calcul en temps réel du calcul du total 2EME TABLEAU : Autonomie
   useEffect(() => {
-    let Initiative = initiative === "" ? 0 : parseFloat(initiative);
-    let Harmonie = harmonie === "" ? 0 : parseFloat(harmonie);
+    let Initiative =
+      valuesAutonomie.initiative === ""
+        ? 0
+        : parseFloat(valuesAutonomie.initiative);
+    let Harmonie =
+      valuesAutonomie.harmonie === ""
+        ? 0
+        : parseFloat(valuesAutonomie.harmonie);
     let QualiteAccompagnement =
-      qualiteAccomp === "" ? 0 : parseFloat(qualiteAccomp);
-    let Clarte = clarte === "" ? 0 : parseFloat(clarte);
+      valuesAutonomie.qualiteAccomp === ""
+        ? 0
+        : parseFloat(valuesAutonomie.qualiteAccomp);
+    let Clarte =
+      valuesAutonomie.clarte === "" ? 0 : parseFloat(valuesAutonomie.clarte);
     let totalAutonomie = Initiative + Harmonie + QualiteAccompagnement + Clarte;
     setTotalAutonomie(totalAutonomie);
-  }, [initiative, harmonie, qualiteAccomp, clarte, totalAutonomie]);
+  }, [valuesAutonomie, totalAutonomie]);
+
+  //   TABLEAU 3 : DEVELOPPEMENT DURABLE
+
+  const [valuesDurable, setValuesDurable] = useState({
+    dechets: "",
+    fluides: "",
+    totalDurable: 0,
+  });
+  const [totalDurable, setTotalDurable] = useState(0);
+
+  // Récupération de la valeur des inputs
+  const handleInputChange3 = (key: string, value: string) => {
+    setValuesDurable((prevValues) => ({ ...prevValues, [key]: value }));
+  };
+
+  // Affichage-calcul en temps réel du calcul du total 3EME TABLEAU : Développement durable
+  useEffect(() => {
+    let Dechets =
+      valuesDurable.dechets === "" ? 0 : parseFloat(valuesDurable.dechets);
+    let Fluides =
+      valuesDurable.fluides === "" ? 0 : parseFloat(valuesDurable.fluides);
+    let totalDurable = Dechets + Fluides;
+    setTotalDurable(totalDurable);
+  }, [valuesDurable, totalDurable]);
+
+  //   TABLEAU OPTIMISATION DU PANIER
+
+  const [valuesOptimisation, setValuesOptimisation] = useState({
+    utilObligatoires: "",
+    utilLibres: "",
+    totalOptimisation: 0,
+  });
+  const [totalOptimisation, setTotalOptimisation] = useState(0);
+
+  const handleInputChange4 = (key: string, value: string) => {
+    setValuesOptimisation((prevValues) => ({ ...prevValues, [key]: value }));
+  };
 
   // Affichage-calcul en temps réel du calcul du total intermédiaire
   useEffect(() => {
@@ -122,22 +145,19 @@ function TableEvaluationTechnique() {
     setTotalProductAutonomie(TotalProductAutonomie);
   }, [totalAutonomie, totalProduction]);
 
-  // Affichage-calcul en temps réel du calcul du total 3EME TABLEAU : Développement durable
-  useEffect(() => {
-    let Dechets = dechets === "" ? 0 : parseFloat(dechets);
-    let Fluides = fluides === "" ? 0 : parseFloat(fluides);
-    let totalDurable = Dechets + Fluides;
-    setTotalDurable(totalDurable);
-  }, [dechets, fluides, totalDurable]);
-
   // Affichage-calcul en temps réel du calcul du total 4EME TABLEAU : Optimisation du panier
   useEffect(() => {
     let UtilObligatoires =
-      utilObligatoires === "" ? 0 : parseFloat(utilObligatoires);
-    let UtilLibres = utilLibres === "" ? 0 : parseFloat(utilLibres);
+      valuesOptimisation.utilObligatoires === ""
+        ? 0
+        : parseFloat(valuesOptimisation.utilObligatoires);
+    let UtilLibres =
+      valuesOptimisation.utilLibres === ""
+        ? 0
+        : parseFloat(valuesOptimisation.utilLibres);
     let totalOptimisation = UtilObligatoires + UtilLibres;
     setTotalOptimisation(totalOptimisation);
-  }, [utilObligatoires, utilLibres, totalOptimisation]);
+  }, [valuesOptimisation, totalOptimisation]);
 
   // Affichage-calcul en temps réel du calcul du total 1er tableau + 2éme tableau : Optimisation du panier
   useEffect(() => {
@@ -154,22 +174,27 @@ function TableEvaluationTechnique() {
   const handleValidateClick = () => {
     if (store) {
       let candidates_notes = {
-        secuHygiene,
-        organisation,
-        maitriseTech,
-        timing,
+        // tableau 1
+        secuHygiene: valuesProduction.secuHygiene,
+        organisation: valuesProduction.organisation,
+        maitriseTech: valuesProduction.maitriseTech,
+        timing: valuesProduction.timing,
         totalProduction,
-        initiative,
-        qualiteAccomp,
-        harmonie,
-        clarte,
+        // tableau 2
+        initiative: valuesAutonomie.initiative,
+        qualiteAccomp: valuesAutonomie.qualiteAccomp,
+        harmonie: valuesAutonomie.harmonie,
+        clarte: valuesAutonomie.clarte,
         totalAutonomie,
-        dechets,
-        fluides,
+        // tableau 3
+        dechets: valuesDurable.dechets,
+        fluides: valuesDurable.fluides,
         totalDurable,
-        utilLibres,
-        utilObligatoires,
+        // tableau 4
+        utilLibres: valuesOptimisation.utilLibres,
+        utilObligatoires: valuesOptimisation.utilObligatoires,
         totalOptimisation,
+        // totaux
         TotalProductAutonomie,
         TotalOptiDurable,
         AllTotal,
@@ -200,17 +225,22 @@ function TableEvaluationTechnique() {
         const candidateNotes = all_notes["candidat" + candidate];
         if (candidateNotes) {
           // Affichage éléments 1er tableau : Production
-          setSecuHygiene(candidateNotes.secuHygiene || "");
-          setOrganisation(candidateNotes.organisation || "");
-          setMaitriseTech(candidateNotes.maitriseTech || "");
-          setTiming(candidateNotes.timing || "");
-          setTotalProduction(candidateNotes.totalProduction || "");
+          setValuesProduction({
+            secuHygiene: candidateNotes.secuHygiene || "",
+            organisation: candidateNotes.organisation || "",
+            maitriseTech: candidateNotes.maitriseTech || "",
+            timing: candidateNotes.timing || "",
+            totalProduction: candidateNotes.totalProduction || "",
+          });
 
           // Affichage éléments 2éme tableau : Autonomie
-          setInitiative(candidateNotes.initiative || "");
-          setHarmonie(candidateNotes.harmonie || "");
-          setQualiteAccomp(candidateNotes.qualiteAccomp || "");
-          setClarte(candidateNotes.clarte || "");
+          setValuesAutonomie({
+            initiative: candidateNotes.initiative || "",
+            harmonie: candidateNotes.harmonie || "",
+            qualiteAccomp: candidateNotes.qualiteAccomp || "",
+            clarte: candidateNotes.clarte || "",
+            totalAutonomie: 0,
+          });
           setTotalAutonomie(candidateNotes.totalAutonomie || "");
 
           // Affichage total intermédiaire
@@ -218,13 +248,19 @@ function TableEvaluationTechnique() {
           setTotalOptiDurable(candidateNotes.TotalDurableOpti || "");
 
           // Affichage éléments 3éme tableau : Développement durable
-          setDechets(candidateNotes.dechets || "");
-          setFluides(candidateNotes.fluides || "");
+          setValuesDurable({
+            dechets: candidateNotes.dechets || "",
+            fluides: candidateNotes.fluides || "",
+            totalDurable: 0,
+          });
           setTotalDurable(candidateNotes.totalDurable || "");
 
           // Affichage élément 4éme tableau : Optimisation du panier
-          setUtilObligatoires(candidateNotes.utilObligatoires || "");
-          setUtilLibres(candidateNotes.utilLibres || "");
+          setValuesOptimisation({
+            utilObligatoires: candidateNotes.utilObligatoires || "",
+            utilLibres: candidateNotes.utilLibres || "",
+            totalOptimisation: 0,
+          });
           setTotalOptimisation(candidateNotes.totalOptimisation || "");
 
           // Totaux finaux
@@ -273,10 +309,10 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-5"
                 min={0}
                 max={5}
-                onInputChange={handleSecuHygieneChange}
+                onIonInput={(value) => handleInputChange1("secuHygiene", value)}
+                value={valuesProduction.secuHygiene}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
@@ -292,10 +328,12 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-5"
                 min={0}
                 max={5}
-                onInputChange={handleOrganisationChange}
+                onIonInput={(value) =>
+                  handleInputChange1("organisation", value)
+                }
+                value={valuesProduction.organisation}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
@@ -311,11 +349,13 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-5"
                 min={0}
                 max={5}
-                onInputChange={handleMaitriseTechChange}
-              ></CustomNotesInput>
+                onIonInput={(value) =>
+                  handleInputChange1("maitriseTech", value)
+                }
+                value={valuesProduction.maitriseTech}
+              ></CustomNotesInput>{" "}
             </IonCol>
             <IonCol size="1.5">
               <p>/5</p>
@@ -330,10 +370,10 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-5"
                 min={0}
                 max={5}
-                onInputChange={handleTimingChange}
+                onIonInput={(value) => handleInputChange1("timing", value)}
+                value={valuesProduction.timing}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
@@ -379,10 +419,10 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-10"
                 min={0}
                 max={10}
-                onInputChange={handleInitiative}
+                onIonInput={(value) => handleInputChange2("initiative", value)}
+                value={valuesAutonomie.initiative}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
@@ -398,10 +438,10 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-7"
                 min={0}
                 max={7}
-                onInputChange={handleHarmonie}
+                onIonInput={(value) => handleInputChange2("harmonie", value)}
+                value={valuesAutonomie.harmonie}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
@@ -417,10 +457,12 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-7"
                 min={0}
                 max={7}
-                onInputChange={handleQualiteAccomp}
+                onIonInput={(value) =>
+                  handleInputChange2("qualiteAccomp", value)
+                }
+                value={valuesAutonomie.qualiteAccomp}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
@@ -436,10 +478,10 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-6"
                 min={0}
                 max={6}
-                onInputChange={handleClarte}
+                onIonInput={(value) => handleInputChange2("clarte", value)}
+                value={valuesAutonomie.clarte}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
@@ -502,10 +544,10 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-5"
                 min={0}
                 max={5}
-                onInputChange={handleDechets}
+                onIonInput={(value) => handleInputChange3("dechets", value)}
+                value={valuesDurable.dechets}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
@@ -521,10 +563,10 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-5"
                 min={0}
                 max={5}
-                onInputChange={handleFluides}
+                onIonInput={(value) => handleInputChange3("fluides", value)}
+                value={valuesDurable.fluides}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
@@ -570,10 +612,12 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-6"
                 min={0}
                 max={6}
-                onInputChange={handleUtilObligatoires}
+                onIonInput={(value) =>
+                  handleInputChange4("utilObligatoires", value)
+                }
+                value={valuesOptimisation.utilObligatoires}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">
@@ -589,10 +633,10 @@ function TableEvaluationTechnique() {
             </IonCol>
             <IonCol size="2">
               <CustomNotesInput
-                placeholder="0-4"
                 min={0}
                 max={4}
-                onInputChange={handleUtilLibres}
+                onIonInput={(value) => handleInputChange4("utilLibres", value)}
+                value={valuesOptimisation.utilLibres}
               ></CustomNotesInput>
             </IonCol>
             <IonCol size="1.5">

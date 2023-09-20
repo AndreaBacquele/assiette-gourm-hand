@@ -21,6 +21,7 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
     const valeur = event.detail.value as string;
     const intValue = parseFloat(valeur);
 
+    // Vérifie que la note est dans l'intervalle autorisée. Arrondie à 0.5 une note.
     if (intValue >= min && intValue <= max) {
       let roundedValue = (Math.round(intValue * 2) / 2).toString();
       console.log("composant ok", roundedValue);
