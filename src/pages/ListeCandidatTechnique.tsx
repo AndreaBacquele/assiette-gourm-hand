@@ -20,8 +20,8 @@ import axios from "axios";
 function ListeCandidatCuisine() {
   const { candidate } = useParams<{ candidate: string }>();
   const { store } = useStorage();
-  const [lastName, setLastName] = useState("");
-  const [firstName, setFirstName] = useState("");
+  const [completeName, setCompleteName] = useState("");
+  const [juryTable, setJuryTable] = useState("");
   const [notes, setNotes] = useState<Record<string, Note>>({});
 
   interface Note {
@@ -50,10 +50,10 @@ function ListeCandidatCuisine() {
   const picklastNamefirstName = async () => {
     if (store) {
       const name = await store.get("jury");
-      const lastName = name?.lastName;
-      const firstName = name?.firstName;
-      setLastName(lastName);
-      setFirstName(firstName);
+      const completeName = name?.completeName;
+      const table = name?.juryTable;
+      setCompleteName(completeName);
+      setJuryTable(juryTable);
     }
   };
   useEffect(() => {
@@ -112,8 +112,6 @@ function ListeCandidatCuisine() {
     loadNotes();
   }, [store]);
 
-  console.log(notes);
-
   // Connexion entre le spreadsheet / l'API REST Google / l'application
   // Envoi les notes vers le spreasheet dés que l'on appuie sur le bouton envoyé
 
@@ -135,7 +133,8 @@ function ListeCandidatCuisine() {
       if (notes["candidat" + nb] != null) {
         const oneRow = {
           date_sync: fullDate,
-          jury_name: lastName + " " + firstName,
+          jury_name: completeName,
+          table_number: juryTable,
           candidate_number: nb,
           // ENREGISTREMENT TABLEAU 1
           grade_secu_hygiene: notes["candidat" + nb]["secuHygiene"],
@@ -205,10 +204,7 @@ function ListeCandidatCuisine() {
 
         <IonItem>
           <IonTitle>
-            <p>
-              {" "}
-              Jury {firstName} {lastName}{" "}
-            </p>
+            <p> Jury {completeName} </p>
           </IonTitle>
         </IonItem>
         <div id="title">

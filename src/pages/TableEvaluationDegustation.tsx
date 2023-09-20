@@ -71,8 +71,6 @@ function TableEvaluationDegustation() {
         total: total,
       };
 
-      console.log("Est ce que j'ai des notes", candidates_notes);
-
       // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
       // On récupére les notes déja présentes. Ensuite, on traite la promesse obtenue et on applique la fonction save_notes
       // La fonction save_notes permet d'ajouter une instance de notes d'un candidat
@@ -97,7 +95,6 @@ function TableEvaluationDegustation() {
       store.get("notes").then((all_notes: any) => {
         const candidateNotes = all_notes["candidat" + candidate];
         if (candidateNotes) {
-          console.log(candidateNotes);
           setValues({
             presentation: candidateNotes.presentation || "",
             cuissonPrincipale: candidateNotes.cuissonPrincipale || "",
@@ -108,7 +105,7 @@ function TableEvaluationDegustation() {
         }
       });
     }
-  }, []);
+  }, [store]);
 
   return (
     <>
