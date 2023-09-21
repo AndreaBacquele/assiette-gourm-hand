@@ -12,7 +12,7 @@ const RadioOption: React.FC<RadioOptionProps> = ({ label, value }) => {
       <IonLabel>
         <code>{label}</code>
       </IonLabel>
-      <IonRadio value={value}></IonRadio>
+      <IonRadio justify="end" value={value}></IonRadio>
     </IonItem>
   );
 };

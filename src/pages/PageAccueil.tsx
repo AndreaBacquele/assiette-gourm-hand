@@ -1,8 +1,5 @@
 import {
-  IonItem,
   IonHeader,
-  IonToolbar,
-  IonTitle,
   IonContent,
   IonImg,
   IonButton,
@@ -14,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomFormInput from "../components/InputForm";
 import RadioOption from "../components/RadioOption";
+import "../theme/globalCSS.css";
 
 function Accueil() {
   const { store } = useStorage();
@@ -60,42 +58,43 @@ function Accueil() {
 
   return (
     <>
-      <IonContent className="ion-padding">
-        {/* Permet d'afficher les éléments de la toolbar */}
-        <IonHeader color="light">
-          <IonToolbar>
-            <IonImg
-              className="logo"
-              src="../images/logo.jpg"
-              alt="Logo du concours"
-            ></IonImg>
-            <IonTitle> Page d'accueil</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+      <IonContent>
+        <IonImg
+          className="logo"
+          src="../images/logo.jpg"
+          alt="Logo du concours"
+        ></IonImg>
+        <div id="header">
+          <p>19ème édition</p>
+          <p>Samedi 14 octobre 2023</p>
+        </div>
+        <div id="title">
+          <p>Inscription des jurys</p>
+        </div>
+        <br></br>
         {/* Mise en place du formulaire */}
-        <h6>
-          {" "}
-          Merci de compléter les informations ci-dessous afin d'avoir accés à la
-          liste des candidats et aux grilles d'évaluation
-        </h6>
-        <IonItem>
-          <CustomFormInput
-            initial={completeName}
-            onInputChange={setCompleteName}
-            label="Nom Prénom"
-            placeholder="Champ à remplir"
-          ></CustomFormInput>
-        </IonItem>
-        <IonItem>
-          <CustomFormInput
-            initial={juryTable}
-            onInputChange={setJuryTable}
-            label="N° Table"
-            placeholder="Champ à remplir"
-          ></CustomFormInput>
-        </IonItem>
+        <div id="instructions">
+          <p>
+            {" "}
+            Merci de compléter les informations ci-dessous afin d'avoir accés à
+            la liste des candidats et aux grilles d'évaluation
+          </p>
+        </div>
+        <CustomFormInput
+          initial={juryTable}
+          onInputChange={setJuryTable}
+          placeholder="Numéro de table"
+        ></CustomFormInput>
+        <CustomFormInput
+          initial={completeName}
+          onInputChange={setCompleteName}
+          placeholder="Prénom NOM"
+        ></CustomFormInput>
+        <br></br>
         {/* Gestion des toogles pour le choix de jury */}
-        <h2>Vous êtes jury:</h2>
+        <div id="instructions">
+          <p>Sélectionnez votre type de jury:</p>
+        </div>
         <IonRadioGroup
           value={juryType}
           onIonChange={(ev: RadioGroupCustomEvent) => {
@@ -105,10 +104,15 @@ function Accueil() {
           <RadioOption label="Dégustation" value="degustation" />
           <RadioOption label="Technique" value="technique" />
         </IonRadioGroup>
+
+        <h6>
+          Toute validation est définitive, merci de bien vérifier les
+          informations saisies avant de continuer.
+        </h6>
         <br />
         <div className="ion-text-center">
-          <IonButton color="success" onClick={handleButtonClick}>
-            Validez
+          <IonButton expand="block" color="warning" onClick={handleButtonClick}>
+            Valider
           </IonButton>
         </div>
       </IonContent>

@@ -1,0 +1,57 @@
+
+ion-img::part(image) {
+    border-radius: 50%;
+    border: 1px solid #838181;
+    justify-content: center;
+    display: block;
+    height: 155px;
+    width: 155px;
+    margin: auto;
+
+  }
+
+  ion-input{
+    border-bottom: 1px solid var(--ion-color-primary);
+    background: #F5F5F5;
+    display: flex;
+  }
+
+
+/* Page d'accueil */
+h3{
+    color: #000;
+    font-family: Open Sans;
+    font-style: normal;
+}
+
+#header{
+    color: #838181;
+    text-align: center;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#title{
+    color: #000;
+    font-family: Open Sans;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#instructions{
+    font-size: 14px;
+    font-family: Open Sans;
+}
+
+*{
+    margin : 5px
+}

@@ -14,7 +14,6 @@ import {
   IonContent,
   IonImg,
 } from "@ionic/react";
-import "./TableEvaluationDegustation.css";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";

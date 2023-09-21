@@ -15,7 +15,6 @@ import {
   IonCardSubtitle,
   IonCardContent,
 } from "@ionic/react";
-import "./ListeCandidatDegustation.css";
 import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import axios from "axios";
