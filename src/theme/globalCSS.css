@@ -1,4 +1,4 @@
-
+/* Modifie les dimensions et la forme du logo */
 ion-img::part(image) {
     border-radius: 50%;
     border: 1px solid #838181;
@@ -7,17 +7,37 @@ ion-img::part(image) {
     height: 155px;
     width: 155px;
     margin: auto;
-
   }
 
+  /* Supprimer les bordures des items */
+ion-item::part(native){
+    --border-style:var(--border-style);
+}
+
+
+/* Page d'accueil */
+.ion-radiogroup{
+    border: 1px solid var(--ion-color-primary);
+    width: 50%;
+    margin:auto;
+    margin-right: 15px;
+    border-radius: 7%;
+    color: var(--ion-color-primary);
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-sans),ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+#custom-radio{
+    font-size: 10px;
+}
   ion-input{
     border-bottom: 1px solid var(--ion-color-primary);
     background: #F5F5F5;
     display: flex;
+    --placeholder:white
   }
 
-
-/* Page d'accueil */
 h3{
     color: #000;
     font-family: Open Sans;
@@ -45,6 +65,7 @@ h3{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: var(--font-sans),ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 #instructions{
@@ -55,3 +76,21 @@ h3{
 *{
     margin : 5px
 }
+
+#test{
+    max-width: 150px;
+    --color : var(--ion-color-primary)
+}
+
+/* Dashboard */
+
+#labelCol{
+    color: var(--ion-color-primary);
+    text-align: center;
+    font-family: Open Sans;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+

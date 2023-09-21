@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
-  IonItem,
   IonList,
-  IonTitle,
   IonButton,
   IonContent,
   IonGrid,
   IonCol,
   IonRow,
   IonImg,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
@@ -180,32 +173,18 @@ function ListeCandidatDegustation() {
   return (
     <>
       <IonContent>
-        <IonCard>
-          <IonImg
-            className="logo"
-            src="../images/logo.jpg"
-            alt="Logo du concours"
-          ></IonImg>
-          <IonCardHeader>
-            <IonCardTitle>Liste des candidats</IonCardTitle>
-            <IonCardSubtitle>Jury dégustation</IonCardSubtitle>
-          </IonCardHeader>
-          <IonCardContent>
-            Pour avoir accés à la table d'évaluation d'un candidat, merci de
-            cliquer sur le n° de celui-ci.
-          </IonCardContent>
-        </IonCard>
-        <IonItem>
-          <IonTitle>
-            <p> Jury {completeName} </p>
-          </IonTitle>
-        </IonItem>
-        <div id="title">
-          Une connexion internet est nécessaire afin de valider l'envoi des
-          notes
-        </div>
+        <IonImg
+          className="logo"
+          src="../images/logo.jpg"
+          alt="Logo du concours"
+        ></IonImg>
         <div className="ion-text-center">
-          <IonButton onClick={handleSubmitNotes} id="txtButton">
+          <IonButton
+            color="warning"
+            expand="block"
+            onClick={handleSubmitNotes}
+            id="txtButton"
+          >
             Envoi des notes
           </IonButton>
         </div>
@@ -217,13 +196,10 @@ function ListeCandidatDegustation() {
                 <div id="labelCol">Candidat</div>
               </IonCol>
               <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">
-                  Note de <br />
-                  présentation
-                </div>
+                <div id="labelCol">PrésentatO</div>
               </IonCol>
               <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Cuisson principale</div>
+                <div id="labelCol">Cuisson p'pale</div>
               </IonCol>
               <IonCol size-xs="1.84" size-lg="2">
                 <div id="labelCol">Cuisson garniture</div>
@@ -240,7 +216,7 @@ function ListeCandidatDegustation() {
         </IonList>
 
         <div className="ion-text-center">
-          <IonButton onClick={handleDeleteClick} id="txtButton">
+          <IonButton color="warning" onClick={handleDeleteClick} id="txtButton">
             Supprimer les données
           </IonButton>
         </div>

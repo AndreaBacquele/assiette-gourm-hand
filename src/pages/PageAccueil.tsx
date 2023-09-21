@@ -1,9 +1,12 @@
 import {
-  IonHeader,
   IonContent,
   IonImg,
   IonButton,
   IonRadioGroup,
+  IonGrid,
+  IonRow,
+  IonItem,
+  IonCol,
 } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import type { RadioGroupCustomEvent } from "@ionic/react";
@@ -95,16 +98,22 @@ function Accueil() {
         <div id="instructions">
           <p>Sélectionnez votre type de jury:</p>
         </div>
-        <IonRadioGroup
-          value={juryType}
-          onIonChange={(ev: RadioGroupCustomEvent) => {
-            setJuryType(ev.detail.value);
-          }}
-        >
-          <RadioOption label="Dégustation" value="degustation" />
-          <RadioOption label="Technique" value="technique" />
-        </IonRadioGroup>
-
+        <div id="test">
+          <IonGrid>
+            <IonRow>
+              <IonRadioGroup
+                value={juryType}
+                style={{ display: "flex", justifyContent: "space-between" }}
+                onIonChange={(ev: RadioGroupCustomEvent) => {
+                  setJuryType(ev.detail.value);
+                }}
+              >
+                <RadioOption label="Dégustation" value="degustation" />
+                <RadioOption label="Technique" value="technique" />
+              </IonRadioGroup>
+            </IonRow>
+          </IonGrid>
+        </div>
         <h6>
           Toute validation est définitive, merci de bien vérifier les
           informations saisies avant de continuer.
