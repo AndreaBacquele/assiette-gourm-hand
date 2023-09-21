@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { IonItem, IonInput } from "@ionic/react";
-import "./InputForm.css";
+import "../theme/globalCSS.css";
 
 interface CustomFormInputProps {
   initial?: string;
-  label: string;
   placeholder: string;
   onInputChange: (value: string) => void;
 }
 
 const CustomFormInput: React.FC<CustomFormInputProps> = ({
   initial = "",
-  label,
-  //   placeholder,
+  placeholder,
   onInputChange,
 }) => {
   const [value, setValue] = useState(initial);
@@ -29,11 +27,9 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
         required={true}
         value={value}
         onIonChange={handleChange}
-        // placeholder={placeholder}
+        placeholder={placeholder}
         class="ion-float-left"
-      >
-        {label}
-      </IonInput>
+      ></IonInput>
     </IonItem>
   );
 };

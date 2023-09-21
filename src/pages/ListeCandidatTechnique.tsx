@@ -11,7 +11,6 @@ import {
   IonCol,
   IonRow,
 } from "@ionic/react";
-import "./ListeCandidatTechnique.css";
 import { useHistory, useParams } from "react-router";
 import { useStorage } from "../hooks/useStorage";
 import "./PageAccueil";

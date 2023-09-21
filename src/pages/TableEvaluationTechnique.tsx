@@ -13,7 +13,6 @@ import {
   IonIcon,
   IonContent,
 } from "@ionic/react";
-import "./TableEvaluationTechnique.css";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";
