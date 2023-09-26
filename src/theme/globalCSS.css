@@ -1,5 +1,29 @@
-/* Modifie les dimensions et la forme du logo */
-ion-img::part(image) {
+/* GENERAL */
+
+*{
+    font-family: var(--font-sans),ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+  /* Supprimer les bordures des items */
+ion-item::part(native){
+    --border-style:var(--border-style);
+}
+
+ion-content{
+    --padding-top : 10px;
+    --padding-start: 10px;
+    --padding-end: 10px;
+}
+
+ion-input{
+    border-bottom: 1px solid var(--ion-color-primary);
+    background: #F5F5F5;
+    display: flex;
+    text-align: center;
+  }
+
+/* PAGE D'ACCUEIL*/
+
+.logo-accueil {
     border-radius: 50%;
     border: 1px solid #838181;
     justify-content: center;
@@ -9,13 +33,6 @@ ion-img::part(image) {
     margin: auto;
   }
 
-  /* Supprimer les bordures des items */
-ion-item::part(native){
-    --border-style:var(--border-style);
-}
-
-
-/* Page d'accueil */
 .ion-radiogroup{
     border: 1px solid var(--ion-color-primary);
     width: 50%;
@@ -31,20 +48,9 @@ ion-item::part(native){
 #custom-radio{
     font-size: 10px;
 }
-  ion-input{
-    border-bottom: 1px solid var(--ion-color-primary);
-    background: #F5F5F5;
-    display: flex;
-    --placeholder:white
-  }
 
-h3{
-    color: #000;
-    font-family: Open Sans;
-    font-style: normal;
-}
 
-#header{
+#header-footer{
     color: #838181;
     text-align: center;
     font-family: Open Sans;
@@ -52,6 +58,7 @@ h3{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    padding-top: 9px;
 }
 
 #title{
@@ -73,10 +80,6 @@ h3{
     font-family: Open Sans;
 }
 
-*{
-    margin : 5px
-}
-
 #test{
     max-width: 150px;
     --color : var(--ion-color-primary)
@@ -94,3 +97,60 @@ h3{
     line-height: normal;
 }
 
+.logo-dash-eval{
+    border-radius: 50%;
+    border: 1px solid #838181;
+    height: 57px;
+    width: 57px;
+}
+
+#orga-header{
+    display: flex;
+    padding-bottom: 20px;
+}
+
+
+.orange-label{
+    color: var(--ion-color-primary);
+    font-size: 18px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.black-label{
+    color: black;
+    font-size: 18px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#one-line{
+    display:flex;
+}
+
+#note-label{
+    color: #000;
+    font-family: Open Sans;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#top{
+    display:flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-right: 20px;
+}
+
+#bottom{
+    display:flex;
+    justify-content: center;
+    gap: 40px;
+    margin-left: 30px;
+}

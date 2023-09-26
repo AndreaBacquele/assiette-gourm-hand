@@ -7,6 +7,9 @@ import {
   IonCol,
   IonRow,
   IonImg,
+  IonToolbar,
+  IonHeader,
+  IonPage,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
@@ -16,6 +19,7 @@ function ListeCandidatDegustation() {
   // Gére la récupération des données + permet l'affichage de celles-ci en dessous
   const { store } = useStorage();
   const [completeName, setCompleteName] = useState("");
+  const [juryType, setJuryType] = useState("");
   const [juryTable, setJuryTable] = useState("");
   const [notes, setNotes] = useState<Record<string, Note>>({});
   const history = useHistory();
@@ -27,6 +31,7 @@ function ListeCandidatDegustation() {
     cuissonGarniture: string;
     accordGlobal: string;
     total: string;
+    observation: string;
   }
 
   // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
@@ -35,8 +40,10 @@ function ListeCandidatDegustation() {
       const name = await store.get("jury");
       const completeName = name?.completeName;
       const juryTable = name?.juryTable;
+      const juryType = name?.juryType;
       setCompleteName(completeName);
       setJuryTable(juryTable);
+      setJuryType(juryType);
     }
   };
   useEffect(() => {
@@ -147,6 +154,7 @@ function ListeCandidatDegustation() {
           grade_cuisson_garniture: notes["candidat" + nb]["cuissonPrincipale"],
           grade_accord_global: notes["candidat" + nb]["accordGlobal"],
           grade_total: notes["candidat" + nb]["total"],
+          observations: notes["candidat" + nb]["observation"],
         };
         if (url) {
           axios.post(url, oneRow);
@@ -172,55 +180,70 @@ function ListeCandidatDegustation() {
 
   return (
     <>
-      <IonContent>
-        <IonImg
-          className="logo"
-          src="../images/logo.jpg"
-          alt="Logo du concours"
-        ></IonImg>
-        <div className="ion-text-center">
-          <IonButton
-            color="warning"
-            expand="block"
-            onClick={handleSubmitNotes}
-            id="txtButton"
-          >
-            Envoi des notes
-          </IonButton>
-        </div>
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <img
+              className="logo-dash-eval"
+              src="../images/logo.jpg"
+              alt="Logo du concours"
+            ></img>
+            <div id="top">
+              <p className="black-label"> {completeName}</p>
+              <p className="orange-label"> {juryType} </p>
+            </div>
+          </IonToolbar>
+        </IonHeader>
 
-        <IonList lines="full">
-          <IonGrid>
-            <IonRow>
-              <IonCol size-xs="2.8" size-lg="2">
-                <div id="labelCol">Candidat</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">PrésentatO</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Cuisson p'pale</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Cuisson garniture</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Accord global plat</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Total</div>
-              </IonCol>
-            </IonRow>
-            {candidates}
-          </IonGrid>
-        </IonList>
+        <IonContent>
+          <div className="ion-text-center">
+            <IonButton
+              color="warning"
+              expand="block"
+              onClick={handleSubmitNotes}
+              id="txtButton"
+            >
+              Envoi des notes
+            </IonButton>
+          </div>
 
-        <div className="ion-text-center">
-          <IonButton color="warning" onClick={handleDeleteClick} id="txtButton">
-            Supprimer les données
-          </IonButton>
-        </div>
-      </IonContent>
+          <IonList lines="full">
+            <IonGrid>
+              <IonRow>
+                <IonCol size-xs="2.8" size-lg="2">
+                  <div id="labelCol">Candidat</div>
+                </IonCol>
+                <IonCol size-xs="1.84" size-lg="2">
+                  <div id="labelCol">PrésentatO</div>
+                </IonCol>
+                <IonCol size-xs="1.84" size-lg="2">
+                  <div id="labelCol">Cuisson p'pale</div>
+                </IonCol>
+                <IonCol size-xs="1.84" size-lg="2">
+                  <div id="labelCol">Cuisson garniture</div>
+                </IonCol>
+                <IonCol size-xs="1.84" size-lg="2">
+                  <div id="labelCol">Accord global plat</div>
+                </IonCol>
+                <IonCol size-xs="1.84" size-lg="2">
+                  <div id="labelCol">Total</div>
+                </IonCol>
+              </IonRow>
+              {candidates}
+            </IonGrid>
+          </IonList>
+
+          <div className="ion-text-center">
+            <IonButton
+              color="warning"
+              onClick={handleDeleteClick}
+              id="txtButton"
+            >
+              Supprimer les données
+            </IonButton>
+          </div>
+        </IonContent>
+      </IonPage>
     </>
   );
 }

@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
 import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
+  IonFooter,
+  IonToolbar,
   IonGrid,
   IonCol,
   IonRow,
-  IonInput,
   IonButton,
-  IonIcon,
   IonContent,
-  IonImg,
+  IonPage,
+  IonHeader,
+  IonIcon,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";
-
-// import { refreshOutline } from 'ionicons/dist/types/components/icon/icon';
+import CustomFormInput from "../components/InputForm";
 
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
@@ -34,6 +30,7 @@ function TableEvaluationDegustation() {
     total: 0,
   });
   const [total, setTotal] = useState(0);
+  const [observation, setObservations] = useState("");
 
   const handleInputChange = (key: string, value: string) => {
     setValues((prevValues) => ({ ...prevValues, [key]: value }));
@@ -68,6 +65,7 @@ function TableEvaluationDegustation() {
         cuissonGarniture: values.cuissonGarniture,
         accordGlobal: values.accordGlobal,
         total: total,
+        observation: observation,
       };
 
       // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
@@ -101,6 +99,7 @@ function TableEvaluationDegustation() {
             accordGlobal: candidateNotes.accordGlobal || "",
             total: candidateNotes.total || 0,
           });
+          setObservations(observation);
         }
       });
     }
@@ -108,59 +107,42 @@ function TableEvaluationDegustation() {
 
   return (
     <>
-      <IonContent>
-        <IonImg
-          className="logo"
-          src="../images/logo.jpg"
-          alt="Logo du concours"
-        ></IonImg>
-        {/* <img alt="Logo du concours" src="../images/logo.jpg" /> */}
-        <IonCard>
-          <IonCardHeader>
-            <IonCardTitle>Grille évaluation Jury Dégustation</IonCardTitle>
-            <IonCardSubtitle>
-              Sous le haut patronnage de Monsieur Emmanuel MACRON, Président de
-              la République
-            </IonCardSubtitle>
-          </IonCardHeader>
-          <IonCardContent>
-            Note de présentation et de dégustation.
-          </IonCardContent>
-        </IonCard>
-        <p> Candidat n°{candidate}</p>
-        <IonGrid fixed={true}>
-          <IonRow>
-            <IonCol size="5">
-              <p>Critéres</p>
-            </IonCol>
-            <IonCol size-xs="2.8" size-lg="2">
-              <p>Notation</p>
-            </IonCol>
-            <IonCol size-xs="2.7" size-lg="2">
-              <p>Observations</p>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p>Présentation générale et netteté du contenant</p>
-            </IonCol>
-            <IonCol size-xs="2.8" size-lg="2">
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <div id="top">
+              <p className="black-label">Grille d'évaluation</p>
+              <p className="orange-label"> Candidat n°{candidate}</p>
+            </div>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent fullscreen={true}>
+          <div id="orga-header">
+            <img
+              className="logo-dash-eval"
+              src="../images/logo.jpg"
+              alt="Logo du concours"
+            ></img>
+            <div id="header-footer">
+              Sous le haut patronage de Monsieur Emmanuel MACRON, Président de
+              la République.
+            </div>
+          </div>
+          <IonGrid fixed={true}>
+            <IonRow>
               <CustomNotesInput
                 min={0}
                 max={9}
                 onIonInput={(value) => handleInputChange("presentation", value)}
                 value={values.presentation}
               ></CustomNotesInput>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p>Cuisson et qualité gustative de la pièce principale</p>
-            </IonCol>
-            <IonCol size-xs="2.8" size-lg="2">
+              <IonCol>
+                <p id="note-label">
+                  Présentation générale et netteté du contenant
+                </p>
+              </IonCol>
+            </IonRow>
+            <IonRow>
               <CustomNotesInput
                 min={0}
                 max={7}
@@ -169,16 +151,13 @@ function TableEvaluationDegustation() {
                 }
                 value={values.cuissonPrincipale}
               ></CustomNotesInput>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p>Cuisson et qualité gustative des garnitures</p>
-            </IonCol>
-            <IonCol size-xs="2.8" size-lg="2">
+              <IonCol>
+                <p id="note-label">
+                  Cuisson et qualité gustative de la pièce principale
+                </p>
+              </IonCol>
+            </IonRow>
+            <IonRow>
               <CustomNotesInput
                 min={0}
                 max={7}
@@ -187,51 +166,63 @@ function TableEvaluationDegustation() {
                 }
                 value={values.cuissonGarniture}
               ></CustomNotesInput>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-
-          <IonRow>
-            <IonCol size="5">
-              <p>Accord entre les garnitures et la pièce principale</p>
-            </IonCol>
-            <IonCol size-xs="2.8" size-lg="2">
+              <IonCol>
+                <p id="note-label">
+                  Cuisson et qualité gustative des garnitures
+                </p>
+              </IonCol>
+            </IonRow>
+            <IonRow>
               <CustomNotesInput
                 min={0}
                 max={7}
                 onIonInput={(value) => handleInputChange("accordGlobal", value)}
                 value={values.accordGlobal}
               ></CustomNotesInput>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p> Total : </p>
-            </IonCol>
-            <IonCol size-xs="2.8" size-lg="2">
-              <p> {total} </p>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/30</p>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-        <div className="ion-text-center">
-          <IonButton
-            type="submit"
-            color={"success"}
-            onClick={handleValidateClick}
-          >
-            {/* <IonIcon icon={refreshOutline}/> */}
-            Validez l'évaluation
-          </IonButton>
-        </div>
-      </IonContent>
+              <IonCol>
+                <p id="note-label">
+                  Accord entre les garnitures et la pièce principale
+                </p>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+          <CustomFormInput
+            initial={observation}
+            onInputChange={setObservations}
+            placeholder="Observations (facultatif)"
+          ></CustomFormInput>
+        </IonContent>
+        <IonFooter>
+          <IonToolbar>
+            {" "}
+            <div className="ion-text-center">
+              <div id="bottom">
+                <p className="black-label"> Total évaluation dégustation </p>
+                <p
+                  style={{
+                    fontSize: "20px",
+                    color: "var(--ion-color-primary)",
+                  }}
+                >
+                  {" "}
+                  {total} / 30{" "}
+                </p>
+              </div>
+              <IonButton
+                expand="block"
+                type="submit"
+                color={"warning"}
+                onClick={handleValidateClick}
+              >
+                Enregistrer
+              </IonButton>
+              <p id="header-footer">
+                Vous pourrez revenir modifier ces notes ultérieurement.
+              </p>
+            </div>
+          </IonToolbar>
+        </IonFooter>
+      </IonPage>
     </>
   );
 }

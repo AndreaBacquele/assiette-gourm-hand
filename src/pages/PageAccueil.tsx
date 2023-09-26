@@ -32,7 +32,7 @@ function Accueil() {
       store.set("jury", { completeName, juryTable, juryType });
       store.set("notes", {});
     }
-    if (juryType == "degustation") {
+    if (juryType == "Dégustation") {
       history.push("/listingdegustation");
     } else {
       history.push("/listingtechnique");
@@ -47,7 +47,7 @@ function Accueil() {
           console.log(response);
           if (response != null) {
             alert("Vous allez être redirigé vers le listing des candidats");
-            if (response.juryType == "degustation") {
+            if (response.juryType == "Dégustation") {
               history.push("/listingdegustation");
             } else {
               history.push("/listingtechnique");
@@ -62,12 +62,12 @@ function Accueil() {
   return (
     <>
       <IonContent>
-        <IonImg
-          className="logo"
+        <img
+          className="logo-accueil"
           src="../images/logo.jpg"
           alt="Logo du concours"
-        ></IonImg>
-        <div id="header">
+        ></img>
+        <div id="header-footer">
           <p>19ème édition</p>
           <p>Samedi 14 octobre 2023</p>
         </div>
@@ -108,8 +108,8 @@ function Accueil() {
                   setJuryType(ev.detail.value);
                 }}
               >
-                <RadioOption label="Dégustation" value="degustation" />
-                <RadioOption label="Technique" value="technique" />
+                <RadioOption label="Dégustation" value="Dégustation" />
+                <RadioOption label="Technique" value="Technique" />
               </IonRadioGroup>
             </IonRow>
           </IonGrid>
