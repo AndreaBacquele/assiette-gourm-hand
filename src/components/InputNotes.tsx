@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonInput } from "@ionic/react";
+import { IonInput, IonCol } from "@ionic/react";
 import "./InputNotes.css";
 
 interface CustomNotesInputProps {
@@ -36,7 +36,10 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
   };
 
   return (
-    <span>
+    <IonCol
+      size="3"
+      style={{ display: "flex", justifyContent: "space-between" }}
+    >
       <IonInput
         min={min}
         max={max}
@@ -45,8 +48,8 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
         type="number"
         value={value}
       ></IonInput>
-      /{max}
-    </span>
+      <div style={{ paddingTop: "20px", paddingLeft: "10px" }}>/{max}</div>
+    </IonCol>
   );
 };
 

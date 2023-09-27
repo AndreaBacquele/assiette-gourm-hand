@@ -21,7 +21,7 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
   };
 
   return (
-    <IonItem>
+    <IonItem style={{ marginTop: "10px", marginBottom: "10px" }}>
       <IonInput
         id="label"
         required={true}
