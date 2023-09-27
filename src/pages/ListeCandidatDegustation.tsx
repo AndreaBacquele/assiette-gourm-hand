@@ -6,7 +6,7 @@ import {
   IonGrid,
   IonCol,
   IonRow,
-  IonImg,
+  IonFooter,
   IonToolbar,
   IonHeader,
   IonPage,
@@ -183,12 +183,13 @@ function ListeCandidatDegustation() {
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <img
-              className="logo-dash-eval"
-              src="../images/logo.jpg"
-              alt="Logo du concours"
-            ></img>
             <div id="top">
+              <img
+                className="logo-dash-eval"
+                src="../images/logo.jpg"
+                alt="Logo du concours"
+              ></img>
+
               <p className="black-label"> {completeName}</p>
               <p className="orange-label"> {juryType} </p>
             </div>
@@ -196,17 +197,6 @@ function ListeCandidatDegustation() {
         </IonHeader>
 
         <IonContent>
-          <div className="ion-text-center">
-            <IonButton
-              color="warning"
-              expand="block"
-              onClick={handleSubmitNotes}
-              id="txtButton"
-            >
-              Envoi des notes
-            </IonButton>
-          </div>
-
           <IonList lines="full">
             <IonGrid>
               <IonRow>
@@ -232,8 +222,24 @@ function ListeCandidatDegustation() {
               {candidates}
             </IonGrid>
           </IonList>
+        </IonContent>
 
-          <div className="ion-text-center">
+        <IonFooter>
+          <div className="header-footer">
+            <IonButton
+              color="warning"
+              expand="block"
+              onClick={handleSubmitNotes}
+              id="txtButton"
+            >
+              Envoyer les notes
+            </IonButton>
+            <p id="instructions">
+              {" "}
+              Chaque envoi des notes remplace le précédent
+            </p>
+          </div>
+          {/* <div className="ion-text-center">
             <IonButton
               color="warning"
               onClick={handleDeleteClick}
@@ -241,8 +247,8 @@ function ListeCandidatDegustation() {
             >
               Supprimer les données
             </IonButton>
-          </div>
-        </IonContent>
+          </div> */}
+        </IonFooter>
       </IonPage>
     </>
   );
