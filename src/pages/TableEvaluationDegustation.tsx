@@ -9,12 +9,12 @@ import {
   IonContent,
   IonPage,
   IonHeader,
-  IonIcon,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
+import { totalmem } from "os";
 
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
@@ -27,13 +27,13 @@ function TableEvaluationDegustation() {
     cuissonPrincipale: "",
     cuissonGarniture: "",
     accordGlobal: "",
-    total: 0,
   });
   const [total, setTotal] = useState(0);
   const [observation, setObservations] = useState("");
 
   const handleInputChange = (key: string, value: string) => {
     setValues((prevValues) => ({ ...prevValues, [key]: value }));
+    console.log(values);
   };
 
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
@@ -65,7 +65,6 @@ function TableEvaluationDegustation() {
         cuissonGarniture: values.cuissonGarniture,
         accordGlobal: values.accordGlobal,
         total: total,
-        observation: observation,
       };
 
       // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
@@ -97,17 +96,16 @@ function TableEvaluationDegustation() {
             cuissonPrincipale: candidateNotes.cuissonPrincipale || "",
             cuissonGarniture: candidateNotes.cuissonGarniture || "",
             accordGlobal: candidateNotes.accordGlobal || "",
-            total: candidateNotes.total || 0,
           });
-          setObservations(observation);
+          setTotal(total);
         }
       });
     }
-  }, [store]);
+  }, [values]);
 
   return (
     <>
-      <IonPage>
+      <IonContent fullscreen={true}>
         <IonHeader>
           <IonToolbar>
             <div id="top">
@@ -116,82 +114,80 @@ function TableEvaluationDegustation() {
             </div>
           </IonToolbar>
         </IonHeader>
-        <IonContent fullscreen={true}>
-          <div id="orga-header">
-            <img
-              className="logo-dash-eval"
-              src="../images/logo.jpg"
-              alt="Logo du concours"
-            ></img>
-            <div id="header-footer">
-              Sous le haut patronage de Monsieur Emmanuel MACRON, Président de
-              la République.
-            </div>
+
+        <div id="orga-header">
+          <img
+            className="logo-dash-eval"
+            src="../images/logo.jpg"
+            alt="Logo du concours"
+          ></img>
+          <div id="header-footer">
+            Sous le haut patronage de Monsieur Emmanuel MACRON, Président de la
+            République.
           </div>
-          <IonGrid fixed={true}>
-            <IonRow>
-              <CustomNotesInput
-                min={0}
-                max={9}
-                onIonInput={(value) => handleInputChange("presentation", value)}
-                value={values.presentation}
-              ></CustomNotesInput>
-              <IonCol>
-                <p id="note-label">
-                  Présentation générale et netteté du contenant
-                </p>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <CustomNotesInput
-                min={0}
-                max={7}
-                onIonInput={(value) =>
-                  handleInputChange("cuissonPrincipale", value)
-                }
-                value={values.cuissonPrincipale}
-              ></CustomNotesInput>
-              <IonCol>
-                <p id="note-label">
-                  Cuisson et qualité gustative de la pièce principale
-                </p>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <CustomNotesInput
-                min={0}
-                max={7}
-                onIonInput={(value) =>
-                  handleInputChange("cuissonGarniture", value)
-                }
-                value={values.cuissonGarniture}
-              ></CustomNotesInput>
-              <IonCol>
-                <p id="note-label">
-                  Cuisson et qualité gustative des garnitures
-                </p>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <CustomNotesInput
-                min={0}
-                max={7}
-                onIonInput={(value) => handleInputChange("accordGlobal", value)}
-                value={values.accordGlobal}
-              ></CustomNotesInput>
-              <IonCol>
-                <p id="note-label">
-                  Accord entre les garnitures et la pièce principale
-                </p>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-          <CustomFormInput
-            initial={observation}
-            onInputChange={setObservations}
-            placeholder="Observations (facultatif)"
-          ></CustomFormInput>
-        </IonContent>
+        </div>
+        <IonGrid fixed={true}>
+          <IonRow>
+            <CustomNotesInput
+              min={0}
+              max={9}
+              onIonInput={(value) => handleInputChange("presentation", value)}
+              value={values.presentation}
+            ></CustomNotesInput>
+            <IonCol>
+              <p id="note-label">
+                Présentation générale et netteté du contenant
+              </p>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <CustomNotesInput
+              min={0}
+              max={7}
+              onIonInput={(value) =>
+                handleInputChange("cuissonPrincipale", value)
+              }
+              value={values.cuissonPrincipale}
+            ></CustomNotesInput>
+            <IonCol>
+              <p id="note-label">
+                Cuisson et qualité gustative de la pièce principale
+              </p>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <CustomNotesInput
+              min={0}
+              max={7}
+              onIonInput={(value) =>
+                handleInputChange("cuissonGarniture", value)
+              }
+              value={values.cuissonGarniture}
+            ></CustomNotesInput>
+            <IonCol>
+              <p id="note-label">Cuisson et qualité gustative des garnitures</p>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <CustomNotesInput
+              min={0}
+              max={7}
+              onIonInput={(value) => handleInputChange("accordGlobal", value)}
+              value={values.accordGlobal}
+            ></CustomNotesInput>
+            <IonCol>
+              <p id="note-label">
+                Accord entre les garnitures et la pièce principale
+              </p>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+        <CustomFormInput
+          initial={observation}
+          onInputChange={setObservations}
+          placeholder="Observations (facultatif)"
+        ></CustomFormInput>
+
         <IonFooter>
           <IonToolbar>
             {" "}
@@ -222,7 +218,8 @@ function TableEvaluationDegustation() {
             </div>
           </IonToolbar>
         </IonFooter>
-      </IonPage>
+      </IonContent>
+      {/* </IonPage> */}
     </>
   );
 }

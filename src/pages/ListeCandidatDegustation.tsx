@@ -180,51 +180,55 @@ function ListeCandidatDegustation() {
 
   return (
     <>
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <div id="top">
-              <img
-                className="logo-dash-eval"
-                src="../images/logo.jpg"
-                alt="Logo du concours"
-              ></img>
+      <IonHeader>
+        <IonToolbar>
+          <div id="top">
+            <img
+              className="logo-dash-eval"
+              src="../images/logo.jpg"
+              alt="Logo du concours"
+            ></img>
 
-              <p className="black-label"> {completeName}</p>
-              <p className="orange-label"> {juryType} </p>
-            </div>
-          </IonToolbar>
-        </IonHeader>
+            <p className="black-label"> {completeName}</p>
+            <p className="orange-label"> {juryType} </p>
+          </div>
+        </IonToolbar>
+      </IonHeader>
 
-        <IonContent>
-          <IonList lines="full">
-            <IonGrid>
-              <IonRow>
-                <IonCol size-xs="2.8" size-lg="2">
-                  <div id="labelCol">Candidat</div>
-                </IonCol>
-                <IonCol size-xs="1.84" size-lg="2">
-                  <div id="labelCol">PrésentatO</div>
-                </IonCol>
-                <IonCol size-xs="1.84" size-lg="2">
-                  <div id="labelCol">Cuisson p'pale</div>
-                </IonCol>
-                <IonCol size-xs="1.84" size-lg="2">
-                  <div id="labelCol">Cuisson garniture</div>
-                </IonCol>
-                <IonCol size-xs="1.84" size-lg="2">
-                  <div id="labelCol">Accord global plat</div>
-                </IonCol>
-                <IonCol size-xs="1.84" size-lg="2">
-                  <div id="labelCol">Total</div>
-                </IonCol>
-              </IonRow>
-              {candidates}
-            </IonGrid>
-          </IonList>
-        </IonContent>
+      <IonContent style={{ height: "calc(100% - 200px)" }}>
+        <IonList lines="full">
+          <IonGrid>
+            <IonRow>
+              <IonCol size-xs="2.8" size-lg="2">
+                <div id="labelCol">Candidat</div>
+              </IonCol>
+              <IonCol size-xs="1.84" size-lg="2">
+                <div id="labelCol">PrésentatO</div>
+              </IonCol>
+              <IonCol size-xs="1.84" size-lg="2">
+                <div id="labelCol">Cuisson p'pale</div>
+              </IonCol>
+              <IonCol size-xs="1.84" size-lg="2">
+                <div id="labelCol">Cuisson garniture</div>
+              </IonCol>
+              <IonCol size-xs="1.84" size-lg="2">
+                <div id="labelCol">Accord global plat</div>
+              </IonCol>
+              <IonCol size-xs="1.84" size-lg="2">
+                <div id="labelCol">Total</div>
+              </IonCol>
+            </IonRow>
+            {candidates}
+          </IonGrid>
+        </IonList>
+      </IonContent>
 
-        <IonFooter>
+      <IonFooter>
+        <div className="ion-text-center">
+          <IonButton color="warning" onClick={handleDeleteClick} id="txtButton">
+            Supprimer les données
+          </IonButton>
+
           <div className="header-footer">
             <IonButton
               color="warning"
@@ -234,22 +238,11 @@ function ListeCandidatDegustation() {
             >
               Envoyer les notes
             </IonButton>
-            <p id="instructions">
-              {" "}
-              Chaque envoi des notes remplace le précédent
-            </p>
           </div>
-          {/* <div className="ion-text-center">
-            <IonButton
-              color="warning"
-              onClick={handleDeleteClick}
-              id="txtButton"
-            >
-              Supprimer les données
-            </IonButton>
-          </div> */}
-        </IonFooter>
-      </IonPage>
+        </div>
+
+        <p id="instructions"> Chaque envoi des notes remplace le précédent</p>
+      </IonFooter>
     </>
   );
 }
