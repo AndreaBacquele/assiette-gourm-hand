@@ -64,7 +64,7 @@ function Accueil() {
       <IonContent>
         <img
           className="logo-accueil"
-          src="../images/logo.jpg"
+          src="public/logo.jpg"
           alt="Logo du concours"
         ></img>
         <div id="header-footer">

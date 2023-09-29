@@ -37,10 +37,7 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
   };
 
   return (
-    <IonCol
-      size="3"
-      style={{ display: "flex", justifyContent: "space-between" }}
-    >
+    <IonCol size="3" style={{ display: "flex" }}>
       <IonInput
         min={min}
         max={max}
@@ -49,7 +46,15 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
         type="number"
         value={value}
       ></IonInput>
-      <div style={{ paddingTop: "20px", paddingLeft: "10px" }}>/{max}</div>
+      <div
+        style={{
+          paddingTop: "14px",
+          paddingLeft: "10px",
+          paddingRight: "10px",
+        }}
+      >
+        /{max}
+      </div>
     </IonCol>
   );
 };
