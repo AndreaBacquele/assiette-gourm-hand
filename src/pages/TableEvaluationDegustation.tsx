@@ -9,6 +9,7 @@ import {
   IonContent,
   IonPage,
   IonHeader,
+  IonIcon,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
@@ -27,13 +28,13 @@ function TableEvaluationDegustation() {
     cuissonPrincipale: "",
     cuissonGarniture: "",
     accordGlobal: "",
+    total: 0,
   });
   const [total, setTotal] = useState(0);
   const [observation, setObservations] = useState("");
 
   const handleInputChange = (key: string, value: string) => {
     setValues((prevValues) => ({ ...prevValues, [key]: value }));
-    console.log(values);
   };
 
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
@@ -65,6 +66,7 @@ function TableEvaluationDegustation() {
         cuissonGarniture: values.cuissonGarniture,
         accordGlobal: values.accordGlobal,
         total: total,
+        observation: observation,
       };
 
       // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
@@ -96,25 +98,27 @@ function TableEvaluationDegustation() {
             cuissonPrincipale: candidateNotes.cuissonPrincipale || "",
             cuissonGarniture: candidateNotes.cuissonGarniture || "",
             accordGlobal: candidateNotes.accordGlobal || "",
+            total: total || 0,
           });
-          setTotal(total);
+          setObservations(observation);
         }
       });
     }
-  }, [values]);
+  }, [store]);
 
   return (
     <>
-      <IonContent fullscreen={true}>
-        <IonHeader>
-          <IonToolbar>
-            <div id="top">
-              <p className="black-label">Grille d'évaluation</p>
-              <p className="orange-label"> Candidat n°{candidate}</p>
-            </div>
-          </IonToolbar>
-        </IonHeader>
+      <IonHeader>
+        <IonToolbar>
+          <div id="top">
+            <IonIcon src="/public/chevron-back-outline.svg"></IonIcon>
+            <p className="black-label">Grille d'évaluation</p>
+            <p className="orange-label"> Candidat n°{candidate}</p>
+          </div>
+        </IonToolbar>
+      </IonHeader>
 
+      <IonContent fullscreen={true} style={{ height: "calc(100% - 250px)" }}>
         <div id="orga-header">
           <img
             className="logo-dash-eval"
@@ -187,39 +191,38 @@ function TableEvaluationDegustation() {
           onInputChange={setObservations}
           placeholder="Observations (facultatif)"
         ></CustomFormInput>
+      </IonContent>
 
-        <IonFooter>
-          <IonToolbar>
-            {" "}
-            <div className="ion-text-center">
-              <div id="bottom">
-                <p className="black-label"> Total évaluation dégustation </p>
-                <p
-                  style={{
-                    fontSize: "20px",
-                    color: "var(--ion-color-primary)",
-                  }}
-                >
-                  {" "}
-                  {total} / 30{" "}
-                </p>
-              </div>
-              <IonButton
-                expand="block"
-                type="submit"
-                color={"warning"}
-                onClick={handleValidateClick}
+      <IonFooter>
+        <IonToolbar>
+          {" "}
+          <div className="ion-text-center">
+            <div id="bottom">
+              <p className="black-label"> Total évaluation dégustation </p>
+              <p
+                style={{
+                  fontSize: "20px",
+                  color: "var(--ion-color-primary)",
+                }}
               >
-                Enregistrer
-              </IonButton>
-              <p id="header-footer">
-                Vous pourrez revenir modifier ces notes ultérieurement.
+                {" "}
+                {total} / 30{" "}
               </p>
             </div>
-          </IonToolbar>
-        </IonFooter>
-      </IonContent>
-      {/* </IonPage> */}
+            <IonButton
+              expand="block"
+              type="submit"
+              color={"warning"}
+              onClick={handleValidateClick}
+            >
+              Enregistrer
+            </IonButton>
+            <p id="header-footer">
+              Vous pourrez revenir modifier ces notes ultérieurement.
+            </p>
+          </div>
+        </IonToolbar>
+      </IonFooter>
     </>
   );
 }

@@ -17,6 +17,11 @@ ion-input{
     display: flex;
   }
 
+  ion-col{
+    text-align: center;
+}
+
+
 /* PAGE D'ACCUEIL*/
 
 .logo-accueil {
@@ -86,6 +91,11 @@ ion-input{
     font-family: Open Sans;
 }
 
+ion-icon{
+    font-size: 45px;
+    color: #838181;
+    padding-top: 5px;
+}
 
 /* Dashboard */
 
@@ -141,6 +151,7 @@ ion-input{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    text-align: start;
 }
 
 #top{
@@ -156,3 +167,8 @@ ion-input{
     gap: 40px;
     margin-left: 30px;
 }
+
+#txtButton{
+    padding: 5px 20px;
+}
+

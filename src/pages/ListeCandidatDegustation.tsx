@@ -96,7 +96,7 @@ function ListeCandidatDegustation() {
           <IonButton
             color="warning"
             onClick={() => handleButtonClick(nb)}
-            expand="full"
+            expand="block"
           >
             {" "}
             <div id="txtButton"> n°{nb}</div>
@@ -135,7 +135,7 @@ function ListeCandidatDegustation() {
     };
 
     // Permet de tester la connexion API même si aucune note n'a été rentré dans une fiche candidat
-    if (url) {
+    if (url && notes["candidat"] == null) {
       axios.post(url, testRow);
       alert("Test de connexion ok");
     } else {
@@ -195,7 +195,13 @@ function ListeCandidatDegustation() {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent style={{ height: "calc(100% - 200px)" }}>
+      <IonContent style={{ height: "calc(100% - 220px)" }}>
+        <div id="title"> Liste des candidats</div>
+        <div id="instructions">
+          {" "}
+          Cliquez sur le numéro d'un candidat pour accéder à sa grille
+          d'évaluation
+        </div>
         <IonList lines="full">
           <IonGrid>
             <IonRow>
@@ -241,7 +247,9 @@ function ListeCandidatDegustation() {
           </div>
         </div>
 
-        <p id="instructions"> Chaque envoi des notes remplace le précédent</p>
+        <div className="black-label" id="bottom">
+          Chaque envoi des notes remplace le précédent
+        </div>
       </IonFooter>
     </>
   );
