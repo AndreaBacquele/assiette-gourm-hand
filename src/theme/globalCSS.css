@@ -172,3 +172,7 @@ ion-icon{
     padding: 5px 20px;
 }
 
+hr{
+    color: var(--ion-color-primary);
+}
+
