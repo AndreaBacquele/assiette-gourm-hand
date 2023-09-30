@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
-  IonItem,
   IonList,
   IonHeader,
   IonToolbar,
-  IonTitle,
+  IonFooter,
   IonButton,
   IonContent,
   IonGrid,
@@ -21,6 +20,7 @@ function ListeCandidatCuisine() {
   const { store } = useStorage();
   const [completeName, setCompleteName] = useState("");
   const [juryTable, setJuryTable] = useState("");
+  const [juryType, setJuryType] = useState("");
   const [notes, setNotes] = useState<Record<string, Note>>({});
 
   interface Note {
@@ -50,9 +50,11 @@ function ListeCandidatCuisine() {
     if (store) {
       const name = await store.get("jury");
       const completeName = name?.completeName;
-      const table = name?.juryTable;
+      const juryTable = name?.juryTable;
+      const juryType = name?.juryType;
       setCompleteName(completeName);
       setJuryTable(juryTable);
+      setJuryType(juryType);
     }
   };
   useEffect(() => {
@@ -65,6 +67,13 @@ function ListeCandidatCuisine() {
     history.push("/evaltechnique/" + candidate);
   };
 
+  const handleDeleteClick = () => {
+    if (store) {
+      store.remove("jury");
+      alert("Jury supprimé");
+      history.push("/home");
+    }
+  };
   //   Gestion de l'affichage des candidats sur le dashboard
   const nb_candidates = 20;
   const range = (start: number, end: number) =>
@@ -85,7 +94,7 @@ function ListeCandidatCuisine() {
           <IonButton
             color="warning"
             onClick={() => handleButtonClick(nb)}
-            expand="full"
+            expand="block"
           >
             {" "}
             <div id="txtButton"> n°{nb}</div>
@@ -186,34 +195,27 @@ function ListeCandidatCuisine() {
 
   return (
     <>
-      <IonContent>
-        <IonHeader color="light">
-          <IonToolbar>
-            <IonItem>
-              <img alt="Logo du concours" src="../images/logo.jpg" />
-              <IonTitle id="title">
-                {" "}
-                Liste des candidats : <br />
-                Jury technique
-              </IonTitle>
-              {/* <span><p>Pour avoir accés à la fiche du candidat, merci de cliquer sur le numéro</p></span> */}
-            </IonItem>
-          </IonToolbar>
-        </IonHeader>
+      <IonHeader>
+        <IonToolbar>
+          <div id="top">
+            <img
+              className="logo-dash-eval"
+              src="../images/logo.jpg"
+              alt="Logo du concours"
+            ></img>
 
-        <IonItem>
-          <IonTitle>
-            <p> Jury {completeName} </p>
-          </IonTitle>
-        </IonItem>
-        <div id="title">
-          Une connexion internet est nécessaire afin de valider l'envoi des
-          notes
-        </div>
-        <div className="ion-text-center">
-          <IonButton id="txtButton" onClick={handleSubmitNotes}>
-            Envoi des notes
-          </IonButton>
+            <p className="black-label"> {completeName}</p>
+            <p className="orange-label"> {juryType} </p>
+          </div>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent style={{ height: "calc(100% - 220px)" }}>
+        <div id="title"> Liste des candidats</div>
+        <div id="instructions">
+          {" "}
+          Cliquez sur le numéro d'un candidat pour accéder à sa grille
+          d'évaluation
         </div>
 
         <IonList lines="full">
@@ -245,6 +247,35 @@ function ListeCandidatCuisine() {
           </IonGrid>
         </IonList>
       </IonContent>
+
+      <IonFooter>
+        <IonToolbar>
+          <div className="ion-text-center">
+            <IonButton
+              color="warning"
+              onClick={handleDeleteClick}
+              id="txtButton"
+            >
+              Supprimer les données
+            </IonButton>
+
+            <div className="header-footer">
+              <IonButton
+                color="warning"
+                expand="block"
+                onClick={handleSubmitNotes}
+                id="txtButton"
+              >
+                Envoyer les notes
+              </IonButton>
+            </div>
+          </div>
+
+          <div className="black-label" id="bottom">
+            Chaque envoi des notes remplace le précédent
+          </div>
+        </IonToolbar>
+      </IonFooter>
     </>
   );
 }

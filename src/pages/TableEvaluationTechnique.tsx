@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
+  IonHeader,
+  IonToolbar,
+  IonFooter,
   IonGrid,
   IonCol,
   IonRow,
@@ -16,11 +14,12 @@ import {
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";
+import CustomFormInput from "../components/InputForm";
 
-// ATTENTION : PROBLEME RESPONSIVITE SUR MOBILE
 function TableEvaluationTechnique() {
   const history = useHistory();
   const { store } = useStorage();
+  const [observations, setObservations] = useState("");
 
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
@@ -271,238 +270,153 @@ function TableEvaluationTechnique() {
 
   return (
     <>
-      <IonContent>
-        <IonCard>
-          <IonCardHeader>
-            <img alt="Logo du concours" src="../images/logo.jpg" />
-            <IonCardTitle>Grille évaluation Jury Cuisine</IonCardTitle>
-            <IonCardSubtitle>
-              Sous le haut patronnage de Monsieur Emmanuel MACRON, Président de
-              la République
-            </IonCardSubtitle>
-          </IonCardHeader>
-        </IonCard>
+      <IonHeader>
+        <IonToolbar>
+          <div id="top">
+            <IonIcon src="/public/chevron-back-outline.svg"></IonIcon>
+            <p className="black-label">Grille d'évaluation</p>
+            <p className="orange-label"> Candidat n°{candidate}</p>
+          </div>
+        </IonToolbar>
+      </IonHeader>
 
-        <p>Candidat n°{candidate}</p>
-
-        <div id="tableau">
-          <u> Notes de production</u>
+      <IonContent style={{ height: "calc(100% - 250px)" }}>
+        <div id="orga-header">
+          <img
+            className="logo-dash-eval"
+            src="../images/logo.jpg"
+            alt="Logo du concours"
+          ></img>
+          <div id="header-footer">
+            Sous le haut patronage de Monsieur Emmanuel MACRON, Président de la
+            République.
+          </div>
         </div>
+
         {/*1er tableau : Note de production*/}
-        <IonGrid fixed={true}>
-          <IonRow>
-            <IonCol size="5">
-              <i>Critéres</i>
-            </IonCol>
-            <IonCol size="2">
-              <i>Notation</i>
-            </IonCol>
-            <IonCol size="1.5"></IonCol>
-            <IonCol>
-              <i>Observations</i>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p>Respect des règles d'hygiène et de sécurité</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={5}
-                onIonInput={(value) => handleInputChange1("secuHygiene", value)}
-                value={valuesProduction.secuHygiene}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/5</p>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p>Organisation du travail</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={5}
-                onIonInput={(value) =>
-                  handleInputChange1("organisation", value)
-                }
-                value={valuesProduction.organisation}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/5</p>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p>Maîtrise des techniques</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={5}
-                onIonInput={(value) =>
-                  handleInputChange1("maitriseTech", value)
-                }
-                value={valuesProduction.maitriseTech}
-              ></CustomNotesInput>{" "}
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/5</p>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p>Envoi du plat en respectant le temps imparti</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={5}
-                onIonInput={(value) => handleInputChange1("timing", value)}
-                value={valuesProduction.timing}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/5</p>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p> Total : </p>
-            </IonCol>
-            <IonCol size="2">
-              <p>{totalProduction}</p>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/20</p>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
+        <p className="orange-label"> Notes de production</p>
 
-        <div id="tableau">
-          <u> Notes d'autonomie</u>
-        </div>
-        {/*2éme tableau : Note d'autonomie*/}
         <IonGrid fixed={true}>
           <IonRow>
-            <IonCol size="5">
-              <i>Critéres</i>
-            </IonCol>
-            <IonCol size="2">
-              <i>Notation</i>
-            </IonCol>
-            <IonCol size="1.5"></IonCol>
+            <CustomNotesInput
+              min={0}
+              max={5}
+              onIonInput={(value) => handleInputChange1("secuHygiene", value)}
+              value={valuesProduction.secuHygiene}
+            ></CustomNotesInput>
             <IonCol>
-              <i>Observations</i>
+              <p id="note-label">Respect des règles d'hygiène et de sécurité</p>
             </IonCol>
           </IonRow>
+
           <IonRow>
-            <IonCol size="5">
-              <p>Initiative laissée à la personne handicapée</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={10}
-                onIonInput={(value) => handleInputChange2("initiative", value)}
-                value={valuesAutonomie.initiative}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/10</p>
-            </IonCol>
+            <CustomNotesInput
+              min={0}
+              max={5}
+              onIonInput={(value) => handleInputChange1("organisation", value)}
+              value={valuesProduction.organisation}
+            ></CustomNotesInput>
             <IonCol>
-              <IonInput placeholder="..."> </IonInput>
+              <p id="note-label">Organisation du travail</p>
             </IonCol>
           </IonRow>
+
           <IonRow>
-            <IonCol size="5">
-              <p>Harmonie globale du binôme</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={7}
-                onIonInput={(value) => handleInputChange2("harmonie", value)}
-                value={valuesAutonomie.harmonie}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/7</p>
-            </IonCol>
+            <CustomNotesInput
+              min={0}
+              max={5}
+              onIonInput={(value) => handleInputChange1("maitriseTech", value)}
+              value={valuesProduction.maitriseTech}
+            ></CustomNotesInput>
             <IonCol>
-              <IonInput placeholder="..."> </IonInput>
+              <p id="note-label">Maîtrise des techniques</p>
             </IonCol>
           </IonRow>
+
           <IonRow>
-            <IonCol size="5">
-              <p>Qualité de l'accompagnement</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={7}
-                onIonInput={(value) =>
-                  handleInputChange2("qualiteAccomp", value)
-                }
-                value={valuesAutonomie.qualiteAccomp}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/7</p>
-            </IonCol>
+            <CustomNotesInput
+              min={0}
+              max={5}
+              onIonInput={(value) => handleInputChange1("timing", value)}
+              value={valuesProduction.timing}
+            ></CustomNotesInput>
             <IonCol>
-              <IonInput placeholder="..."> </IonInput>
+              <p id="note-label">
+                Envoi du plat en respectant le temps imparti
+              </p>
             </IonCol>
           </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p>Clarté des consignes</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={6}
-                onIonInput={(value) => handleInputChange2("clarte", value)}
-                value={valuesAutonomie.clarte}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/6</p>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p> Total : </p>
-            </IonCol>
-            <IonCol size="2">
-              <p>{totalAutonomie} </p>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/30</p>
-            </IonCol>
-          </IonRow>
+
+          <p>{totalProduction} / 20 Total</p>
+          <CustomFormInput
+            initial={observations}
+            onInputChange={setObservations}
+            placeholder="Observations (facultatif)"
+          ></CustomFormInput>
         </IonGrid>
         <br></br>
+
+        {/*2éme tableau : Note d'autonomie*/}
+        <p className="orange-label"> Notes d'autonomie</p>
+
+        <IonGrid fixed={true}>
+          <IonRow>
+            <CustomNotesInput
+              min={0}
+              max={10}
+              onIonInput={(value) => handleInputChange2("initiative", value)}
+              value={valuesAutonomie.initiative}
+            ></CustomNotesInput>
+            <IonCol>
+              <p id="note-label">Initiative laissée à la personne handicapée</p>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
+            <CustomNotesInput
+              min={0}
+              max={7}
+              onIonInput={(value) => handleInputChange2("harmonie", value)}
+              value={valuesAutonomie.harmonie}
+            ></CustomNotesInput>
+            <IonCol>
+              <p id="note-label">Harmonie globale du binôme</p>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
+            <CustomNotesInput
+              min={0}
+              max={7}
+              onIonInput={(value) => handleInputChange2("qualiteAccomp", value)}
+              value={valuesAutonomie.qualiteAccomp}
+            ></CustomNotesInput>
+            <IonCol>
+              <p id="note-label">Qualité de l'accompagnement</p>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
+            <CustomNotesInput
+              min={0}
+              max={6}
+              onIonInput={(value) => handleInputChange2("clarte", value)}
+              value={valuesAutonomie.clarte}
+            ></CustomNotesInput>
+            <IonCol>
+              <p id="note-label">Clarté des consignes</p>
+            </IonCol>
+          </IonRow>
+
+          <p>{totalAutonomie} / 30 Total</p>
+          <CustomFormInput
+            initial={observations}
+            onInputChange={setObservations}
+            placeholder="Observations (facultatif)"
+          ></CustomFormInput>
+        </IonGrid>
+        <br></br>
+
         {/* 1er total global des 2 tableaux précédents */}
         <IonRow class="ion-justify-content-center">
           <IonCol size="5">
@@ -517,145 +431,80 @@ function TableEvaluationTechnique() {
         </IonRow>
         <br></br>
         <hr />
-        <hr />
-        {/* <IonItem lines="full" color={"warning"}></IonItem> */}
-
         {/* 3éme tableau : Note développement durable */}
-        <div id="tableau">
-          <u> Note développement durable</u>
-        </div>
+
+        <p className="orange-label"> Note développement durable</p>
+
         <IonGrid fixed={true}>
           <IonRow>
-            <IonCol size="5">
-              <i>Critéres</i>
-            </IonCol>
-            <IonCol size="2">
-              <i>Notation</i>
-            </IonCol>
-            <IonCol size="1.5"></IonCol>
+            <CustomNotesInput
+              min={0}
+              max={5}
+              onIonInput={(value) => handleInputChange3("dechets", value)}
+              value={valuesDurable.dechets}
+            ></CustomNotesInput>
             <IonCol>
-              <i>Observations</i>
+              <p id="note-label">Gestion des déchets</p>
             </IonCol>
           </IonRow>
+
           <IonRow>
-            <IonCol size="5">
-              <p>Gestion des déchets</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={5}
-                onIonInput={(value) => handleInputChange3("dechets", value)}
-                value={valuesDurable.dechets}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/5</p>
-            </IonCol>
+            <CustomNotesInput
+              min={0}
+              max={5}
+              onIonInput={(value) => handleInputChange3("fluides", value)}
+              value={valuesDurable.fluides}
+            ></CustomNotesInput>
             <IonCol>
-              <IonInput placeholder="..."> </IonInput>
+              <p id="note-label">Gestion des fluides (eau,gaz,électricité)</p>
             </IonCol>
           </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p>Gestion des fluides (eau,gaz,électricité)</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={5}
-                onIonInput={(value) => handleInputChange3("fluides", value)}
-                value={valuesDurable.fluides}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/5</p>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p> Total : </p>
-            </IonCol>
-            <IonCol size="2">
-              <p>{totalDurable} </p>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/10</p>
-            </IonCol>
-          </IonRow>
+          <p>{totalProduction} / 10 Total</p>
+          <CustomFormInput
+            initial={observations}
+            onInputChange={setObservations}
+            placeholder="Observations (facultatif)"
+          ></CustomFormInput>
         </IonGrid>
+        <br></br>
 
         {/* 4éme tableau : Note optimisation du panier */}
-        <div id="tableau">
-          <u> Note optimisation du panier</u>
-        </div>
+        {/* <div id="tableau"> */}
+        <p className="orange-label"> Note optimisation du panier</p>
+        {/* </div> */}
         <IonGrid fixed={true}>
           <IonRow>
-            <IonCol size="5">
-              <i>Critéres</i>
-            </IonCol>
-            <IonCol size="2">
-              <i>Notation</i>
-            </IonCol>
-            <IonCol size="1.5"></IonCol>
+            <CustomNotesInput
+              min={0}
+              max={6}
+              onIonInput={(value) =>
+                handleInputChange4("utilObligatoires", value)
+              }
+              value={valuesOptimisation.utilObligatoires}
+            ></CustomNotesInput>
             <IonCol>
-              <i>Observations</i>
+              <p id="note-label">Utilisation des produits obligatoires</p>
             </IonCol>
           </IonRow>
+
           <IonRow>
-            <IonCol size="5">
-              <p>Utilisation des produits obligatoires</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={6}
-                onIonInput={(value) =>
-                  handleInputChange4("utilObligatoires", value)
-                }
-                value={valuesOptimisation.utilObligatoires}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/6</p>
-            </IonCol>
+            <CustomNotesInput
+              min={0}
+              max={4}
+              onIonInput={(value) => handleInputChange4("utilLibres", value)}
+              value={valuesOptimisation.utilLibres}
+            ></CustomNotesInput>
             <IonCol>
-              <IonInput placeholder="..."> </IonInput>
+              <p id="note-label">Utilisation des produits libres</p>
             </IonCol>
           </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p>Utilisation des produits libres</p>
-            </IonCol>
-            <IonCol size="2">
-              <CustomNotesInput
-                min={0}
-                max={4}
-                onIonInput={(value) => handleInputChange4("utilLibres", value)}
-                value={valuesOptimisation.utilLibres}
-              ></CustomNotesInput>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/4</p>
-            </IonCol>
-            <IonCol>
-              <IonInput placeholder="..."> </IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="5">
-              <p> Total : </p>
-            </IonCol>
-            <IonCol size="2">
-              <p>{totalOptimisation}</p>
-            </IonCol>
-            <IonCol size="1.5">
-              <p>/10</p>
-            </IonCol>
-          </IonRow>
+
+          <p>{totalOptimisation} / 10 Total</p>
+          <CustomFormInput
+            initial={observations}
+            onInputChange={setObservations}
+            placeholder="Observations (facultatif)"
+          ></CustomFormInput>
         </IonGrid>
         <br></br>
 
@@ -674,25 +523,38 @@ function TableEvaluationTechnique() {
         <br></br>
         <hr />
         <hr />
-        <IonRow class="ion-justify-content-center">
-          <IonCol size="5">
-            <p> Total évaluation technique : </p>
-          </IonCol>
-          <IonCol size="2">
-            <p>{AllTotal} </p>
-          </IonCol>
-          <IonCol size="1.5">
-            <p>/70</p>
-          </IonCol>
-        </IonRow>
-        <br></br>
-        <div className="ion-text-center">
-          <IonButton color={"success"} onClick={handleValidateClick}>
-            {/* <IonIcon icon={refreshOutline}/> */}
-            Validez l'évaluation
-          </IonButton>
-        </div>
       </IonContent>
+
+      <IonFooter>
+        <IonToolbar>
+          {" "}
+          <div className="ion-text-center">
+            <div id="bottom">
+              <p className="black-label"> Total évaluation technique </p>
+              <p
+                style={{
+                  fontSize: "20px",
+                  color: "var(--ion-color-primary)",
+                }}
+              >
+                {" "}
+                {AllTotal} / 70{" "}
+              </p>
+            </div>
+            <IonButton
+              expand="block"
+              type="submit"
+              color={"warning"}
+              onClick={handleValidateClick}
+            >
+              Enregistrer
+            </IonButton>
+            <p id="header-footer">
+              Vous pourrez revenir modifier ces notes ultérieurement.
+            </p>
+          </div>
+        </IonToolbar>
+      </IonFooter>
     </>
   );
 }

@@ -9,7 +9,6 @@ import {
   IonFooter,
   IonToolbar,
   IonHeader,
-  IonPage,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
@@ -230,26 +229,32 @@ function ListeCandidatDegustation() {
       </IonContent>
 
       <IonFooter>
-        <div className="ion-text-center">
-          <IonButton color="warning" onClick={handleDeleteClick} id="txtButton">
-            Supprimer les données
-          </IonButton>
-
-          <div className="header-footer">
+        <IonToolbar>
+          <div className="ion-text-center">
             <IonButton
               color="warning"
-              expand="block"
-              onClick={handleSubmitNotes}
+              onClick={handleDeleteClick}
               id="txtButton"
             >
-              Envoyer les notes
+              Supprimer les données
             </IonButton>
-          </div>
-        </div>
 
-        <div className="black-label" id="bottom">
-          Chaque envoi des notes remplace le précédent
-        </div>
+            <div className="header-footer">
+              <IonButton
+                color="warning"
+                expand="block"
+                onClick={handleSubmitNotes}
+                id="txtButton"
+              >
+                Envoyer les notes
+              </IonButton>
+            </div>
+          </div>
+
+          <div className="black-label" id="bottom">
+            Chaque envoi des notes remplace le précédent
+          </div>
+        </IonToolbar>
       </IonFooter>
     </>
   );
