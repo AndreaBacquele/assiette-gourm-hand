@@ -7,7 +7,6 @@ import {
   IonRow,
   IonButton,
   IonContent,
-  IonPage,
   IonHeader,
   IonIcon,
 } from "@ionic/react";
@@ -15,7 +14,6 @@ import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
-import { totalmem } from "os";
 
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
@@ -122,7 +120,7 @@ function TableEvaluationDegustation() {
         <div id="orga-header">
           <img
             className="logo-dash-eval"
-            src="../images/logo.jpg"
+            src="public/logo.jpg"
             alt="Logo du concours"
           ></img>
           <div id="header-footer">
