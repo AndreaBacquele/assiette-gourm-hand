@@ -64,10 +64,10 @@ function Accueil() {
       <IonContent>
         <img
           className="logo-accueil"
-          src="public/logo.jpg"
+          src="/logo.jpg"
           alt="Logo du concours"
         ></img>
-        <div id="header-footer">
+        <div className="header-footer">
           <p>19ème édition</p>
           <p>Samedi 14 octobre 2023</p>
         </div>

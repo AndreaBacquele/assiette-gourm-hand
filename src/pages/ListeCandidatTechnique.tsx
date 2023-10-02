@@ -95,16 +95,16 @@ function ListeCandidatCuisine() {
             color="warning"
             onClick={() => handleButtonClick(nb)}
             expand="block"
+            className="txtButton"
           >
-            {" "}
-            <div id="txtButton"> n°{nb}</div>
+            n° {nb}
           </IonButton>
         </IonCol>
         <IonCol>{totalProduction}</IonCol>
         <IonCol>{totalAutonomie} </IonCol>
         <IonCol>{totalDurable}</IonCol>
         <IonCol>{totalOptimisation}</IonCol>
-        <IonCol>{TotalAllTableaux}</IonCol>
+        <IonCol style={{ fontWeight: "600" }}>{TotalAllTableaux}</IonCol>
       </IonRow>
     );
   });
@@ -200,7 +200,7 @@ function ListeCandidatCuisine() {
           <div id="top">
             <img
               className="logo-dash-eval"
-              src="../images/logo.jpg"
+              src="/logo.jpg"
               alt="Logo du concours"
             ></img>
 
@@ -210,7 +210,7 @@ function ListeCandidatCuisine() {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent style={{ height: "calc(100% - 220px)" }}>
+      <IonContent className="content-listing">
         <div id="title"> Liste des candidats</div>
         <div id="instructions">
           {" "}
@@ -226,17 +226,17 @@ function ListeCandidatCuisine() {
               </IonCol>
               <IonCol size-xs="1.84" size-lg="2">
                 {" "}
-                <div id="labelCol">Total Production</div>
+                <div id="labelCol">Production</div>
               </IonCol>
               <IonCol size-xs="1.84" size-lg="2">
                 {" "}
-                <div id="labelCol">Total Autonomie </div>{" "}
+                <div id="labelCol">Autonomie </div>{" "}
               </IonCol>
               <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Total développement durable</div>
+                <div id="labelCol">Dévelop. durable</div>
               </IonCol>
               <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Total optimisation du panier</div>
+                <div id="labelCol">Optim. du panier</div>
               </IonCol>
               <IonCol size-xs="1.84" size-lg="2">
                 <div id="labelCol">Total final</div>
@@ -251,27 +251,33 @@ function ListeCandidatCuisine() {
       <IonFooter>
         <IonToolbar>
           <div className="ion-text-center">
-            <IonButton
-              color="warning"
-              onClick={handleDeleteClick}
-              id="txtButton"
-            >
-              Supprimer les données
-            </IonButton>
-
-            <div className="header-footer">
-              <IonButton
-                color="warning"
-                expand="block"
-                onClick={handleSubmitNotes}
-                id="txtButton"
-              >
-                Envoyer les notes
-              </IonButton>
-            </div>
+            <IonGrid>
+              <IonRow>
+                <IonCol size-xs="6">
+                  <IonButton
+                    color="warning"
+                    expand="block"
+                    onClick={handleSubmitNotes}
+                    className="txtButton"
+                  >
+                    Envoyer les notes
+                  </IonButton>
+                </IonCol>
+                <IonCol size-xs="6">
+                  <IonButton
+                    color="warning"
+                    expand="block"
+                    onClick={handleDeleteClick}
+                    className="txtButton"
+                  >
+                    Supprimer les données
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
           </div>
 
-          <div className="black-label" id="bottom">
+          <div className="header-footer" style={{ textAlign: "center" }}>
             Chaque envoi des notes remplace le précédent
           </div>
         </IonToolbar>

@@ -19,7 +19,6 @@ import CustomFormInput from "../components/InputForm";
 function TableEvaluationTechnique() {
   const history = useHistory();
   const { store } = useStorage();
-  const [observations, setObservations] = useState("");
 
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
@@ -38,6 +37,7 @@ function TableEvaluationTechnique() {
     totalProduction: 0,
   });
   const [totalProduction, setTotalProduction] = useState(0);
+  const [observationsProduction, setObservationsProduction] = useState("");
 
   // Récupération de la valeur des inputs
   const handleInputChange1 = (key: string, value: string) => {
@@ -74,6 +74,7 @@ function TableEvaluationTechnique() {
     totalAutonomie: 0,
   });
   const [totalAutonomie, setTotalAutonomie] = useState(0);
+  const [observationsAutonomie, setObservationsAutonomie] = useState("");
 
   // Récupération de la valeur des inputs
   const handleInputChange2 = (key: string, value: string) => {
@@ -108,6 +109,7 @@ function TableEvaluationTechnique() {
     totalDurable: 0,
   });
   const [totalDurable, setTotalDurable] = useState(0);
+  const [observationsDurable, setObservationsDurable] = useState("");
 
   // Récupération de la valeur des inputs
   const handleInputChange3 = (key: string, value: string) => {
@@ -132,6 +134,7 @@ function TableEvaluationTechnique() {
     totalOptimisation: 0,
   });
   const [totalOptimisation, setTotalOptimisation] = useState(0);
+  const [observationsOptimisation, setObservationsOptimisation] = useState("");
 
   const handleInputChange4 = (key: string, value: string) => {
     setValuesOptimisation((prevValues) => ({ ...prevValues, [key]: value }));
@@ -178,20 +181,24 @@ function TableEvaluationTechnique() {
         maitriseTech: valuesProduction.maitriseTech,
         timing: valuesProduction.timing,
         totalProduction,
+        observationsProduction: observationsProduction,
         // tableau 2
         initiative: valuesAutonomie.initiative,
         qualiteAccomp: valuesAutonomie.qualiteAccomp,
         harmonie: valuesAutonomie.harmonie,
         clarte: valuesAutonomie.clarte,
         totalAutonomie,
+        observationsAutonomie: observationsAutonomie,
         // tableau 3
         dechets: valuesDurable.dechets,
         fluides: valuesDurable.fluides,
         totalDurable,
+        observationsDurable: observationsDurable,
         // tableau 4
         utilLibres: valuesOptimisation.utilLibres,
         utilObligatoires: valuesOptimisation.utilObligatoires,
         totalOptimisation,
+        observationsOptimistion: observationsOptimisation,
         // totaux
         TotalProductAutonomie,
         TotalOptiDurable,
@@ -231,6 +238,8 @@ function TableEvaluationTechnique() {
             totalProduction: candidateNotes.totalProduction || "",
           });
 
+          setObservationsProduction(observationsProduction);
+
           // Affichage éléments 2éme tableau : Autonomie
           setValuesAutonomie({
             initiative: candidateNotes.initiative || "",
@@ -240,6 +249,7 @@ function TableEvaluationTechnique() {
             totalAutonomie: 0,
           });
           setTotalAutonomie(candidateNotes.totalAutonomie || "");
+          setObservationsAutonomie(observationsAutonomie);
 
           // Affichage total intermédiaire
           setTotalProductAutonomie(candidateNotes.TotalProductAutonomie || "");
@@ -252,6 +262,7 @@ function TableEvaluationTechnique() {
             totalDurable: 0,
           });
           setTotalDurable(candidateNotes.totalDurable || "");
+          setObservationsDurable(observationsDurable);
 
           // Affichage élément 4éme tableau : Optimisation du panier
           setValuesOptimisation({
@@ -260,6 +271,7 @@ function TableEvaluationTechnique() {
             totalOptimisation: 0,
           });
           setTotalOptimisation(candidateNotes.totalOptimisation || "");
+          setObservationsOptimisation(observationsOptimisation);
 
           // Totaux finaux
           setAllTotal(candidateNotes.AllTotal || 0);
@@ -273,21 +285,21 @@ function TableEvaluationTechnique() {
       <IonHeader>
         <IonToolbar>
           <div id="top">
-            <IonIcon src="/public/chevron-back-outline.svg"></IonIcon>
+            <IonIcon src="/chevron-back-outline.svg"></IonIcon>
             <p className="black-label">Grille d'évaluation</p>
             <p className="orange-label"> Candidat n°{candidate}</p>
           </div>
         </IonToolbar>
       </IonHeader>
 
-      <IonContent style={{ height: "calc(100% - 250px)" }}>
-        <div id="orga-header">
+      <IonContent className="content-evaluation">
+        <div id="orga-header" style={{ padding: "5px" }}>
           <img
             className="logo-dash-eval"
-            src="../images/logo.jpg"
+            src="/logo.jpg"
             alt="Logo du concours"
           ></img>
-          <div id="header-footer">
+          <div className="header-footer">
             Sous le haut patronage de Monsieur Emmanuel MACRON, Président de la
             République.
           </div>
@@ -347,12 +359,14 @@ function TableEvaluationTechnique() {
             </IonCol>
           </IonRow>
 
-          <p>{totalProduction} / 20 Total</p>
-          <CustomFormInput
-            initial={observations}
-            onInputChange={setObservations}
-            placeholder="Observations (facultatif)"
-          ></CustomFormInput>
+          <IonRow>{totalProduction} / 20 Total</IonRow>
+          <IonRow>
+            <CustomFormInput
+              initial={observationsProduction}
+              onInputChange={setObservationsProduction}
+              placeholder="Observations (facultatif)"
+            ></CustomFormInput>
+          </IonRow>
         </IonGrid>
         <br></br>
 
@@ -407,18 +421,20 @@ function TableEvaluationTechnique() {
               <p id="note-label">Clarté des consignes</p>
             </IonCol>
           </IonRow>
-
-          <p>{totalAutonomie} / 30 Total</p>
-          <CustomFormInput
-            initial={observations}
-            onInputChange={setObservations}
-            placeholder="Observations (facultatif)"
-          ></CustomFormInput>
+          <IonRow>{totalAutonomie} / 30 Total</IonRow>
+          <IonRow>
+            <CustomFormInput
+              initial={observationsAutonomie}
+              onInputChange={setObservationsAutonomie}
+              placeholder="Observations (facultatif)"
+            ></CustomFormInput>
+          </IonRow>
         </IonGrid>
         <br></br>
 
+        {/* VOIR SI AFFICHAGE TOTAL INTERMEDIAIRE */}
         {/* 1er total global des 2 tableaux précédents */}
-        <IonRow class="ion-justify-content-center">
+        {/* <IonRow class="ion-justify-content-center">
           <IonCol size="5">
             <p> Total : </p>
           </IonCol>
@@ -430,7 +446,7 @@ function TableEvaluationTechnique() {
           </IonCol>
         </IonRow>
         <br></br>
-        <hr />
+        <hr /> */}
         {/* 3éme tableau : Note développement durable */}
 
         <p className="orange-label"> Note développement durable</p>
@@ -459,12 +475,18 @@ function TableEvaluationTechnique() {
               <p id="note-label">Gestion des fluides (eau,gaz,électricité)</p>
             </IonCol>
           </IonRow>
-          <p>{totalProduction} / 10 Total</p>
-          <CustomFormInput
-            initial={observations}
-            onInputChange={setObservations}
-            placeholder="Observations (facultatif)"
-          ></CustomFormInput>
+          <IonRow>
+            {/* TODO: faire pareil pour l'aligner dans tous les tableaux */}
+            <IonCol size="3">{totalProduction} / 10</IonCol>
+            <IonCol className="note-total">Total</IonCol>
+          </IonRow>
+          <IonRow>
+            <CustomFormInput
+              initial={observationsProduction}
+              onInputChange={setObservationsProduction}
+              placeholder="Observations (facultatif)"
+            ></CustomFormInput>
+          </IonRow>
         </IonGrid>
         <br></br>
 
@@ -499,17 +521,21 @@ function TableEvaluationTechnique() {
             </IonCol>
           </IonRow>
 
-          <p>{totalOptimisation} / 10 Total</p>
-          <CustomFormInput
-            initial={observations}
-            onInputChange={setObservations}
-            placeholder="Observations (facultatif)"
-          ></CustomFormInput>
+          <IonRow>{totalOptimisation} / 10 Total</IonRow>
+          <IonRow>
+            <CustomFormInput
+              initial={observationsOptimisation}
+              onInputChange={setObservationsOptimisation}
+              placeholder="Observations (facultatif)"
+            ></CustomFormInput>
+          </IonRow>
         </IonGrid>
         <br></br>
 
+        {/* VOIR SI AFFICHAGE TOTAL INTERMEDIAIRE */}
+
         {/* 2éme total global des 2 tableaux précédents */}
-        <IonRow class="ion-justify-content-center">
+        {/* <IonRow class="ion-justify-content-center">
           <IonCol size="5">
             <p> Total : </p>
           </IonCol>
@@ -522,7 +548,7 @@ function TableEvaluationTechnique() {
         </IonRow>
         <br></br>
         <hr />
-        <hr />
+        <hr /> */}
       </IonContent>
 
       <IonFooter>
@@ -530,8 +556,8 @@ function TableEvaluationTechnique() {
           {" "}
           <div className="ion-text-center">
             <div id="bottom">
-              <p className="black-label"> Total évaluation technique </p>
-              <p
+              <span className="black-label"> Total évaluation technique </span>
+              <span
                 style={{
                   fontSize: "20px",
                   color: "var(--ion-color-primary)",
@@ -539,7 +565,7 @@ function TableEvaluationTechnique() {
               >
                 {" "}
                 {AllTotal} / 70{" "}
-              </p>
+              </span>
             </div>
             <IonButton
               expand="block"
@@ -549,9 +575,9 @@ function TableEvaluationTechnique() {
             >
               Enregistrer
             </IonButton>
-            <p id="header-footer">
+            <span className="header-footer">
               Vous pourrez revenir modifier ces notes ultérieurement.
-            </p>
+            </span>
           </div>
         </IonToolbar>
       </IonFooter>
