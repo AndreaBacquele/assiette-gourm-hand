@@ -96,13 +96,13 @@ function ListeCandidatDegustation() {
             color="warning"
             onClick={() => handleButtonClick(nb)}
             expand="block"
+            className="txtButton"
           >
-            {" "}
-            <div id="txtButton"> n°{nb}</div>
+            n° {nb}
           </IonButton>
         </IonCol>
-        <IonCol> {presentation} </IonCol>
-        <IonCol>{cuissonPrincipale} </IonCol>
+        <IonCol>{presentation}</IonCol>
+        <IonCol>{cuissonPrincipale}</IonCol>
         <IonCol>{cuissonGarniture}</IonCol>
         <IonCol>{accordGlobal}</IonCol>
         <IonCol>{total}</IonCol>
@@ -184,7 +184,7 @@ function ListeCandidatDegustation() {
           <div id="top">
             <img
               className="logo-dash-eval"
-              src="../images/logo.jpg"
+              src="/logo.jpg"
               alt="Logo du concours"
             ></img>
 
@@ -194,7 +194,7 @@ function ListeCandidatDegustation() {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent style={{ height: "calc(100% - 220px)" }}>
+      <IonContent className="content-listing">
         <div id="title"> Liste des candidats</div>
         <div id="instructions">
           {" "}
@@ -231,27 +231,33 @@ function ListeCandidatDegustation() {
       <IonFooter>
         <IonToolbar>
           <div className="ion-text-center">
-            <IonButton
-              color="warning"
-              onClick={handleDeleteClick}
-              id="txtButton"
-            >
-              Supprimer les données
-            </IonButton>
-
-            <div className="header-footer">
-              <IonButton
-                color="warning"
-                expand="block"
-                onClick={handleSubmitNotes}
-                id="txtButton"
-              >
-                Envoyer les notes
-              </IonButton>
-            </div>
+            <IonGrid>
+              <IonRow>
+                <IonCol size-xs="6">
+                  <IonButton
+                    color="warning"
+                    expand="block"
+                    onClick={handleSubmitNotes}
+                    className="txtButton"
+                  >
+                    Envoyer les notes
+                  </IonButton>
+                </IonCol>
+                <IonCol size-xs="6">
+                  <IonButton
+                    color="warning"
+                    expand="block"
+                    onClick={handleDeleteClick}
+                    className="txtButton"
+                  >
+                    Supprimer les données
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
           </div>
 
-          <div className="black-label" id="bottom">
+          <div className="header-footer" style={{ textAlign: "center" }}>
             Chaque envoi des notes remplace le précédent
           </div>
         </IonToolbar>

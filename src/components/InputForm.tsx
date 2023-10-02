@@ -21,16 +21,14 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
   };
 
   return (
-    <IonItem style={{ marginTop: "10px", marginBottom: "10px" }}>
-      <IonInput
-        id="label"
-        required={true}
-        value={value}
-        onIonChange={handleChange}
-        placeholder={placeholder}
-        class="ion-float-left"
-      ></IonInput>
-    </IonItem>
+    <IonInput
+      id="label"
+      required={true}
+      value={value}
+      onIonChange={handleChange}
+      placeholder={placeholder}
+      class="ion-float-left"
+    ></IonInput>
   );
 };
 

@@ -9,6 +9,7 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
+  IonAlert,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
@@ -29,7 +30,7 @@ function TableEvaluationDegustation() {
     total: 0,
   });
   const [total, setTotal] = useState(0);
-  const [observation, setObservations] = useState("");
+  const [observations, setObservations] = useState("");
 
   const handleInputChange = (key: string, value: string) => {
     setValues((prevValues) => ({ ...prevValues, [key]: value }));
@@ -64,7 +65,7 @@ function TableEvaluationDegustation() {
         cuissonGarniture: values.cuissonGarniture,
         accordGlobal: values.accordGlobal,
         total: total,
-        observation: observation,
+        observation: observations,
       };
 
       // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
@@ -85,6 +86,17 @@ function TableEvaluationDegustation() {
     }
   };
 
+  //  A INCORPORER
+  // return (
+  //   <IonAlert
+  //     trigger="validate-notes-click"
+  //     header="Message important"
+  //     subHeader="Notes sauvegardées avec succés"
+  //     message="Vous allez être redirigé vers la liste des candidats "
+  //     buttons={["OK"]}
+  //   ></IonAlert>
+  // );
+
   // // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
   useEffect(() => {
     if (store) {
@@ -98,7 +110,7 @@ function TableEvaluationDegustation() {
             accordGlobal: candidateNotes.accordGlobal || "",
             total: total || 0,
           });
-          setObservations(observation);
+          setObservations(observations);
         }
       });
     }
@@ -109,21 +121,28 @@ function TableEvaluationDegustation() {
       <IonHeader>
         <IonToolbar>
           <div id="top">
-            <IonIcon src="/public/chevron-back-outline.svg"></IonIcon>
+            <IonButton
+              type="submit"
+              color={"white"}
+              onClick={handleValidateClick}
+            >
+              <IonIcon src="/chevron-back-outline.svg"></IonIcon>
+            </IonButton>
+
             <p className="black-label">Grille d'évaluation</p>
             <p className="orange-label"> Candidat n°{candidate}</p>
           </div>
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen={true} style={{ height: "calc(100% - 250px)" }}>
+      <IonContent fullscreen={true} className="content-evaluation">
         <div id="orga-header">
           <img
             className="logo-dash-eval"
-            src="public/logo.jpg"
+            src="/logo.jpg"
             alt="Logo du concours"
           ></img>
-          <div id="header-footer">
+          <div className="header-footer">
             Sous le haut patronage de Monsieur Emmanuel MACRON, Président de la
             République.
           </div>
@@ -185,7 +204,7 @@ function TableEvaluationDegustation() {
           </IonRow>
         </IonGrid>
         <CustomFormInput
-          initial={observation}
+          initial={observations}
           onInputChange={setObservations}
           placeholder="Observations (facultatif)"
         ></CustomFormInput>
@@ -196,8 +215,11 @@ function TableEvaluationDegustation() {
           {" "}
           <div className="ion-text-center">
             <div id="bottom">
-              <p className="black-label"> Total évaluation dégustation </p>
-              <p
+              <span className="black-label">
+                {" "}
+                Total évaluation dégustation{" "}
+              </span>
+              <span
                 style={{
                   fontSize: "20px",
                   color: "var(--ion-color-primary)",
@@ -205,19 +227,23 @@ function TableEvaluationDegustation() {
               >
                 {" "}
                 {total} / 30{" "}
-              </p>
+              </span>
             </div>
             <IonButton
               expand="block"
               type="submit"
               color={"warning"}
               onClick={handleValidateClick}
+              className="txtButton"
             >
               Enregistrer
             </IonButton>
-            <p id="header-footer">
+            <span
+              className="header-footer"
+              style={{ textAlign: "center", padding: "10px 0px" }}
+            >
               Vous pourrez revenir modifier ces notes ultérieurement.
-            </p>
+            </span>
           </div>
         </IonToolbar>
       </IonFooter>

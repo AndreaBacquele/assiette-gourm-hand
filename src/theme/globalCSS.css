@@ -17,10 +17,23 @@ ion-input{
     display: flex;
   }
 
-  ion-col{
+ion-col{
     text-align: center;
+    padding: 0px;
 }
 
+ion-row {
+    padding: 10px 0px;
+    align-items: center;
+}
+
+ion-grid {
+    padding: 0px;
+}
+
+* {
+    font-family: var(--font-sans),ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
 
 /* PAGE D'ACCUEIL*/
 
@@ -40,7 +53,6 @@ ion-input{
     margin-right: 20px;
     border-radius: 7%;
     color: var(--ion-color-primary);
-    font-family: var(--font-sans),ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 .ion-radiogroup.last-radio {
@@ -61,20 +73,18 @@ ion-input{
 }
 
 
-#header-footer{
+.header-footer{
     color: #838181;
     text-align: center;
-    font-family: Open Sans;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding-top: 9px;
+    text-align: left;
 }
 
 #title{
     color: #000;
-    font-family: Open Sans;
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -83,12 +93,10 @@ ion-input{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: var(--font-sans),ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 #instructions{
     font-size: 14px;
-    font-family: Open Sans;
 }
 
 ion-icon{
@@ -102,7 +110,6 @@ ion-icon{
 #labelCol{
     color: var(--ion-color-primary);
     text-align: center;
-    font-family: Open Sans;
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
@@ -110,10 +117,8 @@ ion-icon{
 }
 
 .logo-dash-eval{
-    border-radius: 50%;
-    border: 1px solid #838181;
-    height: 57px;
-    width: 57px;
+    height: 90px;
+    margin: -20px 0px;
 }
 
 #orga-header{
@@ -125,7 +130,6 @@ ion-icon{
 .orange-label{
     color: var(--ion-color-primary);
     font-size: 18px;
-    font-family: Open Sans;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -134,20 +138,37 @@ ion-icon{
 .black-label{
     color: black;
     font-size: 18px;
-    font-family: Open Sans;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
+.content-evaluation {
+    height: calc(100% - 200px);
+}
+
+.content-listing {
+    height: calc(100% - 180px);
+}
+
+
 #one-line{
     display:flex;
 }
 
-#note-label{
+.note-total{
     color: #000;
-    font-family: Open Sans;
-    font-size: 12px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: start;
+}
+
+#note-label{
+    /* TODO: à convertir en classe */
+    color: #000;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -157,19 +178,18 @@ ion-icon{
 #top{
     display:flex;
     justify-content: space-between;
-    gap: 20px;
     margin-right: 20px;
+    margin-left: 5px;
 }
 
 #bottom{
     display:flex;
-    justify-content: center;
-    gap: 40px;
-    margin-left: 30px;
+    justify-content: space-between;
+    padding: 10px;
 }
 
-#txtButton{
-    padding: 5px 20px;
+.txtButton{
+    padding: 5px 5px;
 }
 
 hr{
