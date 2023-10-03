@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonItem, IonInput } from "@ionic/react";
+import { IonInput } from "@ionic/react";
 import "../theme/globalCSS.css";
 
 interface CustomFormInputProps {

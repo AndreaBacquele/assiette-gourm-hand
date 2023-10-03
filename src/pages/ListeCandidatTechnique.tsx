@@ -87,7 +87,8 @@ function ListeCandidatCuisine() {
     const totalDurable = (notes && notes["candidat" + nb]?.totalDurable) ?? "";
     const totalOptimisation =
       (notes && notes["candidat" + nb]?.totalOptimisation) ?? "";
-    const TotalAllTableaux = (notes && notes["candidat" + nb]?.AllTotal) ?? "";
+    const TotalAllTableaux =
+      (notes && notes["candidat" + nb]?.AllTotal) ?? "--";
     return (
       <IonRow>
         <IonCol size-xs="2.8" size-lg="2">
@@ -104,7 +105,7 @@ function ListeCandidatCuisine() {
         <IonCol>{totalAutonomie} </IonCol>
         <IonCol>{totalDurable}</IonCol>
         <IonCol>{totalOptimisation}</IonCol>
-        <IonCol style={{ fontWeight: "600" }}>{TotalAllTableaux}</IonCol>
+        <IonCol style={{ fontWeight: "600" }}>{TotalAllTableaux} / 70</IonCol>
       </IonRow>
     );
   });
@@ -196,23 +197,23 @@ function ListeCandidatCuisine() {
   return (
     <>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar style={{ height: "60px", display: "flex" }}>
           <div id="top">
             <img
               className="logo-dash-eval"
-              src="/logo.jpg"
+              src="/logo AG.png"
               alt="Logo du concours"
             ></img>
 
-            <p className="black-label"> {completeName}</p>
-            <p className="orange-label"> {juryType} </p>
+            <span className="black-label"> {completeName}</span>
+            <span className="orange-label"> {juryType} </span>
           </div>
         </IonToolbar>
       </IonHeader>
 
       <IonContent className="content-listing">
         <div id="title"> Liste des candidats</div>
-        <div id="instructions">
+        <div id="instructions" style={{ textAlign: "center" }}>
           {" "}
           Cliquez sur le numéro d'un candidat pour accéder à sa grille
           d'évaluation

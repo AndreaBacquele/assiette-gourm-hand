@@ -317,7 +317,9 @@ function TableEvaluationTechnique() {
               value={valuesProduction.secuHygiene}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Respect des règles d'hygiène et de sécurité</p>
+              <p className="note-label">
+                Respect des règles d'hygiène et de sécurité
+              </p>
             </IonCol>
           </IonRow>
 
@@ -329,7 +331,7 @@ function TableEvaluationTechnique() {
               value={valuesProduction.organisation}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Organisation du travail</p>
+              <p className="note-label">Organisation du travail</p>
             </IonCol>
           </IonRow>
 
@@ -341,7 +343,7 @@ function TableEvaluationTechnique() {
               value={valuesProduction.maitriseTech}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Maîtrise des techniques</p>
+              <p className="note-label">Maîtrise des techniques</p>
             </IonCol>
           </IonRow>
 
@@ -353,7 +355,7 @@ function TableEvaluationTechnique() {
               value={valuesProduction.timing}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">
+              <p className="note-label">
                 Envoi du plat en respectant le temps imparti
               </p>
             </IonCol>
@@ -382,7 +384,9 @@ function TableEvaluationTechnique() {
               value={valuesAutonomie.initiative}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Initiative laissée à la personne handicapée</p>
+              <p className="note-label">
+                Initiative laissée à la personne handicapée
+              </p>
             </IonCol>
           </IonRow>
 
@@ -394,7 +398,7 @@ function TableEvaluationTechnique() {
               value={valuesAutonomie.harmonie}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Harmonie globale du binôme</p>
+              <p className="note-label">Harmonie globale du binôme</p>
             </IonCol>
           </IonRow>
 
@@ -406,7 +410,7 @@ function TableEvaluationTechnique() {
               value={valuesAutonomie.qualiteAccomp}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Qualité de l'accompagnement</p>
+              <p className="note-label">Qualité de l'accompagnement</p>
             </IonCol>
           </IonRow>
 
@@ -418,7 +422,7 @@ function TableEvaluationTechnique() {
               value={valuesAutonomie.clarte}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Clarté des consignes</p>
+              <p className="note-label">Clarté des consignes</p>
             </IonCol>
           </IonRow>
           <IonRow>{totalAutonomie} / 30 Total</IonRow>
@@ -460,7 +464,7 @@ function TableEvaluationTechnique() {
               value={valuesDurable.dechets}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Gestion des déchets</p>
+              <p className="note-label">Gestion des déchets</p>
             </IonCol>
           </IonRow>
 
@@ -472,7 +476,9 @@ function TableEvaluationTechnique() {
               value={valuesDurable.fluides}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Gestion des fluides (eau,gaz,électricité)</p>
+              <p className="note-label">
+                Gestion des fluides (eau,gaz,électricité)
+              </p>
             </IonCol>
           </IonRow>
           <IonRow>
@@ -505,7 +511,9 @@ function TableEvaluationTechnique() {
               value={valuesOptimisation.utilObligatoires}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Utilisation des produits obligatoires</p>
+              <p className="note-label">
+                Utilisation des produits obligatoires
+              </p>
             </IonCol>
           </IonRow>
 
@@ -517,7 +525,7 @@ function TableEvaluationTechnique() {
               value={valuesOptimisation.utilLibres}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Utilisation des produits libres</p>
+              <p className="note-label">Utilisation des produits libres</p>
             </IonCol>
           </IonRow>
 

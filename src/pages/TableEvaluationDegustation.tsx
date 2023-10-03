@@ -156,7 +156,7 @@ function TableEvaluationDegustation() {
               value={values.presentation}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">
+              <p className="note-label">
                 Présentation générale et netteté du contenant
               </p>
             </IonCol>
@@ -171,7 +171,7 @@ function TableEvaluationDegustation() {
               value={values.cuissonPrincipale}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">
+              <p className="note-label">
                 Cuisson et qualité gustative de la pièce principale
               </p>
             </IonCol>
@@ -186,7 +186,9 @@ function TableEvaluationDegustation() {
               value={values.cuissonGarniture}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">Cuisson et qualité gustative des garnitures</p>
+              <p className="note-label">
+                Cuisson et qualité gustative des garnitures
+              </p>
             </IonCol>
           </IonRow>
           <IonRow>
@@ -197,7 +199,7 @@ function TableEvaluationDegustation() {
               value={values.accordGlobal}
             ></CustomNotesInput>
             <IonCol>
-              <p id="note-label">
+              <p className="note-label">
                 Accord entre les garnitures et la pièce principale
               </p>
             </IonCol>
