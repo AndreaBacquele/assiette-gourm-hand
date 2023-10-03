@@ -68,11 +68,11 @@ function Accueil() {
           alt="Logo du concours"
         ></img>
         <div className="header-footer">
-          <p>19ème édition</p>
-          <p>Samedi 14 octobre 2023</p>
+          <p style={{ textAlign: "center" }}>19ème édition</p>
+          <p style={{ textAlign: "center" }}>Samedi 14 octobre 2023</p>
         </div>
         <div id="title">
-          <p>Inscription des jurys</p>
+          <span>Inscription des jurys</span>
         </div>
         <br></br>
         {/* Mise en place du formulaire */}
@@ -93,10 +93,10 @@ function Accueil() {
           onInputChange={setCompleteName}
           placeholder="Prénom NOM"
         ></CustomFormInput>
-        <br></br>
+
         {/* Gestion des toogles pour le choix de jury */}
         <div id="instructions">
-          <p>Sélectionnez votre type de jury:</p>
+          <span>Sélectionnez votre type de jury:</span>
         </div>
         <div id="test">
           <IonGrid>

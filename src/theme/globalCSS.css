@@ -15,6 +15,8 @@ ion-input{
     border-bottom: 1px solid var(--ion-color-primary);
     background: #F5F5F5;
     display: flex;
+    margin-top: 7px;
+    margin-bottom: 5px;
   }
 
 ion-col{
@@ -117,8 +119,10 @@ ion-icon{
 }
 
 .logo-dash-eval{
-    height: 90px;
-    margin: -20px 0px;
+    height: 40px;
+    width: auto;
+    vertical-align: baseline;
+    display:flex
 }
 
 #orga-header{
@@ -137,7 +141,7 @@ ion-icon{
 
 .black-label{
     color: black;
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -165,7 +169,7 @@ ion-icon{
     text-align: start;
 }
 
-#note-label{
+.note-label{
     /* TODO: à convertir en classe */
     color: #000;
     font-size: 14px;
@@ -180,6 +184,7 @@ ion-icon{
     justify-content: space-between;
     margin-right: 20px;
     margin-left: 5px;
+    align-items: center;
 }
 
 #bottom{
@@ -190,9 +195,5 @@ ion-icon{
 
 .txtButton{
     padding: 5px 5px;
-}
-
-hr{
-    color: var(--ion-color-primary);
 }
 
