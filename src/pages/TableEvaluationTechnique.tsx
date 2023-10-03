@@ -6,7 +6,6 @@ import {
   IonGrid,
   IonCol,
   IonRow,
-  IonInput,
   IonButton,
   IonIcon,
   IonContent,
@@ -293,10 +292,10 @@ function TableEvaluationTechnique() {
       </IonHeader>
 
       <IonContent className="content-evaluation">
-        <div id="orga-header" style={{ padding: "5px" }}>
+        <div id="orga-header" style={{ padding: "5px", alignItems: "center" }}>
           <img
             className="logo-dash-eval"
-            src="/logo.jpg"
+            src="/logo AG.png"
             alt="Logo du concours"
           ></img>
           <div className="header-footer">
@@ -317,9 +316,9 @@ function TableEvaluationTechnique() {
               value={valuesProduction.secuHygiene}
             ></CustomNotesInput>
             <IonCol>
-              <p className="note-label">
+              <span className="note-label">
                 Respect des règles d'hygiène et de sécurité
-              </p>
+              </span>
             </IonCol>
           </IonRow>
 
@@ -331,7 +330,7 @@ function TableEvaluationTechnique() {
               value={valuesProduction.organisation}
             ></CustomNotesInput>
             <IonCol>
-              <p className="note-label">Organisation du travail</p>
+              <span className="note-label">Organisation du travail</span>
             </IonCol>
           </IonRow>
 
@@ -343,7 +342,7 @@ function TableEvaluationTechnique() {
               value={valuesProduction.maitriseTech}
             ></CustomNotesInput>
             <IonCol>
-              <p className="note-label">Maîtrise des techniques</p>
+              <span className="note-label">Maîtrise des techniques</span>
             </IonCol>
           </IonRow>
 
@@ -355,9 +354,9 @@ function TableEvaluationTechnique() {
               value={valuesProduction.timing}
             ></CustomNotesInput>
             <IonCol>
-              <p className="note-label">
+              <span className="note-label">
                 Envoi du plat en respectant le temps imparti
-              </p>
+              </span>
             </IonCol>
           </IonRow>
 
@@ -483,13 +482,13 @@ function TableEvaluationTechnique() {
           </IonRow>
           <IonRow>
             {/* TODO: faire pareil pour l'aligner dans tous les tableaux */}
-            <IonCol size="3">{totalProduction} / 10</IonCol>
+            <IonCol size="3">{totalDurable} / 10</IonCol>
             <IonCol className="note-total">Total</IonCol>
           </IonRow>
           <IonRow>
             <CustomFormInput
-              initial={observationsProduction}
-              onInputChange={setObservationsProduction}
+              initial={observationsDurable}
+              onInputChange={setObservationsDurable}
               placeholder="Observations (facultatif)"
             ></CustomFormInput>
           </IonRow>
