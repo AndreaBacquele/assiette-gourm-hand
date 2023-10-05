@@ -56,6 +56,7 @@ function TableEvaluationDegustation() {
   }, [values, total]);
 
   const history = useHistory();
+  const [showAlert1, setShowAlert1] = useState(false);
   // Stockage des notes dés que l'on appuie sur le bouton Valider l'évaluation
   const handleValidateClick = () => {
     if (store) {
@@ -82,6 +83,7 @@ function TableEvaluationDegustation() {
       store.get("notes").then((all_notes: Record<string, any>) => {
         save_notes(all_notes, candidate, candidates_notes);
         history.push("/listingdegustation");
+        setShowAlert1(true);
       });
     }
   };
@@ -90,8 +92,7 @@ function TableEvaluationDegustation() {
   // return (
   //   <IonAlert
   //     trigger="validate-notes-click"
-  //     header="Message important"
-  //     subHeader="Notes sauvegardées avec succés"
+  //     subHeader="Notes enregistrées avec succés"
   //     message="Vous allez être redirigé vers la liste des candidats "
   //     buttons={["OK"]}
   //   ></IonAlert>
@@ -241,6 +242,12 @@ function TableEvaluationDegustation() {
             >
               Enregistrer
             </IonButton>
+            <IonAlert
+              isOpen={showAlert1}
+              onDidDismiss={() => setShowAlert1(false)}
+              message={"Les notes ont été correctement enregistrées"}
+              buttons={["OK"]}
+            />
             <span
               className="header-footer"
               style={{ textAlign: "center", padding: "10px 0px" }}
