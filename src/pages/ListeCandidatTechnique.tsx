@@ -19,7 +19,7 @@ function ListeCandidatCuisine() {
   const { candidate } = useParams<{ candidate: string }>();
   const { store } = useStorage();
   const [completeName, setCompleteName] = useState("");
-  const [juryTable, setJuryTable] = useState("");
+  const [juryNumber, setJuryNumber] = useState("");
   const [juryType, setJuryType] = useState("");
   const [notes, setNotes] = useState<Record<string, Note>>({});
 
@@ -41,8 +41,10 @@ function ListeCandidatCuisine() {
     timing: string;
     utilLibres: string;
     utilObligatoires: string;
-    TotalOptiDurable: number;
-    TotalProductAutonomie: number;
+    observationsProduction: string;
+    observationsAutonomie: string;
+    observationsDurable: string;
+    observationsOptimisation: string;
   }
 
   // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
@@ -53,7 +55,7 @@ function ListeCandidatCuisine() {
       const juryTable = name?.juryTable;
       const juryType = name?.juryType;
       setCompleteName(completeName);
-      setJuryTable(juryTable);
+      setJuryNumber(juryNumber);
       setJuryType(juryType);
     }
   };
@@ -143,7 +145,7 @@ function ListeCandidatCuisine() {
         const oneRow = {
           date_sync: fullDate,
           jury_name: completeName,
-          table_number: juryTable,
+          jury_number: juryNumber,
           candidate_number: nb,
           // ENREGISTREMENT TABLEAU 1
           grade_secu_hygiene: notes["candidat" + nb]["secuHygiene"],
@@ -151,25 +153,27 @@ function ListeCandidatCuisine() {
           grade_maitrise_tech: notes["candidat" + nb]["maitriseTech"],
           grade_timing: notes["candidat" + nb]["timing"],
           grade_total_production: notes["candidat" + nb]["totalProduction"],
+          observations_production:
+            notes["candidat" + nb]["observationsProduction"],
           // ENREGISTREMENT TABLEAU 2
           grade_initiative: notes["candidat" + nb]["initiative"],
           grade_harmonie: notes["candidat" + nb]["harmonie"],
           grade_qualite_accomp: notes["candidat" + nb]["qualiteAccomp"],
           grade_clarte: notes["candidat" + nb]["clarte"],
           grade_total_autonomie: notes["candidat" + nb]["totalAutonomie"],
+          observations_autonomie:
+            notes["candidat" + nb]["observationsAutonomie"],
           // ENREGISTREMENT TABLEAU 3
           grade_dechets: notes["candidat" + nb]["dechets"],
           grade_fluides: notes["candidat" + nb]["fluides"],
           grade_total_durable: notes["candidat" + nb]["totalDurable"],
+          observations_durable: notes["candidat" + nb]["observationsDurable"],
           // ENREGISTREMENT TABLEAU 4
           grade_util_obligatoires: notes["candidat" + nb]["utilObligatoires"],
           grade_util_libres: notes["candidat" + nb]["utilLibres"],
           grade_total_optimisation: notes["candidat" + nb]["totalOptimisation"],
-
-          // ENREGISTREMENT TOTAUX
-          grade_total_opti_durable: notes["candidat" + nb]["TotalOptiDurable"],
-          grade_total_product_autonomie:
-            notes["candidat" + nb]["TotalProductAutonomie"],
+          observations_optimisation:
+            notes["candidat" + nb]["observationsOptimisation"],
 
           grade_total: notes["candidat" + nb]["AllTotal"],
         };

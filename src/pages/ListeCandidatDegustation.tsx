@@ -19,7 +19,7 @@ function ListeCandidatDegustation() {
   const { store } = useStorage();
   const [completeName, setCompleteName] = useState("");
   const [juryType, setJuryType] = useState("");
-  const [juryTable, setJuryTable] = useState("");
+  const [juryNumber, setJuryNumber] = useState("");
   const [notes, setNotes] = useState<Record<string, Note>>({});
   const history = useHistory();
 
@@ -38,10 +38,10 @@ function ListeCandidatDegustation() {
     if (store) {
       const name = await store.get("jury");
       const completeName = name?.completeName;
-      const juryTable = name?.juryTable;
+      const juryNumber = name?.juryNumber;
       const juryType = name?.juryType;
       setCompleteName(completeName);
-      setJuryTable(juryTable);
+      setJuryNumber(juryNumber);
       setJuryType(juryType);
     }
   };
@@ -130,7 +130,7 @@ function ListeCandidatDegustation() {
     const testRow = {
       date_sync: fullDate,
       jury_name: completeName,
-      table_number: juryTable,
+      jury_number: juryNumber,
     };
 
     // Permet de tester la connexion API même si aucune note n'a été rentré dans une fiche candidat
@@ -146,7 +146,7 @@ function ListeCandidatDegustation() {
         const oneRow = {
           date_sync: fullDate,
           jury_name: completeName,
-          table_number: juryTable,
+          jury_number: juryNumber,
           candidate_number: nb,
           grade_presentation: notes["candidat" + nb]["presentation"],
           grade_cuisson_principale: notes["candidat" + nb]["cuissonPrincipale"],
