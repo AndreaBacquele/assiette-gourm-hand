@@ -16,6 +16,10 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
 }) => {
   const [isValid, setIsValid] = useState(true);
 
+  // Change la couleur du background si la valeur entrée n'est pas dans l'intervalle autorisée
+  const validInputStyle = { backgroundColor: "var(--ion-color-step-50)" };
+  const invalidInputStyle = { backgroundColor: "rgb(200,42,25)" };
+
   const handleChange = (event: CustomEvent) => {
     const valeur = event.detail.value as string;
     const intValue = parseFloat(valeur);
@@ -27,10 +31,6 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
       setIsValid(true);
     } else {
       setIsValid(false);
-      if (!isNaN(intValue)) {
-        // A modifier pour que la case devienne rouge si erreur
-        alert("Votre note n'est pas dans l'intervalle autorisé");
-      }
     }
   };
 
@@ -43,6 +43,7 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
         onIonInput={handleChange}
         type="number"
         value={value}
+        style={isValid ? validInputStyle : invalidInputStyle}
       ></IonInput>
       <div
         style={{

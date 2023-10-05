@@ -20,7 +20,7 @@ ion-input{
   }
 
 ion-col{
-    text-align: center;
+    /* text-align: center; */
     padding: 0px;
     align-items: center;
 }
@@ -191,7 +191,7 @@ ion-icon{
 
 #bottom{
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 10px;
 }
 

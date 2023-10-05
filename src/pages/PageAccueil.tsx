@@ -1,12 +1,9 @@
 import {
   IonContent,
-  IonImg,
   IonButton,
   IonRadioGroup,
   IonGrid,
   IonRow,
-  IonItem,
-  IonCol,
 } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import type { RadioGroupCustomEvent } from "@ionic/react";
@@ -21,7 +18,7 @@ function Accueil() {
 
   //Récupére les valeurs mise dans les inputs
   const [completeName, setCompleteName] = useState("");
-  const [juryTable, setJuryTable] = useState("");
+  const [juryNumber, setJuryNumber] = useState("");
   const [juryType, setJuryType] = useState("overlay");
 
   const history = useHistory();
@@ -29,7 +26,7 @@ function Accueil() {
   //Permet de rediriger la page quand on clique sur le bouton ainsi que stocker les données rentrées
   const handleButtonClick = () => {
     if (store) {
-      store.set("jury", { completeName, juryTable, juryType });
+      store.set("jury", { completeName, juryNumber, juryType });
       store.set("notes", {});
     }
     if (juryType == "Dégustation") {
@@ -84,9 +81,9 @@ function Accueil() {
           </p>
         </div>
         <CustomFormInput
-          initial={juryTable}
-          onInputChange={setJuryTable}
-          placeholder="Numéro de table"
+          initial={juryNumber}
+          onInputChange={setJuryNumber}
+          placeholder="Numéro de jury"
         ></CustomFormInput>
         <CustomFormInput
           initial={completeName}

@@ -197,7 +197,7 @@ function TableEvaluationTechnique() {
         utilLibres: valuesOptimisation.utilLibres,
         utilObligatoires: valuesOptimisation.utilObligatoires,
         totalOptimisation,
-        observationsOptimistion: observationsOptimisation,
+        observationsOptimisation: observationsOptimisation,
         // totaux
         TotalProductAutonomie,
         TotalOptiDurable,
@@ -237,7 +237,10 @@ function TableEvaluationTechnique() {
             totalProduction: candidateNotes.totalProduction || "",
           });
 
-          setObservationsProduction(observationsProduction);
+          setObservationsProduction(
+            candidateNotes.observationsProduction || ""
+          );
+          console.log(candidateNotes.observationsProduction);
 
           // Affichage éléments 2éme tableau : Autonomie
           setValuesAutonomie({
@@ -248,11 +251,7 @@ function TableEvaluationTechnique() {
             totalAutonomie: 0,
           });
           setTotalAutonomie(candidateNotes.totalAutonomie || "");
-          setObservationsAutonomie(observationsAutonomie);
-
-          // Affichage total intermédiaire
-          setTotalProductAutonomie(candidateNotes.TotalProductAutonomie || "");
-          setTotalOptiDurable(candidateNotes.TotalDurableOpti || "");
+          setObservationsAutonomie(candidateNotes.observationsAutonomie);
 
           // Affichage éléments 3éme tableau : Développement durable
           setValuesDurable({

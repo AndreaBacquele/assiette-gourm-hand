@@ -65,7 +65,7 @@ function TableEvaluationDegustation() {
         cuissonGarniture: values.cuissonGarniture,
         accordGlobal: values.accordGlobal,
         total: total,
-        observation: observations,
+        observations: observations,
       };
 
       // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
@@ -110,7 +110,7 @@ function TableEvaluationDegustation() {
             accordGlobal: candidateNotes.accordGlobal || "",
             total: total || 0,
           });
-          setObservations(observations);
+          setObservations(candidateNotes.observations || "");
         }
       });
     }
@@ -210,6 +210,7 @@ function TableEvaluationDegustation() {
           onInputChange={setObservations}
           placeholder="Observations (facultatif)"
         ></CustomFormInput>
+        <p>{observations}</p>
       </IonContent>
 
       <IonFooter>
