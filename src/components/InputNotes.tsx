@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { IonInput, IonCol } from "@ionic/react";
+import { IonInput, IonCol, IonRow } from "@ionic/react";
 
 interface CustomNotesInputProps {
   min: number;
   max: number;
   value: string;
+  noteLabel: string;
   onIonInput: (value: string) => void;
 }
 
@@ -13,6 +14,7 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
   max,
   onIonInput,
   value,
+  noteLabel,
 }) => {
   const [isValid, setIsValid] = useState(true);
 
@@ -35,26 +37,25 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
   };
 
   return (
-    <IonCol size="3" style={{ display: "flex" }}>
-      <IonInput
-        min={min}
-        max={max}
-        step="0.5"
-        onIonInput={handleChange}
-        type="number"
-        value={value}
-        style={isValid ? validInputStyle : invalidInputStyle}
-      ></IonInput>
-      <div
-        style={{
-          paddingTop: "14px",
-          paddingLeft: "10px",
-          paddingRight: "10px",
-        }}
-      >
-        /{max}
-      </div>
-    </IonCol>
+    <>
+      <IonRow>
+        <IonCol size="3" sizeLg="1" sizeMd="2" style={{ display: "flex" }}>
+          <IonInput
+            min={min}
+            max={max}
+            step="0.5"
+            onIonInput={handleChange}
+            type="number"
+            value={value}
+            style={isValid ? validInputStyle : invalidInputStyle}
+          ></IonInput>
+        </IonCol>
+        <IonCol size="2">
+          <div>/{max}</div>
+        </IonCol>
+        <IonCol className="note-label">{noteLabel}</IonCol>
+      </IonRow>
+    </>
   );
 };
 

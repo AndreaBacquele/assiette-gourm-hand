@@ -180,7 +180,7 @@ function ListeCandidatDegustation() {
   return (
     <>
       <IonHeader>
-        <IonToolbar style={{ height: "60px", display: "flex" }}>
+        <IonToolbar style={{ height: "60px", display: "flex" }} mode="ios">
           <div id="top">
             <img
               className="logo-dash-eval"
@@ -194,7 +194,7 @@ function ListeCandidatDegustation() {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent className="content-listing">
+      <IonContent>
         <div id="title"> Liste des candidats</div>
         <div id="instructions" style={{ textAlign: "center" }}>
           {" "}
@@ -229,7 +229,7 @@ function ListeCandidatDegustation() {
       </IonContent>
 
       <IonFooter>
-        <IonToolbar>
+        <IonToolbar mode="ios">
           <div className="ion-text-center">
             <IonGrid>
               <IonRow>

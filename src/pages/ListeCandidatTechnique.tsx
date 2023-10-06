@@ -52,7 +52,7 @@ function ListeCandidatCuisine() {
     if (store) {
       const name = await store.get("jury");
       const completeName = name?.completeName;
-      const juryTable = name?.juryTable;
+      const juryNumber = name?.juryNumber;
       const juryType = name?.juryType;
       setCompleteName(completeName);
       setJuryNumber(juryNumber);
@@ -201,7 +201,7 @@ function ListeCandidatCuisine() {
   return (
     <>
       <IonHeader>
-        <IonToolbar style={{ height: "60px", display: "flex" }}>
+        <IonToolbar style={{ height: "60px", display: "flex" }} mode="ios">
           <div id="top">
             <img
               className="logo-dash-eval"
@@ -218,7 +218,6 @@ function ListeCandidatCuisine() {
       <IonContent className="content-listing">
         <div id="title"> Liste des candidats</div>
         <div id="instructions" style={{ textAlign: "center" }}>
-          {" "}
           Cliquez sur le numéro d'un candidat pour accéder à sa grille
           d'évaluation
         </div>
@@ -254,7 +253,7 @@ function ListeCandidatCuisine() {
       </IonContent>
 
       <IonFooter>
-        <IonToolbar>
+        <IonToolbar mode="ios">
           <div className="ion-text-center">
             <IonGrid>
               <IonRow>

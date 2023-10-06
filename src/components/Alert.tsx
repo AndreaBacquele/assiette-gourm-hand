@@ -1,5 +1,4 @@
 import { IonAlert } from "@ionic/react";
-import { useState } from "react";
 
 interface AlertFormProps {
   message: string;
@@ -11,14 +10,13 @@ const Alert: React.FC<AlertFormProps> = ({
   showAlert,
   setShowAlert,
 }) => {
-  //   const [showAlert, setShowAlert] = useState(false);
-
   return (
     <IonAlert
       isOpen={showAlert}
       onDidDismiss={() => setShowAlert(false)}
       message={message}
       buttons={["OK"]}
+      mode="ios"
     />
   );
 };
