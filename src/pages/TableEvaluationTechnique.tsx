@@ -221,6 +221,7 @@ function TableEvaluationTechnique() {
       };
       store.get("notes").then((all_notes: Record<string, any>) => {
         save_notes(all_notes, candidate, candidates_notes);
+        setValidateNote(true);
         history.push("/listingtechnique");
       });
     }
