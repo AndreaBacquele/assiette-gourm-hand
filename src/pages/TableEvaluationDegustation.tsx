@@ -20,6 +20,7 @@ import Alert from "../components/Alert";
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
+  const [alertNoSend, setAlertNoSend] = useState(false);
 
   const { store } = useStorage();
   //Récupération des informations des inputs
@@ -114,12 +115,32 @@ function TableEvaluationDegustation() {
         <IonToolbar mode="ios">
           <div id="top">
             <IonButton
-              type="submit"
               color={"white"}
-              onClick={handleValidateClick}
+              type="submit"
+              onClick={() => setAlertNoSend(true)}
             >
               <IonIcon src="/chevron-back-outline.svg"></IonIcon>
             </IonButton>
+            <IonAlert
+              isOpen={alertNoSend}
+              onDidDismiss={() => setAlertNoSend(false)}
+              header={"Attention"}
+              message={
+                "Les notes ne seront pas enregistrées en cliquant sur ce bouton"
+              }
+              buttons={[
+                {
+                  text: "Retour liste candidat",
+                  handler: () => {
+                    history.push("/listingdegustation");
+                  },
+                },
+                {
+                  text: "Rester sur cette page",
+                },
+              ]}
+              mode="ios"
+            ></IonAlert>
 
             <p className="black-label">Grille d'évaluation</p>
             <p className="orange-label"> Candidat n°{candidate}</p>

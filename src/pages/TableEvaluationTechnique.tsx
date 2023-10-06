@@ -9,6 +9,7 @@ import {
   IonButton,
   IonIcon,
   IonContent,
+  IonAlert,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
@@ -20,6 +21,7 @@ function TableEvaluationTechnique() {
   const history = useHistory();
   const { store } = useStorage();
   const [validateNote, setValidateNote] = useState(false);
+  const [alertNoSend, setAlertNoSend] = useState(false);
 
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
@@ -285,7 +287,33 @@ function TableEvaluationTechnique() {
       <IonHeader>
         <IonToolbar mode="ios">
           <div id="top">
-            <IonIcon src="/chevron-back-outline.svg"></IonIcon>
+            <IonButton
+              color={"white"}
+              type="submit"
+              onClick={() => setAlertNoSend(true)}
+            >
+              <IonIcon src="/chevron-back-outline.svg"></IonIcon>
+            </IonButton>
+            <IonAlert
+              isOpen={alertNoSend}
+              onDidDismiss={() => setAlertNoSend(false)}
+              header={"Attention"}
+              message={
+                "Les notes ne seront pas enregistrées en cliquant sur ce bouton"
+              }
+              buttons={[
+                {
+                  text: "Retour liste candidat",
+                  handler: () => {
+                    history.push("/listingtechnique");
+                  },
+                },
+                {
+                  text: "Rester sur cette page",
+                },
+              ]}
+              mode="ios"
+            ></IonAlert>
             <p className="black-label">Grille d'évaluation</p>
             <p className="orange-label"> Candidat n°{candidate}</p>
           </div>

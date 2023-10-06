@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomFormInput from "../components/InputForm";
 import RadioOption from "../components/RadioOption";
+import Alert from "../components/Alert";
 import "../theme/globalCSS.css";
 
 function Accueil() {
@@ -20,6 +21,7 @@ function Accueil() {
   const [completeName, setCompleteName] = useState("");
   const [juryNumber, setJuryNumber] = useState("");
   const [juryType, setJuryType] = useState("overlay");
+  const [register, setRegister] = useState(false);
 
   const history = useHistory();
 
@@ -43,7 +45,7 @@ function Accueil() {
         store.get("jury").then(function (response: any) {
           console.log(response);
           if (response != null) {
-            alert("Vous allez être redirigé vers le listing des candidats");
+            setRegister(true);
             if (response.juryType == "Dégustation") {
               history.push("/listingdegustation");
             } else {
@@ -59,6 +61,11 @@ function Accueil() {
   return (
     <>
       <IonContent>
+        <Alert
+          message="Vous avez été rédirigé vers la liste des candidats"
+          showAlert={register}
+          setShowAlert={setRegister}
+        ></Alert>
         <img
           className="logo-accueil"
           src="/logo.jpg"
