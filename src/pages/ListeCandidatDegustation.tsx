@@ -13,6 +13,8 @@ import {
 import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import axios from "axios";
+import Dashboard from "../components/Dashboard";
+import Alert from "../components/Alert";
 
 function ListeCandidatDegustation() {
   // Gére la récupération des données + permet l'affichage de celles-ci en dessous
@@ -21,6 +23,7 @@ function ListeCandidatDegustation() {
   const [juryType, setJuryType] = useState("");
   const [juryNumber, setJuryNumber] = useState("");
   const [notes, setNotes] = useState<Record<string, Note>>({});
+  const [sendNotes, setSendNotes] = useState(false);
   const history = useHistory();
 
   // Spécifie la structure attendu pour l'objet notes
@@ -91,7 +94,7 @@ function ListeCandidatDegustation() {
     const total = (notes && notes["candidat" + nb]?.total) ?? "--";
     return (
       <IonRow>
-        <IonCol size-xs="2.8" size-lg="2">
+        <IonCol size-xs="2.5" size-lg="2" sizeSm="2">
           <IonButton
             color="warning"
             onClick={() => handleButtonClick(nb)}
@@ -133,14 +136,6 @@ function ListeCandidatDegustation() {
       jury_number: juryNumber,
     };
 
-    // Permet de tester la connexion API même si aucune note n'a été rentré dans une fiche candidat
-    if (url && notes["candidat"] == null) {
-      axios.post(url, testRow);
-      alert("Test de connexion ok");
-    } else {
-      console.error("Probléme de connexion");
-    }
-
     for (let nb = 0; nb <= nb_candidates; nb++) {
       if (notes["candidat" + nb] != null) {
         const oneRow = {
@@ -168,7 +163,7 @@ function ListeCandidatDegustation() {
       .then((responses) => {
         responses.forEach(
           (response) => console.log(response),
-          alert("Toutes les notes ont été envoyées avec succès !")
+          setSendNotes(true)
         );
       })
       .catch((error) => {
@@ -204,24 +199,12 @@ function ListeCandidatDegustation() {
         <IonList lines="full">
           <IonGrid>
             <IonRow>
-              <IonCol size-xs="2.8" size-lg="2">
-                <div id="labelCol">Candidat</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">PrésentatO</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Cuisson p'pale</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Cuisson garniture</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Accord global plat</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Total</div>
-              </IonCol>
+              <Dashboard label="Candidat"></Dashboard>
+              <Dashboard label="PrésentatO"></Dashboard>
+              <Dashboard label="Cuisson p'pale"></Dashboard>
+              <Dashboard label="Cuisson garniture"></Dashboard>
+              <Dashboard label="Accord global plat"></Dashboard>
+              <Dashboard label="Total"></Dashboard>
             </IonRow>
             {candidates}
           </IonGrid>
@@ -242,6 +225,11 @@ function ListeCandidatDegustation() {
                   >
                     Envoyer les notes
                   </IonButton>
+                  <Alert
+                    showAlert={sendNotes}
+                    setShowAlert={setSendNotes}
+                    message={"Les notes ont été synchronisées avec succés"}
+                  ></Alert>
                 </IonCol>
                 <IonCol size-xs="6">
                   <IonButton

@@ -140,67 +140,47 @@ function TableEvaluationDegustation() {
           </div>
         </div>
         <IonGrid fixed={true}>
+          <CustomNotesInput
+            min={0}
+            max={9}
+            onIonInput={(value) => handleInputChange("presentation", value)}
+            value={values.presentation}
+            noteLabel="Présentation générale et netteté du contenant"
+          ></CustomNotesInput>
+
+          <CustomNotesInput
+            min={0}
+            max={7}
+            onIonInput={(value) =>
+              handleInputChange("cuissonPrincipale", value)
+            }
+            value={values.cuissonPrincipale}
+            noteLabel="Cuisson et qualité gustative de la pièce principale"
+          ></CustomNotesInput>
+
+          <CustomNotesInput
+            min={0}
+            max={7}
+            onIonInput={(value) => handleInputChange("cuissonGarniture", value)}
+            value={values.cuissonGarniture}
+            noteLabel="Cuisson et qualité gustative des garnitures"
+          ></CustomNotesInput>
+
+          <CustomNotesInput
+            min={0}
+            max={7}
+            onIonInput={(value) => handleInputChange("accordGlobal", value)}
+            value={values.accordGlobal}
+            noteLabel="Accord entre les garnitures et la pièce principale"
+          ></CustomNotesInput>
+
           <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={9}
-              onIonInput={(value) => handleInputChange("presentation", value)}
-              value={values.presentation}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Présentation générale et netteté du contenant
-              </p>
-            </IonCol>
+            <CustomFormInput
+              initial={observations}
+              onInputChange={setObservations}
+              placeholder="Observations (facultatif)"
+            ></CustomFormInput>
           </IonRow>
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={7}
-              onIonInput={(value) =>
-                handleInputChange("cuissonPrincipale", value)
-              }
-              value={values.cuissonPrincipale}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Cuisson et qualité gustative de la pièce principale
-              </p>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={7}
-              onIonInput={(value) =>
-                handleInputChange("cuissonGarniture", value)
-              }
-              value={values.cuissonGarniture}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Cuisson et qualité gustative des garnitures
-              </p>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={7}
-              onIonInput={(value) => handleInputChange("accordGlobal", value)}
-              value={values.accordGlobal}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Accord entre les garnitures et la pièce principale
-              </p>
-            </IonCol>
-          </IonRow>
-          <CustomFormInput
-            initial={observations}
-            onInputChange={setObservations}
-            placeholder="Observations (facultatif)"
-          ></CustomFormInput>
         </IonGrid>
       </IonContent>
 

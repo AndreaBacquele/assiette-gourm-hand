@@ -39,7 +39,13 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
   return (
     <>
       <IonRow>
-        <IonCol size="3" sizeLg="1" sizeMd="2" style={{ display: "flex" }}>
+        <IonCol
+          size="3"
+          sizeLg="1"
+          sizeMd="2"
+          sizeXs="2"
+          style={{ display: "flex" }}
+        >
           <IonInput
             min={min}
             max={max}

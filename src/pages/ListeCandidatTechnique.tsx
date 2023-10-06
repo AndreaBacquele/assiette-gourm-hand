@@ -13,7 +13,9 @@ import {
 import { useHistory, useParams } from "react-router";
 import { useStorage } from "../hooks/useStorage";
 import "./PageAccueil";
+import Alert from "../components/Alert";
 import axios from "axios";
+import Dashboard from "../components/Dashboard";
 
 function ListeCandidatCuisine() {
   const { candidate } = useParams<{ candidate: string }>();
@@ -22,6 +24,7 @@ function ListeCandidatCuisine() {
   const [juryNumber, setJuryNumber] = useState("");
   const [juryType, setJuryType] = useState("");
   const [notes, setNotes] = useState<Record<string, Note>>({});
+  const [sendNotes, setSendNotes] = useState(false);
 
   interface Note {
     totalProduction: string;
@@ -190,7 +193,7 @@ function ListeCandidatCuisine() {
     Promise.all(requests)
       .then((responses) => {
         responses.forEach((response) => console.log(response));
-        alert("Toutes les notes ont été envoyées avec succès !");
+        setSendNotes(true);
       })
       .catch((error) => {
         console.error(error);
@@ -225,26 +228,12 @@ function ListeCandidatCuisine() {
         <IonList lines="full">
           <IonGrid>
             <IonRow>
-              <IonCol size-xs="2.8" size-lg="2">
-                <div id="labelCol">Candidat</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                {" "}
-                <div id="labelCol">Production</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                {" "}
-                <div id="labelCol">Autonomie </div>{" "}
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Dévelop. durable</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Optim. du panier</div>
-              </IonCol>
-              <IonCol size-xs="1.84" size-lg="2">
-                <div id="labelCol">Total final</div>
-              </IonCol>
+              <Dashboard label="Candidat"></Dashboard>
+              <Dashboard label="Production"></Dashboard>
+              <Dashboard label="Autonomie"></Dashboard>
+              <Dashboard label="Dévelop. durable"></Dashboard>
+              <Dashboard label="Optim. du panier"></Dashboard>
+              <Dashboard label="Total"></Dashboard>
             </IonRow>
 
             <IonList lines="full">{candidates}</IonList>
@@ -266,6 +255,11 @@ function ListeCandidatCuisine() {
                   >
                     Envoyer les notes
                   </IonButton>
+                  <Alert
+                    showAlert={sendNotes}
+                    setShowAlert={setSendNotes}
+                    message={"Les notes ont été synchronisées avec succés"}
+                  ></Alert>
                 </IonCol>
                 <IonCol size-xs="6">
                   <IonButton

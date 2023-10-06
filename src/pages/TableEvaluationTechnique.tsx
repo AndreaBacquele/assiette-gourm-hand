@@ -342,17 +342,15 @@ function TableEvaluationTechnique() {
             noteLabel="Envoi du plat en respectant le temps imparti"
           ></CustomNotesInput>
 
-          <IonRow>
-            <IonCol>{totalProduction}</IonCol>
-            <IonCol>/ 20 </IonCol>
-            <IonCol> Total</IonCol>
-          </IonRow>
+          <IonRow>{totalProduction}/ 20 Total</IonRow>
 
-          <CustomFormInput
-            initial={observationsProduction}
-            onInputChange={setObservationsProduction}
-            placeholder="Observations (facultatif)"
-          ></CustomFormInput>
+          <IonRow>
+            <CustomFormInput
+              initial={observationsProduction}
+              onInputChange={setObservationsProduction}
+              placeholder="Observations (facultatif)"
+            ></CustomFormInput>
+          </IonRow>
         </IonGrid>
         <br></br>
 
