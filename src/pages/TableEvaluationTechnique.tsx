@@ -9,15 +9,19 @@ import {
   IonButton,
   IonIcon,
   IonContent,
+  IonAlert,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
+import Alert from "../components/Alert";
 
 function TableEvaluationTechnique() {
   const history = useHistory();
   const { store } = useStorage();
+  const [validateNote, setValidateNote] = useState(false);
+  const [alertNoSend, setAlertNoSend] = useState(false);
 
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
@@ -281,9 +285,35 @@ function TableEvaluationTechnique() {
   return (
     <>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar mode="ios">
           <div id="top">
-            <IonIcon src="/chevron-back-outline.svg"></IonIcon>
+            <IonButton
+              color={"white"}
+              type="submit"
+              onClick={() => setAlertNoSend(true)}
+            >
+              <IonIcon src="/chevron-back-outline.svg"></IonIcon>
+            </IonButton>
+            <IonAlert
+              isOpen={alertNoSend}
+              onDidDismiss={() => setAlertNoSend(false)}
+              header={"Attention"}
+              message={
+                "Les notes ne seront pas enregistrées en cliquant sur ce bouton"
+              }
+              buttons={[
+                {
+                  text: "Retour liste candidat",
+                  handler: () => {
+                    history.push("/listingtechnique");
+                  },
+                },
+                {
+                  text: "Rester sur cette page",
+                },
+              ]}
+              mode="ios"
+            ></IonAlert>
             <p className="black-label">Grille d'évaluation</p>
             <p className="orange-label"> Candidat n°{candidate}</p>
           </div>
@@ -304,62 +334,44 @@ function TableEvaluationTechnique() {
         </div>
 
         {/*1er tableau : Note de production*/}
-        <p className="orange-label"> Notes de production</p>
 
         <IonGrid fixed={true}>
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={5}
-              onIonInput={(value) => handleInputChange1("secuHygiene", value)}
-              value={valuesProduction.secuHygiene}
-            ></CustomNotesInput>
-            <IonCol>
-              <span className="note-label">
-                Respect des règles d'hygiène et de sécurité
-              </span>
-            </IonCol>
-          </IonRow>
+          <p className="orange-label"> Notes de production</p>
 
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={5}
-              onIonInput={(value) => handleInputChange1("organisation", value)}
-              value={valuesProduction.organisation}
-            ></CustomNotesInput>
-            <IonCol>
-              <span className="note-label">Organisation du travail</span>
-            </IonCol>
-          </IonRow>
+          <CustomNotesInput
+            min={0}
+            max={5}
+            onIonInput={(value) => handleInputChange1("secuHygiene", value)}
+            value={valuesProduction.secuHygiene}
+            noteLabel="Respect des règles d'hygiène et de sécurité"
+          ></CustomNotesInput>
 
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={5}
-              onIonInput={(value) => handleInputChange1("maitriseTech", value)}
-              value={valuesProduction.maitriseTech}
-            ></CustomNotesInput>
-            <IonCol>
-              <span className="note-label">Maîtrise des techniques</span>
-            </IonCol>
-          </IonRow>
+          <CustomNotesInput
+            min={0}
+            max={5}
+            onIonInput={(value) => handleInputChange1("organisation", value)}
+            value={valuesProduction.organisation}
+            noteLabel="Organisation du travail"
+          ></CustomNotesInput>
 
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={5}
-              onIonInput={(value) => handleInputChange1("timing", value)}
-              value={valuesProduction.timing}
-            ></CustomNotesInput>
-            <IonCol>
-              <span className="note-label">
-                Envoi du plat en respectant le temps imparti
-              </span>
-            </IonCol>
-          </IonRow>
+          <CustomNotesInput
+            min={0}
+            max={5}
+            onIonInput={(value) => handleInputChange1("maitriseTech", value)}
+            value={valuesProduction.maitriseTech}
+            noteLabel="Maîtrise des techniques"
+          ></CustomNotesInput>
 
-          <IonRow>{totalProduction} / 20 Total</IonRow>
+          <CustomNotesInput
+            min={0}
+            max={5}
+            onIonInput={(value) => handleInputChange1("timing", value)}
+            value={valuesProduction.timing}
+            noteLabel="Envoi du plat en respectant le temps imparti"
+          ></CustomNotesInput>
+
+          <IonRow>{totalProduction}/ 20 Total</IonRow>
+
           <IonRow>
             <CustomFormInput
               initial={observationsProduction}
@@ -371,58 +383,42 @@ function TableEvaluationTechnique() {
         <br></br>
 
         {/*2éme tableau : Note d'autonomie*/}
-        <p className="orange-label"> Notes d'autonomie</p>
 
         <IonGrid fixed={true}>
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={10}
-              onIonInput={(value) => handleInputChange2("initiative", value)}
-              value={valuesAutonomie.initiative}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Initiative laissée à la personne handicapée
-              </p>
-            </IonCol>
-          </IonRow>
+          <p className="orange-label"> Notes d'autonomie</p>
 
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={7}
-              onIonInput={(value) => handleInputChange2("harmonie", value)}
-              value={valuesAutonomie.harmonie}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">Harmonie globale du binôme</p>
-            </IonCol>
-          </IonRow>
+          <CustomNotesInput
+            min={0}
+            max={10}
+            onIonInput={(value) => handleInputChange2("initiative", value)}
+            value={valuesAutonomie.initiative}
+            noteLabel="Initiative laissée à la personne handicapée"
+          ></CustomNotesInput>
 
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={7}
-              onIonInput={(value) => handleInputChange2("qualiteAccomp", value)}
-              value={valuesAutonomie.qualiteAccomp}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">Qualité de l'accompagnement</p>
-            </IonCol>
-          </IonRow>
+          <CustomNotesInput
+            min={0}
+            max={7}
+            onIonInput={(value) => handleInputChange2("harmonie", value)}
+            value={valuesAutonomie.harmonie}
+            noteLabel="Harmonie globale du binôme"
+          ></CustomNotesInput>
 
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={6}
-              onIonInput={(value) => handleInputChange2("clarte", value)}
-              value={valuesAutonomie.clarte}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">Clarté des consignes</p>
-            </IonCol>
-          </IonRow>
+          <CustomNotesInput
+            min={0}
+            max={7}
+            onIonInput={(value) => handleInputChange2("qualiteAccomp", value)}
+            value={valuesAutonomie.qualiteAccomp}
+            noteLabel="Qualité de l'accompagnement"
+          ></CustomNotesInput>
+
+          <CustomNotesInput
+            min={0}
+            max={6}
+            onIonInput={(value) => handleInputChange2("clarte", value)}
+            value={valuesAutonomie.clarte}
+            noteLabel="Clarté des consignes"
+          ></CustomNotesInput>
+
           <IonRow>{totalAutonomie} / 30 Total</IonRow>
           <IonRow>
             <CustomFormInput
@@ -434,51 +430,25 @@ function TableEvaluationTechnique() {
         </IonGrid>
         <br></br>
 
-        {/* VOIR SI AFFICHAGE TOTAL INTERMEDIAIRE */}
-        {/* 1er total global des 2 tableaux précédents */}
-        {/* <IonRow class="ion-justify-content-center">
-          <IonCol size="5">
-            <p> Total : </p>
-          </IonCol>
-          <IonCol size="2">
-            <p>{TotalProductAutonomie}</p>
-          </IonCol>
-          <IonCol size="1.5">
-            <p>/50</p>
-          </IonCol>
-        </IonRow>
-        <br></br>
-        <hr /> */}
-        {/* 3éme tableau : Note développement durable */}
-
-        <p className="orange-label"> Note développement durable</p>
-
         <IonGrid fixed={true}>
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={5}
-              onIonInput={(value) => handleInputChange3("dechets", value)}
-              value={valuesDurable.dechets}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">Gestion des déchets</p>
-            </IonCol>
-          </IonRow>
+          <p className="orange-label"> Note développement durable</p>
 
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={5}
-              onIonInput={(value) => handleInputChange3("fluides", value)}
-              value={valuesDurable.fluides}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Gestion des fluides (eau,gaz,électricité)
-              </p>
-            </IonCol>
-          </IonRow>
+          <CustomNotesInput
+            min={0}
+            max={5}
+            onIonInput={(value) => handleInputChange3("dechets", value)}
+            value={valuesDurable.dechets}
+            noteLabel="Gestion des déchets"
+          ></CustomNotesInput>
+
+          <CustomNotesInput
+            min={0}
+            max={5}
+            onIonInput={(value) => handleInputChange3("fluides", value)}
+            value={valuesDurable.fluides}
+            noteLabel="Gestion des fluides (eau,gaz,électricité)"
+          ></CustomNotesInput>
+
           <IonRow>
             {/* TODO: faire pareil pour l'aligner dans tous les tableaux */}
             <IonCol size="3">{totalDurable} / 10</IonCol>
@@ -495,37 +465,26 @@ function TableEvaluationTechnique() {
         <br></br>
 
         {/* 4éme tableau : Note optimisation du panier */}
-        {/* <div id="tableau"> */}
-        <p className="orange-label"> Note optimisation du panier</p>
-        {/* </div> */}
         <IonGrid fixed={true}>
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={6}
-              onIonInput={(value) =>
-                handleInputChange4("utilObligatoires", value)
-              }
-              value={valuesOptimisation.utilObligatoires}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Utilisation des produits obligatoires
-              </p>
-            </IonCol>
-          </IonRow>
+          <p className="orange-label"> Note optimisation du panier</p>
 
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={4}
-              onIonInput={(value) => handleInputChange4("utilLibres", value)}
-              value={valuesOptimisation.utilLibres}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">Utilisation des produits libres</p>
-            </IonCol>
-          </IonRow>
+          <CustomNotesInput
+            min={0}
+            max={6}
+            onIonInput={(value) =>
+              handleInputChange4("utilObligatoires", value)
+            }
+            value={valuesOptimisation.utilObligatoires}
+            noteLabel="Utilisation des produits obligatoires"
+          ></CustomNotesInput>
+
+          <CustomNotesInput
+            min={0}
+            max={4}
+            onIonInput={(value) => handleInputChange4("utilLibres", value)}
+            value={valuesOptimisation.utilLibres}
+            noteLabel="Utilisation des produits libres"
+          ></CustomNotesInput>
 
           <IonRow>{totalOptimisation} / 10 Total</IonRow>
           <IonRow>
@@ -537,29 +496,10 @@ function TableEvaluationTechnique() {
           </IonRow>
         </IonGrid>
         <br></br>
-
-        {/* VOIR SI AFFICHAGE TOTAL INTERMEDIAIRE */}
-
-        {/* 2éme total global des 2 tableaux précédents */}
-        {/* <IonRow class="ion-justify-content-center">
-          <IonCol size="5">
-            <p> Total : </p>
-          </IonCol>
-          <IonCol size="2">
-            <p>{TotalOptiDurable} </p>
-          </IonCol>
-          <IonCol size="1.5">
-            <p>/20</p>
-          </IonCol>
-        </IonRow>
-        <br></br>
-        <hr />
-        <hr /> */}
       </IonContent>
 
       <IonFooter>
-        <IonToolbar>
-          {" "}
+        <IonToolbar mode="ios">
           <div className="ion-text-center">
             <div id="bottom">
               <span className="black-label"> Total évaluation technique </span>
@@ -569,7 +509,6 @@ function TableEvaluationTechnique() {
                   color: "var(--ion-color-primary)",
                 }}
               >
-                {" "}
                 {AllTotal} / 70{" "}
               </span>
             </div>
@@ -578,9 +517,15 @@ function TableEvaluationTechnique() {
               type="submit"
               color={"warning"}
               onClick={handleValidateClick}
+              className="txtButton"
             >
               Enregistrer
             </IonButton>
+            <Alert
+              showAlert={validateNote}
+              setShowAlert={setValidateNote}
+              message={"Les notes ont été correctement enregistrées"}
+            ></Alert>
             <span className="header-footer">
               Vous pourrez revenir modifier ces notes ultérieurement.
             </span>

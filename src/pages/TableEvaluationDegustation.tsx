@@ -15,10 +15,12 @@ import { useHistory, useParams } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
+import Alert from "../components/Alert";
 
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
+  const [alertNoSend, setAlertNoSend] = useState(false);
 
   const { store } = useStorage();
   //Récupération des informations des inputs
@@ -56,7 +58,7 @@ function TableEvaluationDegustation() {
   }, [values, total]);
 
   const history = useHistory();
-  const [showAlert1, setShowAlert1] = useState(false);
+  const [validateNote, setValidateNote] = useState(false);
   // Stockage des notes dés que l'on appuie sur le bouton Valider l'évaluation
   const handleValidateClick = () => {
     if (store) {
@@ -82,21 +84,11 @@ function TableEvaluationDegustation() {
       };
       store.get("notes").then((all_notes: Record<string, any>) => {
         save_notes(all_notes, candidate, candidates_notes);
+        setValidateNote(true);
         history.push("/listingdegustation");
-        setShowAlert1(true);
       });
     }
   };
-
-  //  A INCORPORER
-  // return (
-  //   <IonAlert
-  //     trigger="validate-notes-click"
-  //     subHeader="Notes enregistrées avec succés"
-  //     message="Vous allez être redirigé vers la liste des candidats "
-  //     buttons={["OK"]}
-  //   ></IonAlert>
-  // );
 
   // // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
   useEffect(() => {
@@ -120,15 +112,35 @@ function TableEvaluationDegustation() {
   return (
     <>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar mode="ios">
           <div id="top">
             <IonButton
-              type="submit"
               color={"white"}
-              onClick={handleValidateClick}
+              type="submit"
+              onClick={() => setAlertNoSend(true)}
             >
               <IonIcon src="/chevron-back-outline.svg"></IonIcon>
             </IonButton>
+            <IonAlert
+              isOpen={alertNoSend}
+              onDidDismiss={() => setAlertNoSend(false)}
+              header={"Attention"}
+              message={
+                "Les notes ne seront pas enregistrées en cliquant sur ce bouton"
+              }
+              buttons={[
+                {
+                  text: "Retour liste candidat",
+                  handler: () => {
+                    history.push("/listingdegustation");
+                  },
+                },
+                {
+                  text: "Rester sur cette page",
+                },
+              ]}
+              mode="ios"
+            ></IonAlert>
 
             <p className="black-label">Grille d'évaluation</p>
             <p className="orange-label"> Candidat n°{candidate}</p>
@@ -140,7 +152,7 @@ function TableEvaluationDegustation() {
         <div id="orga-header">
           <img
             className="logo-dash-eval"
-            src="/logo.jpg"
+            src="/logo AG.png"
             alt="Logo du concours"
           ></img>
           <div className="header-footer">
@@ -149,87 +161,61 @@ function TableEvaluationDegustation() {
           </div>
         </div>
         <IonGrid fixed={true}>
+          <CustomNotesInput
+            min={0}
+            max={9}
+            onIonInput={(value) => handleInputChange("presentation", value)}
+            value={values.presentation}
+            noteLabel="Présentation générale et netteté du contenant"
+          ></CustomNotesInput>
+
+          <CustomNotesInput
+            min={0}
+            max={7}
+            onIonInput={(value) =>
+              handleInputChange("cuissonPrincipale", value)
+            }
+            value={values.cuissonPrincipale}
+            noteLabel="Cuisson et qualité gustative de la pièce principale"
+          ></CustomNotesInput>
+
+          <CustomNotesInput
+            min={0}
+            max={7}
+            onIonInput={(value) => handleInputChange("cuissonGarniture", value)}
+            value={values.cuissonGarniture}
+            noteLabel="Cuisson et qualité gustative des garnitures"
+          ></CustomNotesInput>
+
+          <CustomNotesInput
+            min={0}
+            max={7}
+            onIonInput={(value) => handleInputChange("accordGlobal", value)}
+            value={values.accordGlobal}
+            noteLabel="Accord entre les garnitures et la pièce principale"
+          ></CustomNotesInput>
+
           <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={9}
-              onIonInput={(value) => handleInputChange("presentation", value)}
-              value={values.presentation}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Présentation générale et netteté du contenant
-              </p>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={7}
-              onIonInput={(value) =>
-                handleInputChange("cuissonPrincipale", value)
-              }
-              value={values.cuissonPrincipale}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Cuisson et qualité gustative de la pièce principale
-              </p>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={7}
-              onIonInput={(value) =>
-                handleInputChange("cuissonGarniture", value)
-              }
-              value={values.cuissonGarniture}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Cuisson et qualité gustative des garnitures
-              </p>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <CustomNotesInput
-              min={0}
-              max={7}
-              onIonInput={(value) => handleInputChange("accordGlobal", value)}
-              value={values.accordGlobal}
-            ></CustomNotesInput>
-            <IonCol>
-              <p className="note-label">
-                Accord entre les garnitures et la pièce principale
-              </p>
-            </IonCol>
+            <CustomFormInput
+              initial={observations}
+              onInputChange={setObservations}
+              placeholder="Observations (facultatif)"
+            ></CustomFormInput>
           </IonRow>
         </IonGrid>
-        <CustomFormInput
-          initial={observations}
-          onInputChange={setObservations}
-          placeholder="Observations (facultatif)"
-        ></CustomFormInput>
-        <p>{observations}</p>
       </IonContent>
 
       <IonFooter>
-        <IonToolbar>
-          {" "}
+        <IonToolbar mode="ios">
           <div className="ion-text-center">
             <div id="bottom">
-              <span className="black-label">
-                {" "}
-                Total évaluation dégustation{" "}
-              </span>
+              <span className="black-label">Total évaluation dégustation</span>
               <span
                 style={{
                   fontSize: "20px",
                   color: "var(--ion-color-primary)",
                 }}
               >
-                {" "}
                 {total} / 30{" "}
               </span>
             </div>
@@ -242,15 +228,14 @@ function TableEvaluationDegustation() {
             >
               Enregistrer
             </IonButton>
-            <IonAlert
-              isOpen={showAlert1}
-              onDidDismiss={() => setShowAlert1(false)}
+            <Alert
+              showAlert={validateNote}
+              setShowAlert={setValidateNote}
               message={"Les notes ont été correctement enregistrées"}
-              buttons={["OK"]}
-            />
+            ></Alert>
             <span
               className="header-footer"
-              style={{ textAlign: "center", padding: "10px 0px" }}
+              // style={{ textAlign: "center", padding: "10px 0px" }}
             >
               Vous pourrez revenir modifier ces notes ultérieurement.
             </span>
