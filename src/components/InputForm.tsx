@@ -3,29 +3,30 @@ import { IonInput } from "@ionic/react";
 import "../theme/globalCSS.css";
 
 interface CustomFormInputProps {
-  initial?: string;
+  initial: string;
   placeholder: string;
-  onInputChange: (value: string) => void;
+  onIonInput: (value: string) => void;
 }
 
 const CustomFormInput: React.FC<CustomFormInputProps> = ({
   initial = "",
   placeholder,
-  onInputChange,
+  onIonInput,
 }) => {
   const [value, setValue] = useState(initial);
 
   const handleChange = (event: CustomEvent) => {
     setValue(event.detail.value as string);
-    onInputChange(event.detail.value as string);
+    console.log(event.detail.value);
+    onIonInput(event.detail.value as string);
   };
 
   return (
     <IonInput
       id="label"
       required={true}
-      value={value}
-      onIonChange={handleChange}
+      value={initial}
+      onIonInput={handleChange}
       placeholder={placeholder}
       class="ion-float-left"
     ></IonInput>

@@ -27,7 +27,6 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
     const valeur = event.detail.value as string;
     const intValue = parseFloat(valeur);
     console.log("Valeur de l'input" + "" + valeur);
-    console.log(typeof valeur);
     console.log(intValue);
     // Vérifie que la note est dans l'intervalle autorisée. Arrondie à 0.5 une note.
     if (intValue >= min && intValue <= max) {
@@ -36,7 +35,6 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
       setIsValid(true);
     } else {
       setIsValid(false);
-      // setInputKey((prevKey) => prevKey + 1);
     }
   };
 
@@ -51,7 +49,6 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
           style={{ display: "flex" }}
         >
           <IonInput
-            // key={inputKey}
             min={min}
             max={max}
             step="0.5"
