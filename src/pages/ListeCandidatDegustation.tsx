@@ -80,7 +80,7 @@ function ListeCandidatDegustation() {
   }, [store]);
 
   // Boucle qui permet d'afficher le bon nombre de candidats sur le dashboard
-  const nb_candidates = 20;
+  const nb_candidates = 22;
   const range = (start: number, end: number) =>
     Array.from({ length: end - start + 1 }, (v, k) => k + start);
 

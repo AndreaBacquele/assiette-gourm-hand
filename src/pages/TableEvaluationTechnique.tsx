@@ -376,7 +376,7 @@ function TableEvaluationTechnique() {
           <IonRow>
             <CustomFormInput
               initial={observationsProduction}
-              onInputChange={setObservationsProduction}
+              onIonInput={setObservationsProduction}
               placeholder="Observations (facultatif)"
             ></CustomFormInput>
           </IonRow>
@@ -424,7 +424,7 @@ function TableEvaluationTechnique() {
           <IonRow>
             <CustomFormInput
               initial={observationsAutonomie}
-              onInputChange={setObservationsAutonomie}
+              onIonInput={setObservationsAutonomie}
               placeholder="Observations (facultatif)"
             ></CustomFormInput>
           </IonRow>
@@ -458,7 +458,7 @@ function TableEvaluationTechnique() {
           <IonRow>
             <CustomFormInput
               initial={observationsDurable}
-              onInputChange={setObservationsDurable}
+              onIonInput={setObservationsDurable}
               placeholder="Observations (facultatif)"
             ></CustomFormInput>
           </IonRow>
@@ -491,7 +491,7 @@ function TableEvaluationTechnique() {
           <IonRow>
             <CustomFormInput
               initial={observationsOptimisation}
-              onInputChange={setObservationsOptimisation}
+              onIonInput={setObservationsOptimisation}
               placeholder="Observations (facultatif)"
             ></CustomFormInput>
           </IonRow>

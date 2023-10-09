@@ -21,7 +21,7 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
 
   // Change la couleur du background si la valeur entrée n'est pas dans l'intervalle autorisée
   const validInputStyle = { backgroundColor: "var(--ion-color-step-50)" };
-  const invalidInputStyle = { backgroundColor: "rgb(200,42,25)" };
+  const invalidInputStyle = { backgroundColor: "rgb(232,51,0)" };
 
   const handleChange = (event: CustomEvent) => {
     const valeur = event.detail.value as string;

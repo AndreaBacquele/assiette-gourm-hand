@@ -17,18 +17,16 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
 
   const handleChange = (event: CustomEvent) => {
     setValue(event.detail.value as string);
-    console.log(event.detail.value);
     onIonInput(event.detail.value as string);
   };
 
   return (
     <IonInput
-      id="label"
       required={true}
       value={initial}
       onIonInput={handleChange}
       placeholder={placeholder}
-      class="ion-float-left"
+      style={{ textIndent: "5px" }}
     ></IonInput>
   );
 };
