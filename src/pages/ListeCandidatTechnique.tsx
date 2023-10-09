@@ -80,7 +80,7 @@ function ListeCandidatCuisine() {
     }
   };
   //   Gestion de l'affichage des candidats sur le dashboard
-  const nb_candidates = 20;
+  const nb_candidates = 22;
   const range = (start: number, end: number) =>
     Array.from({ length: end - start + 1 }, (v, k) => k + start);
 

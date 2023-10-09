@@ -18,6 +18,8 @@ ion-input{
     display: flex;
     margin-top: 7px;
     margin-bottom: 5px;
+    --placeholder-opacity: 0.25 !important;
+    /* text-indent: 10px; */
   }
 
 ion-col{
@@ -44,6 +46,14 @@ ion-icon{
 ion-footer{
     position: fixed;
     bottom: 0;
+}
+
+ion-toolbar{
+    --background : var(--ion-color-step-50)
+}
+
+::placeholder{
+    padding-left: 10px;
 }
 
 
@@ -75,7 +85,7 @@ ion-footer{
     margin-right: 0;
 }
 
-#test{
+#radio{
     max-width: 150px;
     --color : var(--ion-color-primary);
     justify-content: center;
@@ -115,8 +125,6 @@ ion-footer{
 #instructions{
     font-size: 14px;
 }
-
-
 
 /* Dashboard */
 

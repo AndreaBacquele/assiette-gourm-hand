@@ -198,7 +198,7 @@ function TableEvaluationDegustation() {
           <IonRow>
             <CustomFormInput
               initial={observations}
-              onInputChange={setObservations}
+              onIonInput={setObservations}
               placeholder="Observations (facultatif)"
             ></CustomFormInput>
           </IonRow>

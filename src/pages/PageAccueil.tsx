@@ -89,12 +89,12 @@ function Accueil() {
         </div>
         <CustomFormInput
           initial={juryNumber}
-          onInputChange={setJuryNumber}
+          onIonInput={setJuryNumber}
           placeholder="Numéro de jury"
         ></CustomFormInput>
         <CustomFormInput
           initial={completeName}
-          onInputChange={setCompleteName}
+          onIonInput={setCompleteName}
           placeholder="Prénom NOM"
         ></CustomFormInput>
 
@@ -102,7 +102,7 @@ function Accueil() {
         <div id="instructions">
           <span>Sélectionnez votre type de jury:</span>
         </div>
-        <div id="test">
+        <div id="radio">
           <IonGrid>
             <IonRow>
               <IonRadioGroup

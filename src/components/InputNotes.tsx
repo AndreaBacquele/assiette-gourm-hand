@@ -21,13 +21,12 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
 
   // Change la couleur du background si la valeur entrée n'est pas dans l'intervalle autorisée
   const validInputStyle = { backgroundColor: "var(--ion-color-step-50)" };
-  const invalidInputStyle = { backgroundColor: "rgb(200,42,25)" };
+  const invalidInputStyle = { backgroundColor: "rgb(232,51,0)" };
 
   const handleChange = (event: CustomEvent) => {
     const valeur = event.detail.value as string;
     const intValue = parseFloat(valeur);
     console.log("Valeur de l'input" + "" + valeur);
-    console.log(typeof valeur);
     console.log(intValue);
     // Vérifie que la note est dans l'intervalle autorisée. Arrondie à 0.5 une note.
     if (intValue >= min && intValue <= max) {
@@ -36,7 +35,6 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
       setIsValid(true);
     } else {
       setIsValid(false);
-      // setInputKey((prevKey) => prevKey + 1);
     }
   };
 
@@ -51,7 +49,6 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
           style={{ display: "flex" }}
         >
           <IonInput
-            // key={inputKey}
             min={min}
             max={max}
             step="0.5"
