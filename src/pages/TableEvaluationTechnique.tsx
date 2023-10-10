@@ -245,7 +245,6 @@ function TableEvaluationTechnique() {
           setObservationsProduction(
             candidateNotes.observationsProduction || ""
           );
-          console.log(candidateNotes.observationsProduction);
 
           // Affichage éléments 2éme tableau : Autonomie
           setValuesAutonomie({
@@ -256,7 +255,7 @@ function TableEvaluationTechnique() {
             totalAutonomie: 0,
           });
           setTotalAutonomie(candidateNotes.totalAutonomie || "");
-          setObservationsAutonomie(candidateNotes.observationsAutonomie);
+          setObservationsAutonomie(candidateNotes.observationsAutonomie || "");
 
           // Affichage éléments 3éme tableau : Développement durable
           setValuesDurable({
@@ -265,7 +264,7 @@ function TableEvaluationTechnique() {
             totalDurable: 0,
           });
           setTotalDurable(candidateNotes.totalDurable || "");
-          setObservationsDurable(observationsDurable);
+          setObservationsDurable(candidateNotes.observationsDurable || "");
 
           // Affichage élément 4éme tableau : Optimisation du panier
           setValuesOptimisation({
@@ -274,7 +273,9 @@ function TableEvaluationTechnique() {
             totalOptimisation: 0,
           });
           setTotalOptimisation(candidateNotes.totalOptimisation || "");
-          setObservationsOptimisation(observationsOptimisation);
+          setObservationsOptimisation(
+            candidateNotes.observationsOptimisation || ""
+          );
 
           // Totaux finaux
           setAllTotal(candidateNotes.AllTotal || 0);
