@@ -33,7 +33,7 @@ function ListeCandidatDegustation() {
     cuissonGarniture: string;
     accordGlobal: string;
     total: string;
-    observation: string;
+    observations: string;
   }
 
   // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
@@ -148,7 +148,7 @@ function ListeCandidatDegustation() {
           grade_cuisson_garniture: notes["candidat" + nb]["cuissonPrincipale"],
           grade_accord_global: notes["candidat" + nb]["accordGlobal"],
           grade_total: notes["candidat" + nb]["total"],
-          observations: notes["candidat" + nb]["observation"],
+          observations: notes["candidat" + nb]["observations"],
         };
         if (url) {
           axios.post(url, oneRow);
