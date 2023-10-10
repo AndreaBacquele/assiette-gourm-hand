@@ -200,8 +200,8 @@ function ListeCandidatDegustation() {
           <IonGrid>
             <IonRow>
               <Dashboard label="Candidat"></Dashboard>
-              <Dashboard label="PrésentatO"></Dashboard>
-              <Dashboard label="Cuisson p'pale"></Dashboard>
+              <Dashboard label="Présentation"></Dashboard>
+              <Dashboard label="Cuisson principale"></Dashboard>
               <Dashboard label="Cuisson garniture"></Dashboard>
               <Dashboard label="Accord global plat"></Dashboard>
               <Dashboard label="Total"></Dashboard>
