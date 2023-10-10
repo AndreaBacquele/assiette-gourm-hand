@@ -5,6 +5,7 @@ import "../theme/globalCSS.css";
 interface CustomFormInputProps {
   initial: string;
   placeholder: string;
+  inputType?: string;
   onIonInput: (value: string) => void;
 }
 
@@ -12,6 +13,7 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
   initial = "",
   placeholder,
   onIonInput,
+  inputType = "text",
 }) => {
   const [value, setValue] = useState(initial);
 
@@ -27,6 +29,7 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
       onIonInput={handleChange}
       placeholder={placeholder}
       style={{ textIndent: "5px" }}
+      type={inputType as "text" | "number"}
     ></IonInput>
   );
 };

@@ -88,6 +88,7 @@ function Accueil() {
           </p>
         </div>
         <CustomFormInput
+          inputType="number"
           initial={juryNumber}
           onIonInput={setJuryNumber}
           placeholder="Numéro de jury"
