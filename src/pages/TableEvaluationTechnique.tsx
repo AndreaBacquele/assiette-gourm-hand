@@ -372,7 +372,10 @@ function TableEvaluationTechnique() {
             noteLabel="Envoi du plat en respectant le temps imparti"
           ></CustomNotesInput>
 
-          <IonRow>{totalProduction}/ 20 Total</IonRow>
+          <IonRow>
+            <IonCol size="3">{totalProduction} / 20</IonCol>
+            <IonCol className="note-total">Total</IonCol>
+          </IonRow>
 
           <IonRow>
             <CustomFormInput
@@ -421,7 +424,11 @@ function TableEvaluationTechnique() {
             noteLabel="Clarté des consignes"
           ></CustomNotesInput>
 
-          <IonRow>{totalAutonomie} / 30 Total</IonRow>
+          <IonRow>
+            <IonCol size="3">{totalAutonomie} / 30</IonCol>
+            <IonCol className="note-total">Total</IonCol>
+          </IonRow>
+
           <IonRow>
             <CustomFormInput
               initial={observationsAutonomie}
@@ -487,8 +494,10 @@ function TableEvaluationTechnique() {
             value={valuesOptimisation.utilLibres}
             noteLabel="Utilisation des produits libres"
           ></CustomNotesInput>
-
-          <IonRow>{totalOptimisation} / 10 Total</IonRow>
+          <IonRow>
+            <IonCol size="3">{totalOptimisation} / 10</IonCol>
+            <IonCol className="note-total">Total</IonCol>
+          </IonRow>
           <IonRow>
             <CustomFormInput
               initial={observationsOptimisation}
