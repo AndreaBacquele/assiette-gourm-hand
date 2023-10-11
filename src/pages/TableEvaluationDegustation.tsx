@@ -203,45 +203,47 @@ function TableEvaluationDegustation() {
             ></CustomFormInput>
           </IonRow>
         </IonGrid>
-      </IonContent>
 
-      <IonFooter>
-        <IonToolbar mode="ios">
-          <div className="ion-text-center">
-            <div id="bottom">
-              <span className="black-label">Total évaluation dégustation</span>
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "var(--ion-color-primary)",
-                }}
+        <IonFooter>
+          <IonToolbar mode="ios">
+            <div className="ion-text-center">
+              <div id="bottom">
+                <span className="black-label">
+                  Total évaluation dégustation
+                </span>
+                <span
+                  style={{
+                    fontSize: "20px",
+                    color: "var(--ion-color-primary)",
+                  }}
+                >
+                  {total} / 30{" "}
+                </span>
+              </div>
+              <IonButton
+                expand="block"
+                type="submit"
+                color={"warning"}
+                onClick={handleValidateClick}
+                className="txtButton"
               >
-                {total} / 30{" "}
+                Enregistrer
+              </IonButton>
+              <Alert
+                showAlert={validateNote}
+                setShowAlert={setValidateNote}
+                message={"Les notes ont été correctement enregistrées"}
+              ></Alert>
+              <span
+                className="header-footer"
+                // style={{ textAlign: "center", padding: "10px 0px" }}
+              >
+                Vous pourrez revenir modifier ces notes ultérieurement.
               </span>
             </div>
-            <IonButton
-              expand="block"
-              type="submit"
-              color={"warning"}
-              onClick={handleValidateClick}
-              className="txtButton"
-            >
-              Enregistrer
-            </IonButton>
-            <Alert
-              showAlert={validateNote}
-              setShowAlert={setValidateNote}
-              message={"Les notes ont été correctement enregistrées"}
-            ></Alert>
-            <span
-              className="header-footer"
-              // style={{ textAlign: "center", padding: "10px 0px" }}
-            >
-              Vous pourrez revenir modifier ces notes ultérieurement.
-            </span>
-          </div>
-        </IonToolbar>
-      </IonFooter>
+          </IonToolbar>
+        </IonFooter>
+      </IonContent>
     </>
   );
 }
