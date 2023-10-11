@@ -498,42 +498,45 @@ function TableEvaluationTechnique() {
           </IonRow>
         </IonGrid>
         <br></br>
-      </IonContent>
 
-      <IonFooter>
-        <IonToolbar mode="ios">
-          <div className="ion-text-center">
-            <div id="bottom">
-              <span className="black-label"> Total évaluation technique </span>
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "var(--ion-color-primary)",
-                }}
+        <IonFooter>
+          <IonToolbar mode="ios">
+            <div className="ion-text-center">
+              <div id="bottom">
+                <span className="black-label">
+                  {" "}
+                  Total évaluation technique{" "}
+                </span>
+                <span
+                  style={{
+                    fontSize: "20px",
+                    color: "var(--ion-color-primary)",
+                  }}
+                >
+                  {AllTotal} / 70{" "}
+                </span>
+              </div>
+              <IonButton
+                expand="block"
+                type="submit"
+                color={"warning"}
+                onClick={handleValidateClick}
+                className="txtButton"
               >
-                {AllTotal} / 70{" "}
+                Enregistrer
+              </IonButton>
+              <Alert
+                showAlert={validateNote}
+                setShowAlert={setValidateNote}
+                message={"Les notes ont été correctement enregistrées"}
+              ></Alert>
+              <span className="header-footer">
+                Vous pourrez revenir modifier ces notes ultérieurement.
               </span>
             </div>
-            <IonButton
-              expand="block"
-              type="submit"
-              color={"warning"}
-              onClick={handleValidateClick}
-              className="txtButton"
-            >
-              Enregistrer
-            </IonButton>
-            <Alert
-              showAlert={validateNote}
-              setShowAlert={setValidateNote}
-              message={"Les notes ont été correctement enregistrées"}
-            ></Alert>
-            <span className="header-footer">
-              Vous pourrez revenir modifier ces notes ultérieurement.
-            </span>
-          </div>
-        </IonToolbar>
-      </IonFooter>
+          </IonToolbar>
+        </IonFooter>
+      </IonContent>
     </>
   );
 }
