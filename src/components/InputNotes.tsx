@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IonInput, IonCol, IonRow } from "@ionic/react";
 
 interface CustomNotesInputProps {
@@ -18,9 +18,14 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
 }) => {
   const [isValid, setIsValid] = useState(true);
   const [localValue, setLocalValue] = useState(propValue);
+
   // Change la couleur du background si la valeur entrée n'est pas dans l'intervalle autorisée
   const validInputStyle = { backgroundColor: "var(--ion-color-step-50)" };
   const invalidInputStyle = { backgroundColor: "rgb(232,51,0)" };
+
+  useEffect(() => {
+    setLocalValue(propValue);
+  }, [propValue]);
 
   const handleChange = (event: CustomEvent) => {
     const valeur = event.detail.value as string;
@@ -29,11 +34,8 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
     if (valeur === "") {
       setIsValid(true);
       onIonInput(valeur);
-      return;
     }
     const intValue = parseFloat(valeur);
-    console.log("Valeur de l'input" + "" + valeur);
-    console.log(intValue);
     // Vérifie que la note est dans l'intervalle autorisée. Arrondie à 0.5 une note.
     if (intValue >= min && intValue <= max) {
       let roundedValue = (Math.round(intValue * 2) / 2).toString();
