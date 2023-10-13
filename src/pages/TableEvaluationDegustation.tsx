@@ -204,7 +204,7 @@ function TableEvaluationDegustation() {
           </IonRow>
         </IonGrid>
 
-        <IonFooter>
+        <IonFooter style={{ position: "relative" }}>
           <IonToolbar mode="ios">
             <div className="ion-text-center">
               <div id="bottom">
@@ -243,7 +243,7 @@ function TableEvaluationDegustation() {
             </div>
           </IonToolbar>
         </IonFooter>
-        <div style={{ paddingBottom: "200px" }}></div>
+        <div style={{ paddingBottom: "80px" }}></div>
       </IonContent>
     </>
   );
