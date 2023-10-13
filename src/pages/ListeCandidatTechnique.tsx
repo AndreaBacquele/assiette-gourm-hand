@@ -241,6 +241,7 @@ function ListeCandidatCuisine() {
             <IonList lines="full">{candidates}</IonList>
           </IonGrid>
         </IonList>
+        <div style={{ paddingBottom: "200px" }}></div>
       </IonContent>
 
       <IonFooter>

@@ -148,7 +148,7 @@ function TableEvaluationDegustation() {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen={true} className="content-evaluation">
+      <IonContent className="content-evaluation">
         <div id="orga-header">
           <img
             className="logo-dash-eval"
@@ -243,6 +243,7 @@ function TableEvaluationDegustation() {
             </div>
           </IonToolbar>
         </IonFooter>
+        <div style={{ paddingBottom: "200px" }}></div>
       </IonContent>
     </>
   );

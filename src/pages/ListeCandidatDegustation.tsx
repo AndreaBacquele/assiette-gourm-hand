@@ -209,6 +209,7 @@ function ListeCandidatDegustation() {
             {candidates}
           </IonGrid>
         </IonList>
+        <div style={{ paddingBottom: "200px" }}></div>
       </IonContent>
 
       <IonFooter>

@@ -440,7 +440,7 @@ function TableEvaluationTechnique() {
         <br></br>
 
         <IonGrid fixed={true}>
-          <p className="orange-label"> Note développement durable</p>
+          <p className="orange-label"> Notes développement durable</p>
 
           <CustomNotesInput
             min={0}
@@ -475,7 +475,7 @@ function TableEvaluationTechnique() {
 
         {/* 4éme tableau : Note optimisation du panier */}
         <IonGrid fixed={true}>
-          <p className="orange-label"> Note optimisation du panier</p>
+          <p className="orange-label"> Notes optimisation du panier</p>
 
           <CustomNotesInput
             min={0}
@@ -508,21 +508,18 @@ function TableEvaluationTechnique() {
         </IonGrid>
         <br></br>
 
-        <IonFooter>
+        <IonFooter style={{ position: "relative" }}>
           <IonToolbar mode="ios">
             <div className="ion-text-center">
               <div id="bottom">
-                <span className="black-label">
-                  {" "}
-                  Total évaluation technique{" "}
-                </span>
+                <span className="black-label">Total évaluation technique</span>
                 <span
                   style={{
                     fontSize: "20px",
                     color: "var(--ion-color-primary)",
                   }}
                 >
-                  {AllTotal} / 70{" "}
+                  {AllTotal} / 70
                 </span>
               </div>
               <IonButton
@@ -545,6 +542,7 @@ function TableEvaluationTechnique() {
             </div>
           </IonToolbar>
         </IonFooter>
+        <div style={{ paddingBottom: "80px" }}></div>
       </IonContent>
     </>
   );
