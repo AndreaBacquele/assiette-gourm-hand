@@ -22,7 +22,6 @@ function Accueil() {
   const [juryNumber, setJuryNumber] = useState("");
   const [juryType, setJuryType] = useState("");
   const [register, setRegister] = useState(false);
-  const [registerCorrect, setRegisterCorrect] = useState(true);
 
   const history = useHistory();
 
@@ -38,8 +37,6 @@ function Accueil() {
       history.push("/listingtechnique");
     }
   };
-
-  // VERIFIER SI VALEUR == OVERLAY , ne rien faire, erreur
 
   // Permet de vérifier si la personne a déja enregistré des notes ou non.
   useEffect(() => {
@@ -109,18 +106,18 @@ function Accueil() {
           </div>
           <div id="radio">
             {/* <IonGrid> */}
-            {/* <IonRow> */}
-            <IonRadioGroup
-              value={juryType}
-              style={{ display: "flex", justifyContent: "space-between" }}
-              onIonChange={(ev: RadioGroupCustomEvent) => {
-                setJuryType(ev.detail.value);
-              }}
-            >
-              <RadioOption label="Dégustation" value="Dégustation" />
-              <RadioOption label="Technique" value="Technique" />
-            </IonRadioGroup>
-            {/* </IonRow> */}
+            <IonRow>
+              <IonRadioGroup
+                value={juryType}
+                style={{ display: "flex", justifyContent: "space-between" }}
+                onIonChange={(ev: RadioGroupCustomEvent) => {
+                  setJuryType(ev.detail.value);
+                }}
+              >
+                <RadioOption label="Dégustation" value="Dégustation" />
+                <RadioOption label="Technique" value="Technique" />
+              </IonRadioGroup>
+            </IonRow>
             {/* </IonGrid> */}
           </div>
           <h6>
@@ -134,7 +131,6 @@ function Accueil() {
               type="submit"
               expand="block"
               color="warning"
-              // onClick={handleButtonClick}
             >
               Valider
             </IonButton>

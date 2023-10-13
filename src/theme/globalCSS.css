@@ -5,6 +5,10 @@ ion-item::part(native){
     --border-style:var(--border-style);
 }
 
+ion-radio::part(container){
+    min-height: 50px;
+}
+
 ion-content{
     --padding-top : 10px;
     --padding-start: 10px;
@@ -126,6 +130,7 @@ ion-toolbar{
 
 #instructions{
     font-size: 14px;
+    padding-bottom: 10px;
 }
 
 /* Dashboard */
