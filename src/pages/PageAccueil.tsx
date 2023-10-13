@@ -82,7 +82,6 @@ function Accueil() {
         {/* Mise en place du formulaire */}
         <div id="instructions">
           <p>
-            {" "}
             Merci de compléter les informations ci-dessous afin d'avoir accés à
             la liste des candidats et aux grilles d'évaluation
           </p>
