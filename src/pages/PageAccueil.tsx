@@ -20,8 +20,9 @@ function Accueil() {
   //Récupére les valeurs mise dans les inputs
   const [completeName, setCompleteName] = useState("");
   const [juryNumber, setJuryNumber] = useState("");
-  const [juryType, setJuryType] = useState("overlay");
+  const [juryType, setJuryType] = useState("");
   const [register, setRegister] = useState(false);
+  const [registerCorrect, setRegisterCorrect] = useState(true);
 
   const history = useHistory();
 
@@ -37,6 +38,8 @@ function Accueil() {
       history.push("/listingtechnique");
     }
   };
+
+  // VERIFIER SI VALEUR == OVERLAY , ne rien faire, erreur
 
   // Permet de vérifier si la personne a déja enregistré des notes ou non.
   useEffect(() => {
@@ -87,48 +90,56 @@ function Accueil() {
             la liste des candidats et aux grilles d'évaluation
           </p>
         </div>
-        <CustomFormInput
-          inputType="number"
-          initial={juryNumber}
-          onIonInput={setJuryNumber}
-          placeholder="Numéro de jury"
-        ></CustomFormInput>
-        <CustomFormInput
-          initial={completeName}
-          onIonInput={setCompleteName}
-          placeholder="Prénom NOM"
-        ></CustomFormInput>
+        <form onSubmit={handleButtonClick}>
+          <CustomFormInput
+            inputType="number"
+            initial={juryNumber}
+            onIonInput={setJuryNumber}
+            placeholder="Numéro de jury"
+          ></CustomFormInput>
+          <CustomFormInput
+            initial={completeName}
+            onIonInput={setCompleteName}
+            placeholder="Prénom NOM"
+          ></CustomFormInput>
 
-        {/* Gestion des toogles pour le choix de jury */}
-        <div id="instructions">
-          <span>Sélectionnez votre type de jury:</span>
-        </div>
-        <div id="radio">
-          <IonGrid>
-            <IonRow>
-              <IonRadioGroup
-                value={juryType}
-                style={{ display: "flex", justifyContent: "space-between" }}
-                onIonChange={(ev: RadioGroupCustomEvent) => {
-                  setJuryType(ev.detail.value);
-                }}
-              >
-                <RadioOption label="Dégustation" value="Dégustation" />
-                <RadioOption label="Technique" value="Technique" />
-              </IonRadioGroup>
-            </IonRow>
-          </IonGrid>
-        </div>
-        <h6>
-          Toute validation est définitive, merci de bien vérifier les
-          informations saisies avant de continuer.
-        </h6>
-        <br />
-        <div className="ion-text-center">
-          <IonButton expand="block" color="warning" onClick={handleButtonClick}>
-            Valider
-          </IonButton>
-        </div>
+          {/* Gestion des toogles pour le choix de jury */}
+          <div id="instructions">
+            <span>Sélectionnez votre type de jury:</span>
+          </div>
+          <div id="radio">
+            {/* <IonGrid> */}
+            {/* <IonRow> */}
+            <IonRadioGroup
+              value={juryType}
+              style={{ display: "flex", justifyContent: "space-between" }}
+              onIonChange={(ev: RadioGroupCustomEvent) => {
+                setJuryType(ev.detail.value);
+              }}
+            >
+              <RadioOption label="Dégustation" value="Dégustation" />
+              <RadioOption label="Technique" value="Technique" />
+            </IonRadioGroup>
+            {/* </IonRow> */}
+            {/* </IonGrid> */}
+          </div>
+          <h6>
+            Toute validation est définitive, merci de bien vérifier les
+            informations saisies avant de continuer.
+          </h6>
+          <br />
+          <div className="ion-text-center">
+            <IonButton
+              disabled={juryType == ""}
+              type="submit"
+              expand="block"
+              color="warning"
+              // onClick={handleButtonClick}
+            >
+              Valider
+            </IonButton>
+          </div>
+        </form>
       </IonContent>
     </>
   );

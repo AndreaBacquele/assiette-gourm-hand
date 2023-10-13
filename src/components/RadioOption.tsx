@@ -1,5 +1,5 @@
 import React from "react";
-import { IonItem, IonRadio } from "@ionic/react";
+import { IonCol, IonRadio } from "@ionic/react";
 
 interface RadioOptionProps {
   label: string;
@@ -8,11 +8,11 @@ interface RadioOptionProps {
 
 const RadioOption: React.FC<RadioOptionProps> = ({ label, value }) => {
   return (
-    <IonItem className="ion-radiogroup">
+    <IonCol size="6" className="ion-radiogroup">
       <IonRadio value={value}>
         <code style={{ fontSize: "12px" }}>{label}</code>
       </IonRadio>
-    </IonItem>
+    </IonCol>
   );
 };
 
