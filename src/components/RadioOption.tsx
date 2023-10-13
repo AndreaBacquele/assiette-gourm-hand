@@ -9,7 +9,7 @@ interface RadioOptionProps {
 const RadioOption: React.FC<RadioOptionProps> = ({ label, value }) => {
   return (
     <IonCol size="6" className="ion-radiogroup">
-      <IonRadio value={value}>
+      <IonRadio value={value} mode="ios">
         <code style={{ fontSize: "12px" }}>{label}</code>
       </IonRadio>
     </IonCol>
