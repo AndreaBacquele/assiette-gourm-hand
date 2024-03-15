@@ -3,7 +3,6 @@ import {
   IonFooter,
   IonToolbar,
   IonGrid,
-  IonCol,
   IonRow,
   IonButton,
   IonContent,
@@ -75,14 +74,14 @@ function TableEvaluationDegustation() {
       // On récupére les notes déja présentes. Ensuite, on traite la promesse obtenue et on applique la fonction save_notes
       // La fonction save_notes permet d'ajouter une instance de notes d'un candidat
       const save_notes = (
-        all_notes: Record<string, any>,
+        all_notes: Record<string, unknown>,
         candidate: string,
         candidates_notes: Object
       ) => {
         all_notes["candidat" + candidate] = candidates_notes;
         store.set("notes", all_notes);
       };
-      store.get("notes").then((all_notes: Record<string, any>) => {
+      store.get("notes").then((all_notes: Record<string, unknown>) => {
         save_notes(all_notes, candidate, candidates_notes);
         setValidateNote(true);
         history.push("/listingdegustation");
@@ -93,7 +92,7 @@ function TableEvaluationDegustation() {
   // // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
   useEffect(() => {
     if (store) {
-      store.get("notes").then((all_notes: any) => {
+      store.get("notes").then((all_notes) => {
         const candidateNotes = all_notes["candidat" + candidate];
         if (candidateNotes) {
           setValues({
