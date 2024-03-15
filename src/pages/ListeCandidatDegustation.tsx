@@ -119,7 +119,7 @@ function ListeCandidatDegustation() {
   const handleSubmitNotes = (e: any) => {
     e.preventDefault();
 
-    const requests: any = [];
+    const requests: any[] = [];
 
     // Récupération de la date + heure
     var d = new Date();

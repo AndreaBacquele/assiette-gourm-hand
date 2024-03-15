@@ -26,8 +26,6 @@ function ListeCandidatCuisine() {
   const [notes, setNotes] = useState<Record<string, Note>>({});
   const [sendNotes, setSendNotes] = useState(false);
 
-  // Commentaire inutile
-
   interface Note {
     totalProduction: string;
     totalAutonomie: string;
