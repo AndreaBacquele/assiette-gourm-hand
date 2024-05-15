@@ -11,7 +11,6 @@ import {
   IonAlert,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
-import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
 import Alert from "../components/Alert";
@@ -21,7 +20,6 @@ function TableEvaluationDegustation() {
   const { candidate } = useParams<{ candidate: string }>();
   const [alertNoSend, setAlertNoSend] = useState(false);
 
-  const { store } = useStorage();
   //Récupération des informations des inputs
   const [values, setValues] = useState({
     presentation: "",
@@ -58,55 +56,6 @@ function TableEvaluationDegustation() {
 
   const history = useHistory();
   const [validateNote, setValidateNote] = useState(false);
-  // Stockage des notes dés que l'on appuie sur le bouton Valider l'évaluation
-  const handleValidateClick = () => {
-    if (store) {
-      let candidates_notes = {
-        presentation: values.presentation,
-        cuissonPrincipale: values.cuissonPrincipale,
-        cuissonGarniture: values.cuissonGarniture,
-        accordGlobal: values.accordGlobal,
-        total: total,
-        observations: observations,
-      };
-
-      // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
-      // On récupére les notes déja présentes. Ensuite, on traite la promesse obtenue et on applique la fonction save_notes
-      // La fonction save_notes permet d'ajouter une instance de notes d'un candidat
-      const save_notes = (
-        all_notes: Record<string, unknown>,
-        candidate: string,
-        candidates_notes: Object
-      ) => {
-        all_notes["candidat" + candidate] = candidates_notes;
-        store.set("notes", all_notes);
-      };
-      store.get("notes").then((all_notes: Record<string, unknown>) => {
-        save_notes(all_notes, candidate, candidates_notes);
-        setValidateNote(true);
-        history.push("/listingdegustation");
-      });
-    }
-  };
-
-  // // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
-  useEffect(() => {
-    if (store) {
-      store.get("notes").then((all_notes) => {
-        const candidateNotes = all_notes["candidat" + candidate];
-        if (candidateNotes) {
-          setValues({
-            presentation: candidateNotes.presentation || "",
-            cuissonPrincipale: candidateNotes.cuissonPrincipale || "",
-            cuissonGarniture: candidateNotes.cuissonGarniture || "",
-            accordGlobal: candidateNotes.accordGlobal || "",
-            total: total || 0,
-          });
-          setObservations(candidateNotes.observations || "");
-        }
-      });
-    }
-  }, [store]);
 
   return (
     <>
@@ -223,7 +172,7 @@ function TableEvaluationDegustation() {
                 expand="block"
                 type="submit"
                 color={"warning"}
-                onClick={handleValidateClick}
+                // onClick={handleValidateClick}
                 className="txtButton"
               >
                 Enregistrer

@@ -9,15 +9,12 @@ import {
 import React, { useState, useEffect } from "react";
 import type { RadioGroupCustomEvent } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { useStorage } from "../hooks/useStorage";
 import CustomFormInput from "../components/InputForm";
 import RadioOption from "../components/RadioOption";
 import Alert from "../components/Alert";
 import "../theme/globalCSS.css";
 
 function Accueil() {
-  const { store } = useStorage();
-
   //Récupére les valeurs mise dans les inputs
   const [formData, setFormData] = useState({
     email: "",
@@ -30,38 +27,6 @@ function Accueil() {
   const [register, setRegister] = useState(false);
 
   const history = useHistory();
-
-  //Permet de rediriger la page quand on clique sur le bouton ainsi que stocker les données rentrées
-  const handleSubmit = () => {
-    if (store) {
-      store.set("jury", { completeName, juryNumber, juryType });
-      store.set("notes", {});
-    }
-    if (juryType == "Dégustation") {
-      history.push("/listingdegustation");
-    } else {
-      history.push("/listingtechnique");
-    }
-  };
-  // Permet de vérifier si la personne a déja enregistré des notes ou non.
-  useEffect(() => {
-    const isJuryRegister = () => {
-      if (store) {
-        store.get("jury").then(function (response: any) {
-          console.log(response);
-          if (response != null) {
-            setRegister(true);
-            if (response.juryType == "Dégustation") {
-              history.push("/listingdegustation");
-            } else {
-              history.push("/listingtechnique");
-            }
-          }
-        });
-      }
-    };
-    isJuryRegister();
-  }, [store]);
 
   return (
     <>
@@ -98,62 +63,62 @@ function Accueil() {
               à la liste des candidats et aux grilles d'évaluation
             </p>
           </div>
-          <form onSubmit={handleSubmit}>
-            <CustomFormInput
-              inputType="email"
-              initial={juryNumber}
-              onIonInput={setJuryNumber}
-              placeholder="E-mail"
-            ></CustomFormInput>
-            <CustomFormInput
-              initial={completeName}
-              onIonInput={setCompleteName}
-              placeholder="Prénom NOM"
-            ></CustomFormInput>
-            <CustomFormInput
-              inputType="password"
-              initial={password}
-              onIonInput={setPassword}
-              placeholder="Mot de passe"
-            ></CustomFormInput>
+          {/* <form onSubmit={handleSubmit}> */}
+          <CustomFormInput
+            inputType="email"
+            initial={juryNumber}
+            onIonInput={setJuryNumber}
+            placeholder="E-mail"
+          ></CustomFormInput>
+          <CustomFormInput
+            initial={completeName}
+            onIonInput={setCompleteName}
+            placeholder="Prénom NOM"
+          ></CustomFormInput>
+          <CustomFormInput
+            inputType="password"
+            initial={password}
+            onIonInput={setPassword}
+            placeholder="Mot de passe"
+          ></CustomFormInput>
 
-            {/* Gestion des toogles pour le choix de jury */}
-            <div id="instructions">
-              <span>Sélectionnez votre type de jury:</span>
-            </div>
-            <IonGrid>
-              <IonRadioGroup
-                value={juryType}
-                style={{ display: "flex", justifyContent: "center" }}
-                onIonChange={(ev: RadioGroupCustomEvent) => {
-                  setJuryType(ev.detail.value);
-                }}
-              >
-                <IonRow>
-                  <RadioOption label="Dégustation" value="Dégustation" />
-                </IonRow>
-                <IonRow>
-                  <RadioOption label="Technique" value="Technique" />
-                </IonRow>
-              </IonRadioGroup>
-            </IonGrid>
+          {/* Gestion des toogles pour le choix de jury */}
+          <div id="instructions">
+            <span>Sélectionnez votre type de jury:</span>
+          </div>
+          <IonGrid>
+            <IonRadioGroup
+              value={juryType}
+              style={{ display: "flex", justifyContent: "center" }}
+              onIonChange={(ev: RadioGroupCustomEvent) => {
+                setJuryType(ev.detail.value);
+              }}
+            >
+              <IonRow>
+                <RadioOption label="Dégustation" value="Dégustation" />
+              </IonRow>
+              <IonRow>
+                <RadioOption label="Technique" value="Technique" />
+              </IonRow>
+            </IonRadioGroup>
+          </IonGrid>
 
-            <h6>
-              Toute validation est définitive, merci de bien vérifier les
-              informations saisies avant de continuer.
-            </h6>
-            <br />
-            <div className="ion-text-center">
-              <IonButton
-                disabled={juryType == ""}
-                type="submit"
-                style={{ width: "75%" }}
-                color="warning"
-              >
-                Valider
-              </IonButton>
-            </div>
-          </form>
+          <h6>
+            Toute validation est définitive, merci de bien vérifier les
+            informations saisies avant de continuer.
+          </h6>
+          <br />
+          <div className="ion-text-center">
+            <IonButton
+              disabled={juryType == ""}
+              type="submit"
+              style={{ width: "75%" }}
+              color="warning"
+            >
+              Valider
+            </IonButton>
+          </div>
+          {/* </form> */}
         </IonContent>
       </IonPage>
     </>
