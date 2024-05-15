@@ -11,73 +11,25 @@ import {
   IonHeader,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { useStorage } from "../hooks/useStorage";
 import axios from "axios";
 import Dashboard from "../components/Dashboard";
 import Alert from "../components/Alert";
+import { TastingNotes } from "../types";
 
 function ListeCandidatDegustation() {
   // Gére la récupération des données + permet l'affichage de celles-ci en dessous
-  const { store } = useStorage();
   const [completeName, setCompleteName] = useState("");
   const [juryType, setJuryType] = useState("");
   const [juryNumber, setJuryNumber] = useState("");
-  const [notes, setNotes] = useState<Record<string, Note>>({});
+  const [notes, setNotes] = useState<Record<string, TastingNotes>>({});
   const [sendNotes, setSendNotes] = useState(false);
   const history = useHistory();
-
-  // Spécifie la structure attendu pour l'objet notes
-  interface Note {
-    presentation: string;
-    cuissonPrincipale: string;
-    cuissonGarniture: string;
-    accordGlobal: string;
-    total: string;
-    observations: string;
-  }
-
-  // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
-  const picklastNamefirstName = async () => {
-    if (store) {
-      const name = await store.get("jury");
-      const completeName = name?.completeName;
-      const juryNumber = name?.juryNumber;
-      const juryType = name?.juryType;
-      setCompleteName(completeName);
-      setJuryNumber(juryNumber);
-      setJuryType(juryType);
-    }
-  };
-  useEffect(() => {
-    picklastNamefirstName();
-  }, [store]);
-
-  // Supprime le jury en cas d'erreur
-  const handleDeleteClick = () => {
-    if (store) {
-      store.remove("jury");
-      alert("Jury supprimé");
-      history.push("/home");
-    }
-  };
 
   // Redirige la page lorsque l'on clique sur le bouton Candidat: Créer une url avec le numéro du candidat qui nous sert à stocker les données dans la bon candidat
 
   const handleButtonClick = (candidate: number) => {
     history.push("/evaldegustation/" + candidate);
   };
-
-  // Récupération des notes dans la base de données
-  const loadNotes = async () => {
-    if (store) {
-      const notes = await store.get("notes");
-      setNotes(notes || {});
-    }
-  };
-
-  useEffect(() => {
-    loadNotes();
-  }, [store]);
 
   // Boucle qui permet d'afficher le bon nombre de candidats sur le dashboard
   const nb_candidates = 22;
@@ -112,9 +64,6 @@ function ListeCandidatDegustation() {
       </IonRow>
     );
   });
-
-  // Connexion entre le spreadsheet / l'API REST Google / l'application
-  // Envoi les notes vers le spreasheet dés que l'on appuie sur le bouton envoyé
 
   const handleSubmitNotes = (e: any) => {
     e.preventDefault();
@@ -236,7 +185,7 @@ function ListeCandidatDegustation() {
                   <IonButton
                     color="warning"
                     expand="block"
-                    onClick={handleDeleteClick}
+                    // onClick={handleDeleteClick}
                     className="txtButton"
                   >
                     Supprimer les données

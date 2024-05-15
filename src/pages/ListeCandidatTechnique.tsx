@@ -11,60 +11,19 @@ import {
   IonRow,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router";
-import { useStorage } from "../hooks/useStorage";
 import "./PageAccueil";
 import Alert from "../components/Alert";
 import axios from "axios";
 import Dashboard from "../components/Dashboard";
+import { TechnicalNotes } from "../types";
 
 function ListeCandidatCuisine() {
   const { candidate } = useParams<{ candidate: string }>();
-  const { store } = useStorage();
   const [completeName, setCompleteName] = useState("");
   const [juryNumber, setJuryNumber] = useState("");
   const [juryType, setJuryType] = useState("");
-  const [notes, setNotes] = useState<Record<string, Note>>({});
+  const [notes, setNotes] = useState<Record<string, TechnicalNotes>>({});
   const [sendNotes, setSendNotes] = useState(false);
-
-  interface Note {
-    totalProduction: string;
-    totalAutonomie: string;
-    totalDurable: string;
-    totalOptimisation: string;
-    AllTotal: string;
-    clarte: string;
-    dechets: string;
-    fluides: string;
-    harmonie: string;
-    initiative: string;
-    maitriseTech: string;
-    organisation: string;
-    qualiteAccomp: string;
-    secuHygiene: string;
-    timing: string;
-    utilLibres: string;
-    utilObligatoires: string;
-    observationsProduction: string;
-    observationsAutonomie: string;
-    observationsDurable: string;
-    observationsOptimisation: string;
-  }
-
-  // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
-  const picklastNamefirstName = async () => {
-    if (store) {
-      const name = await store.get("jury");
-      const completeName = name?.completeName;
-      const juryNumber = name?.juryNumber;
-      const juryType = name?.juryType;
-      setCompleteName(completeName);
-      setJuryNumber(juryNumber);
-      setJuryType(juryType);
-    }
-  };
-  useEffect(() => {
-    picklastNamefirstName();
-  }, [store]);
 
   const history = useHistory();
 
@@ -72,13 +31,6 @@ function ListeCandidatCuisine() {
     history.push("/evaltechnique/" + candidate);
   };
 
-  const handleDeleteClick = () => {
-    if (store) {
-      store.remove("jury");
-      alert("Jury supprimé");
-      history.push("/home");
-    }
-  };
   //   Gestion de l'affichage des candidats sur le dashboard
   const nb_candidates = 22;
   const range = (start: number, end: number) =>
@@ -93,7 +45,7 @@ function ListeCandidatCuisine() {
     const totalOptimisation =
       (notes && notes["candidat" + nb]?.totalOptimisation) ?? "";
     const TotalAllTableaux =
-      (notes && notes["candidat" + nb]?.AllTotal) ?? "--";
+      (notes && notes["candidat" + nb]?.allTotal) ?? "--";
     return (
       <IonRow>
         <IonCol size-xs="2.8" size-lg="2">
@@ -115,17 +67,6 @@ function ListeCandidatCuisine() {
     );
   });
 
-  const loadNotes = async () => {
-    if (store) {
-      const notes = await store.get("notes");
-      setNotes(notes || {});
-    }
-  };
-
-  useEffect(() => {
-    loadNotes();
-  }, [store]);
-
   // Connexion entre le spreadsheet / l'API REST Google / l'application
   // Envoi les notes vers le spreasheet dés que l'on appuie sur le bouton envoyé
 
@@ -139,9 +80,6 @@ function ListeCandidatCuisine() {
     var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
     var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
     var fullDate = date + " " + hours;
-
-    const url: string | undefined = import.meta.env
-      .VITE_REACT_APP_SHEET_BEST_API_TECHNIQUE;
 
     for (let nb = 0; nb <= nb_candidates; nb++) {
       if (notes["candidat" + nb] != null) {
@@ -178,14 +116,9 @@ function ListeCandidatCuisine() {
           observations_optimisation:
             notes["candidat" + nb]["observationsOptimisation"],
 
-          grade_total: notes["candidat" + nb]["AllTotal"],
+          grade_total: notes["candidat" + nb]["allTotal"],
         };
         console.log(oneRow);
-        if (url) {
-          axios.post(url, oneRow);
-        } else {
-          console.error("URL is undefined");
-        }
       }
     }
 
@@ -266,7 +199,7 @@ function ListeCandidatCuisine() {
                   <IonButton
                     color="warning"
                     expand="block"
-                    onClick={handleDeleteClick}
+                    // onClick={handleDeleteClick}
                     className="txtButton"
                   >
                     Supprimer les données
