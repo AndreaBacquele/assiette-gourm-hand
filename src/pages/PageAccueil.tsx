@@ -28,6 +28,25 @@ function Accueil() {
 
   const history = useHistory();
 
+  useEffect(() => {
+    const url = "http://127.0.0.1:4000/notes_criteria";
+
+    async function fetchData() {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <IonPage className="backgroundColor">
