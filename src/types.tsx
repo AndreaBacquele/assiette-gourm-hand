@@ -23,10 +23,17 @@ export type TechnicalNotes = {
 };
 
 export type TastingNotes = {
-  presentation: string;
-  cuissonPrincipale: string;
-  cuissonGarniture: string;
-  accordGlobal: string;
-  total: string;
+  presentation: number;
+  cuissonPrincipale: number;
+  cuissonGarniture: number;
+  accordGlobal: number;
+  total: number;
   observations: string;
+};
+
+export type ProductionValues = {
+  secuHygiene: number;
+  organisation: number;
+  maitriseTech: number;
+  timing: number;
 };
