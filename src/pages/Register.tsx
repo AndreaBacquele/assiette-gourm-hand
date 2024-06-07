@@ -15,7 +15,7 @@ export default function Register() {
     url: "http://localhost:4000/add-to-jury",
     data: {
       nom,
-      // mdp,
+      mdp,
     },
   };
 

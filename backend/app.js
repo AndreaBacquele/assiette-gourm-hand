@@ -37,14 +37,16 @@ app.get('/jury', async (req, res) => {
 
 app.post('/add-to-jury', async (req, res) => {
   try {
-    const { nom } = req.body; 
+    const { nom, mdp } = req.body; 
+    const saltRounds = 10;
+    const hashedMdp = await bcrypt.hash(mdp, saltRounds);
 
     const text = `
-      INSERT INTO jury (nom)
-      VALUES ($1)
+      INSERT INTO jury (nom, mdp)
+      VALUES ($1, $2)
       RETURNING *;`; 
 
-    const result = await db.query(text, [nom]);
+    const result = await db.query(text, [nom, hashedMdp]);
 
     res.status(201).json(result.rows[0]);
   } catch (error) {
