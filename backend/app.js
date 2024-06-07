@@ -3,6 +3,7 @@ const db = require('./db');
 const app = express();
 const port = 4000;
 const cors = require('cors')
+const bcrypt = require('bcrypt')
 
 app.use(express.json());
 app.use(cors());
@@ -36,14 +37,14 @@ app.get('/jury', async (req, res) => {
 
 app.post('/add-to-jury', async (req, res) => {
   try {
-    const { name } = req.body; 
+    const { nom } = req.body; 
 
     const text = `
-      INSERT INTO jury (name)
-      VALUES ($1, $2, $3)
+      INSERT INTO jury (nom)
+      VALUES ($1)
       RETURNING *;`; 
 
-    const result = await db.query(text, [name]);
+    const result = await db.query(text, [nom]);
 
     res.status(201).json(result.rows[0]);
   } catch (error) {
