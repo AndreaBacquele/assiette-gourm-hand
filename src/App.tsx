@@ -27,6 +27,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 setupIonicReact();
 
@@ -41,6 +42,7 @@ const App: React.FC = () => (
           component={ListeCandidatDegustation}
         />
         <Route path="/register" component={Register}></Route>
+        <Route path="/login" component={Login}></Route>
         <Route path="/listingtechnique" component={ListeCandidatTechnique} />
         <Route path="/evaldegustation/:candidate">
           <TableEvaluationDegustation />
