@@ -41,18 +41,18 @@ app.get('/jury', async (req, res) => {
 
 app.post('/add-to-jury', async (req, res) => {
   try {
-    const { nom, mdp } = req.body; 
+    const { nom, mdp , type_epreuve_id} = req.body; 
     const saltRounds = 10;
     // const hashedMdp = await bcrypt.hash(mdp, saltRounds);
 
     const text = `
-      INSERT INTO jury (nom, mdp)
-      VALUES ($1, $2)
+      INSERT INTO jury (nom, mdp, type_epreuve_id)
+      VALUES ($1, $2, $3)
       RETURNING *;`; 
 
-    const result = await db.query(text, [nom, mdp]);
+    const result = await db.query(text, [nom, mdp, type_epreuve_id]);
 
-    res.status(201).send('Vous avez bien été enregistré').json(result.rows[0]);
+    res.status(201).json(result.rows[0])
   } catch (error) {
     console.error(error);
     res.status(500).send('Une erreur est survenue lors de l\'ajout d\'un membre au jury.');
@@ -60,6 +60,7 @@ app.post('/add-to-jury', async (req, res) => {
 });
 
 // Login jury
+// TODO : add token
 
 app.post('/login-jury', async(req, res)=> {
   try {

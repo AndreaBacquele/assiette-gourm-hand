@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import CustomFormInput from "../components/InputForm";
-import { IonButton } from "@ionic/react";
+import {
+  IonButton,
+  IonGrid,
+  IonRadioGroup,
+  IonRow,
+  RadioGroupCustomEvent,
+} from "@ionic/react";
 import axios from "axios";
+import RadioOption from "../components/RadioOption";
 
 export default function Register() {
   const [nom, setEmail] = useState("");
   const [mdp, setPassword] = useState("");
+  const [type_epreuve_id, setJuryType] = useState();
   const [register, setRegister] = useState(false);
 
   // TODO : voir les paramétres à mettre (nom / numéro de table / mot de passe / email ? )
@@ -16,6 +24,7 @@ export default function Register() {
     data: {
       nom,
       mdp,
+      type_epreuve_id,
     },
   };
 
@@ -47,6 +56,22 @@ export default function Register() {
         onIonInput={setPassword}
         placeholder="Mot de passe"
       ></CustomFormInput>
+      <IonGrid>
+        <IonRadioGroup
+          value={type_epreuve_id}
+          style={{ display: "flex", justifyContent: "center" }}
+          onIonChange={(ev: RadioGroupCustomEvent) => {
+            setJuryType(ev.detail.value);
+          }}
+        >
+          <IonRow>
+            <RadioOption label="Dégustation" value={2} />
+          </IonRow>
+          <IonRow>
+            <RadioOption label="Technique" value={1} />
+          </IonRow>
+        </IonRadioGroup>
+      </IonGrid>
       <IonButton
         type="submit"
         style={{ width: "75%" }}

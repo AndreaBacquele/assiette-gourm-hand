@@ -3,7 +3,7 @@ import { IonGrid, IonRadio } from "@ionic/react";
 
 interface RadioOptionProps {
   label: string;
-  value: string;
+  value: number;
 }
 
 const RadioOption: React.FC<RadioOptionProps> = ({ label, value }) => {
