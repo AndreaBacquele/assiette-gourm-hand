@@ -9,12 +9,16 @@ import {
 } from "@ionic/react";
 import axios from "axios";
 import RadioOption from "../components/RadioOption";
+import { useHistory } from "react-router";
+import Alert from "../components/Alert";
 
 export default function Register() {
   const [nom, setEmail] = useState("");
   const [mdp, setPassword] = useState("");
   const [type_epreuve_id, setJuryType] = useState();
   const [register, setRegister] = useState(false);
+
+  const history = useHistory();
 
   // TODO : voir les paramétres à mettre (nom / numéro de table / mot de passe / email ? )
 
@@ -31,11 +35,14 @@ export default function Register() {
   const handleSubmit = (e: React.MouseEvent<HTMLIonButtonElement>) => {
     // prevent the form from refreshing the whole page
     e.preventDefault();
-    alert("Submited");
     axios(configuration)
       .then((result) => {
         setRegister(true);
-        console.log(result);
+        if (type_epreuve_id === 1) {
+          history.push("/listingtechnique");
+        } else {
+          history.push("listingdegustation");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -80,6 +87,11 @@ export default function Register() {
       >
         Valider
       </IonButton>
+      <Alert
+        message="Votre compte a bien été créé"
+        showAlert={register}
+        setShowAlert={setRegister}
+      ></Alert>
     </>
   );
 }

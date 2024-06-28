@@ -18,7 +18,6 @@ export default function Login() {
   };
 
   const handleSubmit = (e: React.MouseEvent<HTMLIonButtonElement>) => {
-    // prevent the form from refreshing the whole page
     e.preventDefault();
     axios(configuration)
       .then((result) => {
@@ -44,7 +43,6 @@ export default function Login() {
         onIonInput={setPassword}
         placeholder="Mot de passe"
       ></CustomFormInput>
-
       <IonButton
         type="submit"
         style={{ width: "75%" }}
