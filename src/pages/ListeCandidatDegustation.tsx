@@ -67,58 +67,6 @@ function ListeCandidatDegustation() {
 
   const handleSubmitNotes = (e: any) => {
     e.preventDefault();
-
-    const requests: any[] = [];
-
-    // Récupération de la date + heure
-    var d = new Date();
-    var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-    var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-    var fullDate = date + " " + hours;
-
-    const url: string | undefined = import.meta.env
-      .VITE_REACT_APP_SHEET_BEST_API_DEGUSTATION;
-
-    const testRow = {
-      date_sync: fullDate,
-      jury_name: completeName,
-      jury_number: juryNumber,
-    };
-
-    for (let nb = 0; nb <= nb_candidates; nb++) {
-      if (notes["candidat" + nb] != null) {
-        const oneRow = {
-          date_sync: fullDate,
-          jury_name: completeName,
-          jury_number: juryNumber,
-          candidate_number: nb,
-          grade_presentation: notes["candidat" + nb]["presentation"],
-          grade_cuisson_principale: notes["candidat" + nb]["cuissonPrincipale"],
-          grade_cuisson_garniture: notes["candidat" + nb]["cuissonPrincipale"],
-          grade_accord_global: notes["candidat" + nb]["accordGlobal"],
-          grade_total: notes["candidat" + nb]["total"],
-          observations: notes["candidat" + nb]["observations"],
-        };
-        if (url) {
-          axios.post(url, oneRow);
-        } else {
-          console.error("URL is undefined");
-        }
-      }
-    }
-
-    // Si toutes les lignes sont traitées avec succés, envoi un message à l'utilisateur
-    Promise.all(requests)
-      .then((responses) => {
-        responses.forEach(
-          (response) => console.log(response),
-          setSendNotes(true)
-        );
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Une erreur s'est produite lors de l'envoi des notes.");
-      });
   };
 
   return (
