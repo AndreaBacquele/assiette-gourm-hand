@@ -114,6 +114,8 @@ app.get('/type_epreuve', async (req, res) => {
   }
 });
 
+// GESTION DES NOTES 
+
 app.get('/notes_criteria', async (req, res) => {
   try {
     const result = await db.query('SELECT * FROM notes_criteria');
@@ -130,7 +132,26 @@ app.get('/notes', async (req, res) => {
     res.json(result.rows); 
   } catch (error) {
     console.error(error);  
-    res.status(500).send('Une erreur est survenue lors de la récupération des données de criteria_notes.'); 
+    res.status(500).send('Une erreur est survenue lors de la récupération des données de notes.'); 
+  }
+});
+
+// TODO : add the jury_id
+app.post('/add-to-notes', async (req, res) => {
+  try {
+    const { note, criteria_name , candidat_id} = req.body; 
+
+    const text = `
+      INSERT INTO jury (note, criteria_name, candidat_id)
+      VALUES ($1, $2, $3)
+      RETURNING *;`; 
+
+    const result = await db.query(text, [note, criteria_name, candidat_id]);
+
+    res.status(201).json(result.rows[0])
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Une erreur est survenue lors de l\'ajout de la note.');
   }
 });
 

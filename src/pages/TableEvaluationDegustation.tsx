@@ -11,51 +11,69 @@ import {
   IonAlert,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
+import axios from "axios";
 import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
 import Alert from "../components/Alert";
 
+type Note = {
+  label: string;
+  value: number;
+};
+
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
-  const { candidate } = useParams<{ candidate: string }>();
+  const { candidat_id } = useParams<{ candidat_id: string }>();
   const [alertNoSend, setAlertNoSend] = useState(false);
 
   //Récupération des informations des inputs
-  const [values, setValues] = useState({
-    presentation: "",
-    cuissonPrincipale: "",
-    cuissonGarniture: "",
-    accordGlobal: "",
-    total: 0,
-  });
+  const [presentation, setPresentation] = useState(0);
   const [total, setTotal] = useState(0);
   const [observations, setObservations] = useState("");
 
-  const handleInputChange = (key: string, value: string) => {
-    setValues((prevValues) => ({ ...prevValues, [key]: value }));
+  const handleInputChange = (value: number) => {
+    setPresentation(value);
   };
 
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
-  useEffect(() => {
-    let Presentation = isNaN(Number(values.presentation))
-      ? 0
-      : Number(values.presentation);
-    let CuissonGarniture = isNaN(Number(values.cuissonGarniture))
-      ? 0
-      : Number(values.cuissonGarniture);
-    let CuissonPrincipale = isNaN(Number(values.cuissonPrincipale))
-      ? 0
-      : Number(values.cuissonPrincipale);
-    let AccordGlobal = isNaN(Number(values.accordGlobal))
-      ? 0
-      : Number(values.accordGlobal);
-    let total =
-      CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal;
-    setTotal(total);
-  }, [values, total]);
+  // useEffect(() => {
+  //   let Presentation = isNaN(Number(values.presentation))
+  //     ? 0
+  //     : Number(values.presentation);
+  //   let CuissonGarniture = isNaN(Number(values.cuissonGarniture))
+  //     ? 0
+  //     : Number(values.cuissonGarniture);
+  //   let CuissonPrincipale = isNaN(Number(values.cuissonPrincipale))
+  //     ? 0
+  //     : Number(values.cuissonPrincipale);
+  //   let AccordGlobal = isNaN(Number(values.accordGlobal))
+  //     ? 0
+  //     : Number(values.accordGlobal);
+  //   let total =
+  //     CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal;
+  //   setTotal(total);
+  // }, [values, total]);
 
   const history = useHistory();
   const [validateNote, setValidateNote] = useState(false);
+
+  const configuration = {
+    method: "post",
+    url: "http://localhost:4000/add-to-notes",
+    data: {},
+  };
+
+  const handleSubmit = (e: React.MouseEvent<HTMLIonButtonElement>) => {
+    // prevent the form from refreshing the whole page
+    e.preventDefault();
+    axios(configuration)
+      .then((result) => {
+        setValidateNote(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <>
@@ -91,7 +109,7 @@ function TableEvaluationDegustation() {
             ></IonAlert>
 
             <p className="black-label">Grille d'évaluation</p>
-            <p className="orange-label"> Candidat n°{candidate}</p>
+            <p className="orange-label"> Candidat n°{candidat_id}</p>
           </div>
         </IonToolbar>
       </IonHeader>
@@ -112,12 +130,12 @@ function TableEvaluationDegustation() {
           <CustomNotesInput
             min={0}
             max={9}
-            onIonInput={(value) => handleInputChange("presentation", value)}
-            value={values.presentation}
+            onIonInput={(value) => handleInputChange(value)}
+            value={presentation}
             noteLabel="Présentation générale et netteté du contenant"
           ></CustomNotesInput>
 
-          <CustomNotesInput
+          {/* <CustomNotesInput
             min={0}
             max={7}
             onIonInput={(value) =>
@@ -141,7 +159,7 @@ function TableEvaluationDegustation() {
             onIonInput={(value) => handleInputChange("accordGlobal", value)}
             value={values.accordGlobal}
             noteLabel="Accord entre les garnitures et la pièce principale"
-          ></CustomNotesInput>
+          ></CustomNotesInput> */}
 
           <IonRow>
             <CustomFormInput
