@@ -43,10 +43,10 @@ const App: React.FC = () => (
         <Route path="/register" component={Register}></Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/listingtechnique" component={ListeCandidatTechnique} />
-        <Route path="/evaldegustation/:candidate">
+        <Route path="/evaldegustation/:candidat_id">
           <TableEvaluationDegustation />
         </Route>
-        <Route path="/evaltechnique/:candidate">
+        <Route path="/evaltechnique/:candidat_id">
           <TableEvaluationTechnique />
         </Route>
       </IonRouterOutlet>
