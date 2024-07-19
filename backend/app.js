@@ -142,7 +142,7 @@ app.post('/add-to-notes', async (req, res) => {
     const { note, criteria_name , candidat_id} = req.body; 
 
     const text = `
-      INSERT INTO jury (note, criteria_name, candidat_id)
+      INSERT INTO notes (note, criteria_name, candidat_id)
       VALUES ($1, $2, $3)
       RETURNING *;`; 
 
