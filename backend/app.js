@@ -1,7 +1,8 @@
 const express = require("express");
-const db = require("./db");
+// const db = require('./db');
+const { connectToDatabase } = require("./sequelize");
 const app = express();
-const port = 4000;
+const port = 4001;
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -12,19 +13,6 @@ app.use(cors());
 // Définition des routes
 app.get("/", (req, res) => {
   res.send("Hello World!");
-});
-
-app.get("/test-db-connection", async (req, res) => {
-  try {
-    const client = await db.connect();
-    const result = await client.query("SELECT NOW()");
-    res.send(
-      `La connexion à la base de données a réussi. Temps actuel : ${result.rows[0].now}`
-    );
-  } catch (err) {
-    console.error("Erreur lors de la connexion à la base de données:", err);
-    res.status(500).send("Impossible de se connecter à la base de données.");
-  }
 });
 
 app.get("/jury", async (req, res) => {
@@ -173,6 +161,13 @@ app.post("/add-to-notes", async (req, res) => {
 });
 
 // Démarrage du serveur
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+
+app.listen(port, async () => {
+  try {
+    await connectToDatabase();
+    console.log(`Example app listening on port ${port}`);
+  } catch (error) {
+    console.error("Failed to connect to the database. Server not started.");
+    process.exit(1);
+  }
 });
