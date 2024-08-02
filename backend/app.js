@@ -1,6 +1,7 @@
 const express = require("express");
 // const db = require('./db');
-const { connectToDatabase } = require("./sequelize");
+const { connectToDatabase, sequelize } = require("./sequelize");
+const Jury = require("./model");
 const app = express();
 const port = 4001;
 const cors = require("cors");
