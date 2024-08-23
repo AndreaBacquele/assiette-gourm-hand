@@ -1,7 +1,6 @@
 const express = require("express");
-// const db = require('./db');
 const { connectToDatabase, sequelize } = require("./sequelize");
-const Jury = require("./model");
+const Jury = require("./models/jury");
 const app = express();
 const port = 4001;
 const cors = require("cors");
@@ -166,7 +165,8 @@ app.post("/add-to-notes", async (req, res) => {
 app.listen(port, async () => {
   try {
     await connectToDatabase();
-    console.log(`Example app listening on port ${port}`);
+    await sequelize.sync({ force: true });
+    console.log("All models were synchronized successfully.");
   } catch (error) {
     console.error("Failed to connect to the database. Server not started.");
     process.exit(1);

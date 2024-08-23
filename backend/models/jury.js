@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('./sequelize')
+const { sequelize } = require('../sequelize')
 
 const Jury = sequelize.define(
   'Jury',
@@ -11,6 +11,7 @@ const Jury = sequelize.define(
         },
     name: {
       type: DataTypes.STRING,
+      unique: true
     },
     mdp:{
       type: DataTypes.STRING
