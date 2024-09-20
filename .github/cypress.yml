@@ -9,23 +9,18 @@ on:
       - main # Lance les tests lors des pull requests vers la branche main
 
 jobs:
-  cypress:
+  cypress_run:
     runs-on: ubuntu-latest # Utilise l'image Ubuntu la plus récente
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2 # Vérifie le code du dépôt
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2 # Installe Node.js
-        with:
-          node-version: "16" # Spécifie la version de Node.js
+        uses: actions/checkout@v2
 
       - name: Install dependencies
         run: npm install # Installe les dépendances du projet
 
       - name: Start application
-        run: npm start & # Démarre l'application en arrière-plan
+        run: npm start # Démarre l'application en arrière-plan
 
       - name: Run Cypress tests
         run: npx cypress run # Exécute les tests Cypress
