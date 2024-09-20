@@ -26,13 +26,10 @@ describe('Form Submission', () => {
     cy.get('input[placeholder="Numéro de jury"]').type('123');
     cy.get('input[placeholder="Prénom NOM"]').type('John Doe');
 
-    // Sélectionne le type de jury
     cy.get('input[type="radio"][value="Dégustation"]').check();
 
-    // Soumets le formulaire
     cy.get('form').submit();
 
-    // Vérifie la redirection
     cy.url().should('include', '/listingdegustation');
   });
 
