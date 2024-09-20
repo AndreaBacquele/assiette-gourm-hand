@@ -2,7 +2,7 @@
 
 describe('Form Validation', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('/home');
   });
 
   it('should not allow submission if jury type is not selected', () => {
