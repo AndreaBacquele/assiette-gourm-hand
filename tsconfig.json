@@ -18,5 +18,11 @@
     "types": ["cypress"],
   },
   "include": ["src"],
+  "exclude": [
+  "./cypress.config.ts",
+  "node_modules",
+  "cypress",
+  "**/*.cy.tsx"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

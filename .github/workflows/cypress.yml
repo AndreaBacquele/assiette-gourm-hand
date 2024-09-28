@@ -14,13 +14,24 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: npm install # Installe les dépendances du projet
+        run: npm install
 
       - name: Start application
-        run: npm start # Démarre l'application en arrière-plan
+        run: npm run dev & # Démarre l'application en arrière-plan
+
+      - name: Wait for application to start
+        run: |
+          echo "Waiting for the application to start..."
+          while ! curl -s http://localhost:5173 > /dev/null
+          do
+            sleep 5
+          done
 
       - name: Run Cypress tests
-        run: npx cypress run # Exécute les tests Cypress
+        run: npm run test.e2e
+
+      - name: Stop application
+        run: pkill -f "npm run dev"
