@@ -13,6 +13,9 @@ ion-content{
     --padding-top : 10px;
     --padding-start: 10px;
     --padding-end: 10px;
+          display: "flex";
+          justify-content: "center";
+          align-items: "center",
 }
 
 ion-input{
@@ -31,13 +34,8 @@ ion-col{
     align-items: center;
 }
 
-ion-row {
-    padding: 10px 0px;
-    align-items: center;
-}
-
 ion-grid {
-    padding: 0px;
+    padding: 2px;
 }
 
 ion-icon{
@@ -78,26 +76,10 @@ ion-toolbar{
 
 .ion-radiogroup{
     border: 1px solid var(--ion-color-primary);
-    margin:auto;
     margin-right: 20px;
     border-radius: 7%;
     color: var(--ion-color-primary);
-    min-height: auto;
-
 }
-
-.ion-radiogroup.last-radio {
-    margin-right: 0;
-}
-
-#radio{
-    max-width: 150px;
-    --color : var(--ion-color-primary);
-    justify-content: center;
-    display: flex;
-    margin: auto;
-}
-
 
 #custom-radio{
     font-size: 10px;
@@ -211,4 +193,13 @@ ion-toolbar{
 
 .txtButton{
     padding: 5px 5px;
+}
+
+
+.backgroundColor{
+    --background : none;
+    background-position: left;
+    background-repeat: no-repeat;
+    /* A MODIFIER */
+    background-image: url('../public/21ans.jpg')
 }
