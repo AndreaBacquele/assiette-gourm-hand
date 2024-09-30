@@ -126,7 +126,9 @@ app.get("/notes_criteria", async (req, res) => {
   }
 });
 
-app.get("/notes", async (req, res) => {
+// GESTION DES NOTES 
+
+app.get('/notes_criteria', async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM notes");
     res.json(result.rows);
