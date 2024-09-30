@@ -11,51 +11,112 @@ import {
   IonAlert,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
+import axios from "axios";
 import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
 import Alert from "../components/Alert";
 
+type Criteria = {
+  label: string;
+  description: string;
+  value: number;
+  min: number;
+  max: number;
+};
+
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
-  const { candidate } = useParams<{ candidate: string }>();
-  const [alertNoSend, setAlertNoSend] = useState(false);
-
-  //Récupération des informations des inputs
-  const [values, setValues] = useState({
-    presentation: "",
-    cuissonPrincipale: "",
-    cuissonGarniture: "",
-    accordGlobal: "",
-    total: 0,
-  });
+  const { candidat_id } = useParams<{ candidat_id: string }>();
+  const history = useHistory();
+  const [presentation, setPresentation] = useState(0);
+  const [cuissonPrincipale, setCuissonPrincipale] = useState(0);
+  const [cuissonGarniture, setCuissonGarniture] = useState(0);
+  const [accordGlobal, setAccordGlobal] = useState(0);
   const [total, setTotal] = useState(0);
   const [observations, setObservations] = useState("");
+  const [alertNoSend, setAlertNoSend] = useState(false);
+  const [validateNote, setValidateNote] = useState(false);
 
-  const handleInputChange = (key: string, value: string) => {
-    setValues((prevValues) => ({ ...prevValues, [key]: value }));
+  const criteria: Criteria[] = [
+    {
+      label: "presentation",
+      description: "Présentation générale et netteté du contenant",
+      value: presentation,
+      min: 0,
+      max: 9,
+    },
+    {
+      label: "cuisson_principale",
+      description: "Cuisson et qualité gustative de la pièce principale",
+      value: cuissonPrincipale,
+      min: 0,
+      max: 7,
+    },
+    {
+      label: "cuisson_garniture",
+      description: "Cuisson et qualité gustative des garnitures",
+      value: cuissonGarniture,
+      min: 0,
+      max: 7,
+    },
+    {
+      label: "accord_global",
+      description: "Accord entre les garnitures et la pièce principale",
+      value: accordGlobal,
+      min: 0,
+      max: 7,
+    },
+  ];
+
+  const handleInputChange = (value: number) => {
+    setPresentation(value);
   };
 
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
   useEffect(() => {
-    let Presentation = isNaN(Number(values.presentation))
-      ? 0
-      : Number(values.presentation);
-    let CuissonGarniture = isNaN(Number(values.cuissonGarniture))
-      ? 0
-      : Number(values.cuissonGarniture);
-    let CuissonPrincipale = isNaN(Number(values.cuissonPrincipale))
-      ? 0
-      : Number(values.cuissonPrincipale);
-    let AccordGlobal = isNaN(Number(values.accordGlobal))
-      ? 0
-      : Number(values.accordGlobal);
-    let total =
-      CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal;
-    setTotal(total);
-  }, [values, total]);
+    let Presentation = isNaN(Number(presentation)) ? 0 : Number(presentation);
 
-  const history = useHistory();
-  const [validateNote, setValidateNote] = useState(false);
+    let total = Presentation;
+    //
+    setTotal(total);
+  }, [presentation, total]);
+
+  const configuration = {
+    method: "post",
+    url: "http://localhost:4000/add-to-notes",
+    data: {},
+  };
+
+  const dataToSend = {
+    note: presentation,
+    criteria_name: criteria[0].label,
+    candidat_id: candidat_id,
+  };
+
+  const notesInput = criteria.map((criterion) => {
+    return (
+      <CustomNotesInput
+        key={criterion.label}
+        min={criterion.min}
+        max={criterion.max}
+        onIonInput={(value) => handleInputChange(value)}
+        value={criterion.value}
+        noteLabel={criterion.description}
+      />
+    );
+  });
+
+  const handleSubmit = (e: React.MouseEvent<HTMLIonButtonElement>) => {
+    e.preventDefault();
+    configuration.data = dataToSend;
+    axios(configuration)
+      .then((result) => {
+        setValidateNote(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <>
@@ -91,7 +152,7 @@ function TableEvaluationDegustation() {
             ></IonAlert>
 
             <p className="black-label">Grille d'évaluation</p>
-            <p className="orange-label"> Candidat n°{candidate}</p>
+            <p className="orange-label"> Candidat n°{candidat_id}</p>
           </div>
         </IonToolbar>
       </IonHeader>
@@ -109,40 +170,7 @@ function TableEvaluationDegustation() {
           </div>
         </div>
         <IonGrid fixed={true}>
-          <CustomNotesInput
-            min={0}
-            max={9}
-            onIonInput={(value) => handleInputChange("presentation", value)}
-            value={values.presentation}
-            noteLabel="Présentation générale et netteté du contenant"
-          ></CustomNotesInput>
-
-          <CustomNotesInput
-            min={0}
-            max={7}
-            onIonInput={(value) =>
-              handleInputChange("cuissonPrincipale", value)
-            }
-            value={values.cuissonPrincipale}
-            noteLabel="Cuisson et qualité gustative de la pièce principale"
-          ></CustomNotesInput>
-
-          <CustomNotesInput
-            min={0}
-            max={7}
-            onIonInput={(value) => handleInputChange("cuissonGarniture", value)}
-            value={values.cuissonGarniture}
-            noteLabel="Cuisson et qualité gustative des garnitures"
-          ></CustomNotesInput>
-
-          <CustomNotesInput
-            min={0}
-            max={7}
-            onIonInput={(value) => handleInputChange("accordGlobal", value)}
-            value={values.accordGlobal}
-            noteLabel="Accord entre les garnitures et la pièce principale"
-          ></CustomNotesInput>
-
+          {notesInput}
           <IonRow>
             <CustomFormInput
               initial={observations}
@@ -172,7 +200,7 @@ function TableEvaluationDegustation() {
                 expand="block"
                 type="submit"
                 color={"warning"}
-                // onClick={handleValidateClick}
+                onClick={handleSubmit}
                 className="txtButton"
               >
                 Enregistrer

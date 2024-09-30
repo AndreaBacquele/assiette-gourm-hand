@@ -114,10 +114,10 @@ function Accueil() {
               }}
             >
               <IonRow>
-                <RadioOption label="Dégustation" value="Dégustation" />
+                <RadioOption label="Dégustation" value={2} />
               </IonRow>
               <IonRow>
-                <RadioOption label="Technique" value="Technique" />
+                <RadioOption label="Technique" value={1} />
               </IonRow>
             </IonRadioGroup>
           </IonGrid>
