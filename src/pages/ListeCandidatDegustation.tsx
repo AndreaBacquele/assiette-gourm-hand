@@ -15,6 +15,7 @@ import { useStorage } from "../hooks/useStorage";
 import axios from "axios";
 import Dashboard from "../components/Dashboard";
 import Alert from "../components/Alert";
+import { TastingNotes } from "../types";
 
 function ListeCandidatDegustation() {
   // Gére la récupération des données + permet l'affichage de celles-ci en dessous
@@ -22,19 +23,9 @@ function ListeCandidatDegustation() {
   const [completeName, setCompleteName] = useState("");
   const [juryType, setJuryType] = useState("");
   const [juryNumber, setJuryNumber] = useState("");
-  const [notes, setNotes] = useState<Record<string, Note>>({});
+  const [notes, setNotes] = useState<Record<string, TastingNotes>>({});
   const [sendNotes, setSendNotes] = useState(false);
   const history = useHistory();
-
-  // Spécifie la structure attendu pour l'objet notes
-  interface Note {
-    presentation: string;
-    cuissonPrincipale: string;
-    cuissonGarniture: string;
-    accordGlobal: string;
-    total: string;
-    observations: string;
-  }
 
   // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
   const picklastNamefirstName = async () => {

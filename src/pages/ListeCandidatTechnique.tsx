@@ -16,6 +16,7 @@ import "./PageAccueil";
 import Alert from "../components/Alert";
 import axios from "axios";
 import Dashboard from "../components/Dashboard";
+import { TechnicalNotes } from "../types";
 
 function ListeCandidatCuisine() {
   const { candidate } = useParams<{ candidate: string }>();
@@ -23,34 +24,8 @@ function ListeCandidatCuisine() {
   const [completeName, setCompleteName] = useState("");
   const [juryNumber, setJuryNumber] = useState("");
   const [juryType, setJuryType] = useState("");
-  const [notes, setNotes] = useState<Record<string, Note>>({});
+  const [notes, setNotes] = useState<Record<string, TechnicalNotes>>({});
   const [sendNotes, setSendNotes] = useState(false);
-
-  // Commentaire inutile
-
-  interface Note {
-    totalProduction: string;
-    totalAutonomie: string;
-    totalDurable: string;
-    totalOptimisation: string;
-    AllTotal: string;
-    clarte: string;
-    dechets: string;
-    fluides: string;
-    harmonie: string;
-    initiative: string;
-    maitriseTech: string;
-    organisation: string;
-    qualiteAccomp: string;
-    secuHygiene: string;
-    timing: string;
-    utilLibres: string;
-    utilObligatoires: string;
-    observationsProduction: string;
-    observationsAutonomie: string;
-    observationsDurable: string;
-    observationsOptimisation: string;
-  }
 
   // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
   const picklastNamefirstName = async () => {
@@ -95,7 +70,7 @@ function ListeCandidatCuisine() {
     const totalOptimisation =
       (notes && notes["candidat" + nb]?.totalOptimisation) ?? "";
     const TotalAllTableaux =
-      (notes && notes["candidat" + nb]?.AllTotal) ?? "--";
+      (notes && notes["candidat" + nb]?.allTotal) ?? "--";
     return (
       <IonRow>
         <IonCol size-xs="2.8" size-lg="2">
@@ -180,7 +155,7 @@ function ListeCandidatCuisine() {
           observations_optimisation:
             notes["candidat" + nb]["observationsOptimisation"],
 
-          grade_total: notes["candidat" + nb]["AllTotal"],
+          grade_total: notes["candidat" + nb]["allTotal"],
         };
         console.log(oneRow);
         if (url) {

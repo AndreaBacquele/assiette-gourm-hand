@@ -108,7 +108,7 @@ function Accueil() {
             <IonRow>
               <IonRadioGroup
                 value={juryType}
-                style={{ display: "flex", justifyContent: "space-between" }}
+                style={{ display: "flex", justifyContent: "center" }}
                 onIonChange={(ev: RadioGroupCustomEvent) => {
                   setJuryType(ev.detail.value);
                 }}
@@ -128,7 +128,7 @@ function Accueil() {
             <IonButton
               disabled={juryType == ""}
               type="submit"
-              expand="block"
+              style={{ width: "75%" }}
               color="warning"
             >
               Valider

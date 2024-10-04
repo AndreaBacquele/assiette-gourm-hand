@@ -25,10 +25,10 @@ function TableEvaluationDegustation() {
   const { store } = useStorage();
   //Récupération des informations des inputs
   const [values, setValues] = useState({
-    presentation: "",
-    cuissonPrincipale: "",
-    cuissonGarniture: "",
-    accordGlobal: "",
+    presentation: 0,
+    cuissonPrincipale: 0,
+    cuissonGarniture: 0,
+    accordGlobal: 0,
     total: 0,
   });
   const [total, setTotal] = useState(0);

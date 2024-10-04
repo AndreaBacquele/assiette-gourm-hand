@@ -4,7 +4,7 @@ import { IonInput, IonCol, IonRow } from "@ionic/react";
 interface CustomNotesInputProps {
   min: number;
   max: number;
-  value: string;
+  value: number;
   noteLabel: string;
   onIonInput: (value: string) => void;
 }

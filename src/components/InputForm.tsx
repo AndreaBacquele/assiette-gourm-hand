@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonInput } from "@ionic/react";
+import { IonGrid, IonInput } from "@ionic/react";
 import "../theme/globalCSS.css";
 
 interface CustomFormInputProps {
@@ -23,14 +23,16 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
   };
 
   return (
-    <IonInput
-      required={true}
-      value={initial}
-      onIonInput={handleChange}
-      placeholder={placeholder}
-      style={{ textIndent: "5px" }}
-      type={inputType as "text" | "number"}
-    ></IonInput>
+    <IonGrid style={{ marginLeft: "20px", marginRight: "20px" }}>
+      <IonInput
+        required={true}
+        value={initial}
+        onIonInput={handleChange}
+        placeholder={placeholder}
+        style={{ textIndent: "20px" }}
+        type={inputType as "text" | "number"}
+      ></IonInput>
+    </IonGrid>
   );
 };
 
