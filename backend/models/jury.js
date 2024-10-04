@@ -1,28 +1,28 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../sequelize')
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../sequelize");
 
 const Jury = sequelize.define(
-  'Jury',
+  "Jury",
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-        },
+    },
     name: {
       type: DataTypes.STRING,
-      unique: true
+      unique: true,
     },
-    mdp:{
-      type: DataTypes.STRING
+    table_number: {
+      type: DataTypes.INTEGER,
     },
     type_epreuve_id: {
-      type: DataTypes.INTEGER
-    }
+      type: DataTypes.INTEGER,
+    },
   },
   {
-     tableName: 'Jury'
-  },
+    tableName: "jury",
+  }
 );
 
 // `sequelize.define` also returns the model
