@@ -13,7 +13,7 @@ const RadioOption: React.FC<RadioOptionProps> = ({ label, value }) => {
         <code
           style={{
             fontSize: "12px",
-            paddingLeft: "5px",
+            paddingLeft: "10px",
             display: "flex",
           }}
         >

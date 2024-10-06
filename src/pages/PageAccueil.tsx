@@ -60,7 +60,15 @@ function Accueil() {
 
   return (
     <>
-      <IonContent>
+      <IonContent
+        style={{
+          width: "450px",
+          height: "750px",
+          display: "flex",
+          left: "25%",
+          margin: "auto",
+        }}
+      >
         <Alert
           message="Vous avez été rédirigé vers la liste des candidats"
           showAlert={register}
@@ -72,8 +80,8 @@ function Accueil() {
           alt="Logo du concours"
         ></img>
         <div className="header-footer">
-          <p style={{ textAlign: "center" }}>19ème édition</p>
-          <p style={{ textAlign: "center" }}>Samedi 14 octobre 2023</p>
+          <p style={{ textAlign: "center" }}>20ème édition</p>
+          <p style={{ textAlign: "center" }}>Samedi 12 octobre 2024</p>
         </div>
         <div id="title">
           <span>Inscription des jurys</span>
@@ -104,8 +112,7 @@ function Accueil() {
             <span>Sélectionnez votre type de jury:</span>
           </div>
           <div id="radio">
-            {/* <IonGrid> */}
-            <IonRow>
+            <IonGrid>
               <IonRadioGroup
                 value={juryType}
                 style={{ display: "flex", justifyContent: "center" }}
@@ -113,11 +120,14 @@ function Accueil() {
                   setJuryType(ev.detail.value);
                 }}
               >
-                <RadioOption label="Dégustation" value="Dégustation" />
-                <RadioOption label="Technique" value="Technique" />
+                <IonRow style={{ width: "143px" }}>
+                  <RadioOption label="Dégustation" value="Dégustation" />
+                </IonRow>
+                <IonRow style={{ width: "143px" }}>
+                  <RadioOption label="Technique" value="Technique" />
+                </IonRow>
               </IonRadioGroup>
-            </IonRow>
-            {/* </IonGrid> */}
+            </IonGrid>
           </div>
           <h6>
             Toute validation est définitive, merci de bien vérifier les

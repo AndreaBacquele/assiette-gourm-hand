@@ -78,24 +78,10 @@ ion-toolbar{
 
 .ion-radiogroup{
     border: 1px solid var(--ion-color-primary);
-    margin:auto;
     margin-right: 20px;
     border-radius: 7%;
     color: var(--ion-color-primary);
-    min-height: auto;
 
-}
-
-.ion-radiogroup.last-radio {
-    margin-right: 0;
-}
-
-#radio{
-    max-width: 150px;
-    --color : var(--ion-color-primary);
-    justify-content: center;
-    display: flex;
-    margin: auto;
 }
 
 
