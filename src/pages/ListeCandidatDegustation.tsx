@@ -232,16 +232,6 @@ function ListeCandidatDegustation() {
                     message={"Les notes ont été synchronisées avec succés"}
                   ></Alert>
                 </IonCol>
-                <IonCol size-xs="6">
-                  <IonButton
-                    color="warning"
-                    expand="block"
-                    onClick={handleDeleteClick}
-                    className="txtButton"
-                  >
-                    Supprimer les données
-                  </IonButton>
-                </IonCol>
               </IonRow>
             </IonGrid>
           </div>
