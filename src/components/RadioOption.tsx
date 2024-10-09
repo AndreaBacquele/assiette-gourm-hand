@@ -1,5 +1,5 @@
 import React from "react";
-import { IonCol, IonRadio } from "@ionic/react";
+import { IonGrid, IonRadio } from "@ionic/react";
 
 interface RadioOptionProps {
   label: string;
@@ -8,11 +8,19 @@ interface RadioOptionProps {
 
 const RadioOption: React.FC<RadioOptionProps> = ({ label, value }) => {
   return (
-    <IonCol size="6" className="ion-radiogroup">
+    <IonGrid style={{ width: "50%" }} className="ion-radiogroup">
       <IonRadio value={value} mode="ios">
-        <code style={{ fontSize: "12px" }}>{label}</code>
+        <code
+          style={{
+            fontSize: "12px",
+            paddingLeft: "10px",
+            display: "flex",
+          }}
+        >
+          {label}
+        </code>
       </IonRadio>
-    </IonCol>
+    </IonGrid>
   );
 };
 
