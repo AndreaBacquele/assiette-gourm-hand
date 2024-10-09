@@ -215,30 +215,44 @@ function ListeCandidatDegustation() {
       <IonFooter>
         <IonToolbar mode="ios">
           <div className="ion-text-center">
-            <IonGrid>
-              <IonRow>
-                <IonCol size-xs="6">
-                  <IonButton
-                    color="warning"
-                    expand="block"
-                    onClick={handleSubmitNotes}
-                    className="txtButton"
-                  >
-                    Envoyer les notes
-                  </IonButton>
-                  <Alert
-                    showAlert={sendNotes}
-                    setShowAlert={setSendNotes}
-                    message={"Les notes ont été synchronisées avec succés"}
-                  ></Alert>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
+            <IonCol
+              style={{
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
+              <IonButton
+                color="warning"
+                expand="block"
+                onClick={handleSubmitNotes}
+                className="txtButton"
+                style={{
+                  width: "50%",
+                }}
+              >
+                Envoyer les notes
+              </IonButton>
+              <Alert
+                showAlert={sendNotes}
+                setShowAlert={setSendNotes}
+                message={"Les notes ont été synchronisées avec succés"}
+              ></Alert>
+            </IonCol>
           </div>
 
           <div className="header-footer" style={{ textAlign: "center" }}>
             Chaque envoi des notes remplace le précédent
           </div>
+          <IonCol size-xs="6">
+            <IonButton
+              color="warning"
+              expand="block"
+              onClick={handleDeleteClick}
+              className="txtButton"
+            >
+              Supprimer les données
+            </IonButton>
+          </IonCol>
         </IonToolbar>
       </IonFooter>
     </>
