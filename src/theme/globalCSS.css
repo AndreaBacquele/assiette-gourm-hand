@@ -22,7 +22,6 @@ ion-input{
     margin-top: 7px;
     margin-bottom: 5px;
     --placeholder-opacity: 0.25 !important;
-    /* text-indent: 10px; */
   }
 
 ion-col{
