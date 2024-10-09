@@ -196,3 +196,12 @@ ion-toolbar{
 .txtButton{
     padding: 5px 5px;
 }
+
+
+.backgroundColor{
+    --background : none;
+    background-position: left;
+    background-repeat: no-repeat;
+    /* A MODIFIER */
+    background-image: url('../public/21ans.jpg')
+}
