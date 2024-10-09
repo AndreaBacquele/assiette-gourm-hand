@@ -61,12 +61,12 @@ function Accueil() {
 
   return (
     <>
-      <IonPage className="backgroundColor">
+      <IonPage>
         <IonContent
           style={{
-            width: "500px",
+            width: "600px",
             display: "flex",
-            left: "50%",
+            left: "30%",
           }}
         >
           <Alert
