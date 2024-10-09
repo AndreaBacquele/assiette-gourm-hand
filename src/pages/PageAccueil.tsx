@@ -62,13 +62,7 @@ function Accueil() {
   return (
     <>
       <IonPage>
-        <IonContent
-          style={{
-            width: "600px",
-            display: "flex",
-            left: "30%",
-          }}
-        >
+        <IonContent>
           <Alert
             message="Vous avez été rédirigé vers la liste des candidats"
             showAlert={register}
