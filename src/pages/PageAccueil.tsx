@@ -61,87 +61,85 @@ function Accueil() {
 
   return (
     <>
-      <IonPage>
-        <IonContent>
-          <Alert
-            message="Vous avez été rédirigé vers la liste des candidats"
-            showAlert={register}
-            setShowAlert={setRegister}
-          ></Alert>
-          <img
-            className="logo-accueil"
-            src="/logo.jpg"
-            alt="Logo du concours"
-          ></img>
-          <div className="header-footer">
-            <p style={{ textAlign: "center" }}>20ème édition</p>
-            <p style={{ textAlign: "center" }}>Samedi 12 octobre 2024</p>
-          </div>
-          <div id="title">
-            <span>Inscription des jurys</span>
-          </div>
-          <br></br>
-          {/* Mise en place du formulaire */}
+      <IonContent>
+        <Alert
+          message="Vous avez été rédirigé vers la liste des candidats"
+          showAlert={register}
+          setShowAlert={setRegister}
+        ></Alert>
+        <img
+          className="logo-accueil"
+          src="/logo.jpg"
+          alt="Logo du concours"
+        ></img>
+        <div className="header-footer">
+          <p style={{ textAlign: "center" }}>20ème édition</p>
+          <p style={{ textAlign: "center" }}>Samedi 12 octobre 2024</p>
+        </div>
+        <div id="title">
+          <span>Inscription des jurys</span>
+        </div>
+        <br></br>
+        {/* Mise en place du formulaire */}
+        <div id="instructions">
+          <p>
+            Merci de compléter les informations ci-dessous afin d'avoir accés à
+            la liste des candidats et aux grilles d'évaluation
+          </p>
+        </div>
+        <form onSubmit={handleButtonClick}>
+          <CustomFormInput
+            inputType="number"
+            initial={juryNumber}
+            onIonInput={setJuryNumber}
+            placeholder="Numéro de jury"
+          ></CustomFormInput>
+          <CustomFormInput
+            initial={completeName}
+            onIonInput={setCompleteName}
+            placeholder="Prénom NOM"
+          ></CustomFormInput>
+
+          {/* Gestion des toogles pour le choix de jury */}
           <div id="instructions">
-            <p>
-              Merci de compléter les informations ci-dessous afin d'avoir accés
-              à la liste des candidats et aux grilles d'évaluation
-            </p>
+            <span>Sélectionnez votre type de jury:</span>
           </div>
-          <form onSubmit={handleButtonClick}>
-            <CustomFormInput
-              inputType="number"
-              initial={juryNumber}
-              onIonInput={setJuryNumber}
-              placeholder="Numéro de jury"
-            ></CustomFormInput>
-            <CustomFormInput
-              initial={completeName}
-              onIonInput={setCompleteName}
-              placeholder="Prénom NOM"
-            ></CustomFormInput>
-
-            {/* Gestion des toogles pour le choix de jury */}
-            <div id="instructions">
-              <span>Sélectionnez votre type de jury:</span>
-            </div>
-            <div id="radio">
-              <IonGrid>
-                <IonRadioGroup
-                  value={juryType}
-                  style={{ display: "flex", justifyContent: "center" }}
-                  onIonChange={(ev: RadioGroupCustomEvent) => {
-                    setJuryType(ev.detail.value);
-                  }}
-                >
-                  <IonRow style={{ width: "143px" }}>
-                    <RadioOption label="Dégustation" value="Dégustation" />
-                  </IonRow>
-
-                  <IonRow style={{ width: "143px" }}>
-                    <RadioOption label="Technique" value="Technique" />
-                  </IonRow>
-                </IonRadioGroup>
-              </IonGrid>
-            </div>
-            <h6>
-              Toute validation est définitive, merci de bien vérifier les
-              informations saisies avant de continuer.
-            </h6>
-            <br />
-            <div className="ion-text-center">
-              <IonButton
-                disabled={juryType == ""}
-                type="submit"
-                style={{ width: "50%" }}
-                color="warning"
+          <div id="radio">
+            <IonGrid>
+              <IonRadioGroup
+                value={juryType}
+                style={{ display: "flex", justifyContent: "center" }}
+                onIonChange={(ev: RadioGroupCustomEvent) => {
+                  setJuryType(ev.detail.value);
+                }}
               >
-                Valider
-              </IonButton>
-            </div>
-          </form>
-        </IonContent>
-      </IonPage>
+                <IonRow style={{ width: "143px" }}>
+                  <RadioOption label="Dégustation" value="Dégustation" />
+                </IonRow>
+
+                <IonRow style={{ width: "143px" }}>
+                  <RadioOption label="Technique" value="Technique" />
+                </IonRow>
+              </IonRadioGroup>
+            </IonGrid>
+          </div>
+          <h6>
+            Toute validation est définitive, merci de bien vérifier les
+            informations saisies avant de continuer.
+          </h6>
+          <br />
+          <div className="ion-text-center">
+            <IonButton
+              disabled={juryType == ""}
+              type="submit"
+              style={{ width: "50%" }}
+              color="warning"
+            >
+              Valider
+            </IonButton>
+          </div>
+        </form>
+      </IonContent>
     </>
   );
 }
