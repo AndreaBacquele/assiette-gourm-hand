@@ -29,7 +29,7 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
         value={initial}
         onIonInput={handleChange}
         placeholder={placeholder}
-        style={{ textIndent: "5px" }}
+        style={{ textIndent: "10px" }}
         type={inputType as "text" | "number"}
       ></IonInput>
     </IonGrid>

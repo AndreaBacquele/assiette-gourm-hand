@@ -61,7 +61,7 @@ function Accueil() {
 
   return (
     <>
-      <IonContent>
+      <IonContent style={{ width: "500px" }}>
         <Alert
           message="Vous avez été rédirigé vers la liste des candidats"
           showAlert={register}
@@ -92,12 +92,12 @@ function Accueil() {
             inputType="number"
             initial={juryNumber}
             onIonInput={setJuryNumber}
-            placeholder="Numéro de jury"
+            placeholder="Numéro de table jury"
           ></CustomFormInput>
           <CustomFormInput
             initial={completeName}
             onIonInput={setCompleteName}
-            placeholder="Prénom NOM"
+            placeholder="NOM Jury 1 / NOM Jury 2"
           ></CustomFormInput>
 
           {/* Gestion des toogles pour le choix de jury */}
