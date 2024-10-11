@@ -23,7 +23,13 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
   };
 
   return (
-    <IonGrid style={{ marginLeft: "20px", marginRight: "20px" }}>
+    <IonGrid
+      style={{
+        marginLeft: "20px",
+        marginRight: "20px",
+        width: "75%",
+      }}
+    >
       <IonInput
         required={true}
         value={initial}

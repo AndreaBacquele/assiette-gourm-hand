@@ -83,11 +83,6 @@ ion-toolbar{
 
 }
 
-#custom-radio{
-    font-size: 10px;
-}
-
-
 .header-footer{
     color: #838181;
     text-align: center;
@@ -113,6 +108,19 @@ ion-toolbar{
 
 #instructions{
     font-size: 14px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#input-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding-bottom: 10px;
 }
 
