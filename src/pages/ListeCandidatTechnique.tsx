@@ -19,7 +19,6 @@ import Dashboard from "../components/Dashboard";
 import { TechnicalNotes } from "../types";
 
 function ListeCandidatCuisine() {
-  const { candidate } = useParams<{ candidate: string }>();
   const { store } = useStorage();
   const [completeName, setCompleteName] = useState("");
   const [juryNumber, setJuryNumber] = useState("");

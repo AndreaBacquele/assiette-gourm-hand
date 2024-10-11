@@ -15,6 +15,7 @@ import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
 import Alert from "../components/Alert";
+import { isValidNote } from "../hooks/isValidNotes";
 
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
@@ -61,41 +62,19 @@ function TableEvaluationDegustation() {
   const [validateNote, setValidateNote] = useState(false);
   // Stockage des notes dés que l'on appuie sur le bouton Valider l'évaluation
   const noteLimits = {
-    presentation: { min: 0, max: 9 },
-    cuissonPrincipale: { min: 0, max: 7 },
-    cuissonGarniture: { min: 0, max: 7 },
-    accordGlobal: { min: 0, max: 7 },
-  };
-
-  // Fonction pour valider une note avec ses limites
-  const isValidNote = (note: string, min: number, max: number) => {
-    const noteValue = parseFloat(note);
-    return !isNaN(noteValue) && noteValue >= min && noteValue <= max;
+    presentation: { max: 9 },
+    cuissonPrincipale: { max: 7 },
+    cuissonGarniture: { max: 7 },
+    accordGlobal: { max: 7 },
   };
 
   // Fonction de validation pour toutes les notes
   const validateNotes = () => {
     return (
-      isValidNote(
-        values.presentation,
-        noteLimits.presentation.min,
-        noteLimits.presentation.max
-      ) &&
-      isValidNote(
-        values.cuissonPrincipale,
-        noteLimits.cuissonPrincipale.min,
-        noteLimits.cuissonPrincipale.max
-      ) &&
-      isValidNote(
-        values.cuissonGarniture,
-        noteLimits.cuissonGarniture.min,
-        noteLimits.cuissonGarniture.max
-      ) &&
-      isValidNote(
-        values.accordGlobal,
-        noteLimits.accordGlobal.min,
-        noteLimits.accordGlobal.max
-      )
+      isValidNote(values.presentation, noteLimits.presentation.max) &&
+      isValidNote(values.cuissonPrincipale, noteLimits.cuissonPrincipale.max) &&
+      isValidNote(values.cuissonGarniture, noteLimits.cuissonGarniture.max) &&
+      isValidNote(values.accordGlobal, noteLimits.accordGlobal.max)
     );
   };
 
@@ -204,7 +183,6 @@ function TableEvaluationDegustation() {
         </div>
         <IonGrid fixed={true}>
           <CustomNotesInput
-            min={noteLimits.presentation.min}
             max={noteLimits.presentation.max}
             onIonInput={(value) => handleInputChange("presentation", value)}
             value={values.presentation}
@@ -212,7 +190,6 @@ function TableEvaluationDegustation() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={noteLimits.cuissonPrincipale.min}
             max={noteLimits.cuissonPrincipale.max}
             onIonInput={(value) =>
               handleInputChange("cuissonPrincipale", value)
@@ -222,7 +199,6 @@ function TableEvaluationDegustation() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={noteLimits.cuissonGarniture.min}
             max={noteLimits.cuissonGarniture.max}
             onIonInput={(value) => handleInputChange("cuissonGarniture", value)}
             value={values.cuissonGarniture}
@@ -230,7 +206,6 @@ function TableEvaluationDegustation() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={noteLimits.accordGlobal.min}
             max={noteLimits.accordGlobal.max}
             onIonInput={(value) => handleInputChange("accordGlobal", value)}
             value={values.accordGlobal}

@@ -16,12 +16,14 @@ import { useStorage } from "../hooks/useStorage";
 import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
 import Alert from "../components/Alert";
+import { isValidNote } from "../hooks/isValidNotes";
 
 function TableEvaluationTechnique() {
   const history = useHistory();
   const { store } = useStorage();
   const [validateNote, setValidateNote] = useState(false);
   const [alertNoSend, setAlertNoSend] = useState(false);
+  const [alertInvalideNotes, setAlertInvalideNotes] = useState(false);
 
   // Récupére le numéro de candidat dans l'URL
   const { candidate } = useParams<{ candidate: string }>();
@@ -41,6 +43,13 @@ function TableEvaluationTechnique() {
   });
   const [totalProduction, setTotalProduction] = useState(0);
   const [observationsProduction, setObservationsProduction] = useState("");
+
+  const noteLimitsProduction = {
+    secuHygiene: { min: 0, max: 5 },
+    organisation: { min: 0, max: 5 },
+    maitriseTech: { min: 0, max: 5 },
+    timing: { min: 0, max: 5 },
+  };
 
   // Récupération de la valeur des inputs
   const handleInputChange1 = (key: string, value: string) => {
@@ -79,6 +88,13 @@ function TableEvaluationTechnique() {
   const [totalAutonomie, setTotalAutonomie] = useState(0);
   const [observationsAutonomie, setObservationsAutonomie] = useState("");
 
+  const noteLimitsAutonomie = {
+    initiative: { max: 10 },
+    harmonie: { max: 7 },
+    qualiteAccomp: { max: 7 },
+    clarte: { max: 6 },
+  };
+
   // Récupération de la valeur des inputs
   const handleInputChange2 = (key: string, value: string) => {
     setValuesAutonomie((prevValues) => ({ ...prevValues, [key]: value }));
@@ -114,6 +130,11 @@ function TableEvaluationTechnique() {
   const [totalDurable, setTotalDurable] = useState(0);
   const [observationsDurable, setObservationsDurable] = useState("");
 
+  const noteLimitsDurable = {
+    dechets: { max: 5 },
+    fluides: { max: 5 },
+  };
+
   // Récupération de la valeur des inputs
   const handleInputChange3 = (key: string, value: string) => {
     setValuesDurable((prevValues) => ({ ...prevValues, [key]: value }));
@@ -138,6 +159,11 @@ function TableEvaluationTechnique() {
   });
   const [totalOptimisation, setTotalOptimisation] = useState(0);
   const [observationsOptimisation, setObservationsOptimisation] = useState("");
+
+  const notesLimitsOptimisation = {
+    utilObligatoires: { max: 6 },
+    utilLibre: { max: 4 },
+  };
 
   const handleInputChange4 = (key: string, value: string) => {
     setValuesOptimisation((prevValues) => ({ ...prevValues, [key]: value }));
@@ -174,56 +200,99 @@ function TableEvaluationTechnique() {
     setAllTotal(TotalAllTableaux);
   });
 
+  // Fonction de validation pour toutes les notes
+  const validateNotes = () => {
+    return (
+      isValidNote(
+        valuesProduction.secuHygiene,
+        noteLimitsProduction.secuHygiene.max
+      ) &&
+      isValidNote(
+        valuesProduction.organisation,
+        noteLimitsProduction.organisation.max
+      ) &&
+      isValidNote(
+        valuesProduction.maitriseTech,
+        noteLimitsProduction.maitriseTech.max
+      ) &&
+      isValidNote(valuesProduction.timing, noteLimitsProduction.timing.max) &&
+      isValidNote(
+        valuesAutonomie.initiative,
+        noteLimitsAutonomie.initiative.max
+      ) &&
+      isValidNote(valuesAutonomie.harmonie, noteLimitsAutonomie.harmonie.max) &&
+      isValidNote(
+        valuesAutonomie.qualiteAccomp,
+        noteLimitsAutonomie.qualiteAccomp.max
+      ) &&
+      isValidNote(valuesAutonomie.clarte, noteLimitsAutonomie.clarte.max) &&
+      isValidNote(valuesDurable.dechets, noteLimitsDurable.dechets.max) &&
+      isValidNote(valuesDurable.fluides, noteLimitsDurable.fluides.max) &&
+      isValidNote(
+        valuesOptimisation.utilObligatoires,
+        notesLimitsOptimisation.utilObligatoires.max
+      ) &&
+      isValidNote(
+        valuesOptimisation.utilLibres,
+        notesLimitsOptimisation.utilLibre.max
+      )
+    );
+  };
+
   // Fonction qui permet de stocker les données lorsque l'on clique sur le bouton Validez l'évaluation.
   const handleValidateClick = () => {
-    if (store) {
-      let candidates_notes = {
-        // tableau 1
-        secuHygiene: valuesProduction.secuHygiene,
-        organisation: valuesProduction.organisation,
-        maitriseTech: valuesProduction.maitriseTech,
-        timing: valuesProduction.timing,
-        totalProduction,
-        observationsProduction: observationsProduction,
-        // tableau 2
-        initiative: valuesAutonomie.initiative,
-        qualiteAccomp: valuesAutonomie.qualiteAccomp,
-        harmonie: valuesAutonomie.harmonie,
-        clarte: valuesAutonomie.clarte,
-        totalAutonomie,
-        observationsAutonomie: observationsAutonomie,
-        // tableau 3
-        dechets: valuesDurable.dechets,
-        fluides: valuesDurable.fluides,
-        totalDurable,
-        observationsDurable: observationsDurable,
-        // tableau 4
-        utilLibres: valuesOptimisation.utilLibres,
-        utilObligatoires: valuesOptimisation.utilObligatoires,
-        totalOptimisation,
-        observationsOptimisation: observationsOptimisation,
-        // totaux
-        TotalProductAutonomie,
-        TotalOptiDurable,
-        AllTotal,
-      };
+    if (validateNotes()) {
+      if (store) {
+        let candidates_notes = {
+          // tableau 1
+          secuHygiene: valuesProduction.secuHygiene,
+          organisation: valuesProduction.organisation,
+          maitriseTech: valuesProduction.maitriseTech,
+          timing: valuesProduction.timing,
+          totalProduction,
+          observationsProduction: observationsProduction,
+          // tableau 2
+          initiative: valuesAutonomie.initiative,
+          qualiteAccomp: valuesAutonomie.qualiteAccomp,
+          harmonie: valuesAutonomie.harmonie,
+          clarte: valuesAutonomie.clarte,
+          totalAutonomie,
+          observationsAutonomie: observationsAutonomie,
+          // tableau 3
+          dechets: valuesDurable.dechets,
+          fluides: valuesDurable.fluides,
+          totalDurable,
+          observationsDurable: observationsDurable,
+          // tableau 4
+          utilLibres: valuesOptimisation.utilLibres,
+          utilObligatoires: valuesOptimisation.utilObligatoires,
+          totalOptimisation,
+          observationsOptimisation: observationsOptimisation,
+          // totaux
+          TotalProductAutonomie,
+          TotalOptiDurable,
+          AllTotal,
+        };
 
-      // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
-      // On récupére les notes déja présentes. Ensuite, on traite la promesse obtenue et on applique la fonction save_notes
-      // La fonction save_notes permet d'ajouter une instance de notes d'un candidat
-      const save_notes = (
-        all_notes: Record<string, any>,
-        candidate: string,
-        candidates_notes: Object
-      ) => {
-        all_notes["candidat" + candidate] = candidates_notes;
-        store.set("notes", all_notes);
-      };
-      store.get("notes").then((all_notes: Record<string, any>) => {
-        save_notes(all_notes, candidate, candidates_notes);
-        setValidateNote(true);
-        history.push("/listingtechnique");
-      });
+        // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
+        // On récupére les notes déja présentes. Ensuite, on traite la promesse obtenue et on applique la fonction save_notes
+        // La fonction save_notes permet d'ajouter une instance de notes d'un candidat
+        const save_notes = (
+          all_notes: Record<string, any>,
+          candidate: string,
+          candidates_notes: Object
+        ) => {
+          all_notes["candidat" + candidate] = candidates_notes;
+          store.set("notes", all_notes);
+        };
+        store.get("notes").then((all_notes: Record<string, any>) => {
+          save_notes(all_notes, candidate, candidates_notes);
+          setValidateNote(true);
+          history.push("/listingtechnique");
+        });
+      }
+    } else {
+      setAlertInvalideNotes(true);
     }
   };
 
@@ -341,7 +410,6 @@ function TableEvaluationTechnique() {
           <p className="orange-label"> Notes de production</p>
 
           <CustomNotesInput
-            min={0}
             max={5}
             onIonInput={(value) => handleInputChange1("secuHygiene", value)}
             value={valuesProduction.secuHygiene}
@@ -349,7 +417,6 @@ function TableEvaluationTechnique() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={0}
             max={5}
             onIonInput={(value) => handleInputChange1("organisation", value)}
             value={valuesProduction.organisation}
@@ -357,7 +424,6 @@ function TableEvaluationTechnique() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={0}
             max={5}
             onIonInput={(value) => handleInputChange1("maitriseTech", value)}
             value={valuesProduction.maitriseTech}
@@ -365,7 +431,6 @@ function TableEvaluationTechnique() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={0}
             max={5}
             onIonInput={(value) => handleInputChange1("timing", value)}
             value={valuesProduction.timing}
@@ -393,7 +458,6 @@ function TableEvaluationTechnique() {
           <p className="orange-label"> Notes d'autonomie</p>
 
           <CustomNotesInput
-            min={0}
             max={10}
             onIonInput={(value) => handleInputChange2("initiative", value)}
             value={valuesAutonomie.initiative}
@@ -401,7 +465,6 @@ function TableEvaluationTechnique() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={0}
             max={7}
             onIonInput={(value) => handleInputChange2("harmonie", value)}
             value={valuesAutonomie.harmonie}
@@ -409,7 +472,6 @@ function TableEvaluationTechnique() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={0}
             max={7}
             onIonInput={(value) => handleInputChange2("qualiteAccomp", value)}
             value={valuesAutonomie.qualiteAccomp}
@@ -417,7 +479,6 @@ function TableEvaluationTechnique() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={0}
             max={6}
             onIonInput={(value) => handleInputChange2("clarte", value)}
             value={valuesAutonomie.clarte}
@@ -443,7 +504,6 @@ function TableEvaluationTechnique() {
           <p className="orange-label"> Notes développement durable</p>
 
           <CustomNotesInput
-            min={0}
             max={5}
             onIonInput={(value) => handleInputChange3("dechets", value)}
             value={valuesDurable.dechets}
@@ -451,7 +511,6 @@ function TableEvaluationTechnique() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={0}
             max={5}
             onIonInput={(value) => handleInputChange3("fluides", value)}
             value={valuesDurable.fluides}
@@ -478,7 +537,6 @@ function TableEvaluationTechnique() {
           <p className="orange-label"> Notes optimisation du panier</p>
 
           <CustomNotesInput
-            min={0}
             max={6}
             onIonInput={(value) =>
               handleInputChange4("utilObligatoires", value)
@@ -488,7 +546,6 @@ function TableEvaluationTechnique() {
           ></CustomNotesInput>
 
           <CustomNotesInput
-            min={0}
             max={4}
             onIonInput={(value) => handleInputChange4("utilLibres", value)}
             value={valuesOptimisation.utilLibres}
@@ -535,6 +592,13 @@ function TableEvaluationTechnique() {
                 showAlert={validateNote}
                 setShowAlert={setValidateNote}
                 message={"Les notes ont été correctement enregistrées"}
+              ></Alert>
+              <Alert
+                showAlert={alertInvalideNotes}
+                setShowAlert={setAlertInvalideNotes}
+                message={
+                  "Attention, une des notes n'est pas valide ou n'a pas été rempli. Merci de la corriger."
+                }
               ></Alert>
               <span className="header-footer">
                 Vous pourrez revenir modifier ces notes ultérieurement.
