@@ -16,6 +16,7 @@ import "./PageAccueil";
 import Alert from "../components/Alert";
 import axios from "axios";
 import Dashboard from "../components/Dashboard";
+import { TechnicalNotes } from "../types";
 
 function ListeCandidatCuisine() {
   const { candidate } = useParams<{ candidate: string }>();
@@ -23,34 +24,8 @@ function ListeCandidatCuisine() {
   const [completeName, setCompleteName] = useState("");
   const [juryNumber, setJuryNumber] = useState("");
   const [juryType, setJuryType] = useState("");
-  const [notes, setNotes] = useState<Record<string, Note>>({});
+  const [notes, setNotes] = useState<Record<string, TechnicalNotes>>({});
   const [sendNotes, setSendNotes] = useState(false);
-
-  // Commentaire inutile
-
-  interface Note {
-    totalProduction: string;
-    totalAutonomie: string;
-    totalDurable: string;
-    totalOptimisation: string;
-    AllTotal: string;
-    clarte: string;
-    dechets: string;
-    fluides: string;
-    harmonie: string;
-    initiative: string;
-    maitriseTech: string;
-    organisation: string;
-    qualiteAccomp: string;
-    secuHygiene: string;
-    timing: string;
-    utilLibres: string;
-    utilObligatoires: string;
-    observationsProduction: string;
-    observationsAutonomie: string;
-    observationsDurable: string;
-    observationsOptimisation: string;
-  }
 
   // Permet de récuperer puis d'afficher le nom du jury en haut du listing des candidats
   const picklastNamefirstName = async () => {
@@ -247,40 +222,44 @@ function ListeCandidatCuisine() {
       <IonFooter>
         <IonToolbar mode="ios">
           <div className="ion-text-center">
-            <IonGrid>
-              <IonRow>
-                <IonCol size-xs="6">
-                  <IonButton
-                    color="warning"
-                    expand="block"
-                    onClick={handleSubmitNotes}
-                    className="txtButton"
-                  >
-                    Envoyer les notes
-                  </IonButton>
-                  <Alert
-                    showAlert={sendNotes}
-                    setShowAlert={setSendNotes}
-                    message={"Les notes ont été synchronisées avec succés"}
-                  ></Alert>
-                </IonCol>
-                <IonCol size-xs="6">
-                  <IonButton
-                    color="warning"
-                    expand="block"
-                    onClick={handleDeleteClick}
-                    className="txtButton"
-                  >
-                    Supprimer les données
-                  </IonButton>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
+            <IonCol
+              style={{
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
+              <IonButton
+                color="warning"
+                expand="block"
+                onClick={handleSubmitNotes}
+                className="txtButton"
+                style={{
+                  width: "50%",
+                }}
+              >
+                Envoyer les notes
+              </IonButton>
+              <Alert
+                showAlert={sendNotes}
+                setShowAlert={setSendNotes}
+                message={"Les notes ont été synchronisées avec succés"}
+              ></Alert>
+            </IonCol>
           </div>
 
           <div className="header-footer" style={{ textAlign: "center" }}>
             Chaque envoi des notes remplace le précédent
           </div>
+          <IonCol size-xs="6">
+            <IonButton
+              color="warning"
+              expand="block"
+              onClick={handleDeleteClick}
+              className="txtButton"
+            >
+              Supprimer les données
+            </IonButton>
+          </IonCol>
         </IonToolbar>
       </IonFooter>
     </>

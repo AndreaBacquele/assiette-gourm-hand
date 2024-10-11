@@ -3,7 +3,6 @@ import {
   IonFooter,
   IonToolbar,
   IonGrid,
-  IonCol,
   IonRow,
   IonButton,
   IonContent,

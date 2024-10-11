@@ -5,3 +5,27 @@ export type Criteria = {
     min: number;
     max: number;
   };
+
+  export type TechnicalNotes = {
+    totalProduction: string;
+    totalAutonomie: string;
+    totalDurable: string;
+    totalOptimisation: string;
+    AllTotal: string;
+    clarte: string;
+    dechets: string;
+    fluides: string;
+    harmonie: string;
+    initiative: string;
+    maitriseTech: string;
+    organisation: string;
+    qualiteAccomp: string;
+    secuHygiene: string;
+    timing: string;
+    utilLibres: string;
+    utilObligatoires: string;
+    observationsProduction: string;
+    observationsAutonomie: string;
+    observationsDurable: string;
+    observationsOptimisation: string;
+  }
