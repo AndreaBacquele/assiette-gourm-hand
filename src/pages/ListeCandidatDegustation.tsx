@@ -243,6 +243,16 @@ function ListeCandidatDegustation() {
           <div className="header-footer" style={{ textAlign: "center" }}>
             Chaque envoi des notes remplace le précédent
           </div>
+          <IonCol size-xs="6">
+            <IonButton
+              color="warning"
+              expand="block"
+              onClick={handleDeleteClick}
+              className="txtButton"
+            >
+              Supprimer les données
+            </IonButton>
+          </IonCol>
         </IonToolbar>
       </IonFooter>
     </>
