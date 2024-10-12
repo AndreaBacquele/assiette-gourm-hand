@@ -241,58 +241,54 @@ function TableEvaluationTechnique() {
 
   // Fonction qui permet de stocker les données lorsque l'on clique sur le bouton Validez l'évaluation.
   const handleValidateClick = () => {
-    if (validateNotes()) {
-      if (store) {
-        let candidates_notes = {
-          // tableau 1
-          secuHygiene: valuesProduction.secuHygiene,
-          organisation: valuesProduction.organisation,
-          maitriseTech: valuesProduction.maitriseTech,
-          timing: valuesProduction.timing,
-          totalProduction,
-          observationsProduction: observationsProduction,
-          // tableau 2
-          initiative: valuesAutonomie.initiative,
-          qualiteAccomp: valuesAutonomie.qualiteAccomp,
-          harmonie: valuesAutonomie.harmonie,
-          clarte: valuesAutonomie.clarte,
-          totalAutonomie,
-          observationsAutonomie: observationsAutonomie,
-          // tableau 3
-          dechets: valuesDurable.dechets,
-          fluides: valuesDurable.fluides,
-          totalDurable,
-          observationsDurable: observationsDurable,
-          // tableau 4
-          utilLibres: valuesOptimisation.utilLibres,
-          utilObligatoires: valuesOptimisation.utilObligatoires,
-          totalOptimisation,
-          observationsOptimisation: observationsOptimisation,
-          // totaux
-          TotalProductAutonomie,
-          TotalOptiDurable,
-          AllTotal,
-        };
+    if (store) {
+      let candidates_notes = {
+        // tableau 1
+        secuHygiene: valuesProduction.secuHygiene,
+        organisation: valuesProduction.organisation,
+        maitriseTech: valuesProduction.maitriseTech,
+        timing: valuesProduction.timing,
+        totalProduction,
+        observationsProduction: observationsProduction,
+        // tableau 2
+        initiative: valuesAutonomie.initiative,
+        qualiteAccomp: valuesAutonomie.qualiteAccomp,
+        harmonie: valuesAutonomie.harmonie,
+        clarte: valuesAutonomie.clarte,
+        totalAutonomie,
+        observationsAutonomie: observationsAutonomie,
+        // tableau 3
+        dechets: valuesDurable.dechets,
+        fluides: valuesDurable.fluides,
+        totalDurable,
+        observationsDurable: observationsDurable,
+        // tableau 4
+        utilLibres: valuesOptimisation.utilLibres,
+        utilObligatoires: valuesOptimisation.utilObligatoires,
+        totalOptimisation,
+        observationsOptimisation: observationsOptimisation,
+        // totaux
+        TotalProductAutonomie,
+        TotalOptiDurable,
+        AllTotal,
+      };
 
-        // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
-        // On récupére les notes déja présentes. Ensuite, on traite la promesse obtenue et on applique la fonction save_notes
-        // La fonction save_notes permet d'ajouter une instance de notes d'un candidat
-        const save_notes = (
-          all_notes: Record<string, any>,
-          candidate: string,
-          candidates_notes: Object
-        ) => {
-          all_notes["candidat" + candidate] = candidates_notes;
-          store.set("notes", all_notes);
-        };
-        store.get("notes").then((all_notes: Record<string, any>) => {
-          save_notes(all_notes, candidate, candidates_notes);
-          setValidateNote(true);
-          history.push("/listingtechnique");
-        });
-      }
-    } else {
-      setAlertInvalideNotes(true);
+      // Stockage des notes sans écraser les notes déja présentes dans la base de donnée
+      // On récupére les notes déja présentes. Ensuite, on traite la promesse obtenue et on applique la fonction save_notes
+      // La fonction save_notes permet d'ajouter une instance de notes d'un candidat
+      const save_notes = (
+        all_notes: Record<string, any>,
+        candidate: string,
+        candidates_notes: Object
+      ) => {
+        all_notes["candidat" + candidate] = candidates_notes;
+        store.set("notes", all_notes);
+      };
+      store.get("notes").then((all_notes: Record<string, any>) => {
+        save_notes(all_notes, candidate, candidates_notes);
+        setValidateNote(true);
+        history.push("/listingtechnique");
+      });
     }
   };
 
