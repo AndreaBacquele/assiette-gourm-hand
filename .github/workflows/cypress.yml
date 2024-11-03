@@ -1,12 +1,6 @@
 name: Run Cypress Tests
 
-on:
-  push:
-    branches:
-      - main # Lance les tests lors des push sur la branche main
-  pull_request:
-    branches:
-      - main # Lance les tests lors des pull requests vers la branche main
+on: [push]
 
 jobs:
   cypress_run:
@@ -29,6 +23,9 @@ jobs:
           do
             sleep 5
           done
+
+      - name: Run linter
+        run: npm run lint
 
       - name: Run Cypress tests
         run: npm run test.e2e
