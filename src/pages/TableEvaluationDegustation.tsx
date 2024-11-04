@@ -72,6 +72,10 @@ function TableEvaluationDegustation() {
     setPresentation(value);
   };
 
+  const isValidNote = (note: number, max: number) => {
+    return !isNaN(note) && note >= 0 && note <= max;
+  };
+
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
   useEffect(() => {
     let Presentation = isNaN(Number(presentation)) ? 0 : Number(presentation);
@@ -199,7 +203,7 @@ function TableEvaluationDegustation() {
               <IonButton
                 expand="block"
                 type="submit"
-                color={"warning"}
+                color={"success"}
                 onClick={handleSubmit}
                 className="txtButton"
               >
