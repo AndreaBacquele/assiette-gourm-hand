@@ -26,6 +26,8 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import Login from "./pages/Login";
+import Inscription from "./pages/Inscription";
 
 setupIonicReact();
 
@@ -34,6 +36,8 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path="/home" component={Accueil} exact={true} />
+        <Route path="/login" component={Login} />
+        <Route path="/inscription" component={Inscription} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
         <Route
           path="/listingdegustation"

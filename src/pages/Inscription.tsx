@@ -5,6 +5,8 @@ import {
   IonGrid,
   IonRow,
   IonPage,
+  IonNavLink,
+  IonRouterLink,
 } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import type { RadioGroupCustomEvent } from "@ionic/react";
@@ -15,7 +17,7 @@ import RadioOption from "../components/RadioOption";
 import Alert from "../components/Alert";
 import "../theme/globalCSS.css";
 
-function Accueil() {
+function Inscription() {
   const { store } = useStorage();
 
   //Récupére les valeurs mise dans les inputs
@@ -78,19 +80,23 @@ function Accueil() {
           <p style={{ textAlign: "center" }}>Samedi 12 octobre 2024</p>
         </div>
         <div id="title">
-          <span>Page de connexion</span>
+          <span>Page d'inscription</span>
         </div>
         <br></br>
         {/* Mise en place du formulaire */}
         <div id="instructions">
           <p>
             Merci de compléter les informations ci-dessous afin de vous
-            connectez d'avoir accés à la liste des candidats et aux grilles
-            d'évaluation
+            inscrire. Vous serez redirigé vers la liste des candidats.
           </p>
         </div>
         <form onSubmit={handleButtonClick}>
           <div id="input-text">
+            <CustomFormInput
+              initial={completeName}
+              onIonInput={setCompleteName}
+              placeholder="NOM Prénom"
+            ></CustomFormInput>
             <CustomFormInput
               inputType="text"
               initial={email}
@@ -103,11 +109,6 @@ function Accueil() {
               onIonInput={setJuryNumber}
               placeholder="Mot de passe"
             ></CustomFormInput>
-            {/* <CustomFormInput
-              initial={completeName}
-              onIonInput={setCompleteName}
-              placeholder="NOM Jury 1 / NOM Jury 2"
-            ></CustomFormInput> */}
           </div>
 
           {/* Gestion des toogles pour le choix de jury */}
@@ -132,9 +133,9 @@ function Accueil() {
             </IonRadioGroup>
           </IonGrid>
           {/* <h6 id="instructions">
-            Toute validation est définitive, merci de bien vérifier les
-            informations saisies avant de continuer.
-          </h6> */}
+                Toute validation est définitive, merci de bien vérifier les
+                informations saisies avant de continuer.
+              </h6> */}
           <br />
           <div className="ion-text-center">
             <IonButton
@@ -147,9 +148,15 @@ function Accueil() {
             </IonButton>
           </div>
         </form>
+        <br />
+        <div className="ion-text-center">
+          <IonRouterLink routerLink="/inscription">
+            Déjà un compte? Cliquez ici
+          </IonRouterLink>
+        </div>
       </IonContent>
     </>
   );
 }
 
-export default Accueil;
+export default Inscription;

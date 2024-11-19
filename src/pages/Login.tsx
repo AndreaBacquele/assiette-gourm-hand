@@ -5,17 +5,19 @@ import {
   IonGrid,
   IonRow,
   IonPage,
+  IonNavLink,
+  IonRouterLink,
 } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import type { RadioGroupCustomEvent } from "@ionic/react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import CustomFormInput from "../components/InputForm";
 import RadioOption from "../components/RadioOption";
 import Alert from "../components/Alert";
 import "../theme/globalCSS.css";
 
-function Accueil() {
+function Login() {
   const { store } = useStorage();
 
   //Récupére les valeurs mise dans les inputs
@@ -104,14 +106,14 @@ function Accueil() {
               placeholder="Mot de passe"
             ></CustomFormInput>
             {/* <CustomFormInput
-              initial={completeName}
-              onIonInput={setCompleteName}
-              placeholder="NOM Jury 1 / NOM Jury 2"
-            ></CustomFormInput> */}
+                initial={completeName}
+                onIonInput={setCompleteName}
+                placeholder="NOM Jury 1 / NOM Jury 2"
+              ></CustomFormInput> */}
           </div>
 
           {/* Gestion des toogles pour le choix de jury */}
-          <div id="instructions">
+          {/* <div id="instructions">
             <span>Sélectionnez votre type de jury:</span>
           </div>
           <IonGrid>
@@ -130,11 +132,11 @@ function Accueil() {
                 <RadioOption label="Technique" value="Technique" />
               </IonRow>
             </IonRadioGroup>
-          </IonGrid>
+          </IonGrid> */}
           {/* <h6 id="instructions">
-            Toute validation est définitive, merci de bien vérifier les
-            informations saisies avant de continuer.
-          </h6> */}
+              Toute validation est définitive, merci de bien vérifier les
+              informations saisies avant de continuer.
+            </h6> */}
           <br />
           <div className="ion-text-center">
             <IonButton
@@ -147,9 +149,15 @@ function Accueil() {
             </IonButton>
           </div>
         </form>
+        <br />
+        <div className="ion-text-center">
+          <IonRouterLink routerLink="/inscription">
+            Pas encore de compte? Cliquez ici
+          </IonRouterLink>
+        </div>
       </IonContent>
     </>
   );
 }
 
-export default Accueil;
+export default Login;
