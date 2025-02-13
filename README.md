@@ -2,6 +2,9 @@
 
 Projet personnel - Développement qui a commencé lorsque j'étais étudiante à Ada Tech School! 
 
+V1 - Utilisée le 12 octobre 2024 
+V2 - En cours d'élaboration
+
 Développement d'une Progressive Web App pour le concours de cuisine "L'Assiette Gourm'hand". 
 Elle est à destination des membres du jury de ce concours afin de moderniser le systéme de notation. 
 
