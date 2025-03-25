@@ -20,6 +20,7 @@
     "@ionic/react": "^7.0.0",
     "@ionic/react-router": "^7.0.0",
     "@ionic/storage": "^4.0.0",
+    "@supabase/supabase-js": "^2.49.3",
     "@types/node": "^20.5.7",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
@@ -38,15 +39,15 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
-    "@vitejs/plugin-legacy": "^4.0.2",
-    "@vitejs/plugin-react": "^3.1.0",
-    "cypress": "^12.7.0",
+    "@vitejs/plugin-legacy": "^6.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "cypress": "^14.2.0",
     "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
     "jsdom": "^21.1.0",
     "typescript": "^4.9.5",
-    "vite": "^4.1.0",
-    "vitest": "^0.29.2"
+    "vite": "^6.2.3",
+    "vitest": "^3.0.9"
   },
   "description": "Assiette Gourm'hand l'application"
 }
