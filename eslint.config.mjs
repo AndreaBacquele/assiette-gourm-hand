@@ -7,5 +7,5 @@ import pluginReact from "eslint-plugin-react";
 export default tseslint.config(
   eslint.configs.recommended,
   tseslint.configs.recommended,
-  pluginReact.configs.recommended
+  pluginReact.configs.flat.recommended
 );
