@@ -5,15 +5,15 @@ import "../theme/globalCSS.css";
 interface CustomFormInputProps {
   initial: string;
   placeholder: string;
-  inputType?: string;
+  label: string;
   onIonInput: (value: string) => void;
 }
 
 const CustomFormInput: React.FC<CustomFormInputProps> = ({
   initial = "",
   placeholder,
+  label,
   onIonInput,
-  inputType = "text",
 }) => {
   const [value, setValue] = useState(initial);
 
@@ -31,12 +31,14 @@ const CustomFormInput: React.FC<CustomFormInputProps> = ({
       }}
     >
       <IonInput
+        label={label}
+        labelPlacement="floating"
+        fill="solid"
         required={true}
-        value={initial}
         onIonInput={handleChange}
         placeholder={placeholder}
         style={{ textIndent: "10px" }}
-        type={inputType as "text" | "number"}
+        type="text"
       ></IonInput>
     </IonGrid>
   );
