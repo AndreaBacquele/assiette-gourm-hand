@@ -7,6 +7,7 @@ import ListeCandidatDegustation from "./pages/ListeCandidatDegustation";
 import TableEvaluationDegustation from "./pages/TableEvaluationDegustation";
 import ListeCandidatTechnique from "./pages/ListeCandidatTechnique";
 import TableEvaluationTechnique from "./pages/TableEvaluationTechnique";
+import QRCodeGenerator from "../src/utils/QRCodeGenerator";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -26,7 +27,6 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import FirstConnexion from "./pages/FirstConnexion";
 
 setupIonicReact();
 
@@ -40,8 +40,8 @@ const App: React.FC = () => (
           path="/listingdegustation"
           component={ListeCandidatDegustation}
         />
-        <Route path="/firstconnexion" component={FirstConnexion} />
         <Route path="/listingtechnique" component={ListeCandidatTechnique} />
+        <Route path="/QRGenerator" component={QRCodeGenerator} />
         <Route path="/evaldegustation/:candidate">
           <TableEvaluationDegustation />
         </Route>
