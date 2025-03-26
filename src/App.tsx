@@ -26,6 +26,7 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import FirstConnexion from "./pages/FirstConnexion";
 
 setupIonicReact();
 
@@ -39,6 +40,7 @@ const App: React.FC = () => (
           path="/listingdegustation"
           component={ListeCandidatDegustation}
         />
+        <Route path="/firstconnexion" component={FirstConnexion} />
         <Route path="/listingtechnique" component={ListeCandidatTechnique} />
         <Route path="/evaldegustation/:candidate">
           <TableEvaluationDegustation />
