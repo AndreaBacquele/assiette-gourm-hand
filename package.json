@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@capacitor/app": "5.0.5",
-    "@capacitor/core": "5.1.0",
+    "@capacitor/core": "7.1.0",
     "@capacitor/haptics": "5.0.5",
     "@capacitor/keyboard": "5.0.5",
     "@capacitor/status-bar": "5.0.5",
@@ -33,7 +33,7 @@
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
-    "@capacitor/cli": "5.1.0",
+    "@capacitor/cli": "7.1.0",
     "@eslint/js": "^9.23.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
