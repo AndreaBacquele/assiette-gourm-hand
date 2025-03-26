@@ -44,7 +44,6 @@ function Accueil() {
     const isJuryRegister = () => {
       if (store) {
         store.get("jury").then(function (response: any) {
-          console.log(response);
           if (response != null) {
             setRegister(true);
             if (response.juryType == "Dégustation") {
