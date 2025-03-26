@@ -1,9 +1,10 @@
+import React from "react";
 import { IonAlert } from "@ionic/react";
 
 interface AlertFormProps {
   message: string;
   showAlert: boolean;
-  setShowAlert: any;
+  setShowAlert: (value: boolean) => void;
 }
 const Alert: React.FC<AlertFormProps> = ({
   message = "",
