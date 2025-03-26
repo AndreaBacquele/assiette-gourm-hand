@@ -1,4 +1,5 @@
-import { IonCol, IonRow } from "@ionic/react";
+import React from "react";
+import { IonCol } from "@ionic/react";
 
 interface DashboardProps {
   label: string;

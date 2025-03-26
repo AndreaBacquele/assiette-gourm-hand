@@ -93,48 +93,44 @@ function ListeCandidatDegustation() {
     const accordGlobal = (notes && notes["candidat" + nb]?.accordGlobal) ?? "";
     const total = (notes && notes["candidat" + nb]?.total) ?? "--";
     return (
-      <IonRow>
-        <IonCol size-xs="2.5" size-lg="2" sizeSm="2">
-          <IonButton
-            color="warning"
-            onClick={() => handleButtonClick(nb)}
-            expand="block"
-            className="txtButton"
-          >
-            n° {nb}
-          </IonButton>
-        </IonCol>
-        <IonCol>{presentation}</IonCol>
-        <IonCol>{cuissonPrincipale}</IonCol>
-        <IonCol>{cuissonGarniture}</IonCol>
-        <IonCol>{accordGlobal}</IonCol>
-        <IonCol style={{ fontWeight: "600" }}>{total} / 30</IonCol>
-      </IonRow>
+      <>
+        <IonRow>
+          <IonCol size-xs="2.5" size-lg="2" sizeSm="2">
+            <IonButton
+              color="warning"
+              onClick={() => handleButtonClick(nb)}
+              expand="block"
+              className="txtButton"
+            >
+              n° {nb}
+            </IonButton>
+          </IonCol>
+          <IonCol>{presentation}</IonCol>
+          <IonCol>{cuissonPrincipale}</IonCol>
+          <IonCol>{cuissonGarniture}</IonCol>
+          <IonCol>{accordGlobal}</IonCol>
+          <IonCol style={{ fontWeight: "600" }}>{total} / 30</IonCol>
+        </IonRow>
+      </>
     );
   });
 
   // Connexion entre le spreadsheet / l'API REST Google / l'application
   // Envoi les notes vers le spreasheet dés que l'on appuie sur le bouton envoyé
 
-  const handleSubmitNotes = (e: any) => {
+  const handleSubmitNotes = (e: Event) => {
     e.preventDefault();
 
     const requests: any = [];
 
     // Récupération de la date + heure
-    var d = new Date();
-    var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-    var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-    var fullDate = date + " " + hours;
+    const d = new Date();
+    const date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    const hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+    const fullDate = date + " " + hours;
 
     const url: string | undefined = import.meta.env
       .VITE_REACT_APP_SHEET_BEST_API_DEGUSTATION;
-
-    const testRow = {
-      date_sync: fullDate,
-      jury_name: completeName,
-      jury_number: juryNumber,
-    };
 
     for (let nb = 0; nb <= nb_candidates; nb++) {
       if (notes["candidat" + nb] != null) {
@@ -192,9 +188,8 @@ function ListeCandidatDegustation() {
       <IonContent>
         <div id="title"> Liste des candidats</div>
         <div id="instructions" style={{ textAlign: "center" }}>
-          {" "}
-          Cliquez sur le numéro d'un candidat pour accéder à sa grille
-          d'évaluation
+          Cliquez sur le numéro d&apos;un candidat pour accéder à sa grille
+          d&apos;évaluation
         </div>
         <IonList lines="full">
           <IonGrid>
