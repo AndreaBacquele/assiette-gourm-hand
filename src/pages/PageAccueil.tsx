@@ -14,7 +14,6 @@ import CustomFormInput from "../components/InputForm";
 import RadioOption from "../components/RadioOption";
 import Alert from "../components/Alert";
 import "../theme/globalCSS.css";
-import QrCodeDisplay from "../components/QrCodeDisplay";
 
 function Accueil() {
   const { store } = useStorage();
@@ -77,7 +76,6 @@ function Accueil() {
           <p style={{ textAlign: "center" }}>Samedi 12 octobre 2024</p>
         </div>
         <div id="title">
-          <QrCodeDisplay></QrCodeDisplay>
           <span>Inscription des jurys</span>
         </div>
         <br></br>
