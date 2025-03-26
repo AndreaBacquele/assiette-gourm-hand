@@ -8,31 +8,30 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import type { RadioGroupCustomEvent } from "@ionic/react";
-
 import CustomFormInput from "../components/InputForm";
 import RadioOption from "../components/RadioOption";
-import Alert from "../components/Alert";
 import "../theme/globalCSS.css";
+import { useHistory } from "react-router";
 
 function FirstConnexion() {
+  const redirect = useHistory();
   //Récupére les valeurs mise dans les inputs
   const [jurySurname, setJurySurname] = useState("");
   const [juryName, setJuryName] = useState("");
   const [juryType, setJuryType] = useState("");
-  const [register, setRegister] = useState(false);
 
   const handleButtonClick = () => {
-    console.log(juryName, jurySurname);
+    if (juryType === "Dégustation") {
+      redirect.push("/listingdegustation");
+    }
+    if (juryType === "Technique") {
+      redirect.push("/listingtechnique");
+    }
   };
 
   return (
     <>
       <IonContent>
-        <Alert
-          message="Vous avez été rédirigé vers la liste des candidats"
-          showAlert={register}
-          setShowAlert={setRegister}
-        ></Alert>
         <img
           className="logo-accueil"
           src="/logo.jpg"
