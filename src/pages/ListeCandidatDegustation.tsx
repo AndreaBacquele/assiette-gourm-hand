@@ -8,13 +8,13 @@ import {
   IonRow,
   IonFooter,
   IonToolbar,
-  IonHeader,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useStorage } from "../hooks/useStorage";
 import axios from "axios";
 import Dashboard from "../components/Dashboard";
 import Alert from "../components/Alert";
+import HeaderDashboard from "../components/HeaderDashboard";
 
 function ListeCandidatDegustation() {
   // Gére la récupération des données + permet l'affichage de celles-ci en dessous
@@ -170,20 +170,7 @@ function ListeCandidatDegustation() {
 
   return (
     <>
-      <IonHeader>
-        <IonToolbar style={{ height: "60px", display: "flex" }} mode="ios">
-          <div id="top">
-            <img
-              className="logo-dash-eval"
-              src="/logo AG.png"
-              alt="Logo du concours"
-            ></img>
-
-            <span className="black-label"> {completeName}</span>
-            <span className="orange-label"> {juryType} </span>
-          </div>
-        </IonToolbar>
-      </IonHeader>
+      <HeaderDashboard juryName={completeName} juryType={juryType} />
 
       <IonContent>
         <div id="title"> Liste des candidats</div>
