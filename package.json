@@ -20,6 +20,7 @@
     "@ionic/react": "^7.0.0",
     "@ionic/react-router": "^7.0.0",
     "@ionic/storage": "^4.0.0",
+    "@react-pdf/renderer": "^4.3.0",
     "@supabase/supabase-js": "^2.49.3",
     "@types/node": "^20.5.7",
     "@types/react-router": "^5.1.20",

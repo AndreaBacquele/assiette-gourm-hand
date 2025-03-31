@@ -1,5 +1,5 @@
 import { supabase } from "../supabase/supabaseClient";
-import { QRCodeSVG } from "qrcode.react";
+import { QRCodeCanvas } from "qrcode.react";
 import { v4 as uuidv4 } from "uuid";
 import React, { useState } from "react";
 import { jsPDF } from "jspdf";
@@ -66,16 +66,17 @@ const QRCodeGenerator: React.FC = () => {
 
     doc.save("jury-qr-codes.pdf");
   };
-
   return (
     <div>
       <div>
         <button onClick={() => generateJuryQRCodes(1)}>
           Générer 1 QR Code
         </button>
+        <br />
         <button onClick={() => generateJuryQRCodes(5)}>
           Générer 5 QR Codes
         </button>
+        <br />
         <button onClick={() => generateJuryQRCodes(30)}>
           Générer 30 QR Codes
         </button>
@@ -93,7 +94,7 @@ const QRCodeGenerator: React.FC = () => {
                 key={code.id}
                 style={{ margin: "10px", textAlign: "center" }}
               >
-                <QRCodeSVG
+                <QRCodeCanvas
                   id={`qr-${code.id}`}
                   value={code.qrToken}
                   size={128}
