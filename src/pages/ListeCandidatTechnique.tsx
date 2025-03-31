@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   IonList,
-  IonHeader,
   IonToolbar,
   IonFooter,
   IonButton,
@@ -17,6 +16,7 @@ import Alert from "../components/Alert";
 import axios from "axios";
 import Dashboard from "../components/Dashboard";
 import { TechnicalNotes } from "../types";
+import HeaderDashboard from "../components/HeaderDashboard";
 
 function ListeCandidatCuisine() {
   const { store } = useStorage();
@@ -179,20 +179,7 @@ function ListeCandidatCuisine() {
 
   return (
     <>
-      <IonHeader>
-        <IonToolbar style={{ height: "60px", display: "flex" }} mode="ios">
-          <div id="top">
-            <img
-              className="logo-dash-eval"
-              src="/logo AG.png"
-              alt="Logo du concours"
-            ></img>
-
-            <span className="black-label"> {completeName}</span>
-            <span className="orange-label"> {juryType} </span>
-          </div>
-        </IonToolbar>
-      </IonHeader>
+      <HeaderDashboard juryName={completeName} juryType={juryType} />
 
       <IonContent className="content-listing">
         <div id="title"> Liste des candidats</div>
