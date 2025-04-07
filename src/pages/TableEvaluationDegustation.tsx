@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useState, useEffect } from "react";
 import {
   IonFooter,
@@ -16,6 +17,7 @@ import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
 import Alert from "../components/Alert";
 import { isValidNote } from "../hooks/isValidNotes";
+import { CandidateNotes, NotesStore } from "../types";
 
 function TableEvaluationDegustation() {
   // Récupére le numéro de candidat dans l'URL
@@ -26,37 +28,28 @@ function TableEvaluationDegustation() {
   const { store } = useStorage();
   //Récupération des informations des inputs
   const [values, setValues] = useState({
-    presentation: "",
-    cuissonPrincipale: "",
-    cuissonGarniture: "",
-    accordGlobal: "",
+    presentation: 0,
+    cuissonPrincipale: 0,
+    cuissonGarniture: 0,
+    accordGlobal: 0,
     total: 0,
   });
   const [total, setTotal] = useState(0);
   const [observations, setObservations] = useState("");
 
-  const handleInputChange = (key: string, value: string) => {
+  const handleInputChange = (key: string, value: number) => {
     setValues((prevValues) => ({ ...prevValues, [key]: value }));
   };
 
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
   useEffect(() => {
-    const Presentation = isNaN(Number(values.presentation))
-      ? 0
-      : Number(values.presentation);
-    const CuissonGarniture = isNaN(Number(values.cuissonGarniture))
-      ? 0
-      : Number(values.cuissonGarniture);
-    const CuissonPrincipale = isNaN(Number(values.cuissonPrincipale))
-      ? 0
-      : Number(values.cuissonPrincipale);
-    const AccordGlobal = isNaN(Number(values.accordGlobal))
-      ? 0
-      : Number(values.accordGlobal);
     const total =
-      CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal;
+      values.presentation +
+      values.cuissonGarniture +
+      values.cuissonPrincipale +
+      values.accordGlobal;
     setTotal(total);
-  }, [values, total]);
+  }, [values]);
 
   const history = useHistory();
   const [validateNote, setValidateNote] = useState(false);
@@ -92,15 +85,15 @@ function TableEvaluationDegustation() {
         };
 
         const save_notes = (
-          all_notes: Record<string, any>,
+          all_notes: NotesStore,
           candidate: string,
-          candidates_notes: object
+          candidates_notes: CandidateNotes
         ) => {
           all_notes["candidat" + candidate] = candidates_notes;
           store.set("notes", all_notes);
         };
 
-        store.get("notes").then((all_notes: Record<string, any>) => {
+        store.get("notes").then((all_notes: NotesStore) => {
           save_notes(all_notes, candidate, candidates_notes);
           setValidateNote(true);
           history.push("/listingdegustation");
@@ -114,15 +107,15 @@ function TableEvaluationDegustation() {
   // // Permet d'afficher les notes dans les cases lorsque l'on retourne sur une fiche candidat déja remplie
   useEffect(() => {
     if (store) {
-      store.get("notes").then((all_notes: any) => {
+      store.get("notes").then((all_notes: NotesStore) => {
         const candidateNotes = all_notes["candidat" + candidate];
         if (candidateNotes) {
           setValues({
-            presentation: candidateNotes.presentation || "",
-            cuissonPrincipale: candidateNotes.cuissonPrincipale || "",
-            cuissonGarniture: candidateNotes.cuissonGarniture || "",
-            accordGlobal: candidateNotes.accordGlobal || "",
-            total: total || 0,
+            presentation: Number(candidateNotes.presentation) || 0,
+            cuissonPrincipale: Number(candidateNotes.cuissonPrincipale) || 0,
+            cuissonGarniture: Number(candidateNotes.cuissonGarniture) || 0,
+            accordGlobal: Number(candidateNotes.accordGlobal) || 0,
+            total: Number(candidateNotes.total) || 0,
           });
           setObservations(candidateNotes.observations || "");
         }

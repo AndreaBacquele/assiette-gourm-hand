@@ -5,35 +5,48 @@ interface CustomNotesInputProps {
   max: number;
   value: number;
   noteLabel: string;
-  onIonInput: (value: string) => void;
+  onIonInput: (value: number) => void;
 }
 
 const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
   max,
   onIonInput,
-  value: propValue,
+  value,
   noteLabel,
 }) => {
   const [isValid, setIsValid] = useState(true);
-  const [localValue, setLocalValue] = useState(propValue);
+  const [localValue, setLocalValue] = useState<number | undefined>(value);
+  console.log(typeof localValue + localValue);
 
   // Change la couleur du background si la valeur entrée n'est pas dans l'intervalle autorisée
   const validInputStyle = { backgroundColor: "#F5F5F5" };
   const invalidInputStyle = { backgroundColor: "rgb(232,51,0)" };
 
   useEffect(() => {
-    setLocalValue(propValue);
-  }, [propValue]);
+    setLocalValue(value);
+  }, [value]);
 
   const handleChange = (event: CustomEvent) => {
-    const value = event.detail.value;
-    setLocalValue(value);
+    // ❗️ Toujours une string ou null, même si type="number"
+    const rawValue = event.detail.value;
 
-    if (value >= 0 && value <= max) {
-      const roundedValue = (Math.round(value * 2) / 2).toString();
-      onIonInput(roundedValue);
+    // Ionic ne fournit pas de number ici, on doit parser manuellement
+    // Si on ne fait pas ça, on risque des bugs avec des comparaisons comme "5" < 3
+    const parsedValue = parseFloat(rawValue);
+
+    if (rawValue === "") {
+      setLocalValue(undefined);
+      setIsValid(false);
+      return;
+    }
+
+    if (!isNaN(parsedValue) && parsedValue >= 0 && parsedValue <= max) {
+      const roundedValue = Math.round(parsedValue * 2) / 2;
+      setLocalValue(roundedValue);
       setIsValid(true);
+      onIonInput(roundedValue);
     } else {
+      setLocalValue(parsedValue);
       setIsValid(false);
     }
   };
@@ -53,7 +66,7 @@ const CustomNotesInput: React.FC<CustomNotesInputProps> = ({
             step="0.5"
             onIonInput={handleChange}
             type="number"
-            value={localValue}
+            value={localValue ?? ""}
             style={isValid ? validInputStyle : invalidInputStyle}
           ></IonInput>
         </IonCol>

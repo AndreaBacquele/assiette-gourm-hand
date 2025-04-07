@@ -214,6 +214,17 @@ function ListeCandidatDegustation() {
               >
                 Envoyer les notes
               </IonButton>
+              <IonButton
+                color="warning"
+                expand="block"
+                onClick={handleDeleteClick}
+                className="txtButton"
+                style={{
+                  width: "50%",
+                }}
+              >
+                Delete
+              </IonButton>
               <Alert
                 showAlert={sendNotes}
                 setShowAlert={setSendNotes}

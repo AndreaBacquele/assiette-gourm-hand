@@ -29,3 +29,14 @@ export type Criteria = {
     observationsDurable: string;
     observationsOptimisation: string;
   }
+
+  export type CandidateNotes = {
+    presentation: number;
+    cuissonPrincipale: number;
+    cuissonGarniture: number;
+    accordGlobal: number;
+    total: number;
+    observations: string;
+  }
+
+  export type NotesStore = Record<string, CandidateNotes>
