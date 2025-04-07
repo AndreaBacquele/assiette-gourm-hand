@@ -41,19 +41,19 @@ function TableEvaluationDegustation() {
 
   // Le total final se fait en temps réel dés qu'une note est rentrée dans un champ de note
   useEffect(() => {
-    let Presentation = isNaN(Number(values.presentation))
+    const Presentation = isNaN(Number(values.presentation))
       ? 0
       : Number(values.presentation);
-    let CuissonGarniture = isNaN(Number(values.cuissonGarniture))
+    const CuissonGarniture = isNaN(Number(values.cuissonGarniture))
       ? 0
       : Number(values.cuissonGarniture);
-    let CuissonPrincipale = isNaN(Number(values.cuissonPrincipale))
+    const CuissonPrincipale = isNaN(Number(values.cuissonPrincipale))
       ? 0
       : Number(values.cuissonPrincipale);
-    let AccordGlobal = isNaN(Number(values.accordGlobal))
+    const AccordGlobal = isNaN(Number(values.accordGlobal))
       ? 0
       : Number(values.accordGlobal);
-    let total =
+    const total =
       CuissonGarniture + Presentation + CuissonPrincipale + AccordGlobal;
     setTotal(total);
   }, [values, total]);
@@ -82,7 +82,7 @@ function TableEvaluationDegustation() {
   const handleValidateClick = () => {
     if (validateNotes()) {
       if (store) {
-        let candidates_notes = {
+        const candidates_notes = {
           presentation: values.presentation,
           cuissonPrincipale: values.cuissonPrincipale,
           cuissonGarniture: values.cuissonGarniture,
@@ -94,7 +94,7 @@ function TableEvaluationDegustation() {
         const save_notes = (
           all_notes: Record<string, any>,
           candidate: string,
-          candidates_notes: Object
+          candidates_notes: object
         ) => {
           all_notes["candidat" + candidate] = candidates_notes;
           store.set("notes", all_notes);
