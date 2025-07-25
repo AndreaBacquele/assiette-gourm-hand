@@ -11,7 +11,7 @@ import {
   IonAlert,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router-dom";
-import { useStorage } from "../hooks/useStorage";
+import { useStorage } from "../services/localStorage";
 import CustomNotesInput from "../components/InputNotes";
 import CustomFormInput from "../components/InputForm";
 import Alert from "../components/Alert";

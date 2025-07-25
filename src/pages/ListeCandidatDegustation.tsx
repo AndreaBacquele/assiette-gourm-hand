@@ -10,7 +10,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { useStorage } from "../hooks/useStorage";
+import { useStorage } from "../services/localStorage";
 import axios from "axios";
 import Dashboard from "../components/Dashboard";
 import Alert from "../components/Alert";
@@ -52,32 +52,11 @@ function ListeCandidatDegustation() {
     picklastNamefirstName();
   }, [store]);
 
-  // Supprime le jury en cas d'erreur
-  const handleDeleteClick = () => {
-    if (store) {
-      store.remove("jury");
-      alert("Jury supprimé");
-      history.push("/home");
-    }
-  };
-
   // Redirige la page lorsque l'on clique sur le bouton Candidat: Créer une url avec le numéro du candidat qui nous sert à stocker les données dans la bon candidat
 
   const handleButtonClick = (candidate: number) => {
     history.push("/evaldegustation/" + candidate);
   };
-
-  // Récupération des notes dans la base de données
-  const loadNotes = async () => {
-    if (store) {
-      const notes = await store.get("notes");
-      setNotes(notes || {});
-    }
-  };
-
-  useEffect(() => {
-    loadNotes();
-  }, [store]);
 
   // Boucle qui permet d'afficher le bon nombre de candidats sur le dashboard
   const nb_candidates = 22;

@@ -10,7 +10,7 @@ import {
   IonRow,
 } from "@ionic/react";
 import { useHistory, useParams } from "react-router";
-import { useStorage } from "../hooks/useStorage";
+import { useStorage } from "../services/localStorage";
 import "./PageAccueil";
 import Alert from "../components/Alert";
 import axios from "axios";
