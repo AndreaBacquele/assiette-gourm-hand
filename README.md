@@ -8,11 +8,13 @@ Elle est à destination des membres du jury de ce concours afin de moderniser le
 Contraintes techniques : 
 - Gestion des données hors ligne possible
 - Cross-plateform
+- Facilité d'utilisation (diversités des utilisateurs - appétence différente avec les différentes technologies)
 
 Technos utilisées : 
 
-* Ionic : https://ionicframework.com/
-* React.JS : https://react.dev/
+* Ionic 
+* React.JS
+* Supabase
 
 
-Utilisation de l'application Nexus pendant la phase de développement afin de faire des tests sur Android
+Utilisation de l'application Nexus pendant la phase de développement afin de visualiser l'application sur Android
