@@ -9,7 +9,7 @@ import {
 import React, { useState, useEffect } from "react";
 import type { RadioGroupCustomEvent } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { useStorage } from "../hooks/useStorage";
+import { useStorage } from "../services/localStorage";
 import CustomFormInput from "../components/InputForm";
 import RadioOption from "../components/RadioOption";
 import Alert from "../components/Alert";
