@@ -3,6 +3,7 @@ import { useStorage } from "../services/localStorage";
 import { supabase } from "../services/supabaseClient";
 import { useEffect, useState } from "react";
 import { Candidat } from "../types";
+import HeaderDashboard from "../components/HeaderDashboard";
 
 const DashboardCandidat: React.FC = () => {
   // WORK IN PROGRESS: Goal is to add the new logic based on the new database structure(supabase) and after delete ListeCandidatDegustation and ListeCandidatTechnique.
@@ -29,12 +30,12 @@ const DashboardCandidat: React.FC = () => {
 
   return (
     <IonPage>
-      <div>
-        <h1>Dashboard Candidat</h1>
-        <p>Bienvenue sur votre tableau de bord.</p>
-      </div>
-
+      <HeaderDashboard />
       <IonContent>
+        <div>
+          <h1>Dashboard Candidat</h1>
+          <p>Bienvenue sur votre tableau de bord.</p>
+        </div>
         {candidat.map((c) => (
           <div key={c.id}>
             <h2>Candidat {c.candidat_number}</h2>
