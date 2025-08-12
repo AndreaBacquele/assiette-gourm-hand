@@ -2,8 +2,9 @@ import React from "react";
 import { IonHeader, IonToolbar } from "@ionic/react";
 
 interface HeaderProps {
-  juryName: string;
-  juryType: string;
+  // TODO Remove optionnal for juryData
+  juryName?: string;
+  juryType?: string;
 }
 
 const HeaderDashboard: React.FC<HeaderProps> = ({ juryName, juryType }) => {
