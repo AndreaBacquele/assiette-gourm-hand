@@ -43,7 +43,7 @@
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
     "@vitejs/plugin-react": "^4.0.0",
-    "cypress": "^14.2.1",
+    "cypress": "^15.0.0",
     "eslint": "^9.23.0",
     "eslint-plugin-react": "^7.37.4",
     "jsdom": "^21.1.0",
