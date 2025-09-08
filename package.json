@@ -49,7 +49,7 @@
     "jsdom": "^21.1.0",
     "typescript": "^4.9.5",
     "typescript-eslint": "^8.28.0",
-    "vite": "^6.2.4",
+    "vite": "^7.0.0",
     "vitest": "^3.1.1"
   },
   "description": "Assiette Gourm'hand l'application"
